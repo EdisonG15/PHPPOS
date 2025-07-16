@@ -1,0 +1,27 @@
+.form-floating label {
+        color: #6c757d; /* gris medio, suave */
+        font-weight: 500; /* peso medio */
+        text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1); /* sombra sutil */
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-floating input:focus + label {
+        color: #007bff; /* cambia de color al enfocar (azul Bootstrap) */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    
+     .form-control-modern, .form-select.form-control-modern {
+        border-radius: 0.75rem;
+        border: 1px solid #ced4da;
+        background-color: #f8f9fa;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+.card {
+        background-color: #f8f9fa;;
+        border-radius: 1rem;
+    } 
+
+.text-center {
+  text-align: center;
+}

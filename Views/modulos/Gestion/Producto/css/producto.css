@@ -1,0 +1,138 @@
+/* --- Estilos del Modal --- */
+.modern-modal-content {
+    border-radius: 1.25rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.modern-header-gradient {
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 1.5rem 2rem !important;
+    border-bottom: none;
+    position: relative;
+}
+
+.modern-header-gradient .btn-close {
+    font-size: 1.25rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.modern-header-gradient .btn-close:hover {
+    opacity: 1;
+}
+
+.modal-title {
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+.modal-body {
+    background-color: #ffffff;
+    padding: 2.5rem !important;
+}
+
+.modal-body strong {
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.modal-body .text-muted {
+    font-size: 0.95rem;
+    color: #6c757d !important;
+}
+
+.modal-body .text-primary {
+    color: #007bff !important;
+}
+
+.modal-body .fs-5 {
+    font-size: 1.25rem !important;
+}
+
+.modal-body .fw-bold {
+    font-weight: 700 !important;
+}
+
+/* Estilos de formularios */
+.form-label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.75rem;
+    padding: 0.85rem 1.2rem;
+    font-size: 1.05rem;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-select-lg {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+}
+
+/* Línea divisoria */
+hr {
+    border-top: 2px solid rgba(0, 0, 0, 0.08);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilo del "Nuevo Stock" */
+.badge.bg-success {
+    background-color: #28a745 !important;
+    padding: 0.75em 1.2em !important;
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 1.4rem !important;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Botón Confirmar */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Botón cerrar en footer */
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 0.75rem;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Iconos */
+.bi {
+    vertical-align: -0.125em;
+}

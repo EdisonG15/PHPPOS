@@ -1,0 +1,104 @@
+<factura id="comprobante" version="1.0.0">
+  <infoTributaria>
+    <ambiente>1</ambiente>
+    <tipoEmision>1</tipoEmision>
+    <razonSocial>Ventas de Producto Agricola</razonSocial>
+    <nombreComercial>El Agricultor</nombreComercial>
+    <ruc>0804610814001</ruc>
+    <claveAcceso>0101197001080461081400110010010000000170000000812</claveAcceso>
+    <codDoc>01</codDoc>
+    <estab>001</estab>
+    <ptoEmi>001</ptoEmi>
+    <secuencial>00000017</secuencial>
+    <dirMatriz>Esmeralda</dirMatriz>
+  </infoTributaria>
+  <infoFactura>
+    <fechaEmision>22/05/2025</fechaEmision>
+    <dirEstablecimiento>AV Las Golondrinas</dirEstablecimiento>
+    <obligadoContabilidad>SI</obligadoContabilidad>
+    <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+    <razonSocialComprador>MARIA JOSE RODRIGUEZ COLUMBA</razonSocialComprador>
+    <identificacionComprador>0927368282</identificacionComprador>
+    <totalSinImpuestos>2.12</totalSinImpuestos>
+    <totalDescuento>0.0000</totalDescuento>
+    <totalConImpuestos>
+      <totalImpuesto>
+        <codigo>2</codigo>
+        <codigoPorcentaje>4</codigoPorcentaje>
+        <baseImponible>2.12</baseImponible>
+        <valor>0.38</valor>
+      </totalImpuesto>
+    </totalConImpuestos>
+    <propina>0.00</propina>
+    <importeTotal>2.50</importeTotal>
+    <moneda>DOLAR</moneda>
+  </infoFactura>
+  <detalles>
+    <detalle>
+      <codigoPrincipal>7501033210778</codigoPrincipal>
+      <descripcion>SPEED STICK</descripcion>
+      <cantidad>2</cantidad>
+      <precioUnitario>1.25</precioUnitario>
+      <descuento>0.00</descuento>
+      <precioTotalSinImpuesto>1.06</precioTotalSinImpuesto>
+      <impuestos>
+        <impuesto>
+          <codigo>2</codigo>
+          <codigoPorcentaje>4</codigoPorcentaje>
+          <tarifa>15.00</tarifa>
+          <baseImponible>1.06</baseImponible>
+          <valor>0.38</valor>
+        </impuesto>
+      </impuestos>
+    </detalle>
+  </detalles>
+  <infoAdicional>
+    <campoAdicional nombre="Email">edisongarofalo88@gmail.com</campoAdicional>
+  </infoAdicional>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference Type="//*[local-name()='factura']" URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>A1f68B1Yc8J1IJJBB7IhS1N3Cz4=</DigestValue></Reference><Reference URI="#Signature-SignedProperties"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>/7C6WCVXTwcKGzFUrljKHQqNoEk=</DigestValue></Reference></SignedInfo><SignatureValue>Ym4F9rmspbelYjD9UHygznVwNB3CUcJ91xfy+QbfvyOSv8AQZwQSOAjhzM0b0YeWoTzBeJ3oPuvN&#13;
+ydnOPKx6PR4o290k+Z4rgvT9WIS6OtmzsmH+bOj1B6QjCJO519oiqD/yd2TcA+EaS8nQ2URINC+E&#13;
+h2YGYTwru7RFeLH0KmZht5QfBh8aU/Zbu37JlJBGDKK8v6+0NMgw4VFy0eLFJHOxyTl8B09a4uuF&#13;
+4laJnDggXS01Jl2JZ03tavMF9lGwg3R03ovAxhGaJsosBnF3ZuTI0WWOAniUiJd5b5pqR0lM3Gkg&#13;
+LjtlghEeR2RWdK4iIVnFPX1HVW/wGkvZ/IeDfg==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIJWzCCB0OgAwIBAgIINDyamaivM/4wDQYJKoZIhvcNAQELBQAwgbgxCzAJBgNVBAYTAkVTMUQw&#13;
+QgYDVQQHDDtCYXJjZWxvbmEgKHNlZSBjdXJyZW50IGFkZHJlc3MgYXQgd3d3LnVhbmF0YWNhLmNv&#13;
+bS9hZGRyZXNzKTEWMBQGA1UECgwNVUFOQVRBQ0EgUy5BLjEVMBMGA1UECwwMVFNQLVVBTkFUQUNB&#13;
+MRowGAYDVQQDDBFVQU5BVEFDQSBDQTIgMjAxNjEYMBYGA1UEYQwPVkFURVMtQTY2NzIxNDk5MB4X&#13;
+DTI0MDgwNzIwMzcwMFoXDTI1MDgwNzIwMzcwMFowgaoxCzAJBgNVBAYTAkVDMRwwGgYDVQQEDBNH&#13;
+QVJPRkFMTyBCVVNUQU1BTlRFMRcwFQYDVQQqDA5FRElTT04gR0FCUklFTDEZMBcGA1UEBRMQSURD&#13;
+RUMtMDgwNDYxMDgxNDErMCkGA1UEAwwiRURJU09OIEdBQlJJRUwgR0FST0ZBTE8gQlVTVEFNQU5U&#13;
+RTEcMBoGA1UEYQwTVElORUMtMDgwNDYxMDgxNDAwMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC&#13;
+AQoCggEBAJz6cDTFbGkbACpRLb8La6fdg6ENmGCpi8/1oX3CacrSJqhiloRNREPOppIKvMTQqCI2&#13;
+k9WLOIbYbT96Bw7Km8p82RSgXGW8coXAZSnhrDLPOy60yjGgjgbIBrPPC/MY4AJ16+D33mQjV57z&#13;
+BymUuylesadJh9TlWF7CJA6PggBDTIXtTl4DAS5zgRO942xkacFVOtM01K6lS5KqNbbCm0tgbX0P&#13;
+M5U3tD3r92dD+IxwEEtBLOmYl+Dnk4TM38fIsHUuSE8SKq6vRW8czcQIfNdVRKCSg4oyu8nQvTOe&#13;
+4eThMXWw9dzrIAgq4/pe1NfBUemXpxU/3iTqr8g+v7wyKasCAwEAAaOCBHMwggRvMBsGCysGAQQB&#13;
+gvE2ZgMBBAwMCjA4MDQ2MTA4MTQwHgYLKwYBBAGC8TZmAwsEDwwNMDgwNDYxMDgxNDAwMTCB1wYI&#13;
+KwYBBQUHAQEEgcowgccwVQYIKwYBBQUHMAKGSWh0dHA6Ly93d3cudWFuYXRhY2EuY29tL3B1Ymxp&#13;
+Yy9kb3dubG9hZC90c3BfY2VydGlmaWNhdGVzL3N1Ym9yZGluYXRlMS5jcnQwNgYIKwYBBQUHMAGG&#13;
+Kmh0dHA6Ly9vY3NwMS51YW5hdGFjYS5jb20vcHVibGljL3BraS9vY3NwLzA2BggrBgEFBQcwAYYq&#13;
+aHR0cDovL29jc3AyLnVhbmF0YWNhLmNvbS9wdWJsaWMvcGtpL29jc3AvMB0GA1UdDgQWBBT9WUXu&#13;
+aU++o9ihslg9qcTlwP+YcjAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFH1X52BzzgdGqeKjaPDh&#13;
+EbJ0knP9MIGZBgNVHSAEgZEwgY4wgYsGDCsGAQQBgvE2ZgIBATB7MDcGCCsGAQUFBwIBFitodHRw&#13;
+czovL3d3dy51YW5hdGFjYS5jb20vcHVibGljL3BraS9kcGMtZWMvMEAGCCsGAQUFBwICMDQMMkNF&#13;
+UlRJRklDQURPIERFIFBFUlNPTkEgTkFUVVJBTCBPIEZJU0lDQSBFTiBBUkNISVZPMIGPBgNVHR8E&#13;
+gYcwgYQwQKA+oDyGOmh0dHA6Ly9jcmwxLnVhbmF0YWNhLmNvbS9wdWJsaWMvcGtpL2NybC9DQTJz&#13;
+dWJvcmRpbmFkYS5jcmwwQKA+oDyGOmh0dHA6Ly9jcmwyLnVhbmF0YWNhLmNvbS9wdWJsaWMvcGtp&#13;
+L2NybC9DQTJzdWJvcmRpbmFkYS5jcmwwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUF&#13;
+BwMCBggrBgEFBQcDBDCCAakGA1UdEQSCAaAwggGcgRplZGlzb25nYXJvZmFsbzg4QGdtYWlsLmNv&#13;
+baAbBgsrBgEEAYLxNmYDAaAMDAowODA0NjEwODE0oB8GCysGAQQBgvE2ZgMCoBAMDkVESVNPTiBH&#13;
+QUJSSUVMoBkGCysGAQQBgvE2ZgMDoAoMCEdBUk9GQUxPoBsGCysGAQQBgvE2ZgMEoAwMCkJVU1RB&#13;
+TUFOVEWgUQYLKwYBBAGC8TZmAwegQgxAQ0FMTEU6IENBTExFIFggTk1FUk86IFNPTEFSIDMgSU5U&#13;
+RVJTRUNDSU46IENBTExFIDE1IE1BTlpBTkE6IDE2MKAfBgsrBgEEAYLxNmYDCKAQDA4wMDU5Mzk3&#13;
+OTM0NzM4MaAaBgsrBgEEAYLxNmYDCaALDAlDT1RBQ0FDSEmgHgYLKwYBBAGC8TZmAwugDwwNMDgw&#13;
+NDYxMDgxNDAwMaATBgsrBgEEAYLxNmYDDKAEDAJFQ6ApBgsrBgEEAYLxNmYDMqAaDBhQRVJTT05B&#13;
+IE5BVFVSQUwgTyBGSVNJQ0GgGAYLKwYBBAGC8TZmAzOgCQwHQVJDSElWTzANBgkqhkiG9w0BAQsF&#13;
+AAOCAgEAvqhy2GlB6+baFUrFjKLuvl1GXFIZCl8Wit+AxFk9iJwJ0/EmGY+MCIcRl8HKJ3rUS73s&#13;
+F8oG/lW6KD32p6mnXRxmrmeqfL3+bsZ3ViLj4Xvw3uKtoSCtSlf0JA8QOAuUMZ0U3QV62aV3i6My&#13;
+2jsxI13qZm13NDLcuZ3E8UKQ2KMCmiP/FJ2hPinbZh0OWZsnQSi4rBAm0WNoL6KRtqQ1Tr4AudZB&#13;
+IuIKmFhJXtEIBoNk7j0W6Kb79rFfiSaFeYlGBZQZSzx2ryBvSXvdyDo6KdTCI9kEe0f7L2hUj5lg&#13;
+5SdYbm/lnFr4wCkPwoy/SEVqko/2/2ud9Kk1U5y0iP3UTqR/7aVeZlLUbFLGbN/QfyKSnFupynZ9&#13;
+Lacud7D810WXnmAwrdWMJhzFGWr5FM9E9wG5Pvbosl7mTMYhOrEPYg4KRmqzlczOCIc9k4fEk9vu&#13;
+a6B+by7rZmWIc4gzyKXEd/QrZrXnae7fFGxydGvi4LTNhunLnBBIwI6J8GJh6MTcQG2TBiMQn6Uq&#13;
+NbOxLH9gV5q3j/Wz6VICxeac+YaxHXMlBc6Otr92kVWbcwpCXb2jQzH2iUCo/a7+dGvzIMIuMfWE&#13;
+s4UfRM83KZzhFXZ/RqHtOZzohbletsFg8OU4JiSIc7RxjcL1GbCmm9hSEZzh1wZD9WBjbidRHbYn&#13;
+8r5pS88=</X509Certificate></X509Data></KeyInfo><Object><xades:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="Signature-SignedProperties" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"><xades:SignedSignatureProperties><xades:SigningTime>2025-05-23T08:00:58.0577965-05:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>iyz5MYrXMfY2eSOiqVH8xAWiJ2M=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>2.5.4.97=#0c0f56415445532d413636373231343939,CN=UANATACA CA2 2016,OU=TSP-UANATACA,O=UANATACA S.A.,L=Barcelona (see current address at www.uanataca.com/address),C=ES</ds:X509IssuerName><ds:X509SerialNumber>3764053373325620222</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:Identifier>https://www.sri.gob.ec/web/guest/esquemas-xml</xades:Identifier></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier></xades:SignedSignatureProperties><xades:SignedDataObjectProperties/></xades:SignedProperties></Object></Signature></factura>

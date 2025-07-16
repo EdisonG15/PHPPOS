@@ -1,0 +1,155 @@
+/* Estilos de tabla generales (si los tienes, mantenlos) */
+.table {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin-top: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra más sutil */
+}
+.table thead {
+    background-color: #4a5568; /* Gris oscuro para el encabezado de tabla */
+    color: white;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+/* --- Estilos del Modal --- */
+.modern-modal-content {
+    border-radius: 1.25rem; /* Bordes aún más redondeados */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Sombra más profunda y elegante */
+    overflow: hidden; /* Asegura que el border-radius se aplique bien */
+}
+
+.modern-header-gradient {
+    /* Gradiente suave y moderno para el encabezado */
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Azul y morado vibrante */
+    color: white;
+    padding: 1.5rem 2rem !important; /* Más padding para un look espacioso */
+    border-bottom: none; /* Eliminar el borde inferior por defecto */
+    position: relative; /* Para posibles elementos decorativos */
+}
+
+.modern-header-gradient .btn-close {
+    font-size: 1.25rem; /* Botón de cerrar más grande */
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.modern-header-gradient .btn-close:hover {
+    opacity: 1;
+}
+
+.modal-title {
+    font-weight: 700; /* Texto del título más bold */
+    font-size: 1.75rem; /* Título más grande */
+}
+
+.modal-body {
+    background-color: #ffffff;
+    padding: 2.5rem !important; /* Más padding interno */
+}
+
+/* Estilos para los campos de información del producto */
+.modal-body strong {
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 0.25rem; /* Espacio entre el label y el valor */
+}
+
+.modal-body .text-muted {
+    font-size: 0.95rem;
+    color: #6c757d !important; /* Un gris más oscuro para los detalles */
+}
+
+.modal-body .text-primary {
+    color: #007bff !important; /* Color primario para el stock actual */
+}
+
+.modal-body .fs-5 {
+    font-size: 1.25rem !important; /* Stock actual más grande */
+}
+
+.modal-body .fw-bold {
+    font-weight: 700 !important; /* Stock actual más bold */
+}
+
+/* Estilos de formularios */
+.form-label {
+    font-weight: 600; /* Labels más bold */
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.75rem; /* Bordes redondeados para campos */
+    padding: 0.85rem 1.2rem; /* Más padding para los campos */
+    font-size: 1.05rem; /* Fuente ligeramente más grande */
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff; /* Un azul de enfoque más suave */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-select-lg {
+    padding-top: 0.9rem; /* Ajuste para el select */
+    padding-bottom: 0.9rem;
+}
+
+/* Estilo para las líneas divisorias */
+hr {
+    border-top: 2px solid rgba(0, 0, 0, 0.08); /* Línea más gruesa y sutil */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilo para el "Nuevo Stock" */
+.badge.bg-success {
+    background-color: #28a745 !important; /* Verde estándar */
+    padding: 0.75em 1.2em !important; /* Más padding */
+    border-radius: 0.75rem !important; /* Bordes más redondeados */
+    font-weight: 700 !important;
+    font-size: 1.4rem !important; /* Nuevo stock más grande */
+    min-width: 100px; /* Asegura un ancho mínimo */
+    text-align: center;
+}
+
+/* Botón de Confirmar */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 0.75rem 2rem; /* Más padding */
+    font-size: 1.1rem; /* Fuente más grande */
+    border-radius: 0.75rem; /* Bordes redondeados */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Sombra al botón */
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-2px); /* Efecto de elevación al pasar el mouse */
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Ajustes para el botón de cerrar en el footer (si lo usas) */
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 0.75rem;
+}
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Ajustes para iconos */
+.bi {
+    vertical-align: -0.125em; /* Ajusta la alineación vertical de los iconos */
+}
+/* **/

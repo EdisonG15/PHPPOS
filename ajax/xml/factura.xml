@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.0.0">
+  <infoTributaria>
+    <ambiente>1</ambiente>
+    <tipoEmision>1</tipoEmision>
+    <razonSocial>Ventas de Producto Agricola</razonSocial>
+    <nombreComercial>El Agricultor</nombreComercial>
+    <ruc>0804610814001</ruc>
+    <claveAcceso>0101197001080461081400110010010000000170000000812</claveAcceso>
+    <codDoc>01</codDoc>
+    <estab>001</estab>
+    <ptoEmi>001</ptoEmi>
+    <secuencial>00000017</secuencial>
+    <dirMatriz>Esmeralda</dirMatriz>
+  </infoTributaria>
+  <infoFactura>
+    <fechaEmision>22/05/2025</fechaEmision>
+    <dirEstablecimiento>AV Las Golondrinas</dirEstablecimiento>
+    <obligadoContabilidad>SI</obligadoContabilidad>
+    <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+    <razonSocialComprador>MARIA JOSE RODRIGUEZ COLUMBA</razonSocialComprador>
+    <identificacionComprador>0927368282</identificacionComprador>
+    <totalSinImpuestos>2.12</totalSinImpuestos>
+    <totalDescuento>0.0000</totalDescuento>
+    <totalConImpuestos>
+      <totalImpuesto>
+        <codigo>2</codigo>
+        <codigoPorcentaje>4</codigoPorcentaje>
+        <baseImponible>2.12</baseImponible>
+        <valor>0.38</valor>
+      </totalImpuesto>
+    </totalConImpuestos>
+    <propina>0.00</propina>
+    <importeTotal>2.50</importeTotal>
+    <moneda>DOLAR</moneda>
+  </infoFactura>
+  <detalles>
+    <detalle>
+      <codigoPrincipal>7501033210778</codigoPrincipal>
+      <descripcion>SPEED STICK</descripcion>
+      <cantidad>2</cantidad>
+      <precioUnitario>1.25</precioUnitario>
+      <descuento>0.00</descuento>
+      <precioTotalSinImpuesto>1.06</precioTotalSinImpuesto>
+      <impuestos>
+        <impuesto>
+          <codigo>2</codigo>
+          <codigoPorcentaje>4</codigoPorcentaje>
+          <tarifa>15.00</tarifa>
+          <baseImponible>1.06</baseImponible>
+          <valor>0.38</valor>
+        </impuesto>
+      </impuestos>
+    </detalle>
+  </detalles>
+  <infoAdicional>
+    <campoAdicional nombre="Email">edisongarofalo88@gmail.com</campoAdicional>
+  </infoAdicional>
+</factura>
