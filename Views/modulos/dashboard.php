@@ -67,7 +67,7 @@
                      <div class="icon">
                          <i class="ion ion-android-remove-circle"></i>
                      </div>
-                     <a style="cursor:pointer;" onclick="CargarContenido('Views/modulos/Compras/Administrar_compras/administrar_compras.php','content-wrapper')" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
+                     <a style="cursor:pointer;" onclick="CargarContenido('Views/modulos/Compras/RealizarCompras/compras.php','content-wrapper')" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
                  </div>
              </div>
 
@@ -83,7 +83,7 @@
                      <div class="icon">
                          <i class="ion ion-ios-cart"></i>
                      </div>
-                     <a style="cursor:pointer;" onclick="CargarContenido('Views/modulos/Ventas/Administrar_ventas/administrar_ventas.php','content-wrapper')" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
+                     <a style="cursor:pointer;" onclick="CargarContenido('Views/modulos/Ventas/RealizarVentas/realizar_ventas.php','content-wrapper')" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
                  </div>
              </div>
 

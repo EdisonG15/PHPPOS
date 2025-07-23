@@ -1,19 +1,12 @@
 <?php 
 
 class Controllers{
-
-    static public function ctrMostrar_reportes_ganacias($opcion,$fechaDesde, $fechaHasta){
-		if($fechaDesde = " ") {
-			$respuesta = Models::mdlMostrar_producto_poco_stock($opcion);
-		}else {
-			$respuesta = Models::mdlMostrar_reportes_ganacias($opcion,$fechaDesde, $fechaHasta);
-		}
-		
-
-		return $respuesta;
-	
-	}
-    static public function ctrMostrar_producto_poco_stock($opcion){
+static public function ctrMostrar_reportes_ganacias($opcion, $fechaInicio, $fechaFin) {
+     
+		$respuesta = Models::mdlMostrar_reportes_ganacias($opcion, $fechaInicio, $fechaFin);
+			return $respuesta;
+    }
+ static public function ctrMostrar_reportes_ventas_hoy($opcion){
 		
 		$respuesta = Models::mdlMostrar_producto_poco_stock($opcion);
 
@@ -21,21 +14,23 @@ class Controllers{
 	
 	}
 
-    static public function ctrMostrar_producto_mas_vendido($opcion){
+	 static public function ctrMostrar_producto_poco_stock($opcion){
 		
-		$respuesta = Models::mdlMostrar_producto_mas_vendido($opcion);
+		$respuesta = Models::mdlMostrar_producto_poco_stock($opcion);
 
 		return $respuesta;
 	
 	}
 
-	static public function ctrMostrar_reportes_ventas_hoy($opcion){
+    static public function ctrMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin){
 		
-		$respuesta = Models::mdlMostrar_producto_mas_vendido($opcion);
+		$respuesta = Models::mdlMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin);
 
 		return $respuesta;
 	
 	}
+
+
 
 	
     

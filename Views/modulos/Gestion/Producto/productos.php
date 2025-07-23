@@ -693,7 +693,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="mdlGestionarProducto" role="dialog" tabindex="-1" aria-labelledby="mdlGestionarProductoLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-ancho-personalizad">
         <div class="modal-content rounded-4 shadow-lg border-0">
@@ -702,7 +701,6 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="btnCerrarModal"></button>
             </div>
             <div class="modal-body p-4 overflow-auto" style="max-height: calc(100vh - 180px);">
-                <!-- Stepper Navigation -->
                 <div class="stepper-wrapper mb-5">
                     <a class="stepper-item active" data-step="1">
                         <div class="stepper-icon-container">
@@ -713,15 +711,13 @@
                     <div class="stepper-line"></div>
                     <a class="stepper-item" data-step="2">
                         <div class="stepper-icon-container">
-                            <i class="fas fa-dollar-sign stepper-icon"></i> <!-- Pricing icon -->
-                        </div>
+                            <i class="fas fa-dollar-sign stepper-icon"></i> </div>
                         <div class="stepper-label text-center">Precios <br> <span class="stepper-sublabel">y Stock</span></div>
                     </a>
                     <div class="stepper-line"></div>
                     <a class="stepper-item" data-step="3">
                         <div class="stepper-icon-container">
-                            <i class="fas fa-cogs stepper-icon"></i> <!-- Options icon -->
-                        </div>
+                            <i class="fas fa-cogs stepper-icon"></i> </div>
                         <div class="stepper-label text-center">Opciones <br> <span class="stepper-sublabel">Adicionales</span></div>
                     </a>
                 </div>
@@ -730,7 +726,6 @@
                     <div class="row g-4">
                         <div class="col-lg-4">
                             <div class="d-flex flex-column align-items-center">
-                                <!-- Logo upload area for product image -->
                                 <label for="logo-upload" class="logo-upload-container mb-3" id="product-image-upload-area">
                                     <img id="logo-preview" src="https://placehold.co/350x250/e9ecef/6c757d?text=No+Image" alt="Vista previa de la imagen">
                                     <span id="logo-placeholder-text" class="logo-upload-text">Subir Imagen</span>
@@ -741,13 +736,11 @@
                                     <input type="file" id="logo-upload" name="logo_file" accept="image/*" class="d-none" onchange="previewFile(event)">
                                 </label>
                                 <input type="hidden" id="idProducto" name="idProducto" value="0">
-                                <!-- <input type="hidden" id="imagenActual" name="imagen_actual" value=""> -->
                                 <input type="hidden" id="logo_url" name="logo_url">
                             </div>
                         </div>
 
                         <div class="col-lg-8">
-                            <!-- Step 1: Product Details -->
                             <div class="form-step active" data-step="1">
                                 <h4 class="mb-3 form-title">Información General</h4>
                                 <p class="form-subtitle">Detalles básicos del producto.</p>
@@ -779,8 +772,8 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="iptDescripcionReg" class="form-label small">Descripción</label>
-                                                <textarea class="form-control form-control-sm" id="iptDescripcionReg" name="iptDescripcionReg" rows="2" required></textarea>
-                                                <div class="invalid-feedback">Debe ingresar la Descripción del producto.</div>
+                                                <textarea class="form-control form-control-sm" id="iptDescripcionReg" name="iptDescripcionReg" rows="2" maxlength="35" required></textarea>
+                                                <div class="invalid-feedback">Debe ingresar la Descripción del producto (máximo 100 caracteres).</div>
                                             </div>
                                         </div>
                                     </div>
@@ -790,7 +783,6 @@
                                 </div>
                             </div>
 
-                            <!-- Step 2: Pricing and Stock -->
                             <div class="form-step" data-step="2">
                                 <h4 class="mb-3 form-title">Configuración de Precios e Inventario</h4>
                                 <p class="form-subtitle">Define los costos y precios de venta.</p>
@@ -836,7 +828,6 @@
                                 </div>
                             </div>
 
-                            <!-- Step 3: Additional Options -->
                             <div class="form-step" data-step="3">
                                 <h4 class="mb-3 form-title">Ajustes Adicionales</h4>
                                 <p class="form-subtitle">Configura opciones extra para el producto.</p>
@@ -856,8 +847,7 @@
                                             <div class="col-md-6" id="contFechaVencimiento" style="display: none;">
                                                 <label for="iptFechaVencimiento" class="form-label small">Fecha de Vencimiento <span class="text-danger">*</span></label>
                                                 <input type="date" class="form-control form-control-sm" id="iptFechaVencimiento" name="iptFechaVencimiento">
-                                                <!-- <div class="invalid-feedback">Debe ingresar la Fecha de Vencimiento.</div> -->
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>

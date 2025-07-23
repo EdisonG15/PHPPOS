@@ -464,7 +464,7 @@
                             El Email es requerido.
                         </div>
                     </div>
-                     <div class="col-md-6">
+                     <!-- <div class="col-md-6">
                             <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password" name="password" value="********" required>
@@ -483,7 +483,48 @@
                                    Por favor, confirma tu contraseña. Las contraseñas deben coincidir..
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="col-md-6">
+            <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" value="********" required>
+                <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password"><i class="fas fa-eye-slash"></i></button>
+                <div class="invalid-feedback">
+                    Se requiere contraseña.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="confirmPassword" class="form-label">confirmar Contraseña <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="********" required>
+                <button class="btn btn-outline-secondary toggle-password" type="button" data-target="confirmPassword"><i class="fas fa-eye-slash"></i></button>
+                <div class="invalid-feedback">
+                    Por favor, confirma tu contraseña. Las contraseñas deben coincidir..
+                </div>
+            </div>
+        </div><script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // ... (your existing JavaScript code) ...
+
+        // Password visibility toggle
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = this.dataset.target;
+                const passwordInput = document.getElementById(targetId);
+                const icon = this.querySelector('i');
+
+                // Toggle the type attribute
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle the eye icon
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+        });
+    });
+</script>
                    
                 </div>
                 <div class="d-flex justify-content-end mt-5">
@@ -763,23 +804,7 @@
         });
     });
 
-    // Function to toggle password visibility
-    document.querySelectorAll('.toggle-password').forEach(button => {
-        button.addEventListener('click', () => {
-            const passwordInput = button.previousElementSibling;
-            const icon = button.querySelector('i');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            }
-        });
-    });
-
+   
     // Event listeners 'input' and 'blur' for real-time validation
     companyProfileForm.querySelectorAll('input, select, textarea').forEach(input => {
         if (input.hasAttribute('required') || input.hasAttribute('pattern') || input.type === 'email' || input.type === 'tel' || input.type === 'password') {
@@ -966,6 +991,7 @@ console.log("---------------------------------------");
     //   $("#btnCancelarRegistro, #btnCerrarModal").on('click', function() { 
     //     limpiar();
     //    });
+
 
         $('#tbl_usuarios tbody').on('click', '.btnEditar', function() {
 

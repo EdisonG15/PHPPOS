@@ -123,7 +123,7 @@ class VentasModelo
     {
         try {
             $stmt = Conexion::conectar()->prepare("
-             select
+              select
 	                     concat('B001-', v.nro_boleta) as nro_boleta,
 	                     concat(u.nombre_usuario, '', u.apellido_usuario)as nombre_cajero,
 	                     v.Id_caja,
@@ -133,7 +133,7 @@ class VentasModelo
 	                    c.telefono as telefono_cliente,
 	                    c.direccion as direccion_cliente,
 	                    dv.codigo_barra,
-	                    upper(dv.descripcion_producto) as descripcion_producto,
+	                    p.descripcion_producto,
 	                    dv.cantidad,
 	                    dv.PrecioUnidad,
 	                    dv.total_venta as total_ventas_producto,
@@ -156,10 +156,10 @@ class VentasModelo
                    inner join cliente c on
 	            v.IdCliente = c.id_cliente
                       inner join cajas ca on
-	                         v.Id_caja = ca.id_caja
+	                         v.Id_caja = ca.id_caja join producto p on p.id_producto =dv.IdProducto
                where
 	                dv.nro_boleta = :nro_boleta
-	                and dv.estado = 1   ");
+	                and dv.estado = 1  ");
 
             $stmt->bindParam(":nro_boleta", $nro_boleta, PDO::PARAM_STR);
 
@@ -179,11 +179,11 @@ class VentasModelo
 
             $stmt = Conexion::conectar()->prepare("SELECT  id_Empresa, razon_social,  concat('RUC: ',ruc) as 
             ruc , mensaje,
-            concat('Direccion: ',direccion_sucursal) as direccion , marca, serie_boleta,  concat('IVA(',impuesto,'%)') as  iva,
+            concat('Direccion: ',direccion_sucursal) as direccion , marca, serie_boleta,  concat('IVA(',pi2.porcentaje,'%)') as  iva,
              nro_correlativo_ventas, nro_credito_ventas, 
             nro_correlativo_compras, nro_credito_compras, concat('Email: ',email) as  email,
             concat('Telefono: ',telefono) as telefono, fecha_registro, 
-            fecha_actualizacion FROM  empresa WHERE 1");
+            fecha_actualizacion FROM  empresa  join porcentaje_iva pi2  on pi2.codigo=codigo_iva  where id_Empresa =1");
             $stmt->execute();
 
             return $stmt->fetchAll();

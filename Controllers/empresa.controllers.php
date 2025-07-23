@@ -60,7 +60,7 @@ class Controllers{
             "nombre_comercial"   => $data["nombre_comercial"],
             "ruc"                => $data["ruc"],
             "marca"              => $data["marca"],
-            "id_firma"           => (int)$data["id_firma"], // Asegúrate de castear a int
+            "forma_pago"           => (int)$data["forma_pago"], // Asegúrate de castear a int
             "direccion_matriz"   => $data["direccion_matriz"],
             "direccion_sucursal" => $data["direccion_sucursal"],
             "email"              => $data["email"],

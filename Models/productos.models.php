@@ -83,7 +83,10 @@ class ProductosModelo
              $stmt->bindParam(":p_id_marca_producto",   $data["selMarcaReg"], PDO::PARAM_STR);
             $stmt->bindParam(":p_id_unidades",   $data["selMedidasReg"], PDO::PARAM_STR);
             $stmt->bindParam(":p_descripcion_producto", $data["iptDescripcionReg"], PDO::PARAM_STR);
-            $stmt->bindParam(":p_img_producto",  $data["logo_path"], PDO::PARAM_STR);
+            // $stmt->bindParam(":p_img_producto",  $data["logo_path"], PDO::PARAM_STR);
+            $img_producto = !empty($data["logo_path"]) ? $data["logo_path"] : "Views/assets/imagenes/productos/img_por_defecto.png";
+            $stmt->bindParam(":p_img_producto", $img_producto, PDO::PARAM_STR);
+
             $stmt->bindParam(":p_precio_compra_producto",   $data["iptPrecioCompraReg"], PDO::PARAM_STR);
             $stmt->bindParam(":p_precio_venta_producto", $data["iptPrecioVentaReg"], PDO::PARAM_STR);
             $stmt->bindParam(":p_precio_1_producto",  $data["iptPrecio1"], PDO::PARAM_STR);

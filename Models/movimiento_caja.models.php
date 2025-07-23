@@ -63,53 +63,123 @@ static public function mdlMostrar_Gastos(){
 
 }
 
- static public function mdlRegistrarArqueoCaja($txt_id_arqueo_caja,$inpuBillete100,$inpuBillete50,$inpuBillete20,
-      $inpuBillete10,$inpuBillete5,$inpuBillete1,$inputMoneda1,$inputMoneda50,$inputMoneda25,$inputMoneda10,
-      $inputMoneda5,$inputMoneda001,$total_efectivo, $inpuTotalMoneda,$inpuTotalBilletes,$txt_Comentario){ 
-         $id_usuario = $_SESSION["usuario"]->id_usuario;
-         $id_caja = $_SESSION["usuario"]->id_caja;
-            try{ //try
-        $stmt = Conexion::conectar()->prepare('call usp_cerrar_caja (
-        :p_id_usuario,:p_id_caja,:p_id_arqueo_caja,:p_inpuBillete100,:p_inpuBillete50,
-        :p_inpuBillete20,:p_inpuBillete10,:p_inpuBillete5,:p_inpuBillete1,:p_inputMoneda1,
-        :p_inputMoneda50,:p_inputMoneda25,:p_inputMoneda10,
-        :p_inputMoneda5,:p_inputMoneda001,:p_total_efectivo, 
-        :p_inpuTotalMoneda,:p_inpuTotalBilletes,
-        :p_Comentario);');
-        $stmt -> bindParam(":p_id_usuario",$id_usuario,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_id_caja",$id_caja,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_id_arqueo_caja",$txt_id_arqueo_caja,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete100",$inpuBillete100,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete50",$inpuBillete50,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete20",$inpuBillete20,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete10",$inpuBillete10,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete5",$inpuBillete5,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuBillete1",$inpuBillete1,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda1",$inputMoneda1,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda50",$inputMoneda50,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda25",$inputMoneda25,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda10",$inputMoneda10,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda5",$inputMoneda5,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inputMoneda001",$inputMoneda001,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_total_efectivo",$total_efectivo,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuTotalMoneda",$inpuTotalMoneda,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_inpuTotalBilletes",$inpuTotalBilletes,PDO::PARAM_STR);
-        $stmt -> bindParam(":p_Comentario",$txt_Comentario,PDO::PARAM_STR);
-         if ($stmt->execute()) {
-                $respuesta = $stmt->fetch(PDO::FETCH_ASSOC); // Obtener el mensaje desde el SELECT
-                $resultado = $respuesta['resultado']; // "Categoría registrada con éxito", etc.
-            } else {
-                $resultado = "Error al ejecutar la accion.";
-            }
+//  static public function mdlRegistrarArqueoCaja($txt_id_arqueo_caja,$inpuBillete100,$inpuBillete50,$inpuBillete20,
+//       $inpuBillete10,$inpuBillete5,$inpuBillete1,$inputMoneda1,$inputMoneda50,$inputMoneda25,$inputMoneda10,
+//       $inputMoneda5,$inputMoneda001,$total_efectivo, $inpuTotalMoneda,$inpuTotalBilletes,$txt_Comentario){ 
+//          $id_usuario = $_SESSION["usuario"]->id_usuario;
+//          $id_caja = $_SESSION["usuario"]->id_caja;
+//             try{ //try
+//         $stmt = Conexion::conectar()->prepare('call usp_cerrar_caja (
+//         :p_id_usuario,:p_id_caja,:p_id_arqueo_caja,:p_inpuBillete100,:p_inpuBillete50,
+//         :p_inpuBillete20,:p_inpuBillete10,:p_inpuBillete5,:p_inpuBillete1,:p_inputMoneda1,
+//         :p_inputMoneda50,:p_inputMoneda25,:p_inputMoneda10,
+//         :p_inputMoneda5,:p_inputMoneda001,:p_total_efectivo, 
+//         :p_inpuTotalMoneda,:p_inpuTotalBilletes,
+//         :p_Comentario);');
+//         $stmt -> bindParam(":p_id_usuario",$id_usuario,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_id_caja",$id_caja,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_id_arqueo_caja",$txt_id_arqueo_caja,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete100",$inpuBillete100,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete50",$inpuBillete50,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete20",$inpuBillete20,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete10",$inpuBillete10,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete5",$inpuBillete5,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuBillete1",$inpuBillete1,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda1",$inputMoneda1,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda50",$inputMoneda50,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda25",$inputMoneda25,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda10",$inputMoneda10,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda5",$inputMoneda5,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inputMoneda001",$inputMoneda001,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_total_efectivo",$total_efectivo,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuTotalMoneda",$inpuTotalMoneda,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_inpuTotalBilletes",$inpuTotalBilletes,PDO::PARAM_STR);
+//         $stmt -> bindParam(":p_Comentario",$txt_Comentario,PDO::PARAM_STR);
+//          if ($stmt->execute()) {
+//                 $respuesta = $stmt->fetch(PDO::FETCH_ASSOC); // Obtener el mensaje desde el SELECT
+//                 $resultado = $respuesta['resultado']; // "Categoría registrada con éxito", etc.
+//             } else {
+//                 $resultado = "Error al ejecutar la accion.";
+//             }
     
-          } catch (Exception $e) {
-               $resultado = 'Excepción: ' . $e->getMessage();
-           }
+//           } catch (Exception $e) {
+//                $resultado = 'Excepción: ' . $e->getMessage();
+//            }
     
-           $stmt = null; // cerrar conexión
-           return $resultado;
- }
+//            $stmt = null; // cerrar conexión
+//            return $resultado;
+//  }
 
+static public function mdlRegistrarArqueoCaja($txt_id_arqueo_caja, $inpuBillete100, $inpuBillete50, $inpuBillete20,
+    $inpuBillete10, $inpuBillete5, $inpuBillete1, $inputMoneda1, $inputMoneda50, $inputMoneda25, $inputMoneda10,
+    $inputMoneda5, $inputMoneda001, $total_efectivo, $inpuTotalMoneda, $inpuTotalBilletes, $txt_Comentario) 
+{
+    $id_usuario = $_SESSION["usuario"]->id_usuario;
+    $id_caja = $_SESSION["usuario"]->id_caja;
+
+    // Función interna para convertir null o vacío a 0
+    $toZeroIfEmpty = function($valor) {
+        return (is_null($valor) || $valor === "") ? 0 : $valor;
+    };
+
+    // Convertir todos los valores vacíos o null a 0
+    $inpuBillete100    = $toZeroIfEmpty($inpuBillete100);
+    $inpuBillete50     = $toZeroIfEmpty($inpuBillete50);
+    $inpuBillete20     = $toZeroIfEmpty($inpuBillete20);
+    $inpuBillete10     = $toZeroIfEmpty($inpuBillete10);
+    $inpuBillete5      = $toZeroIfEmpty($inpuBillete5);
+    $inpuBillete1      = $toZeroIfEmpty($inpuBillete1);
+    $inputMoneda1      = $toZeroIfEmpty($inputMoneda1);
+    $inputMoneda50     = $toZeroIfEmpty($inputMoneda50);
+    $inputMoneda25     = $toZeroIfEmpty($inputMoneda25);
+    $inputMoneda10     = $toZeroIfEmpty($inputMoneda10);
+    $inputMoneda5      = $toZeroIfEmpty($inputMoneda5);
+    $inputMoneda001    = $toZeroIfEmpty($inputMoneda001);
+    $total_efectivo    = $toZeroIfEmpty($total_efectivo);
+    $inpuTotalMoneda   = $toZeroIfEmpty($inpuTotalMoneda);
+    $inpuTotalBilletes = $toZeroIfEmpty($inpuTotalBilletes);
+
+    try {
+        $stmt = Conexion::conectar()->prepare('CALL usp_cerrar_caja (
+            :p_id_usuario, :p_id_caja, :p_id_arqueo_caja, :p_inpuBillete100, :p_inpuBillete50,
+            :p_inpuBillete20, :p_inpuBillete10, :p_inpuBillete5, :p_inpuBillete1, :p_inputMoneda1,
+            :p_inputMoneda50, :p_inputMoneda25, :p_inputMoneda10, :p_inputMoneda5, :p_inputMoneda001,
+            :p_total_efectivo, :p_inpuTotalMoneda, :p_inpuTotalBilletes, :p_Comentario
+        );');
+
+        $stmt->bindParam(":p_id_usuario",        $id_usuario,        PDO::PARAM_STR);
+        $stmt->bindParam(":p_id_caja",           $id_caja,           PDO::PARAM_STR);
+        $stmt->bindParam(":p_id_arqueo_caja",    $txt_id_arqueo_caja,PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete100",    $inpuBillete100,    PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete50",     $inpuBillete50,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete20",     $inpuBillete20,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete10",     $inpuBillete10,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete5",      $inpuBillete5,      PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuBillete1",      $inpuBillete1,      PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda1",      $inputMoneda1,      PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda50",     $inputMoneda50,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda25",     $inputMoneda25,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda10",     $inputMoneda10,     PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda5",      $inputMoneda5,      PDO::PARAM_STR);
+        $stmt->bindParam(":p_inputMoneda001",    $inputMoneda001,    PDO::PARAM_STR);
+        $stmt->bindParam(":p_total_efectivo",    $total_efectivo,    PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuTotalMoneda",   $inpuTotalMoneda,   PDO::PARAM_STR);
+        $stmt->bindParam(":p_inpuTotalBilletes", $inpuTotalBilletes, PDO::PARAM_STR);
+        $stmt->bindParam(":p_Comentario",        $txt_Comentario,    PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            $respuesta = $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultado = $respuesta['resultado'] ?? "Acción ejecutada sin mensaje.";
+        } else {
+            $resultado = "Error al ejecutar la acción.";
+        }
+    } catch (Exception $e) {
+        $resultado = 'Excepción: ' . $e->getMessage();
+    }
+
+    $stmt = null;
+    return $resultado;
+}
 
  
 	static public function mdlAbriCaja($monto_inicial,$observacion) {
@@ -126,7 +196,7 @@ static public function mdlMostrar_Gastos(){
             $stmt->bindParam(":p_IdUsuario", $id_usuario, PDO::PARAM_INT);
             $stmt->bindParam(":p_IdCaja", $id_caja, PDO::PARAM_STR);
             $stmt->bindParam(":p_montoInicial", $monto_inicial, PDO::PARAM_INT);
-            $stmt->bindParam(":p_observacion", $observacion, PDO::PARAM_INT);
+            $stmt->bindParam(":p_observacion", $observacion, PDO::PARAM_STR);
     
             if ($stmt->execute()) {
                 $respuesta = $stmt->fetch(PDO::FETCH_ASSOC); // Obtener el mensaje desde el SELECT

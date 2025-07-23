@@ -662,25 +662,128 @@ var table_arqueo = null;   // Asumiendo que table_arqueo también se usa de mane
     const fechaHasta = formatDate(endDate);
      cargarTableArqueo(fechaDesde,fechaHasta);
 
-      $("#btnBuscarFinalizado").on('click', function() {
-      
-      let tieneFechas = selectedRange.length === 2;
+$("#btnBuscarFinalizado").on('click', function() {
 
-      let fechaInicio = null;
-      let fechaFin = null;
+  let tieneFechas = selectedRange.length === 2;
 
-      if (tieneFechas) {
-        fechaInicio = formatDate(selectedRange[0]);
-        fechaFin = formatDate(selectedRange[1]);
-      }
+  let fechaInicio = null;
+  let fechaFin = null;
 
-      if (tieneFechas) {
-        cargarTableArqueo(fechaInicio, fechaFin);
-      } else {
-        alert("Por favor selecciona al menos un filtro (rango de fechas).");
-      }
-
+  if (tieneFechas) {
+    fechaInicio = formatDate(selectedRange[0]);
+    fechaFin = formatDate(selectedRange[1]);
+    cargarTableArqueo(fechaInicio, fechaFin);
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Rango de fechas requerido',
+      text: 'Por favor selecciona al menos un filtro (rango de fechas).',
+      confirmButtonText: 'Entendido'
     });
+  }
+
+});
+
+ function imprimirArqueo(idArqueo) {
+        // Show a loading indicator (e.g., using SweetAlert2 or Toastr)
+        Swal.fire({
+            title: 'Generando Arqueo',
+            text: 'Por favor, espera...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        $.ajax({
+            url: 'endpoint/generate_report.php', // Your PHP proxy script
+            type: 'POST',
+            data: {
+                reportType: 'arqueoCaja', // Tell PHP which report to generate
+                idArqueo: idArqueo
+            },
+            xhrFields: {
+                responseType: 'blob' // Expect a binary blob response (PDF)
+            },
+            success: function(response, status, xhr) {
+                Swal.close(); // Close loading indicator
+
+                const contentType = xhr.getResponseHeader('Content-Type');
+                if (contentType && contentType.indexOf('application/pdf') !== -1) {
+                    // It's a PDF, create a download link
+                    const blob = new Blob([response], {
+                        type: 'application/pdf'
+                    });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+
+                    // Get filename from Content-Disposition header or default
+                    const contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                    let filename = `arqueo_caja_${idArqueo}.pdf`; // Default filename
+                    if (contentDisposition) {
+                        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                        if (filenameMatch && filenameMatch.length > 1) {
+                            filename = filenameMatch[1];
+                        }
+                    }
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url); // Clean up the URL
+                    toastr.success('¡Arqueo de caja descargado exitosamente!');
+                } else {
+                    // Not a PDF, likely an error message
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        try {
+                            const errorJson = JSON.parse(reader.result);
+                            toastr.error(errorJson.message || 'Error desconocido al generar el arqueo.');
+                        } catch (e) {
+                            toastr.error('Respuesta inesperada del servidor al generar el arqueo.');
+                        }
+                    };
+                    reader.readAsText(response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Swal.close(); // Close loading indicator
+                let errorMessage = 'Error de conexión. Intenta de nuevo.';
+                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                    errorMessage = jqXHR.responseJSON.message;
+                } else if (jqXHR.responseText) {
+                    try {
+                        const errorJson = JSON.parse(jqXHR.responseText);
+                        errorMessage = errorJson.message || errorMessage;
+                    } catch (e) {
+                        // Not JSON, use generic error
+                    }
+                }
+                toastr.error(errorMessage);
+            }
+        });
+    }
+
+    // Event Delegation for the "Imprimir Arqueo" button
+    // This is crucial because DataTables dynamically creates these buttons.
+    // We attach the listener to a parent element (e.g., #tbl_arqueos or document body)
+    // and then filter for clicks on .btnImprimirAqueo
+    $('#tbl_arqueos tbody').on('click', '.btnImprimirAqueo', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        const idArqueo = $(this).data('id'); // Get the ID from data-id attribute
+        imprimirArqueo(idArqueo);
+    });
+
+    // Ensure Toastr is initialized if not already (typically done in AdminLTE setup)
+    if (typeof toastr !== 'undefined') {
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "5000"
+        };
+    }
 
     $('#tbl_ingresos tbody').on('click', '.btn_edit_ingresos', function() {
         opcion_movimiento=1;
@@ -1088,19 +1191,6 @@ function cargarTables() {
                 }, {
                     targets: 3,
                     visible: false,
-                }, {
-                    targets: 6,
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-                        return "<center>" +
-                            "<span class='btn_ver text-primary px-1' style='cursor:pointer;'>" +
-                            "<i class='fas fa-pencil-alt fs-5'></i>" +
-                            "</span>" +
-                            "<span class='btnEliminarRol text-danger px-1' style='cursor:pointer;'>" +
-                            "<i class='fas fa-trash fs-5'></i>" +
-                            "</span>" +
-                            "</center>"
-                    }
                 }],
                 "order": [
                     [0, 'desc']
@@ -1303,39 +1393,47 @@ function cargarTableArqueo(fecha_inicio,fecha_fin){
                 return data === '1' ? '<span class="badge bg-success">Abierta</span>' : '<span class="badge bg-secondary">Cerrado</span>';
               }
             },
-            {
-              targets: 14,
-              orderable: false, // no ordenar
-             render: function(data, type, full, meta) {
-      let arqueoOption = '';
-      if (full.estado === '1') { // Solo si está abierta
-        arqueoOption = `
-      <li>
-        <a class="dropdown-item btnArqueo" href="#" data-id="${full.id_arqueo_caja}" title="Realizar abono a este crédito" style="cursor:pointer;">
-          <i class="fas fa-cash-register"></i> Arqueo
-        </a>
-      </li>
-    `;
-  }
+           {
+  targets: 14,
+  orderable: false,
+  render: function(data, type, full, meta) {
+    let arqueoOption = '';
+    let imprimirOption = '';
 
-  return `
-    <div class="dropdown text-center">
-      <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="accionesDropdown${meta.row}" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-ellipsis-v"></i>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="accionesDropdown${meta.row}">
-        ${arqueoOption}
+    if (full.estado === '1') {
+      // Si está abierta, solo mostrar botón "Arqueo"
+      arqueoOption = `
+        <li>
+          <a class="dropdown-item btnArqueo" href="#" data-id="${full.id_arqueo_caja}" title="Realizar abono a este crédito" style="cursor:pointer;">
+            <i class="fas fa-cash-register"></i> Arqueo
+          </a>
+        </li>
+      `;
+    } else {
+      // Si está cerrada, solo mostrar botón "Imprimir"
+      imprimirOption = `
         <li>
           <a class="dropdown-item btnImprimirAqueo" href="#" data-id="${full.id_arqueo_caja}" title="Imprimir arqueo del cliente" style="cursor:pointer;">
             <i class="fas fa-print"></i> Imprimir Arqueo
           </a>
         </li>
-      </ul>
-    </div>
-  `;
-      }
+      `;
+    }
 
-            }
+    return `
+      <div class="dropdown text-center">
+        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="accionesDropdown${meta.row}" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="accionesDropdown${meta.row}">
+          ${arqueoOption}
+          ${imprimirOption}
+        </ul>
+      </div>
+    `;
+  }
+}
+
           ],
           order: [
             [0, 'desc']

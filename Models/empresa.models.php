@@ -25,7 +25,7 @@ class Models{
         try{ //try can
 
             $stmt = Conexion::conectar()->prepare("CALL usp_registrar_o_actualizar_empresa( :p_id_empresa,
-                                                            :p_razon_social,:p_nombre_comercial, :p_ruc,:p_marca,:p_id_firma,:p_direccion_matriz,
+                                                            :p_razon_social,:p_nombre_comercial, :p_ruc,:p_marca,:p_forma_pago,:p_direccion_matriz,
                                                             :p_direccion_sucursal,:p_email,:p_telefono,:p_mensaje,
                                                             :p_contribuyente_especial,:p_obligado_contabilidad,:p_ambiente,
                                                             :p_tipo_emision,:p_establecimiento_codigo,:p_punto_emision_codigo,:p_secuencial,
@@ -37,7 +37,7 @@ class Models{
             $stmt->bindParam(":p_nombre_comercial", $data["nombre_comercial"], PDO::PARAM_STR);
             $stmt->bindParam(":p_ruc", $data["ruc"], PDO::PARAM_STR);
             $stmt->bindParam(":p_marca", $data["marca"], PDO::PARAM_STR);
-            $stmt->bindParam(":p_id_firma", $data["id_firma"], PDO::PARAM_INT);
+            $stmt->bindParam(":p_forma_pago", $data["forma_pago"], PDO::PARAM_STR);
             $stmt->bindParam(":p_direccion_matriz", $data["direccion_matriz"], PDO::PARAM_STR);
             $stmt->bindParam(":p_direccion_sucursal", $data["direccion_sucursal"], PDO::PARAM_STR);
             $stmt->bindParam(":p_email", $data["email"], PDO::PARAM_STR);

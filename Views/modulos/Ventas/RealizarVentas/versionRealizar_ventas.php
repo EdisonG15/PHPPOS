@@ -778,130 +778,136 @@
                enviarVenta('contado');
            });
 
-         // --- Manejador de cambio de cantidad (`.iptCantidad`) ---
-$('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
-    let $inputw = $(this);
-    let row = producto_ventas.row($inputw.closest('tr'));
-    let data = row.data(); // Obtiene los datos actuales de la fila
+           $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
 
-    if (data.id_producto == '') {
-        return;
-    }
+               let $inputw = $(this);
+               let rows = producto_ventas.row($inputw.closest('tr'));
+               let datas = rows.data();
 
-    let cantidad_actual = parseFloat($(this).val()); // Obtiene la nueva cantidad del input
-    let cod_producto_actual = $(this).attr('codigo_barra');
+               if (datas.id_producto == '') {
+                   return;
+               }
 
-    // Validación: Si la cantidad no es numérica o es menor/igual a cero.
-    if (isNaN(cantidad_actual) || cantidad_actual <= 0) {
-        Toast.fire({
-            icon: 'error',
-            title: 'INGRESE UN VALOR NUMERICO Y MAYOR A 0'
-        });
-        $(this).val("1"); // Restablece la cantidad a 1 en el input
-        cantidad_actual = 1; // Actualiza la variable para el cálculo
-        $("#searchInputCodigo").val("").focus();
-    }
+               let data = producto_ventas.row($(this).parents('tr')).data();
+               let cantidad_actual = $(this)[0]['value'];
+               let cod_producto_actual = $(this)[0]['attributes'][2]['value'];
+               if (!$.isNumeric($(this)[0]['value']) || $(this)[0]['value'] <= 0) {
 
-    // Llama a AJAX para validar el stock (tu lógica existente).
-    $.ajax({
-        async: false, // Considera hacer esto asíncrono (true) para una mejor UX
-        url: "ajax/productos.ajax.php",
-        method: "POST",
-        data: {
-            'accion': 8, // Validar stock del producto
-            'codigo_producto': cod_producto_actual,
-            'cantidad': cantidad_actual
-        },
-        dataType: 'json',
-        success: function(respuesta) {
-            // Si no hay stock suficiente, restablece la cantidad a 1.
-            if (parseInt(respuesta['existe']) == 0) {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'El producto ' + data['descripcion_producto'] + ' ya no tiene stock'
-                });
-                // Restablece el input de cantidad en la tabla a 1.
-                producto_ventas.cell(row.index(), 8).data('<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + cod_producto_actual + '" class="form-control form-control-sm text-center iptCantidad m-0 p-0" value="1">').draw();
-                cantidad_actual = 1; // Asegura que la variable de cantidad sea 1 para los cálculos siguientes.
+                   Toast.fire({
+                       icon: 'error',
+                       title: 'INGRESE UN VALOR NUMERICO Y MAYOR A 0'
+                   });
 
-                $("#searchInputCodigo").val("");
-                $("#searchInputCodigo").focus();
+                   $(this)[0]['value'] = "1";
+                   $("#searchInputCodigo").val("");
+                   $("#searchInputCodigo").focus();
+                   return;
             }
 
-            // Recalcula los valores de la fila con la cantidad (validada/actualizada).
-            let precioUnitarioBruto = parseFloat(data['precio_venta'].replace("$./ ", ""));
-            let totalBrutoProducto = (cantidad_actual * precioUnitarioBruto);
+            producto_ventas.rows().eq(0).each(function(index) {
+                   let row = producto_ventas.row(index);
+                   let data = row.data();
+                   if (data['codigo_barra'] == cod_producto_actual) {
+                       $.ajax({
+                           async: false,
+                           url: "ajax/productos.ajax.php",
+                           method: "POST",
+                           data: {
+                               'accion': 8,
+                               'codigo_producto': cod_producto_actual,
+                               'cantidad': cantidad_actual
+                           },
+                           dataType: 'json',
+                           success: function(respuesta) {
+                               if (parseInt(respuesta['existe']) == 0) {
+                                   Toast.fire({
+                                       icon: 'error',
+                                       title: 'El producto ' + data['descripcion_producto'] + ' ya no tiene stock'
+                                   });
 
-            let nuevoiva = 0;
-            let nuevosubtotal = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
+                                   producto_ventas.cell(index, 8).data('<input type="text"  style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + cod_producto_actual + '" class="form-control form-control-sm text-center iptCantidad m-0 p-0" value="1">').draw();
 
-            if (data['lleva_iva_producto'] == 1) {
-                nuevosubtotal = totalBrutoProducto / (1 + iva);
-                nuevoiva = totalBrutoProducto - nuevosubtotal;
-            }
+                                   $("#searchInputCodigo").val("");
+                                   $("#searchInputCodigo").focus();
 
-            // Actualiza las celdas de la tabla.
-            producto_ventas.cell(row.index(), 10).data(nuevoiva.toFixed(2)).draw();
-            producto_ventas.cell(row.index(), 11).data(nuevosubtotal.toFixed(2)).draw();
-            producto_ventas.cell(row.index(), 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
+                                   // ACTUALIZAR EL NUEVO PRECIO DEL ITEM DEL LISTADO DE VENTA
+                                   let NuevoPrecioPoducto = (parseFloat(1) * data['precio_venta'].replaceAll("$./ ", "")).toFixed(2);
+                                   NuevoPrecio = "$./ " + NuevoPrecioPoducto;
+                                   lleva_iva = data['lleva_iva_producto'];
+                                   if (data['lleva_iva_producto'] == 1) {
 
-            // Recalcula los totales generales.
-            recalcularTotales();
-        }
-    });
-});
+                                       nuevoiva = (NuevoPrecioPoducto * iva).toFixed(2);
+                                       console.log("lleva iva", nuevoiva)
+                                       console.log("iva a multiplicar", iva)
+                                       console.log("NuevoPrecio", NuevoPrecioPoducto)
+                                   } else {
+                                       nuevoiva = (NuevoPrecioPoducto * 0).toFixed(2);
+                                       console.log("lleva no iva", nuevoiva)
+                                   }
+                                   producto_ventas.cell(index, 10).data(nuevoiva).draw();
+                                   producto_ventas.cell(index, 12).data(NuevoPrecio).draw();
+                                   // RECALCULAMOS TOTALES
+                                   recalcularTotales();
+                               } else {
 
-// --- Manejador de click en los precios del Dropdown ---
-// Se llama cuando el usuario selecciona un tipo de precio (Normal, Por Mayor, Especial)
-$('#lstProductosVenta tbody').on('click', '.dropdown-item', function() {
-    let codigo_producto = $(this).attr("codigo");
-    // El precio de los atributos 'precio' del dropdown DEBE ser el precio BRUTO (incluye IVA).
-    let nuevo_precio_unitario_bruto = parseFloat($(this).attr("precio")); 
+                                   producto_ventas.cell(index, 8).data('<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + cod_producto_actual + '"  class="form-control form-control-sm text-center iptCantidad m-0 p-0" value="' + cantidad_actual + '">').draw();
 
-    // Validación para asegurar que el precio es válido.
-    if (isNaN(nuevo_precio_unitario_bruto) || nuevo_precio_unitario_bruto <= 0) {
-        console.warn("Precio inválido recibido del dropdown:", nuevo_precio_unitario_bruto);
-        return;
-    }
+                                   let NuevoPrecioPoducto = (parseFloat(cantidad_actual) * data['precio_venta'].replaceAll("$./ ", "")).toFixed(2);
+                                   NuevoPrecio = "$./ " + NuevoPrecioPoducto;
+                                   lleva_iva = data['lleva_iva_producto'];
+                                   console.log("si estoy llevando el iva cant:", lleva_iva);
+                                   if (data['lleva_iva_producto'] == 1) {
+                                       // NuevoPrecio.replaceAll("$./ ", "")).toFixed(2)
+                                       nuevoiva = (NuevoPrecioPoducto * iva).toFixed(2);
+                                       console.log("lleva iva", nuevoiva)
+                                       console.log("iva a multiplicar", iva)
+                                       console.log("NuevoPrecio", NuevoPrecioPoducto)
+                                   } else {
+                                       nuevoiva = (NuevoPrecioPoducto * 0).toFixed(2);
+                                       console.log("lleva no iva", nuevoiva)
+                                   }
 
-    // Itera sobre las filas de la tabla para encontrar el producto y actualizarlo.
-    producto_ventas.rows().eq(0).each(function(index) {
-        let row = producto_ventas.row(index);
-        let data = row.data();
-        if (data['codigo_barra'] == codigo_producto) {
-            // Actualiza el 'precio_venta' en los datos de la fila con el nuevo precio bruto formateado.
-            data['precio_venta'] = "$./ " + nuevo_precio_unitario_bruto.toFixed(2); 
+                                   producto_ventas.cell(index, 10).data(nuevoiva).draw();
+                                   producto_ventas.cell(index, 12).data(NuevoPrecio).draw();
+                                   // RECALCULAMOS TOTALES
+                                   recalcularTotales();
+                               }
+                           }
+                       });
 
-            // Obtiene la cantidad actual del campo de entrada en la tabla.
-            let currentQuantityInput = $(row.node()).find('.iptCantidad');
-            let cantidad_actual = parseFloat(currentQuantityInput.val());
+                   }
+               });
+           });
 
-            // Recalcula los montos de esta fila específica con el nuevo precio.
-            let totalBrutoProducto = (cantidad_actual * nuevo_precio_unitario_bruto);
+    $('#lstProductosVenta tbody').on('click', '.dropdown-item', function() {
 
-            let nuevoiva = 0;
-            let nuevosubtotal = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
-
-            if (data['lleva_iva_producto'] == 1) {
-                nuevosubtotal = totalBrutoProducto / (1 + iva);
-                nuevoiva = totalBrutoProducto - nuevosubtotal;
-            }
-
-            // Actualiza las celdas de la tabla para la fila.
-            producto_ventas.cell(index, 9).data("$./ " + nuevo_precio_unitario_bruto.toFixed(2)).draw(); // Actualiza columna de Precio
-            producto_ventas.cell(index, 10).data(nuevoiva.toFixed(2)).draw();
-            producto_ventas.cell(index, 11).data(nuevosubtotal.toFixed(2)).draw();
-            producto_ventas.cell(index, 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
-
-            // Detiene el bucle ya que el producto fue encontrado y actualizado.
-            return false; 
-        }
-    });
-
-    // Recalcula los totales generales después del cambio de precio.
-    recalcularTotales();
-});
-
+               let precio_ventas = 0;
+               let precio_ventas_normal = 0;
+               let codigo_producto = $(this).attr("codigo");
+               let volorX = 0;
+               volorX = parseFloat($(this).attr("precio")).toFixed(2);
+               console.log(" valor volorX", volorX);
+               if (volorX > 0) {
+                   precio_ventas = parseFloat($(this).attr("precio").replaceAll("$./ ", "")).toFixed(2);
+                   producto_ventas.rows().eq(0).each(function(index) {
+                       let row = producto_ventas.row(index);
+                       let data = row.data();
+                       if (data['codigo_barra'] == codigo_producto) {
+                           let valor_actual_cantidad = parseFloat($.parseHTML(data['cantidad'])[0]['value']);
+                           producto_ventas.cell(index, 8).data(
+        '<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" ' +
+        'codigo_barra="' + codigo_producto + '" ' +
+        'class="form-control form-control-sm text-center iptCantidad p-0 m-0" ' + // ¡Aquí se añadió form-control-sm!
+        'value="' + valor_actual_cantidad + '">'
+       ).draw();
+                        }
+                   });                                         
+                   console.log(" valor es 0");
+               }
+               console.log("🚀 ~ file: ventas.php:527 ~ $ ~ codigo_producto", codigo_producto)
+               console.log("precio midificado:", precio_ventas);
+               recalcularMontos(codigo_producto, precio_ventas);
+   });
 
            $("#iptEfectivoRecibido").keyup(function() {
                actualizarVuelto();
@@ -1136,60 +1142,60 @@ $("#btnSalidadaDinero").on('click', function() {
            });
     };
     
-  // --- `CargarNroBoleta` y `actualizarIVAs` (ya estaban correctas para cargar el IVA) ---
-function CargarNroBoleta() {
-    $.ajax({
-        async: false,
-        url: "ajax/realizar_ventas.ajax.php",
-        method: "POST",
-        data: {
-            'accion': 1
-        },
-        dataType: 'json',
-        success: function(respuesta) {
-            serie_boleta = respuesta["serie_boleta"];
-            nro_boleta = respuesta["nro_venta"];
-            razon_social = respuesta["razon_social"];
-            ruc = respuesta["ruc"];
-            mensaje = respuesta["mensaje"];
-            direccion = respuesta["direccion"];
-            marca = respuesta["marca"];
-            email = respuesta["email"];
-            iva = (respuesta["impuesto"] / 100); // Esto establece la variable global 'iva' correctamente como decimal.
-            nro_credito_venta = respuesta["nro_credito_ventas"];
-            $("#iptNroSerie").val(serie_boleta);
-            $("#iptNroVenta").val(nro_boleta);
-            actualizarIVAs(iva); // Pasa el valor decimal del IVA para actualizar las etiquetas.
-        }
-    });
-}
+    function CargarNroBoleta() {
 
-    // --- Otras funciones (sin cambios en la lógica de IVA) ---
-function CargarProductos(producto = "") {
-    let codigo_producto = producto || $("#productoSearch").val();
-    codigo_producto = $.trim(codigo_producto.split('/')[0]);
-    let producto_repetido = false;
-    console.log("producto_repetido pase por repetir1", producto_repetido);
-    producto_ventas.rows().eq(0).each(function(index) {
-        let row = producto_ventas.row(index);
-        let data = row.data();
+           $.ajax({
+               async: false,
+               url: "ajax/realizar_ventas.ajax.php",
+               method: "POST",
+               data: {
+                   'accion': 1
+               },
+               dataType: 'json',
+               success: function(respuesta) {
 
-        if (codigo_producto == data['codigo_barra']) {
-            producto_repetido = true;
-            console.log("producto_repetido pase por repetir2", producto_repetido);
-            actualizarCantidadProducto(index, data, codigo_producto);
-            return false; // Salir del bucle temprano
-        }
-    });
+                   serie_boleta = respuesta["serie_boleta"];
+                   nro_boleta = respuesta["nro_venta"];
+                   razon_social = respuesta["razon_social"];
+                   ruc = respuesta["ruc"];
+                   mensaje = respuesta["mensaje"];
+                   direccion = respuesta["direccion"];
+                   marca = respuesta["marca"];
+                   email = respuesta["email"];
+                   iva = (respuesta["impuesto"] / 100);
+                   nro_credito_venta = respuesta["nro_credito_ventas"];
+                   $("#iptNroSerie").val(serie_boleta);
+                   $("#iptNroVenta").val(nro_boleta);
+                   actualizarIVAs(iva);
+               }
+           });
+    };
 
-    if (producto_repetido) {
-        console.log("producto_repetido pase por repetir 3", producto_repetido);
-        return;
-    }
-    console.log("producto_repetido pase por repetir 4 no igresos", producto_repetido);
-    obtenerProductoPorCodigo(codigo_producto);
-}
+    function CargarProductos(producto = "") {
+           let codigo_producto = producto || $("#productoSearch").val();
+           codigo_producto = $.trim(codigo_producto.split('/')[0]);
+           let producto_repetido = false;
+           console.log("producto_repetido pase por repetir1", producto_repetido);
+           producto_ventas.rows().eq(0).each(function(index) {
+               let row = producto_ventas.row(index);
+               let data = row.data();
 
+               if (codigo_producto == data['codigo_barra']) {
+                   producto_repetido = true;
+                   console.log("producto_repetido pase por repetir2", producto_repetido);
+                   actualizarCantidadProducto(index, data, codigo_producto);
+                   return false; // Salir del bucle early
+               }
+           });
+
+           if (producto_repetido) {
+               console.log("producto_repetido pase por repetir 3", producto_repetido);
+               return;
+           }
+           console.log("producto_repetido pase por repetir 4 no igresos", producto_repetido);
+           // Si el producto no está repetido, hacer una solicitud AJAX
+           obtenerProductoPorCodigo(codigo_producto);
+    };
       // Actualiza la cantidad del producto ya existente en la tabla
     function actualizarCantidadProducto(index, data, codigo_producto) {
            let cantidad = parseFloat($.parseHTML(data['cantidad'])[0]['value']) + 1;
@@ -1219,120 +1225,87 @@ function CargarProductos(producto = "") {
     };
 
          // Actualiza los datos de la fila del producto
-  // --- Recalcula IVA y Totales en `actualizarFilaProducto` ---
-// Se llama cuando se actualiza la cantidad de un producto existente.
-function actualizarFilaProducto(index, data, cantidad, respuesta) {
-    // El precio unitario bruto (ya incluye IVA) se toma de los datos de la fila.
-    let precioUnitarioBruto = parseFloat(data['precio_venta'].replace("$./ ", "")); 
-    
-    // Calcula el total bruto (con IVA) para esta línea de producto.
-    let totalBrutoProducto = (cantidad * precioUnitarioBruto); 
+    function actualizarFilaProducto(index, data, cantidad, respuesta) {
+      let nuevoTotal = (parseInt(cantidad) * parseFloat(data['precio_venta'].replace("$./ ", ""))).toFixed(2);
+      let nuevoIva = data['lleva_iva_producto'] == 1 ? (nuevoTotal * iva).toFixed(2) : 0;
+      let nuevoSubtotal = (nuevoTotal - nuevoIva).toFixed(2);
 
-    let ivaProductoActual = 0;
-    let subtotalProductoActual = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
-
-    // Si el producto lleva IVA, desglosamos el IVA y obtenemos el subtotal neto.
-    if (data['lleva_iva_producto'] == 1) {
-        // Calcula el subtotal neto: total bruto / (1 + tasa de IVA)
-        subtotalProductoActual = totalBrutoProducto / (1 + iva); 
-        // Calcula el monto del IVA: total bruto - subtotal neto
-        ivaProductoActual = totalBrutoProducto - subtotalProductoActual;
-    }
-
-    // Actualiza el campo de cantidad en la tabla.
-    producto_ventas.cell(index, 8).data(
+      // Asegura que el HTML para el input sea idéntico a como se añadió inicialmente
+      producto_ventas.cell(index, 8).data(
         '<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" ' +
         'codigo_barra = "' + respuesta['codigo_barra'] + '" ' +
         'class="form-control form-control-sm text-center iptCantidad p-0 m-0" ' +
         'value="' + cantidad + '">'
-    ).draw();
+      ).draw();
 
-    // Actualiza las celdas de IVA, subtotal y total en la tabla con los nuevos valores.
-    producto_ventas.cell(index, 10).data(ivaProductoActual.toFixed(2)).draw();
-    producto_ventas.cell(index, 11).data(subtotalProductoActual.toFixed(2)).draw();
-    producto_ventas.cell(index, 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
+      producto_ventas.cell(index, 10).data(nuevoIva).draw();
+      producto_ventas.cell(index, 11).data(nuevoSubtotal).draw();
+      producto_ventas.cell(index, 12).data("$./ " + nuevoTotal).draw();
 
-    // Llama a la función para recalcular los totales generales de la venta.
-    recalcularTotales();
-}
+       recalcularTotales();
+    };
 
     // Obtiene el producto por su código de barra
-   function obtenerProductoPorCodigo(codigo_producto) {
-    $.ajax({
-        url: "ajax/productos.ajax.php",
-        method: "POST",
-        data: {
-            'accion': 7, // Buscar producto por su código de barra
-            'codigo_producto': codigo_producto
-        },
-        dataType: 'json',
-        success: function(respuesta) {
-            if (respuesta) {
-                agregarProductoATabla(respuesta);
-            } else {
-                Toast.fire({
-                    icon: 'error',
-                    title: ' El producto no existe o no tiene stock'
-                });
-                $("#productoSearch").val("").focus();
-            }
-        }
-    });
-}
+    function obtenerProductoPorCodigo(codigo_producto) {
+           $.ajax({
+               url: "ajax/productos.ajax.php",
+               method: "POST",
+                 data: {
+                   'accion': 7, // Buscar producto por su código de barra
+                   'codigo_producto': codigo_producto
+               },
+               dataType: 'json',
+               success: function(respuesta) {
+                   if (respuesta) {
+                       agregarProductoATabla(respuesta);
+                   } else {
+                       Toast.fire({
+                           icon: 'error',
+                           title: ' El producto no existe o no tiene stock'
+                       });
+                       $("#productoSearch").val("").focus();
+                   }
+               }
+           });
+    };
+        function agregarProductoATabla(respuesta) {
+           let itemProducto = producto_ventas.rows().count() + 1;
+           let ivaProducto = parseFloat(respuesta['precio_venta'].replace("$./ ", "")) * iva * (respuesta['lleva_iva_producto']);
+           let subtotalProducto = parseFloat(respuesta['total'].replace("$./ ", "")) - ivaProducto;
 
-        
-// --- Agrega un nuevo producto a la tabla en `agregarProductoATabla` ---
-// Se llama cuando se añade un producto por primera vez a la tabla de ventas.
-function agregarProductoATabla(respuesta) {
-    let itemProducto = producto_ventas.rows().count() + 1;
-    // Asumiendo que 'precio_venta' de la respuesta AJAX es el precio BRUTO (incluye IVA).
-    let precioUnitarioBruto = parseFloat(respuesta['precio_venta'].replace("$./ ", ""));
+           producto_ventas.row.add({
+               'contador': itemProducto,
+               'id_producto': respuesta['id_producto'],
+               'codigo_barra': respuesta['codigo_barra'],
+               'id_categoria': respuesta['id_categoria'],
+               'nombre_categoria': respuesta['nombre_categoria'],
+               'descripcion_producto': respuesta['descripcion_producto'],
+               'cantidad': '<input type="text"   style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;"  codigo_barra = "' + respuesta['codigo_barra'] + '" class="form-control form-control-sm text-center iptCantidad p-0 m-0" value="1">',
+               'unidad': respuesta['unidad'],
+               'lleva_iva_producto': respuesta['lleva_iva_producto'],
+               'precio_venta': respuesta['precio_venta'],
+               'iva': ivaProducto.toFixed(2),
+               'subtotal': subtotalProducto.toFixed(2),
+               'total': respuesta['total'],
+               'acciones': generarAccionesProducto(respuesta),
+               'precio_normal': respuesta['precio_venta'] || "",
+               'precio_1_producto': respuesta['precio_1_producto'] || "",
+               'precio_2_producto': respuesta['precio_2_producto'] || ""
+           }).draw();
 
-    let ivaProducto = 0;
-    let subtotalProducto = precioUnitarioBruto; // Inicialmente, subtotal es el precio bruto
-
-    // Si el producto lleva IVA, desglosamos el IVA y obtenemos el subtotal neto.
-    if (respuesta['lleva_iva_producto'] == 1) {
-        subtotalProducto = precioUnitarioBruto / (1 + iva); // Subtotal neto para una unidad
-        ivaProducto = precioUnitarioBruto - subtotalProducto; // IVA para una unidad
-    }
-
-    producto_ventas.row.add({
-        'contador': itemProducto,
-        'id_producto': respuesta['id_producto'],
-        'codigo_barra': respuesta['codigo_barra'],
-        'id_categoria': respuesta['id_categoria'],
-        'nombre_categoria': respuesta['nombre_categoria'],
-        'descripcion_producto': respuesta['descripcion_producto'],
-        // Input de cantidad con valor inicial de 1.
-        'cantidad': '<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + respuesta['codigo_barra'] + '" class="form-control form-control-sm text-center iptCantidad p-0 m-0" value="1">',
-        'unidad': respuesta['unidad'],
-        'lleva_iva_producto': respuesta['lleva_iva_producto'],
-        'precio_venta': "$./ " + precioUnitarioBruto.toFixed(2), // Almacena el precio bruto formateado.
-        'iva': ivaProducto.toFixed(2), // Almacena el IVA de una unidad.
-        'subtotal': subtotalProducto.toFixed(2), // Almacena el subtotal neto de una unidad.
-        'total': "$./ " + precioUnitarioBruto.toFixed(2), // Almacena el total (precio bruto) de una unidad.
-        'acciones': generarAccionesProducto(respuesta),
-        'precio_normal': respuesta['precio_venta'] || "", 
-        'precio_1_producto': respuesta['precio_1_producto'] || "",
-        'precio_2_producto': respuesta['precio_2_producto'] || ""
-    }).draw();
-
-    // Recalcula los totales generales después de añadir el producto.
-    recalcularTotales();
-}
-
-
-   function generarAccionesProducto(respuesta) {
-    // Asegúrate de que precioNormal, precio_1_producto y precio_2_producto sean los precios BRUTOS.
-    let match = respuesta['precio_venta'].match(/(\d+\.\d{1,2})/);
-    let precioNormal = match ? parseFloat(match[0]) : 0;
+           recalcularTotales();
+       };
+     
+        function generarAccionesProducto(respuesta) {
+           let match = respuesta['precio_venta'].match(/(\d+\.\d{1,2})/);
+           let precioNormal = match ? parseFloat(match[0]) : 0;
 
     return "<center>" +
         "<span class='btnEliminarproducto text-danger px-1' style='cursor:pointer;' data-bs-toggle='tooltip' data-bs-placement='top' title='Eliminar producto'>" +
         "<i class='fas fa-trash fs-5'> </i>" +
         "</span>" +
         "<div class='btn-group'>" +
+        // Usando btn-link para quitar el fondo azul por defecto, manteniendo el color de texto primario
         "<button type='button' class='p-0 btn btn-link dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>" +
         "<i class='fas fa-cog text-primary fs-5'></i> <i class='fas fa-chevron-down text-primary'></i>" +
         "</button>" +
@@ -1343,7 +1316,7 @@ function agregarProductoATabla(respuesta) {
         "</ul>" +
         "</div>" +
         "</center>";
-}
+       }
 
        function actualizarVuelto() {
            let totalVenta = $("#totalVenta").html(); // capturo Total 
@@ -1360,75 +1333,69 @@ function agregarProductoATabla(respuesta) {
            }
        };
 
-    // --- Recalcula IVA y Totales en `recalcularMontos` (cuando el precio unitario cambia) ---
-// Se llama cuando se selecciona un precio diferente (Normal, Por Mayor, Especial) para un producto.
-function recalcularMontos(codigo_producto, precio_venta_nuevo_bruto) {
-    let cantidad_actual = 0;
-    producto_ventas.rows().eq(0).each(function(index) {
-        let row = producto_ventas.row(index);
-        let data = row.data();
-        if (data['codigo_barra'] == codigo_producto) {
-            // Actualiza el precio de venta almacenado en el objeto de datos de la fila con el nuevo precio bruto.
-            data['precio_venta'] = "$./ " + parseFloat(precio_venta_nuevo_bruto).toFixed(2);
-            // Actualiza la celda del precio en la tabla.
-            producto_ventas.cell(index, 9).data(data['precio_venta']).draw(); 
+       function recalcularMontos(codigo_producto, precio_venta) {
+           let nuevoiva = 0;
+           let nuevosubtotal = 0;
+           let NuevoPrecio = 0;
+           let cantidad_actual = 0;
+           let lleva_iva = 0;
+           producto_ventas.rows().eq(0).each(function(index) {
+               let row = producto_ventas.row(index);
+               let data = row.data();
+               if (data['codigo_barra'] == codigo_producto) {
+                   // AUMENTAR EN 1 EL VALOR DE LA CANTIDAD
+                   producto_ventas.cell(index, 9).data("$./ " + parseFloat(precio_venta).toFixed(2)).draw();
+                   // cantidad_actual = 
+                   console.log("🚀 ~ file: ventas.php:744 ~ table.rows ~ data", parseFloat($.parseHTML(data['cantidad'])[0]['value']))
+                   cantidad_actual = parseFloat($.parseHTML(data['cantidad'])[0]['value']);
+                   // ACTUALIZAR EL NUEVO PRECIO DEL ITEM DEL LISTADO DE VENTA
+                   NuevoPrecio = (parseFloat(cantidad_actual) * data['precio_venta'].replaceAll("$./ ", "")).toFixed(2);
+                   lleva_iva = data['lleva_iva_producto'];
+                   if (data['lleva_iva_producto'] == 1) {
+                       nuevoiva = (NuevoPrecio * iva).toFixed(2);
+                   } else {
+                       nuevoiva = (NuevoPrecio * 0).toFixed(2);
+                   }
+                   nuevosubtotal = (NuevoPrecio - nuevoiva).toFixed(2);
+                   NuevoPrecio = "$./ " + NuevoPrecio;
+                   producto_ventas.cell(index, 10).data(nuevoiva).draw();
+                   producto_ventas.cell(index, 11).data(nuevosubtotal).draw();
+                   producto_ventas.cell(index, 12).data(NuevoPrecio).draw();
 
-            // Obtiene la cantidad actual del input dentro de la celda.
-            cantidad_actual = parseFloat($.parseHTML(data['cantidad'])[0]['value']);
 
-            // Calcula el total bruto (con IVA) con el nuevo precio y cantidad.
-            let totalBrutoProducto = (cantidad_actual * parseFloat(precio_venta_nuevo_bruto));
+               }
+           });
 
-            let nuevoiva = 0;
-            let nuevosubtotal = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
+           recalcularTotales();
 
-            // Si el producto lleva IVA, desglosamos el IVA y obtenemos el subtotal neto.
-            if (data['lleva_iva_producto'] == 1) {
-                nuevosubtotal = totalBrutoProducto / (1 + iva);
-                nuevoiva = totalBrutoProducto - nuevosubtotal;
-            }
+       };
 
-            // Actualiza las celdas de IVA, subtotal y total en la tabla.
-            producto_ventas.cell(index, 10).data(nuevoiva.toFixed(2)).draw();
-            producto_ventas.cell(index, 11).data(nuevosubtotal.toFixed(2)).draw();
-            producto_ventas.cell(index, 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
-            
-            // Rompe el bucle una vez que se encuentra y actualiza el producto.
-            return false; 
-        }
-    });
-    // Llama a la función para recalcular los totales generales de la venta.
-    recalcularTotales();
-}
+       function recalcularTotales() {
 
-       // --- `recalcularTotales` función ---
-// Se encarga de sumar todos los IVAs y Totales de las filas para mostrar el resumen de la venta.
-function recalcularTotales() {
-    let TotalVenta = 0.00; // Suma de los totales con IVA de cada producto.
-    let TotalIva = 0.00; // Suma de los IVAs de cada producto.
-    let TotalSubtotal = 0.00; // Suma de los subtotales (netos) de cada producto.
-
-    producto_ventas.rows().eq(0).each(function(index) { 
-        let row = producto_ventas.row(index);
-        let data = row.data(); 
-        TotalVenta = parseFloat(TotalVenta) + parseFloat(data['total'].replace("$./ ", "")); // Total bruto por línea
-        TotalIva = parseFloat(TotalIva) + parseFloat(data['iva']); // IVA por línea
-        TotalSubtotal = parseFloat(TotalSubtotal) + parseFloat(data['subtotal']); // Subtotal neto por línea
-    });
-
-    $("#totalVenta").html(TotalVenta.toFixed(2)); 
-    // Ahora el subtotal ya no se calcula restando del total, sino sumando los subtotales de cada línea
-    $("#boleta_subtotal").html(parseFloat(TotalSubtotal).toFixed(2)); 
-    $("#boleta_igv").html(parseFloat(TotalIva).toFixed(2));
-    
-    // Restablece los campos de pago.
-    $("#iptEfectivoRecibido").val("");
-    $("#chkEfectivoExacto").prop('checked', false);
-    $("#EfectivoEntregado").html("0.00");
-    $("#Vuelto").html("0.00");
-    $("#iptCodigoVenta").val("");
-    $("#iptCodigoVenta").focus();
-}
+           let TotalVenta = 0.00;
+           let TotalIva = 0.00;
+           producto_ventas.rows().eq(0).each(function(index) { //recorro table
+               let row = producto_ventas.row(index);
+               let data = row.data(); //total puede ser el numero de la coluna
+               TotalVenta = parseFloat(TotalVenta) + parseFloat(data['total'].replace("$./ ", ""));
+               TotalIva = parseFloat(TotalIva) + parseFloat(data['iva']);
+           });
+           $("#totalVenta").html(""); // quita la s./ 
+           $("#totalVenta").html(TotalVenta.toFixed(2)); // catura solo el valor sin S./
+           totalVenta = $("#totalVenta").html();
+           // var igv = parseFloat((totalVenta) * iva);
+           let subtotal = parseFloat(totalVenta) - parseFloat(TotalIva);
+           // $("#totalVentaRegistrar").html(totalVenta);
+           $("#boleta_subtotal").html(parseFloat(subtotal).toFixed(2));
+           $("#boleta_igv").html(parseFloat(TotalIva).toFixed(2));
+           // $("#boleta_total").html(parseFloat(totalVenta).toFixed(2));
+           $("#iptEfectivoRecibido").val("");
+           $("#chkEfectivoExacto").prop('checked', false);
+           $("#EfectivoEntregado").html("0.00");
+           $("#Vuelto").html("0.00");
+           $("#iptCodigoVenta").val("");
+           $("#iptCodigoVenta").focus();
+       };
 
        document.getElementById("btnGuardar_cliente").addEventListener("click", function() {
 
@@ -1532,60 +1499,38 @@ function recalcularTotales() {
            });
        });
          
-      function actualizarIVAs(porcentaje) {
-    porcentaje = porcentaje * 100; // Convierte el decimal a porcentaje para mostrar.
-    const ivaLabels = document.querySelectorAll('.iva_label');
-    ivaLabels.forEach(label => {
-        label.innerText = `IVA (${porcentaje}%):`;
-    });
-}
-
+       function actualizarIVAs(porcentaje) {
+           porcentaje = porcentaje * 100;
+           console.log("porcentaje", porcentaje);
+           const ivaLabels = document.querySelectorAll('.iva_label');
+           ivaLabels.forEach(label => {
+               label.innerText = `IVA (${porcentaje}%):`;
+           });
+       }
 
        function getInputValueFromHTML(html, fallback = '') {
            const input = $("<div>").html(html).find("input");
            return input.length > 0 ? input.val() : html || fallback;
        }
 
-    //    function construirDetalleVenta(table) {
-    //        let arr = [];
-    //        table.rows().eq(0).each(function(index) {
-    //            let data = table.row(index).data();
-                  
-    //            arr.push(JSON.stringify({
-    //                id_producto: data['id_producto'] || '',
-    //                codigo_barra: data['codigo_barra'] || '',
-    //                cantidad: parseFloat(getInputValueFromHTML(data['cantidad'], 0)),
-    //                precio_venta: getInputValueFromHTML(data['precio_venta']).toString().replace("$./ ", ""),
-    //                iva: data['iva'],
-    //                subtotal: data['subtotal'],
-    //                total: data['total'].toString().replace("$./ ", ""),
-    //                descripcion_producto: getInputValueFromHTML(data['descripcion_producto'])
-    //            }));
-    //        });
-    //        return arr;
-    //    }
-    function construirDetalleVenta(table) {
-    let arr = [];
-    table.rows().eq(0).each(function(index) {
-        let row = table.row(index);
-        let data = row.data();
-        let $inputCantidad = $(row.node()).find('.iptCantidad');
-        let cantidad = parseFloat($inputCantidad.val()) || 0;
+       function construirDetalleVenta(table) {
+           let arr = [];
+           table.rows().eq(0).each(function(index) {
+               let data = table.row(index).data();
 
-        arr.push(JSON.stringify({
-            id_producto: data['id_producto'] || '',
-            codigo_barra: data['codigo_barra'] || '',
-            cantidad: cantidad,
-            precio_venta: getInputValueFromHTML(data['precio_venta']).toString().replace("$./ ", ""),
-            iva: data['iva'],
-            subtotal: data['subtotal'],
-            total: data['total'].toString().replace("$./ ", ""),
-            descripcion_producto: getInputValueFromHTML(data['descripcion_producto'])
-        }));
-    });
-    return arr;
-}
-
+               arr.push(JSON.stringify({
+                   id_producto: data['id_producto'] || '',
+                   codigo_barra: data['codigo_barra'] || '',
+                   cantidad: parseFloat(getInputValueFromHTML(data['cantidad'], 0)),
+                   precio_venta: getInputValueFromHTML(data['precio_venta']).toString().replace("$./ ", ""),
+                   iva: data['iva'],
+                   subtotal: data['subtotal'],
+                   total: data['total'].toString().replace("$./ ", ""),
+                   descripcion_producto: getInputValueFromHTML(data['descripcion_producto'])
+               }));
+           });
+           return arr;
+       }
 
        function construirFormDataVenta(tipoVenta, detalles, totalVenta, efectivoRecibido, vuelto) {
            const formData = new FormData();
@@ -1688,10 +1633,10 @@ function recalcularTotales() {
                       mostrarAlertaRespuesta(respuesta, function() {
                       $("#modalCredito").modal('hide');
                        LimpiarInputs();
+                       CargarNroBoleta();
                         habilitarBotones();
                        const nro_boleta = $("#iptNroVenta").val();
                        window.open(`http://localhost/WebPuntoVenta2025/Views/modulos/Ventas/RealizarVentas/generar_tick.php?nro_boleta=${nro_boleta}`);
-                    CargarNroBoleta();
                     }, {
                         mensajeExito: "éxito",
                         mensajeAdvertencia: "Warning",

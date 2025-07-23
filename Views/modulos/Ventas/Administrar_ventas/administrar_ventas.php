@@ -84,8 +84,6 @@
   outline: none;
 }
 
-
-
 </style>
 
 <div class="content">
@@ -99,21 +97,14 @@
                     </div>      
                     <br>
                      <div class="card-body">
-                
-                      <!-- <input type="text" id="rangoFecha" placeholder="Selecciona rango de fecha" /> -->
-
-                
-<div class="row mb-4">
-       
+<div class="row mb-4">       
             <div class="col-md-3">
               <label for="rangoFecha" class="form-label">Fecha:</label>
               <input type="text" class="form-control" id="rangoFecha" placeholder="Buscar por Fecha " autocomplete="off" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
-              <button class="btn btn-outline-primary w-100" id="btnBuscarCompras"><i class="fas fa-search"></i> Buscar</button>
+              <button class="btn btn-outline-primary w-100" id="btnBuscarVenta"><i class="fas fa-search"></i> Buscar</button>
             </div>
-
-
           </div>
                                      <div class="row">
                                      </div>
@@ -147,12 +138,10 @@
         </div>
     </div>
 </div>
-
 <script>
      
     var table_ventas;
     var selectedRange = [];
-
   flatpickr("#rangoFecha", {
         mode: "range",
         dateFormat: "d/m/Y",
@@ -192,33 +181,19 @@
     });
 
     $(document).ready(function(){
-             // 1. Define la función para formatear fechas
-    function formatDate(date) {
-        const d = new Date(date);
-        // El método .toString() es opcional aquí, padStart funciona en números en JS moderno, pero es buena práctica.
-        const month = (d.getMonth() + 1).toString().padStart(2, '0');
-        const day = d.getDate().toString().padStart(2, '0');
-        const year = d.getFullYear();
-        return `${year}-${month}-${day}`;
-    }
-
     // 2. Establece las fechas de inicio y fin
     const fechaInicio = new Date(); // Fecha de hoy
     const fechaFin = new Date();    // También hoy, pero la modificaremos
-    
     // Aumenta un día a la fecha final
     fechaFin.setDate(fechaFin.getDate() + 1);
-
     // 3. Llama a la función con el rango de fechas correcto
     cargarTableVentas(formatDate(fechaInicio), formatDate(fechaFin));
     // También puedes establecer la fecha seleccionada en el input de flatpickr si quieres
     // document.querySelector("#rangoFecha").value = `${fechaHoy} a ${fechaHoy}`;
 
-    
       $('#tb_venta').on('click', '.btnEliminar', function(e) {
             // e.preventDefault();
-          const idEliminar = $(this).data('id');
-  
+          const idEliminar = $(this).data('id');  
            Swal.fire({
             title: 'Está seguro de eliminar la Venta?',
             icon: 'warning',
@@ -261,20 +236,20 @@
                                 confirmButtonText: 'Cerrar'
                             });
                         }
-
                     }
                 });
-
             }
         })
-        
       });
-
+$('#tb_venta tbody').on('click', '.btnImprimir', function () {
+    const nro_boleta = $(this).data('nro');
+    const url = `http://localhost/WebPuntoVenta2025/Views/modulos/Ventas/RealizarVentas/generar_tick.php?nro_boleta=${nro_boleta}`;
+    window.open(url, '_blank');
+});
 
       $('#tb_venta').on('click', '.btnXML', function(e) {
             // e.preventDefault();
-          const idVenta = $(this).data('id');
-  
+          const idVenta = $(this).data('id');  
               $.ajax({
                   url: 'ajax/factura_ajax.php',
                   type: 'POST',
@@ -296,15 +271,12 @@
                 }
              });
       });
-
-
   });
 
     function cargarTableVentas(fechaDesde, fechaHasta){
           if ($.fn.DataTable.isDataTable('#tb_venta')) {
              $('#tb_venta').DataTable().destroy();
           }
-
         table_ventas = $("#tb_venta").DataTable({           
         dom: 'Bfrtip',
         buttons: [
@@ -333,9 +305,6 @@
             { targets: 0, orderable: false, className: 'control' },
             { targets: 1, visible: false },
             { targets: 2, visible: false },
-            // { targets: 3, visible: false },
-            // { targets: 5, visible: false },
-            // { targets: 6, visible: false },
             {
                 targets: 10,
                 sortable: false,
@@ -345,32 +314,23 @@
                         "<center><button class='btn btn-sm btnActivarAlm btn-danger'><i class='fa fa-toggle-off'></i> INACTIVO</button></center>";
                 }
             },
-            {
-                targets: 11,
-                orderable: false,
-                render: function (data, type, full, meta) {
-                      return `
-                            <div class="dropdown text-center">
-        <button class="btn-acciones dropdown-toggle" type="button" id="accionesDropdown${meta.row}" data-bs-toggle="dropdown" aria-expanded="false">
-          Acciones
-          <i class="fas fa-caret-down ms-2"></i>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="accionesDropdown${meta.row}">
-          <li>
-            <a class="dropdown-item btnXML" href="#" data-id="${full.IdVenta}" style="cursor:pointer;">
-              <i class="fas fa-pencil-alt"></i> XML
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item btnEliminar" href="#" data-id="${full.IdVenta}" style="cursor:pointer;">
-              <i class="fas fa-trash-alt"></i> Borrar
-            </a>
-          </li>
-        </ul>
-      </div>
-                      `;
-                }
-            }
+      {
+    targets: 11,
+    orderable: false,
+    className: 'text-center',
+    render: function (data, type, full, meta) {
+        return `
+            <button class="btn btn-outline-danger btn-sm btnEliminar" data-id="${full.IdVenta}" title="Eliminar venta">
+                <i class="fas fa-trash-alt me-1"></i> Eliminar
+            </button>
+            <button class="btn btn-outline-primary btn-sm btnImprimir" data-nro="${full.nro_boleta}" title="Imprimir ticket">
+                <i class="fas fa-print me-1"></i> Ticket
+            </button>
+        `;
+    }
+}
+
+
         ],
         order: [[ 0, 'desc' ]],
         lengthMenu: [ 5, 10, 15, 20, 50 ],
@@ -380,23 +340,37 @@
     });
   }
 
- $(document).on('click', '#btnBuscarCompras', function() {
-     
-      let tieneFechas = selectedRange.length === 2;
+$(document).on('click', '#btnBuscarVenta', function() {
 
-      let fechaInicio = null;
-      let fechaFin = null;
+  let tieneFechas = selectedRange.length === 2;
 
-      if (tieneFechas) {
-        fechaInicio = formatDate(selectedRange[0]);
-        fechaFin = formatDate(selectedRange[1]);
-      }
+  let fechaInicio = null;
+  let fechaFin = null;
 
-      if ( tieneFechas) {
-        cargarTableVentas(fechaInicio, fechaFin);
-      } else {
-        alert("Por favor selecciona al menos un filtro (estado o rango de fechas).");
-      }
+  if (tieneFechas) {
+    fechaInicio = formatDate(selectedRange[0]);
+    fechaFin = formatDate(selectedRange[1]);
+    cargarTableVentas(fechaInicio, fechaFin);
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Filtros requeridos',
+      text: 'Por favor selecciona al menos un filtro (estado o rango de fechas).',
+      confirmButtonText: 'Entendido'
+    });
+  }
 
- });
+});
+
+
+              // 1. Define la función para formatear fechas
+    function formatDate(date) {
+        const d = new Date(date);
+        // El método .toString() es opcional aquí, padStart funciona en números en JS moderno, pero es buena práctica.
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const day = d.getDate().toString().padStart(2, '0');
+        const year = d.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
+
 </script>

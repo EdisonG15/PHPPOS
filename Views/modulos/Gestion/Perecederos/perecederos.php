@@ -1,195 +1,206 @@
-<!DOCTYPE html>
-<!-- <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Ventas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <style>
-        /* Pequeños ajustes para un look más pulido */
-        .card-title i { margin-right: 8px; }
-        .table { vertical-align: middle; }
-        .badge { font-size: 0.85em; }
-    </style>
-</head>
-<body> -->
-
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center bg-light">
-                    <h3 class="card-title mb-0">
-                        <i class="fas fa-file-invoice-dollar text-primary"></i> Gestión de Ventas
-                    </h3>
-                    <div class="card-tools">
-                        <button class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Nueva Venta
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <label for="rangoFecha" class="form-label fw-bold">Filtrar por Fecha:</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                <input type="text" id="rangoFecha" class="form-control" placeholder="Selecciona un rango"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table id="tb_venta" class="table table-hover table-striped" style="width:100%">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Nro. Boleta</th>
-                                    <th>Cliente</th>
-                                    <th>Total</th>
-                                    <th>Fecha</th>
-                                    <th class="text-center">Estado SRI</th>
-                                    <th class="text-center">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>001-001-12345</td>
-                                    <td>Juan Pérez</td>
-                                    <td>$112.00</td>
-                                    <td>15/07/2025</td>
-                                    <td class="text-center">
-                                        <span class="badge bg-success">Autorizado</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-success" title="Enviar al Cliente"><i class="fas fa-envelope"></i></button>
-                                            <button class="btn btn-sm btn-info" title="Descargar RIDE/XML"><i class="fas fa-download"></i></button>
-                                            <button class="btn btn-sm btn-secondary" title="Ver Detalles"><i class="fas fa-eye"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>001-001-12346</td>
-                                    <td>Ana Gómez</td>
-                                    <td>$58.50</td>
-                                    <td>15/07/2025</td>
-                                    <td class="text-center">
-                                        <span class="badge bg-secondary">Por Enviar</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-primary btn-enviar-sri" data-id="12346" title="Enviar al SRI"><i class="fas fa-paper-plane"></i></button>
-                                            <button class="btn btn-sm btn-danger" title="Eliminar Venta"><i class="fas fa-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>001-001-12347</td>
-                                    <td>Carlos Ruiz</td>
-                                    <td>$250.00</td>
-                                    <td>14/07/2025</td>
-                                    <td class="text-center">
-                                        <span class="badge bg-danger">No Autorizado</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-warning" title="Ver Errores"><i class="fas fa-exclamation-triangle"></i></button>
-                                            <button class="btn btn-sm btn-secondary" title="Ver Detalles"><i class="fas fa-eye"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+  <div class="content">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0 text-dark">
+                        <i class="fas fa-chart-pie mr-2"></i> Tablero de Reportes
+                    </h1>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-outline card-success"> <div class="card-header border-0">
+                    <h3 class="card-title text-bold">
+                        Generar un nuevo Reporte
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form id="reportGeneratorForm">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label for="reportTypeSelect" class="form-label text-muted">1. Selecciona el tipo de reporte:</label>
+                                <select class="form-control form-control-lg" id="reportTypeSelect" name="reportType" required>
+                                    <option value="">-- Elige un reporte aquí --</option>
+                                    <option value="historialVentas">Historial de Ventas</option>
+                                    <option value="ganancias">Reporte de Ganancias</option>
+                                    <option value="movimientoDiario">Movimiento Diario</option>
+                                    <option value="movimientoMes">Movimiento Mensual por Año</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="dynamicReportInputs" class="mt-4 p-3 bg-light rounded-lg border">
+                            <p class="text-center text-muted m-0">
+                                <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
+                            </p>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-info btn-lg px-5 shadow-sm">
+                                    <i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
 $(document).ready(function() {
-    // Inicializar el DateRangePicker
-    $('#rangoFecha').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            cancelLabel: 'Limpiar',
-            applyLabel: 'Aplicar',
-            fromLabel: 'Desde',
-            toLabel: 'Hasta',
-            format: 'DD/MM/YYYY'
+    const $reportTypeSelect = $('#reportTypeSelect');
+    const $dynamicInputsContainer = $('#dynamicReportInputs');
+    const $reportGeneratorForm = $('#reportGeneratorForm');
+    const $submitButton = $reportGeneratorForm.find('button[type="submit"]');
+    const phpScriptUrl = 'endpoint/generate_report.php'; // Your PHP script URL
+
+    // Function to update dynamic input fields based on selected report type
+    function updateReportInputs() {
+        const selectedReportType = $reportTypeSelect.val();
+        let htmlInputs = '';
+
+        if (selectedReportType === 'historialVentas' || selectedReportType === 'ganancias' || selectedReportType === 'movimientoDiario') {
+            htmlInputs = `
+                <label class="form-label text-muted mb-3">2. Ingresa el rango de fechas:</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha Inicio:</label>
+                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha Fin:</label>
+                            <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (selectedReportType === 'movimientoMes') {
+            htmlInputs = `
+                <label class="form-label text-muted mb-3">2. Ingresa el año:</label>
+                <div class="form-group">
+                    <label for="anio">Año:</label>
+                    <input type="number" class="form-control" id="anio" name="anio" placeholder="Ej: 2023" min="1900" max="2100" required>
+                </div>
+            `;
+        } else {
+            // Default message when no report is selected
+            htmlInputs = `
+                <p class="text-center text-muted m-0">
+                    <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
+                </p>
+            `;
         }
-    });
 
-    $('#rangoFecha').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        // Aquí puedes agregar la lógica para filtrar la tabla con AJAX
-    });
+        $dynamicInputsContainer.html(htmlInputs);
 
-    // Ejemplo de cómo manejar el click para enviar al SRI con AJAX
-    $('#tb_venta').on('click', '.btn-enviar-sri', function() {
-        const ventaId = $(this).data('id');
-        const
- 
-fila = $(this).closest('tr');
+        // Enable/disable submit button based on selection
+        if (selectedReportType) {
+            $submitButton.prop('disabled', false);
+        } else {
+            $submitButton.prop('disabled', true);
+        }
+    }
 
-        Swal.fire({
-            title: '¿Confirmas el envío?',
-            text: `Se enviará la factura de la venta ${ventaId} al SRI.`,
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, enviar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Simulación de llamada AJAX
-                Swal.fire({
-                    title: 'Enviando...',
-                    text: 'Por favor espera.',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
+    // Event listener for report type selection change
+    $reportTypeSelect.on('change', updateReportInputs);
+
+    // Initial call to set inputs and disable button
+    updateReportInputs();
+
+    // Handle form submission
+    $reportGeneratorForm.submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const selectedReportType = $reportTypeSelect.val();
+        if (!selectedReportType) {
+            toastr.warning('Por favor, selecciona un tipo de reporte antes de continuar.');
+            return;
+        }
+
+        const formData = new FormData(this);
+
+        // Show loading indicator and disable button
+        const card = $(this).closest('.card');
+        card.append('<div class="overlay dark"><i class="fas fa-2x fa-sync-alt fa-spin text-white"></i></div>'); // Added 'dark' class for overlay
+        $submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Generando...');
+
+        $.ajax({
+            url: phpScriptUrl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhrFields: {
+                responseType: 'blob' // Important: Expect a binary blob response
+            },
+            success: function(response, status, xhr) {
+                const contentType = xhr.getResponseHeader('Content-Type');
+                if (contentType && contentType.indexOf('application/pdf') !== -1) {
+                    const blob = new Blob([response], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+
+                    const contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                    let filename = 'reporte.pdf';
+                    if (contentDisposition) {
+                        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                        if (filenameMatch && filenameMatch.length > 1) {
+                            filename = filenameMatch[1];
+                        }
                     }
-                });
-
-                $.ajax({
-                    url: '/tu-endpoint-php/enviar-sri.php',
-                    type: 'POST',
-                    data: { id: ventaId },
-                    success: function(response) {
-                        // Suponiendo que tu PHP devuelve un JSON con el nuevo estado
-                        Swal.close();
-                        fila.find('.text-center').eq(1) // Segunda columna de centrado (Estado SRI)
-                            .html('<span class="badge bg-warning">Pendiente</span>');
-                        
-                        // Cambiar los botones
-                        let nuevosBotones = `
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-sm btn-info" title="Consultar Estado"><i class="fas fa-sync-alt"></i></button>
-                            <button class="btn btn-sm btn-secondary" title="Ver Detalles"><i class="fas fa-eye"></i></button>
-                        </div>`;
-                        fila.find('.text-center').eq(2).html(nuevosBotones);
-
-                        Swal.fire('¡Enviado!', 'La factura está pendiente de autorización.', 'success');
-                    },
-                    error: function() {
-                        Swal.fire('Error', 'No se pudo enviar la factura.', 'error');
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    toastr.success('¡Reporte generado y descargado exitosamente!');
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        try {
+                            const errorJson = JSON.parse(reader.result);
+                            toastr.error(errorJson.message || 'Ocurrió un error desconocido al generar el reporte.');
+                        } catch (e) {
+                            toastr.error('Respuesta inesperada del servidor o formato no válido.');
+                        }
+                    };
+                    reader.readAsText(response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                let errorMessage = 'Error de conexión con el servidor. Intenta de nuevo.';
+                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                    errorMessage = jqXHR.responseJSON.message;
+                } else if (jqXHR.responseText) {
+                    try {
+                        const errorJson = JSON.parse(jqXHR.responseText);
+                        errorMessage = errorJson.message || errorMessage;
+                    } catch (e) {
+                        // Not JSON, use generic error
                     }
-                });
+                }
+                toastr.error(errorMessage);
+            },
+            complete: function() {
+                card.find('.overlay').remove();
+                $submitButton.prop('disabled', false).html('<i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte');
             }
         });
     });
-});
+});   
 </script>
-
-<!-- </body>
-</html> -->

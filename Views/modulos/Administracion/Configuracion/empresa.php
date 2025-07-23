@@ -513,12 +513,28 @@
                                 La Marca es requerido.
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="id_firma" class="form-label">ID Firma <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="id_firma" name="id_firma" required min="1">
                             <div class="invalid-feedback">
                                 El ID de Firma es requerido y debe ser un número válido.
                             </div>
+                        </div> -->
+
+                          <div class="col-md-6">
+                            <label for="forma_pago" class="form-label small">Forma de Pago </label>
+                            <select class="form-select form-select-sm" id="forma_pago" name="forma_pago" required>
+                                <option value="">Seleccione...</option>
+                                <option value="01">SIN UTILIZACION DEL SISTEMA FINANCIERO</option>
+                                <option value="15">COMPENSACIÓN DE DEUDAS</option>
+                                <option value="16">TARJETA DE DÉBITO</option>
+                                <option value="17">DINERO ELECTRÓNICO</option>
+                                <option value="18">TARJETA PREPAGO</option>
+                                <option value="19">TARJETA DE CRÉDITO</option>
+                                <option value="20">OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
+                                <option value="21">ENDOSO DE TÍTULOS</option>
+                            </select>
+                            <div class="invalid-feedback">Seleccione El Código IVA es requerido.</div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-5">
@@ -664,7 +680,7 @@
                     </div>
                     <div class="d-flex justify-content-between mt-5">
                         <button type="button" class="btn btn-outline-secondary prev-step"><i class="fas fa-arrow-left me-2"></i> Anterior</button>
-                        <button type="submit" class="btn btn-success">Guardar Perfil <i class="fas fa-save ms-2"></i></button>
+                        <button type="submit" class="btn btn-success">Guardar <i class="fas fa-save ms-2"></i></button>
                     </div>
                 </div>
             </form>
@@ -1200,7 +1216,7 @@
             document.getElementById('ruc').value = data.ruc;
             document.getElementById('marca').value = data.marca;
             // Para selects, si tienes un id_firma, selecciona la opción correcta
-            document.getElementById('id_firma').value = data.id_firma;
+            document.getElementById('forma_pago').value = data.forma_pago;
             document.getElementById('direccion_matriz').value = data.direccion_matriz;
             document.getElementById('direccion_sucursal').value = data.direccion_sucursal;
             document.getElementById('email').value = data.email;
@@ -1321,88 +1337,6 @@
                 }
             })
         })
-
-
-
-
     })
 
-    // function eliminarDatosFormulario() {
-    //     const companyProfileForm = document.getElementById('companyProfileForm'); // Asegúrate de que este es el ID de tu formulario
-
-    //     // 1. Resetear el formulario completo
-    //     // Esto limpiará la mayoría de los inputs de texto, number, email, etc., y reseteará los select a su primera opción.
-    //     if (companyProfileForm) {
-    //         companyProfileForm.reset();
-    //         companyProfileForm.classList.remove('was-validated'); // Quita las clases de validación de Bootstrap
-    //     }
-
-    //     // 2. Resetear el ID de la empresa (muy importante para nuevos registros)
-    //     const idEmpresaInput = document.getElementById('id_empresa');
-    //     if (idEmpresaInput) {
-    //         idEmpresaInput.value = "0"; // Vuelve a establecer el ID en "0" o nulo para indicar un nuevo registro
-    //     }
-
-    //     // 3. Resetear los campos de tipo file (no se limpian con .reset())
-    //     const logoUploadInput = document.getElementById('logo-upload');
-    //     if (logoUploadInput) {
-    //         logoUploadInput.value = ''; // Esto limpia el archivo seleccionado
-    //     }
-
-    //     // 4. Resetear la vista previa del logo y el input oculto de la URL
-    //     const logoPreview = document.getElementById('logo-preview');
-    //     const logoPlaceholderText = document.getElementById('logo-placeholder-text');
-    //     const logoUrlInput = document.getElementById('logo_url');
-
-    //     if (logoPreview) {
-    //         logoPreview.src = "https://placehold.co/96x96/e0e0e0/555555?text=Logo"; // Vuelve a la imagen por defecto
-    //         logoPreview.style.display = 'block';
-    //     }
-    //     if (logoPlaceholderText) {
-    //         logoPlaceholderText.style.display = 'block'; // Muestra el texto de placeholder
-    //     }
-    //     if (logoUrlInput) {
-    //         logoUrlInput.value = ''; // Limpia la URL del logo existente
-    //     }
-
-    //     // 5. Opcional: Resetear el estado de los radio buttons si no tienen un valor por defecto que `.reset()` maneje
-    //     // Aunque `.reset()` suele desmarcar los radios a su estado inicial, si no tienes un radio por defecto marcado,
-    //     // podrías querer desmarcarlos todos o marcar una opción específica para un nuevo ingreso.
-    //     // Ejemplo para 'obligado_contabilidad':
-    //     const radiosObligado = document.querySelectorAll('input[name="obligado_contabilidad"]');
-    //     for (const radio of radiosObligado) {
-    //         radio.checked = false; // Desmarcar todos
-    //         // Si quieres seleccionar uno por defecto para un nuevo registro, puedes hacerlo aquí:
-    //         // if (radio.value === 'NO') { radio.checked = true; } 
-    //     }
-    //     // Repite para 'ambiente' y cualquier otro grupo de radio buttons
-    //     const radiosAmbiente = document.querySelectorAll('input[name="ambiente"]');
-    //     for (const radio of radiosAmbiente) {
-    //         radio.checked = false;
-    //     }
-
-
-    //     // 6. Opcional: Si usas un stepper (pasos del formulario), resetea su estado
-    //     const formSteps = document.querySelectorAll('.form-step');
-    //     const stepperItems = document.querySelectorAll('.stepper-item');
-
-    //     if (formSteps.length > 0) {
-    //         formSteps.forEach(step => step.classList.remove('active'));
-    //         formSteps[0].classList.add('active'); // Activa el primer paso
-    //     }
-    //     if (stepperItems.length > 0) {
-    //         stepperItems.forEach(item => item.classList.remove('active', 'completed'));
-    //         stepperItems[0].classList.add('active'); // Activa el primer item del stepper
-    //     }
-
-    //     // 7. Ocultar el modal
-    //     $("#mdlGestionarEmpresa").modal('hide');
-
-    //     // 8. Opcional: Ocultar mensajes de validación o estilos de error
-    //     document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-    //     document.querySelectorAll('.invalid-feedback').forEach(el => el.style.display = 'none');
-
-
-
-    // }
 </script>

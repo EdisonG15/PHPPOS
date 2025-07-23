@@ -1,0 +1,6 @@
+Array
+(
+    [accion] => 3
+    [fechaInicio] => 2025-07-01
+    [fechaFin] => 2025-08-31
+)

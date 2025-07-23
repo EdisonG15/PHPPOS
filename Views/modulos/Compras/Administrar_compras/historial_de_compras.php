@@ -185,16 +185,6 @@
 
   $(document).ready(function(){
 
-      // 1. Define la función para formatear fechas
-    function formatDate(date) {
-        const d = new Date(date);
-        // El método .toString() es opcional aquí, padStart funciona en números en JS moderno, pero es buena práctica.
-        const month = (d.getMonth() + 1).toString().padStart(2, '0');
-        const day = d.getDate().toString().padStart(2, '0');
-        const year = d.getFullYear();
-        return `${year}-${month}-${day}`;
-    }
-
     // 2. Establece las fechas de inicio y fin
     const fechaInicio = new Date(); // Fecha de hoy
     const fechaFin = new Date();    // También hoy, pero la modificaremos
@@ -204,9 +194,7 @@
 
     // 3. Llama a la función con el rango de fechas correcto
     cargarTableCompras(formatDate(fechaInicio), formatDate(fechaFin));
-    // También puedes establecer la fecha seleccionada en el input de flatpickr si quieres
-    // document.querySelector("#rangoFecha").value = `${fechaHoy} a ${fechaHoy}`;
-
+   
   $('#tb_compras').on('click', '.btnEliminar', function(e) {
             // e.preventDefault();
           const idEliminar = $(this).data('id');
@@ -259,6 +247,7 @@
         }) 
     });
     });
+
 function cargarTableCompras(fechaDesde, fechaHasta) {
     if ($.fn.DataTable.isDataTable('#tb_compras')) {
         $('#tb_compras').DataTable().destroy();
@@ -313,27 +302,13 @@ function cargarTableCompras(fechaDesde, fechaHasta) {
                 orderable: false,
                 className: 'text-center',
                 render: function(data, type, full, meta) {
-                    // Se agregaron espacios (me-2) a los iconos para mejor legibilidad
-                    return `
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="accionesDropdown${meta.row}" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="accionesDropdown${meta.row}">
-                                <li>
-                                    <a class="dropdown-item btnEditar" href="#" data-id="${full.IdCompra}">
-                                        <i class="fas fa-pencil-alt me-2"></i> Editar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item btnEliminar text-danger" href="#" data-id="${full.IdCompra}">
-                                        <i class="fas fa-trash-alt me-2"></i> Borrar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    `;
-                }
+    return `
+        <button class="btn btn-outline-danger btn-sm btnEliminar" data-id="${full.IdCompra}" title="Eliminar compra">
+            <i class="fas fa-trash-alt me-1"></i> Eliminar
+        </button>
+    `;
+}
+
             }
         ],
         order: [[ 0, 'desc' ]],
@@ -344,20 +319,33 @@ function cargarTableCompras(fechaDesde, fechaHasta) {
     });
 }
 
- $(document).on('click', '#btnBuscarCompras', function() {
-     
-      let tieneFechas = selectedRange.length === 2;
-      let fechaInicio = null;
-      let fechaFin = null;
-      if (tieneFechas) {
-        fechaInicio = formatDate(selectedRange[0]);
-        fechaFin = formatDate(selectedRange[1]);
-      }
+$(document).on('click', '#btnBuscarCompras', function() {
 
-      if ( tieneFechas) {
-        cargarTableCompras(fechaInicio, fechaFin);
-      } else {
-        alert("Por favor selecciona al menos un filtro (estado o rango de fechas).");
-      }
- });
+  let tieneFechas = selectedRange.length === 2;
+  let fechaInicio = null;
+  let fechaFin = null;
+
+  if (tieneFechas) {
+    fechaInicio = formatDate(selectedRange[0]);
+    fechaFin = formatDate(selectedRange[1]);
+    cargarTableCompras(fechaInicio, fechaFin);
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Filtros requeridos',
+      text: 'Por favor selecciona al menos un filtro (estado o rango de fechas).',
+      confirmButtonText: 'Entendido'
+    });
+  }
+
+});
+
+    function formatDate(date) {
+        const d = new Date(date);
+        // El método .toString() es opcional aquí, padStart funciona en números en JS moderno, pero es buena práctica.
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const day = d.getDate().toString().padStart(2, '0');
+        const year = d.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
 </script>

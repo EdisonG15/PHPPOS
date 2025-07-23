@@ -749,7 +749,7 @@ $(document).ready(function() {
           mostrarAlertaRespuesta(respuesta, function() {
              $("#modalAbonoCredito").modal('hide');
             table_credito_vigente.ajax.reload();
-            Limpiar();
+          fun_limpiar() 
            
            
           }, {
@@ -785,6 +785,7 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.btnAbono', function(e) {
+  fun_limpiar() 
       $("#btn_procesar_abono").prop('disabled', false);
       tipoAbono=1;
       $("#modalAbonoCredito").modal('show');
@@ -824,4 +825,11 @@ $(document).on('click', '.btnAbono', function(e) {
 
 });
   
+  function fun_limpiar() {
+      $("#montoAbono").val("");
+        $("#nuevoSaldo").val("");
+          $("#montoVuelto").val("");
+           $("#observacion").val("");
+
+  }
 </script>

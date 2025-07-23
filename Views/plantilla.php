@@ -246,7 +246,9 @@ body {
 
 <script src="Views/assets/dist/js/jquery.tabledit.min.js"></script>
     
-
+<!-- PDFMake (necesario para PDF) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <!-- ============================================================
     =LIBRERIAS PARA EXPORTAR A ARCHIVOS
     ===============================================================-->
