@@ -22,14 +22,14 @@ class Models{
 
 
 	static public function mdlMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin){
-	
-	   $stmt = Conexion::conectar()-> prepare('call usp_reportes(:p_opcion,:p_fechaDesde,:p_fechaHasta)');
-	   $stmt -> bindParam(":p_opcion", $opcion , PDO::PARAM_STR);
-	   $stmt -> bindParam(":p_fechaDesde", $fechaInicio , PDO::PARAM_STR);
-	   $stmt -> bindParam(":p_fechaHasta",  $fechaFin , PDO::PARAM_STR);
-	   $stmt -> execute();
-	   return $stmt -> fetchAll();
-	   $stmt = null;
+	 return  $fechaInicio;
+	//    $stmt = Conexion::conectar()-> prepare('call usp_reportes(:p_opcion,:p_fechaDesde,:p_fechaHasta)');
+	//    $stmt -> bindParam(":p_opcion", $opcion , PDO::PARAM_STR);
+	//    $stmt -> bindParam(":p_fechaDesde", $fechaInicio , PDO::PARAM_STR);
+	//    $stmt -> bindParam(":p_fechaHasta",  $fechaFin , PDO::PARAM_STR);
+	//    $stmt -> execute();
+	//    return $stmt -> fetchAll();
+	//    $stmt = null;
 		   
 	   }
    

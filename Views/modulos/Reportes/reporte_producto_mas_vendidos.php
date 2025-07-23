@@ -128,6 +128,8 @@ flatpickr("#rangoFechaProductoMasVendido", {
 
 })
 function cargarTableGanacias(fechaDesde, fechaHasta) {
+    console.log("fechaHasta",fechaHasta)
+       console.log("fechaDesde",fechaDesde)
     const tabla = $('#tb_rp_productoMasVendido');
     if ($.fn.DataTable.isDataTable(tabla)) {
         tabla.DataTable().clear().destroy();

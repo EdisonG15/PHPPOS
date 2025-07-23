@@ -29,7 +29,7 @@ if(isset($_POST['accion']) && $_POST['accion'] == 1){ // parametro para listar R
     $opcion = $_POST["accion"];
     $fechaInicio = $_POST["fechaInicio"];
     $fechaFin = $_POST["fechaFin"];
-     $respuesta -> ctrMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin);  
+     $respuesta = Controllers::ctrMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin);  
 
 }else if(isset($_POST['accion']) && $_POST['accion'] == 3){ // ACCION PARA ACTUALIZAR UN ROL
 
