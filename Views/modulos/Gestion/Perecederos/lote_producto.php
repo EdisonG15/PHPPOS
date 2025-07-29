@@ -121,7 +121,7 @@
                 }
             });
             $(document).ready(function() {
-                cargarTableLote("", 1, 1, "", "");
+                cargarTableLote("", 1, "", "", "");
 
                 $("#btnBuscar").on('click', function() {
                     console.log("estoy buscaddo")

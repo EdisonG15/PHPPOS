@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <br>
 <style>
   .flatpickr-calendar.rangeMode .flatpickr-innerContainer {
@@ -89,6 +93,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-dark">
+                  <input id="txtId_usuario" type="hidden" value="<?php echo $_SESSION["usuario"]->id_usuario ?>" />
+    <input id="txtId_caja" type="hidden" value="<?php echo $_SESSION["usuario"]->id_caja ?>" />
                     <div class="card-header">    
                         <h3 class="card-title"><i class="fas fa-list"></i> Lista Compras </h3>
                         <div class="card-tools">                  
@@ -98,8 +104,8 @@
                      <div class="card-body">
 <div class="row mb-4">
             <div class="col-md-3">
-              <label for="rangoFecha" class="form-label">Fecha:</label>
-              <input type="text" class="form-control" id="rangoFecha" placeholder="Buscar por Fecha " autocomplete="off" />
+              <label for="rangoFechaCompras" class="form-label">Fecha:</label>
+              <input type="text" class="form-control" id="rangoFechaCompras" placeholder="Buscar por Fecha " autocomplete="off" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
               <button class="btn btn-outline-primary w-100" id="btnBuscarCompras"><i class="fas fa-search"></i> Buscar</button>
@@ -110,7 +116,7 @@
                                      <hr />
                 <div class="row mt-3">
                     <div class="col-sm-12">
-                        <table id="tb_compras"  class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+                        <table id="tb_administrarCompras"  class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
                         <thead class="bg-dark ">
                                 <tr>
                                     <th></th>
@@ -145,7 +151,7 @@
 
     var table_compras;
     var selectedRange = [];
-  flatpickr("#rangoFecha", {
+  flatpickr("#rangoFechaCompras", {
         mode: "range",
         dateFormat: "d/m/Y",
         showMonths: 2,
@@ -184,7 +190,7 @@
     });
 
   $(document).ready(function(){
-
+verificarSiExisteCajaAbierta();
     // 2. Establece las fechas de inicio y fin
     const fechaInicio = new Date(); // Fecha de hoy
     const fechaFin = new Date();    // También hoy, pero la modificaremos
@@ -195,7 +201,7 @@
     // 3. Llama a la función con el rango de fechas correcto
     cargarTableCompras(formatDate(fechaInicio), formatDate(fechaFin));
    
-  $('#tb_compras').on('click', '.btnEliminar', function(e) {
+  $('#tb_administrarCompras').on('click', '.btnEliminarCompras', function(e) {
             // e.preventDefault();
           const idEliminar = $(this).data('id');
   
@@ -249,11 +255,11 @@
     });
 
 function cargarTableCompras(fechaDesde, fechaHasta) {
-    if ($.fn.DataTable.isDataTable('#tb_compras')) {
-        $('#tb_compras').DataTable().destroy();
+    if ($.fn.DataTable.isDataTable('#tb_administrarCompras')) {
+        $('#tb_administrarCompras').DataTable().destroy();
     }
 
-    table_compras = $("#tb_compras").DataTable({
+    table_compras = $("#tb_administrarCompras").DataTable({
         dom: 'Bfrtip',
         buttons: [
             {
@@ -261,6 +267,8 @@ function cargarTableCompras(fechaDesde, fechaHasta) {
                 className: 'btn btn-primary addNewRecord', // Clases de Bootstrap para mejor estilo
                 action: function(e, dt, node, config) {
                     // Aquí va la lógica para abrir tu modal o formulario de nueva compra
+                      CargarContenido('Views/modulos/Compras/RealizarCompras/compras.php', 'content-wrapper');
+                    // onclick="CargarContenido('Views/modulos/Compras/RealizarCompras/compras.php','content-wrapper')" 
                 }
             },
             'excel', 'pdf', 'print', 'pageLength'
@@ -303,7 +311,7 @@ function cargarTableCompras(fechaDesde, fechaHasta) {
                 className: 'text-center',
                 render: function(data, type, full, meta) {
     return `
-        <button class="btn btn-outline-danger btn-sm btnEliminar" data-id="${full.IdCompra}" title="Eliminar compra">
+        <button class="btn btn-outline-danger btn-sm btnEliminarCompras" data-id="${full.IdCompra}" title="Eliminar compra">
             <i class="fas fa-trash-alt me-1"></i> Eliminar
         </button>
     `;
@@ -348,4 +356,48 @@ $(document).on('click', '#btnBuscarCompras', function() {
         const year = d.getFullYear();
         return `${year}-${month}-${day}`;
     }
+
+
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
+
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                // $("#btnRegistrarProveedor").prop('disabled', true);
+                // $("#btnAgregarProducto").prop('disabled', true);
+                // $("#btnIniciarComprasContado").prop('disabled', true);
+                // $("#btnIniciarComprasCredit").prop('disabled', true);
+                $(".btnEliminarCompras").prop("disabled", true);
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
+            }
+        }
+    });
+}
 </script>

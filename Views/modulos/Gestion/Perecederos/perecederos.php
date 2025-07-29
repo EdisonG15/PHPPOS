@@ -1,206 +1,153 @@
-  <div class="content">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0 text-dark">
-                        <i class="fas fa-chart-pie mr-2"></i> Tablero de Reportes
-                    </h1>
-                </div>
+<br>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-dark">
+                    <div class="card-header">                
+                        <h3 class="card-title"><i class="fas fa-list"></i>  Producto A vencer </h3>
+                        <div class="card-tools">                           
+                        </div> 
+                    </div> 
+                     <div class="card-body">
+                                   <div class="row mb-4">       
+            <div class="col-md-3">
+              <label for="diasVencer" class="form-label">Dias A vencer:</label>
+              <input type="text" class="form-control" id="diasVencer" placeholder="Ingrese el numemero de dias " autocomplete="off" />
             </div>
-        </div>
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card card-outline card-success"> <div class="card-header border-0">
-                    <h3 class="card-title text-bold">
-                        Generar un nuevo Reporte
-                    </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
+            <div class="col-md-2 d-flex align-items-end">
+              <button class="btn btn-outline-primary w-100" id="btnProductoProximoAvencer"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+          </div>
+                         
+                                    <hr />
+                <div class="row mt-3">
+                    <div class="col-sm-12">
+                        <table id="tb_reporte_ProductoPorVencer" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+                            <thead class="bg-dark ">
+                                <tr>
+                                    <th></th>
+                                    <th>Id Producto</th>
+                                    <th>Codigo Barra</th>
+                                    <th>Descripcion</th>
+                                    <th>Lote</th>
+                                    <th>Fecha Vencimiento</th>
+                                    <th>Dias Para Vencer</th>
+                                    <th>Stock Disponible</th>
+                                                                   
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form id="reportGeneratorForm">
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <label for="reportTypeSelect" class="form-label text-muted">1. Selecciona el tipo de reporte:</label>
-                                <select class="form-control form-control-lg" id="reportTypeSelect" name="reportType" required>
-                                    <option value="">-- Elige un reporte aquí --</option>
-                                    <option value="historialVentas">Historial de Ventas</option>
-                                    <option value="ganancias">Reporte de Ganancias</option>
-                                    <option value="movimientoDiario">Movimiento Diario</option>
-                                    <option value="movimientoMes">Movimiento Mensual por Año</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="dynamicReportInputs" class="mt-4 p-3 bg-light rounded-lg border">
-                            <p class="text-center text-muted m-0">
-                                <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
-                            </p>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-info btn-lg px-5 shadow-sm">
-                                    <i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                </div>              
+                </div> <!-- ./ end card-body -->
             </div>
         </div>
-    </section>
+    </div>
 </div>
+
 <script>
-$(document).ready(function() {
-    const $reportTypeSelect = $('#reportTypeSelect');
-    const $dynamicInputsContainer = $('#dynamicReportInputs');
-    const $reportGeneratorForm = $('#reportGeneratorForm');
-    const $submitButton = $reportGeneratorForm.find('button[type="submit"]');
-    const phpScriptUrl = 'endpoint/generate_report.php'; // Your PHP script URL
+    $(document).ready(function() {
 
-    // Function to update dynamic input fields based on selected report type
-    function updateReportInputs() {
-        const selectedReportType = $reportTypeSelect.val();
-        let htmlInputs = '';
+        // Carga inicial de la tabla con un valor por defecto (ej: productos a vencer en los próximos 15 días).
+        cargarTablaProductosPorVencer(15);
 
-        if (selectedReportType === 'historialVentas' || selectedReportType === 'ganancias' || selectedReportType === 'movimientoDiario') {
-            htmlInputs = `
-                <label class="form-label text-muted mb-3">2. Ingresa el rango de fechas:</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fechaInicio">Fecha Inicio:</label>
-                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fechaFin">Fecha Fin:</label>
-                            <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
-                        </div>
-                    </div>
-                </div>
-            `;
-        } else if (selectedReportType === 'movimientoMes') {
-            htmlInputs = `
-                <label class="form-label text-muted mb-3">2. Ingresa el año:</label>
-                <div class="form-group">
-                    <label for="anio">Año:</label>
-                    <input type="number" class="form-control" id="anio" name="anio" placeholder="Ej: 2023" min="1900" max="2100" required>
-                </div>
-            `;
-        } else {
-            // Default message when no report is selected
-            htmlInputs = `
-                <p class="text-center text-muted m-0">
-                    <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
-                </p>
-            `;
-        }
+        // Evento de clic para el botón de búsqueda (ID corregido).
+        $(document).on('click', '#btnProductoProximoAvencer', function() {
 
-        $dynamicInputsContainer.html(htmlInputs);
+            // Se obtiene el valor del campo de texto y se convierte a un número entero (ID corregido).
+            const numeroDias = parseInt($("#diasVencer").val());
 
-        // Enable/disable submit button based on selection
-        if (selectedReportType) {
-            $submitButton.prop('disabled', false);
-        } else {
-            $submitButton.prop('disabled', true);
-        }
-    }
+            // Se valida que el valor sea un número válido y mayor que cero.
+            if (numeroDias && numeroDias > 0) {
+                cargarTablaProductosPorVencer(numeroDias);
+            } else {
+                // Si la entrada no es válida, se muestra una alerta.
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Entrada no válida',
+                    text: 'Por favor, ingrese un número de días válido para buscar.',
+                    confirmButtonText: 'Entendido'
+                });
 
-    // Event listener for report type selection change
-    $reportTypeSelect.on('change', updateReportInputs);
-
-    // Initial call to set inputs and disable button
-    updateReportInputs();
-
-    // Handle form submission
-    $reportGeneratorForm.submit(function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        const selectedReportType = $reportTypeSelect.val();
-        if (!selectedReportType) {
-            toastr.warning('Por favor, selecciona un tipo de reporte antes de continuar.');
-            return;
-        }
-
-        const formData = new FormData(this);
-
-        // Show loading indicator and disable button
-        const card = $(this).closest('.card');
-        card.append('<div class="overlay dark"><i class="fas fa-2x fa-sync-alt fa-spin text-white"></i></div>'); // Added 'dark' class for overlay
-        $submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Generando...');
-
-        $.ajax({
-            url: phpScriptUrl,
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            xhrFields: {
-                responseType: 'blob' // Important: Expect a binary blob response
-            },
-            success: function(response, status, xhr) {
-                const contentType = xhr.getResponseHeader('Content-Type');
-                if (contentType && contentType.indexOf('application/pdf') !== -1) {
-                    const blob = new Blob([response], { type: 'application/pdf' });
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-
-                    const contentDisposition = xhr.getResponseHeader('Content-Disposition');
-                    let filename = 'reporte.pdf';
-                    if (contentDisposition) {
-                        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
-                        if (filenameMatch && filenameMatch.length > 1) {
-                            filename = filenameMatch[1];
-                        }
-                    }
-                    a.download = filename;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    toastr.success('¡Reporte generado y descargado exitosamente!');
-                } else {
-                    const reader = new FileReader();
-                    reader.onload = function() {
-                        try {
-                            const errorJson = JSON.parse(reader.result);
-                            toastr.error(errorJson.message || 'Ocurrió un error desconocido al generar el reporte.');
-                        } catch (e) {
-                            toastr.error('Respuesta inesperada del servidor o formato no válido.');
-                        }
-                    };
-                    reader.readAsText(response);
+                // Opcional: Limpiar la tabla si la búsqueda no es válida.
+                if ($.fn.DataTable.isDataTable('#tb_reporte_ProductoPorVencer')) {
+                    $('#tb_reporte_ProductoPorVencer').DataTable().clear().draw();
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                let errorMessage = 'Error de conexión con el servidor. Intenta de nuevo.';
-                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                    errorMessage = jqXHR.responseJSON.message;
-                } else if (jqXHR.responseText) {
-                    try {
-                        const errorJson = JSON.parse(jqXHR.responseText);
-                        errorMessage = errorJson.message || errorMessage;
-                    } catch (e) {
-                        // Not JSON, use generic error
-                    }
-                }
-                toastr.error(errorMessage);
-            },
-            complete: function() {
-                card.find('.overlay').remove();
-                $submitButton.prop('disabled', false).html('<i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte');
             }
         });
     });
-});   
+
+    // Variable global para la tabla, para poder acceder a ella si es necesario.
+    var tableProductoPorVencer;
+
+    /**
+     * Función para inicializar o recargar la DataTable con los productos próximos a vencer.
+     * @param {number} diasVencer - El número de días para filtrar los productos.
+     */
+    function cargarTablaProductosPorVencer(diasVencer) {
+        
+        // Si la tabla ya existe, se destruye para poder re-inicializarla sin errores.
+        if ($.fn.DataTable.isDataTable('#tb_reporte_ProductoPorVencer')) {
+            $('#tb_reporte_ProductoPorVencer').DataTable().destroy();
+        }
+
+        tableProductoPorVencer = $("#tb_reporte_ProductoPorVencer").DataTable({
+            dom: 'Bfrtip', // Habilita los botones en la parte superior.
+            buttons: [{
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-danger',
+                    title: 'Reporte de Productos Próximos dias a Vencer',
+                    orientation: 'portrait',
+                    pageSize: 'A4',
+                    exportOptions: {
+                        // Se exportan las columnas visibles, ajusta los índices si es necesario.
+                        // Columnas: 1 (ID Prod), 2 (Código), 3 (Desc), 5 (Fecha), 6 (Días), 7 (Stock)
+                        columns: [1, 2, 3, 5, 6, 7]
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success',
+                     title: 'Reporte de Productos Próximos dias a Vencer',
+                      exportOptions: {
+                    // ¡AQUÍ ESTÁ EL CAMBIO! Define las mismas columnas que para PDF.
+                    columns: [1, 2, 3, 5, 6, 7]
+                }
+                },
+                'pageLength'
+            ],
+            ajax: {
+                url: "ajax/reporte.ajax.php",
+                type: "POST",
+                data: {
+                    'accion': 5,
+                    'numeroDias': diasVencer // Se envía el parámetro a PHP.
+                },
+                dataSrc: '' // Necesario porque la respuesta de PHP no está anidada en un objeto.
+            },
+            responsive: {
+                details: {
+                    type: 'column'
+                }
+            },
+            columnDefs: [{
+                targets: 0,
+                orderable: false,
+                className: 'control'
+            }],
+            "order": [
+                [6, 'asc'] // Se ordena por "Días Para Vencer" de forma ascendente (los más próximos primero).
+            ],
+            lengthMenu: [10, 20, 50, 100],
+            "pageLength": 10,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+            }
+        });
+    }
 </script>

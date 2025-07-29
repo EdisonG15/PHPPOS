@@ -47,7 +47,8 @@ class AjaxProductos{
     public function ajaxDisminuirStock(){
 
         $respuesta = ProductosControlador::ctrDisminuirStock($_POST["id_producto"], $_POST["codigo_producto"],$_POST["comentario"],
-        $_POST["nuevo_stock"],$_POST["cantidad"],$_POST["precio_compra"],$_POST["tipo_operacion"],$_POST["fechaVencimientoAun"]);
+        $_POST["nuevo_stock"],$_POST["cantidad"],$_POST["precio_compra"],$_POST["tipo_operacion"],$_POST["fechaVencimientoAun"]
+        ,$_POST["nuevaFechaVencimientoAun"],$_POST["precioCosto"]);
 
         echo json_encode($respuesta);
     }

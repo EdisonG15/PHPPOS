@@ -19,7 +19,7 @@
                 <hr />
                 <div class="row mt-3">
                   <div class="col-sm-12">
-                    <table id="tb_clientes" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+                    <table id="tb_clientesC" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
                       <thead class="bg-dark ">
                         <tr>
                           <th></th>
@@ -70,8 +70,8 @@
                       <div class="form-floating">
                         <select class="form-select form-control-modern" id="selTipoIdentificacion">
                           <option value="04" selected>RUC</option>
-                          <option value="05">Cédula</option>
-                          <option value="06">Pasaporte</option>
+                          <option value="05">CÉDULA</option>
+                          <option value="06">PASAPORTE</option>
                         </select>
                         <label for="selTipoIdentificacion">Tipo Identificación <span class="text-danger"></span></label>
                       </div>
@@ -168,7 +168,7 @@
           fun_limpiar();
         });
 
-        $('#tb_clientes tbody').on('click', '.btnEditar', function() {
+        $('#tb_clientesC tbody').on('click', '.btnEditar', function() {
           accion = 2; //seteamos la accion para editar
           $("#mdlGestionarClientes").modal('show');
           $("#chkValidar").prop("checked", false);
@@ -183,7 +183,7 @@
           $("#iptEmail").val(data[8]);
         });
 
-        $('#tb_clientes tbody').on('click', '.btnEliminar', function() {
+        $('#tb_clientesC tbody').on('click', '.btnEliminar', function() {
           accion = 3; //seteamos la accion para editar
           let data = table_clientes.row($(this).parents('tr')).data();
           let id_cliente = data[1];
@@ -227,110 +227,121 @@
 
       }); /** fin document ready */
 
-      document.getElementById("btnGuardar_cliente").addEventListener("click", function() {
+    
+document.getElementById("btnGuardar_cliente").addEventListener("click", function () {
+  const btnGuardarCliente = this;
+  btnGuardarCliente.disabled = true; // 🔒 Desactivar para evitar múltiples clics
 
-        const tipoIdentificacion = $("#selTipoIdentificacion").val();
-        const numeroDocumento = $("#iptNumeroDocumento").val().trim();
-        const saltarValidacion = document.getElementById("chkValidar").checked;
+  const tipoIdentificacion = $("#selTipoIdentificacion").val();
+  const numeroDocumento = $("#iptNumeroDocumento").val().trim();
+  const saltarValidacion = document.getElementById("chkValidar").checked;
 
-        const tipoIdentificacionTexto = {
-          "05": "Cédula",
-          "04": "RUC",
-          "06": "Pasaporte"
-        };
+  const tipoIdentificacionTexto = {
+    "05": "Cédula",
+    "04": "RUC",
+    "06": "Pasaporte"
+  };
 
-        const validarDocumento = () => {
-          if (saltarValidacion) return true;
-          switch (tipoIdentificacion) {
-            case "05":
-              return validarCedula(numeroDocumento);
-            case "04":
-              return validarRUC(numeroDocumento);
-            case "06":
-              return validarPasaporte(numeroDocumento);
-            default:
-              return false;
-          }
-        };
+  const validarDocumento = () => {
+    if (saltarValidacion) return true;
+    switch (tipoIdentificacion) {
+      case "05": return validarCedula(numeroDocumento);
+      case "04": return validarRUC(numeroDocumento);
+      case "06": return validarPasaporte(numeroDocumento);
+      default: return false;
+    }
+  };
 
-        if (!validarDocumento()) {
-          const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
-          Swal.fire({
-            icon: 'warning',
-            title: 'Documento inválido',
-            text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
-            confirmButtonText: 'Aceptar'
-          });
-          return;
-        }
+  if (!validarDocumento()) {
+    const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
+    Swal.fire({
+      icon: 'warning',
+      title: 'Documento inválido',
+      text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
+      confirmButtonText: 'Aceptar'
+    }).then(() => {
+      btnGuardarCliente.disabled = false; // 🔓 Reactivar si hubo error de validación
+    });
+    return;
+  }
 
-        const forms = document.getElementsByClassName('needs-validation');
-        let formularioValido = true;
+  const forms = document.getElementsByClassName('needs-validation');
+  let formularioValido = true;
 
-        Array.from(forms).forEach(form => {
-          if (!form.checkValidity()) {
-            formularioValido = false;
-            form.classList.add('was-validated');
-          }
+  Array.from(forms).forEach(form => {
+    if (!form.checkValidity()) {
+      formularioValido = false;
+      form.classList.add('was-validated');
+    }
+  });
+
+  if (!formularioValido) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Por favor complete todos los campos obligatorios'
+    }).then(() => {
+      btnGuardarCliente.disabled = false; // 🔓 Reactivar si hay campos incompletos
+    });
+    return;
+  }
+
+  Swal.fire({
+    title: '¿Está seguro de registrar el Cliente?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, deseo registrarlo!',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (!result.isConfirmed) {
+      btnGuardarCliente.disabled = false; // 🔓 Reactivar si cancela
+      return;
+    }
+
+    const datos = new FormData();
+    datos.append("accion", accion);
+    datos.append("IdCliente", $("#IdCliente").val());
+    datos.append("tipoIdentificacion", tipoIdentificacion);
+    datos.append("NumeroDocumento", numeroDocumento);
+    datos.append("Nombre", $("#iptNombre").val());
+    datos.append("Apellido", $("#iptApellido").val());
+    datos.append("Direccion", $("#iptDireccion").val());
+    datos.append("Telefono", $("#iptTelefono").val());
+    datos.append("Email", $("#iptEmail").val());
+    datos.append("Estado", 1);
+
+    $.ajax({
+      url: "ajax/clientes.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      success: function (respuesta) {
+        mostrarAlertaRespuesta(respuesta, function () {
+          table_clientes.ajax.reload();
+          fun_limpiar();
+          $("#mdlGestionarClientes").modal('hide');
+          btnGuardarCliente.disabled = false; // 🔓 Reactivar luego del éxito
+        }, {
+          mensajeExito: "éxito",
+          mensajeAdvertencia: "Warning",
+          mensajeError: "Excepción"
         });
-
-        if (!formularioValido) {
-          Swal.fire({
-            icon: 'info',
-            title: 'Por favor complete todos los campos obligatorios'
-          });
-          return;
-        }
-
-        Swal.fire({
-          title: '¿Está seguro de registrar el Cliente?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí, deseo registrarlo!',
-          cancelButtonText: 'Cancelar',
-        }).then((result) => {
-          if (!result.isConfirmed) return;
-
-          const datos = new FormData();
-          datos.append("accion", accion);
-          datos.append("IdCliente", $("#IdCliente").val());
-          datos.append("tipoIdentificacion", tipoIdentificacion);
-          datos.append("NumeroDocumento", numeroDocumento);
-          datos.append("Nombre", $("#iptNombre").val());
-          datos.append("Apellido", $("#iptApellido").val());
-          datos.append("Direccion", $("#iptDireccion").val());
-          datos.append("Telefono", $("#iptTelefono").val());
-          datos.append("Email", $("#iptEmail").val());
-          datos.append("Estado", 1);
-
-          $.ajax({
-            url: "ajax/clientes.ajax.php",
-            method: "POST",
-            data: datos,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function(respuesta) {
-              mostrarAlertaRespuesta(respuesta, function() {
-                table_clientes.ajax.reload();
-                fun_limpiar();
-                $("#mdlGestionarClientes").modal('hide');
-              }, {
-                mensajeExito: "éxito",
-                mensajeAdvertencia: "Warning",
-                mensajeError: "Excepción"
-              });
-            },
-            error: manejarErrorAjax
-          });
-        });
-      });
+         btnGuardarCliente.disabled = false; // 🔓 Reactivar luego del éxito
+      },
+      error: function () {
+        manejarErrorAjax();
+        btnGuardarCliente.disabled = false; // 🔓 Reactivar si hay error AJAX
+      }
+    });
+  });
+});
 
       function cargarTableCliente() {
-        table_clientes = $("#tb_clientes").DataTable({
+        table_clientes = $("#tb_clientesC").DataTable({
           dom: 'Bfrtip', //botoneras en la parte superios
           buttons: [{
               text: 'Agregar Clientes',
@@ -419,6 +430,8 @@
         $("#iptNumeroDocumento").val("");
         $("#iptDireccion").val("");
         $("#iptNombre").val("");
+        $("#iptApellido").val("");
+        
         $("#iptTelefono").val("");
         $("#iptEmail").val("");
         $(".needs-validation").removeClass("was-validated");

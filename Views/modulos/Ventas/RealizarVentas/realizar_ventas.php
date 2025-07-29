@@ -20,6 +20,26 @@
     max-height: 300px;
     overflow-y: auto;
 }
+  .input-group .btn-outline-secondary-custom {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .btn-outline-secondary-custom {
+        border: 1px solid var(--border-color);
+        color: var(--secondary-color);
+        background-color: var(--card-background);
+        font-weight: 500;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .btn-outline-secondary-custom:hover {
+        background-color: var(--background-light);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
 
 .sugerencia-item {
     display: flex;
@@ -328,22 +348,13 @@
                                <div class="input-group">
                                    <input type="text" class="form-control" id="clienteSearch" placeholder="Buscar o seleccionar cliente..." list="clientesList" autocomplete="off">
                                    <datalist id="clientesList">
-
                                    </datalist>
                                    <button class="btn btn-outline-secondary-custom" type="button" id="btnRegistrarCliente" title="Registrar Nuevo Cliente">
                                        <i class="fas fa-user-plus"></i>
                                    </button>
                                </div>
                            </div>
-                           
                            <div class="col-md-3">
-                               <!-- <label for="selDocumentoVenta" class="form-label">Tipo de Documento</label>
-                               <select class="form-select form-select-lg" id="selDocumentoVenta">
-                                   <option selected value="03">Ticket</option>
-                                   <option value="01">Factura</option>
-
-                               </select> -->
-
                          <div class="row mt-3">
          <div class="col-12 d-flex flex-column align-items-end"> <label class="form-label mb-2" style="font-weight: 500;">Movimientos de Caja:</label> <div class="d-flex justify-content-end gap-2"> <button class="btn btn-success btn-sm" id="btnEntradaDinero">
                 <i class="fas fa-coins me-1"></i> Entrada
@@ -366,15 +377,12 @@
                    </div>
                    <div class="card-body p-4">
                        <div class="row align-items-end mb-4" style="gap: 1rem 0;">
-
-
                            <div class="col-md-5"  style="position: relative;">
                                 <label for="productoSearch" class="form-label">Buscar Producto</label>
                                 <input type="text" class="form-control" id="productoSearch" placeholder="Buscar o seleccionar producto..." autocomplete="off">
                                 <div id="productosSugerencias" class="sugerencias-container"></div>
                            </div>
                        </div>
-
                        <div class="card p-3 table-responsive">
                            <table class="table table-hover align-middle" id="lstProductosVenta" style="width:100%">
                                <thead>
@@ -404,9 +412,7 @@
                        </div>
                    </div>
                </div>
-
            </div>
-
            <!-- 🧾 Resumen de Venta -->
            <div class="col-md-3">
                <div class="card">
@@ -428,21 +434,17 @@
                                <strong id="totalVenta" class="display-5"></strong>
                            </div>
                        </div>
-
                        <hr class="my-4">
-
                        <div class="mb-4">
                            <label for="iptEfectivoRecibido" class="form-label fs-5">Valor Recibido</label>
                            <input type="number" class="form-control form-control-lg text-end" id="iptEfectivoRecibido" placeholder="0.00" step="0.01" min="0">
                        </div>
-
                        <div class="summary-box mb-4">
                            <div class="d-flex justify-content-between align-items-center">
                                <span>Vuelto:</span>
                                <span id="Vuelto" class="display-6 text-success">$</span>
                            </div>
                        </div>
-
                        <hr class="my-4">
                        <div class="d-grid gap-3">
                            <button type="button" class="btn btn-primary btn-lg shadow" id="btnIniciarVentaContado">
@@ -455,7 +457,6 @@
                                <i class="bi bi-x-circle me-2"></i> Limpiar Venta
                            </button>
                        </div>
-
                    </div>
                </div>
            </div>
@@ -504,9 +505,6 @@
                                        <div class="invalid-feedback">Debe ingresar la cédula del cliente.</div>
                                    </div>
                                </div>
-
-
-
                                <div class="mb-3">
                                    <div class="form-floating">
                                        <input type="text" class="form-control form-control-modern" id="iptNombre" name="iptNombre"
@@ -515,7 +513,6 @@
                                        <div class="invalid-feedback">Debe ingresar el nombre del cliente.</div>
                                    </div>
                                </div>
-
                                <div class="mb-3">
                                    <div class="form-floating">
                                        <input type="text" class="form-control form-control-modern" id="iptApellido" name="iptApellido"
@@ -524,7 +521,6 @@
                                        <div class="invalid-feedback">Debe ingresar el apellido del cliente.</div>
                                    </div>
                                </div>
-
                                <div class="mb-3">
                                    <div class="form-floating">
                                        <input type="text" class="form-control form-control-modern" id="iptDireccion" name="iptDireccion"
@@ -533,7 +529,6 @@
                                        <div class="invalid-feedback">Debe ingresar la dirección.</div>
                                    </div>
                                </div>
-
                                <div class="mb-3">
                                    <div class="form-floating">
                                        <input type="text" class="form-control form-control-modern" id="iptTelefono" name="iptTelefono"
@@ -543,7 +538,6 @@
                                        <div class="invalid-feedback">Debe ingresar el teléfono.</div>
                                    </div>
                                </div>
-
                                <div class="mb-3">
                                    <div class="form-floating">
                                        <input type="email" class="form-control form-control-modern" id="iptEmail" name="iptEmail"
@@ -556,7 +550,6 @@
                        </div>
                    </div>
                </div>
-
                <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                    <button type="button" id="btnGuardar_cliente" class="btn btn-primary">
@@ -598,14 +591,12 @@
   <div class="modal fade" id="mdlGestionarCaja" tabindex="-1" aria-labelledby="mdlGestionarCajaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow-lg border-0 modern-modal-content">
-
             <div class="modal-header text-white py-4 px-4 rounded-top-4 modern-header-gradient">
                 <h5 class="modal-title" id="titulo_modal_caja">
                     <i class="fas fa-cash-register me-2"></i> Gestionar Caja
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="btnCerrarModalw"></button>
             </div>
-
             <div class="modal-body p-4"> <form class="needs-validation" novalidate> <input type="hidden" id="ddlTipo">
                     <input type="hidden" id="selopciones">
                     <div class="row g-3">
@@ -628,7 +619,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="modal-footer d-flex justify-content-center p-3"> <button type="button" class="btn btn-secondary fw-bold flex-fill mx-1" data-bs-dismiss="modal" id="btnCancelarcaja">
                     <i class="fas fa-times me-2"></i> Cancelar
                 </button>
@@ -661,6 +651,7 @@
  $(document).ready(function() {
         cargarTableProducto();
         CargarNroBoleta();
+        verificarSiExisteCajaAbierta();
         $('#clienteSearch').on('keyup', function() {
                let query = $(this).val().trim();
                if (query.length < 2) {
@@ -723,12 +714,10 @@
             dataType: 'json',
             success: function(respuesta) {
                 sugerenciasDiv.empty().show(); // Limpia sugerencias anteriores y muestra el contenedor
-
                 if (respuesta.length === 0) {
                     sugerenciasDiv.html('<div class="p-2 text-muted">No se encontraron productos.</div>');
                     return;
                 }
-
                 for (let i = 0; i < respuesta.length; i++) {
                     const producto = respuesta[i];
                     const imagenUrl = producto.img_producto;
@@ -750,9 +739,7 @@
                 $('#productosSugerencias').empty().hide();
             }
         });
-    });
-
-        
+    }); 
            $('#lstProductosVenta tbody').on('click', '.btnEliminarproducto', function() {
                producto_ventas.row($(this).parents('tr')).remove().draw();
                recalcularTotales();
@@ -762,21 +749,30 @@
                $("#modalRegistrarCliente").modal('show');
            });
            $('#btnVentaCredit').on('click', function() {
-
                $("#modalCredito").modal('show');
            });
 
         
            // Eventos de botones
-           $('#btnGuardarCredito').on('click', function() {
-               $("#btnGuardarCredito").prop('disabled', true);
-               enviarVenta('credito');
-           });
+        //    $('#btnGuardarCredito').on('click', function() {
+        //        $("#btnGuardarCredito").prop('disabled', true);
+        //        enviarVenta('credito');
+        //    });
 
-           $("#btnIniciarVentaContado").on('click', function() {
-               $("#btnIniciarVentaContado").prop('disabled', true);
-               enviarVenta('contado');
-           });
+      $(document).off('click', '#btnGuardarCredito').on('click', '#btnGuardarCredito', function () {
+           const $btn = $(this);
+           $btn.prop('disabled', true); // 🔒 Deshabilita el botón inmediatamente
+           enviarVenta('credito');      // ⏳ Ejecuta una sola vez la venta a crédito
+      });
+        //    $("#btnIniciarVentaContado").on('click', function() {
+        //        $("#btnIniciarVentaContado").prop('disabled', true);
+        //        enviarVenta('contado');
+        //    });
+      $(document).off('click', '#btnIniciarVentaContado').on('click', '#btnIniciarVentaContado', function () {
+             const $btn = $("#btnIniciarVentaContado");
+             $btn.prop('disabled', true); // 🔒 Desactiva el botón inmediatamente
+             enviarVenta('contado');
+     });
 
          // --- Manejador de cambio de cantidad (`.iptCantidad`) ---
 $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
@@ -787,7 +783,6 @@ $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
     if (data.id_producto == '') {
         return;
     }
-
     let cantidad_actual = parseFloat($(this).val()); // Obtiene la nueva cantidad del input
     let cod_producto_actual = $(this).attr('codigo_barra');
 
@@ -901,17 +896,14 @@ $('#lstProductosVenta tbody').on('click', '.dropdown-item', function() {
     // Recalcula los totales generales después del cambio de precio.
     recalcularTotales();
 });
-
-
            $("#iptEfectivoRecibido").keyup(function() {
                actualizarVuelto();
            });
-
            $("#btnVaciarListado").on('click', function() {
                vaciarListado();
         });
-$("#btnEntradaDinero").on('click', function() {
-    $("#mdlGestionarCaja").modal('show');
+   $("#btnEntradaDinero").on('click', function() {
+      $("#mdlGestionarCaja").modal('show');
 
     // Cambiar el color de la cabecera a verde (bg-success)
     $(".modal-header").removeClass("bg-danger bg-warning").addClass("bg-success");
@@ -956,7 +948,7 @@ $("#btnSalidadaDinero").on('click', function() {
         CargarProductos(codigoProducto); // Carga el producto en la tabla
         $('#productoSearch').val('').focus(); // Limpia el input de búsqueda y vuelve a enfocar
     });
- 
+
       // Opcional: Oculta las sugerencias si se hace clic fuera del input de búsqueda o las sugerencias
     $(document).on('click', function(e) {
         if (!$(e.target).closest('#productoSearch, #productosSugerencias').length) {
@@ -977,7 +969,6 @@ $("#btnSalidadaDinero").on('click', function() {
             }
         }
     });
-
 });
 
     function cargarTableProducto() {
@@ -1090,7 +1081,6 @@ $("#btnSalidadaDinero").on('click', function() {
     };
 
      function CargarCliente(clientes = "") {
-
            let cedula_cliente = 0;
            if (clientes != "") {
                cedula_cliente = clientes;
@@ -1223,14 +1213,11 @@ function CargarProductos(producto = "") {
 // Se llama cuando se actualiza la cantidad de un producto existente.
 function actualizarFilaProducto(index, data, cantidad, respuesta) {
     // El precio unitario bruto (ya incluye IVA) se toma de los datos de la fila.
-    let precioUnitarioBruto = parseFloat(data['precio_venta'].replace("$./ ", "")); 
-    
+    let precioUnitarioBruto = parseFloat(data['precio_venta'].replace("$./ ", ""));     
     // Calcula el total bruto (con IVA) para esta línea de producto.
     let totalBrutoProducto = (cantidad * precioUnitarioBruto); 
-
     let ivaProductoActual = 0;
     let subtotalProductoActual = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
-
     // Si el producto lleva IVA, desglosamos el IVA y obtenemos el subtotal neto.
     if (data['lleva_iva_producto'] == 1) {
         // Calcula el subtotal neto: total bruto / (1 + tasa de IVA)
@@ -1238,7 +1225,6 @@ function actualizarFilaProducto(index, data, cantidad, respuesta) {
         // Calcula el monto del IVA: total bruto - subtotal neto
         ivaProductoActual = totalBrutoProducto - subtotalProductoActual;
     }
-
     // Actualiza el campo de cantidad en la tabla.
     producto_ventas.cell(index, 8).data(
         '<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" ' +
@@ -1246,12 +1232,10 @@ function actualizarFilaProducto(index, data, cantidad, respuesta) {
         'class="form-control form-control-sm text-center iptCantidad p-0 m-0" ' +
         'value="' + cantidad + '">'
     ).draw();
-
     // Actualiza las celdas de IVA, subtotal y total en la tabla con los nuevos valores.
     producto_ventas.cell(index, 10).data(ivaProductoActual.toFixed(2)).draw();
     producto_ventas.cell(index, 11).data(subtotalProductoActual.toFixed(2)).draw();
     producto_ventas.cell(index, 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
-
     // Llama a la función para recalcular los totales generales de la venta.
     recalcularTotales();
 }
@@ -1430,107 +1414,221 @@ function recalcularTotales() {
     $("#iptCodigoVenta").focus();
 }
 
-       document.getElementById("btnGuardar_cliente").addEventListener("click", function() {
+    //    document.getElementById("btnGuardar_cliente").addEventListener("click", function() {
 
-           const tipoIdentificacion = $("#selTipoIdentificacion").val();
-           const numeroDocumento = $("#iptNumeroDocumento").val().trim();
-           const saltarValidacion = document.getElementById("chkValidar").checked;
+    //        const tipoIdentificacion = $("#selTipoIdentificacion").val();
+    //        const numeroDocumento = $("#iptNumeroDocumento").val().trim();
+    //        const saltarValidacion = document.getElementById("chkValidar").checked;
 
-           const tipoIdentificacionTexto = {
-               "05": "Cédula",
-               "04": "RUC",
-               "06": "Pasaporte"
-           };
+    //        const tipoIdentificacionTexto = {
+    //            "05": "Cédula",
+    //            "04": "RUC",
+    //            "06": "Pasaporte"
+    //        };
 
-           const validarDocumento = () => {
-               if (saltarValidacion) return true;
-               switch (tipoIdentificacion) {
-                   case "05":
-                       return validarCedula(numeroDocumento);
-                   case "04":
-                       return validarRUC(numeroDocumento);
-                   case "06":
-                       return validarPasaporte(numeroDocumento);
-                   default:
-                       return false;
-               }
-           };
+    //        const validarDocumento = () => {
+    //            if (saltarValidacion) return true;
+    //            switch (tipoIdentificacion) {
+    //                case "05":
+    //                    return validarCedula(numeroDocumento);
+    //                case "04":
+    //                    return validarRUC(numeroDocumento);
+    //                case "06":
+    //                    return validarPasaporte(numeroDocumento);
+    //                default:
+    //                    return false;
+    //            }
+    //        };
 
-           if (!validarDocumento()) {
-               const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
-               Swal.fire({
-                   icon: 'warning',
-                   title: 'Documento inválido',
-                   text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
-                   confirmButtonText: 'Aceptar'
-               });
-               return;
-           }
+    //        if (!validarDocumento()) {
+    //            const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
+    //            Swal.fire({
+    //                icon: 'warning',
+    //                title: 'Documento inválido',
+    //                text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
+    //                confirmButtonText: 'Aceptar'
+    //            });
+    //            return;
+    //        }
+    //   const form = document.querySelector('#modalRegistrarCliente form.needs-validation');
+    //     if (!form.checkValidity()) {
+    //       form.classList.add('was-validated');
+    //        Swal.fire({
+    //         icon: 'info',
+    //         title: 'Por favor complete todos los campos obligatorios'
+    //       });
+    //     return;
+    //  }
 
-           const forms = document.getElementsByClassName('needs-validation');
-           let formularioValido = true;
 
-           Array.from(forms).forEach(form => {
-               if (!form.checkValidity()) {
-                   formularioValido = false;
-                   form.classList.add('was-validated');
-               }
-           });
+    //     //    const forms = document.getElementsByClassName('needs-validation');
+    //     //    let formularioValido = true;
 
-           if (!formularioValido) {
-               Swal.fire({
-                   icon: 'info',
-                   title: 'Por favor complete todos los campos obligatorios'
-               });
-               return;
-           }
+    //     //    Array.from(forms).forEach(form => {
+    //     //        if (!form.checkValidity()) {
+    //     //            formularioValido = false;
+    //     //            form.classList.add('was-validated');
+    //     //        }
+    //     //    });
 
-           Swal.fire({
-               title: '¿Está seguro de registrar el Cliente?',
-               icon: 'warning',
-               showCancelButton: true,
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               confirmButtonText: 'Sí, deseo registrarlo!',
-               cancelButtonText: 'Cancelar',
-           }).then((result) => {
-               if (!result.isConfirmed) return;
+    //     //    if (!formularioValido) {
+    //     //        Swal.fire({
+    //     //            icon: 'info',
+    //     //            title: 'Por favor complete todos los campos obligatorios'
+    //     //        });
+    //     //        return;
+    //     //    }
 
-               const datos = new FormData();
-               datos.append("accion", 2);
-               datos.append("IdCliente", $("#IdCliente").val());
-               datos.append("tipoIdentificacion", tipoIdentificacion);
-               datos.append("NumeroDocumento", numeroDocumento);
-               datos.append("Nombre", $("#iptNombre").val());
-               datos.append("Apellido", $("#iptApellido").val());
-               datos.append("Direccion", $("#iptDireccion").val());
-               datos.append("Telefono", $("#iptTelefono").val());
-               datos.append("Email", $("#iptEmail").val());
-               datos.append("Estado", 1);
+    //        Swal.fire({
+    //            title: '¿Está seguro de registrar el Cliente?',
+    //            icon: 'warning',
+    //            showCancelButton: true,
+    //            confirmButtonColor: '#3085d6',
+    //            cancelButtonColor: '#d33',
+    //            confirmButtonText: 'Sí, deseo registrarlo!',
+    //            cancelButtonText: 'Cancelar',
+    //        }).then((result) => {
+    //            if (!result.isConfirmed) return;
 
-               $.ajax({
-                   url: "ajax/clientes.ajax.php",
-                   method: "POST",
-                   data: datos,
-                   cache: false,
-                   contentType: false,
-                   processData: false,
-                   dataType: 'json',
-                   success: function(respuesta) {
-                       mostrarAlertaRespuesta(respuesta, function() {
-                           CargarCliente(numeroDocumento);
-                           fun_limpiar();
-                           $("#modalRegistrarCliente").modal('hide');
-                       }, {
-                           mensajeExito: "éxito",
-                           mensajeAdvertencia: "Warning",
-                           mensajeError: "Excepción"
-                       });
-                   },
-                   error: manejarErrorAjax
-               });
-           });
-       });
+    //            const datos = new FormData();
+    //            datos.append("accion", 2);
+    //            datos.append("IdCliente", $("#IdCliente").val());
+    //            datos.append("tipoIdentificacion", tipoIdentificacion);
+    //            datos.append("NumeroDocumento", numeroDocumento);
+    //            datos.append("Nombre", $("#iptNombre").val());
+    //            datos.append("Apellido", $("#iptApellido").val());
+    //            datos.append("Direccion", $("#iptDireccion").val());
+    //            datos.append("Telefono", $("#iptTelefono").val());
+    //            datos.append("Email", $("#iptEmail").val());
+    //            datos.append("Estado", 1);
+
+    //            $.ajax({
+    //                url: "ajax/clientes.ajax.php",
+    //                method: "POST",
+    //                data: datos,
+    //                cache: false,
+    //                contentType: false,
+    //                processData: false,
+    //                dataType: 'json',
+    //                success: function(respuesta) {
+    //                    mostrarAlertaRespuesta(respuesta, function() {
+    //                        CargarCliente(numeroDocumento);
+    //                        fun_limpiar();
+    //                        $("#modalRegistrarCliente").modal('hide');
+    //                    }, {
+    //                        mensajeExito: "éxito",
+    //                        mensajeAdvertencia: "Warning",
+    //                        mensajeError: "Excepción"
+    //                    });
+    //                },
+    //                error: manejarErrorAjax
+    //            });
+    //        });
+    //    });
+
+    document.getElementById("btnGuardar_cliente").addEventListener("click", function () {
+    const btn = this;
+    btn.disabled = true; // 🔒 Bloquea el botón desde el inicio
+
+    const tipoIdentificacion = $("#selTipoIdentificacion").val();
+    const numeroDocumento = $("#iptNumeroDocumento").val().trim();
+    const saltarValidacion = document.getElementById("chkValidar").checked;
+
+    const tipoIdentificacionTexto = {
+        "05": "Cédula",
+        "04": "RUC",
+        "06": "Pasaporte"
+    };
+
+    const validarDocumento = () => {
+        if (saltarValidacion) return true;
+        switch (tipoIdentificacion) {
+            case "05": return validarCedula(numeroDocumento);
+            case "04": return validarRUC(numeroDocumento);
+            case "06": return validarPasaporte(numeroDocumento);
+            default: return false;
+        }
+    };
+
+    if (!validarDocumento()) {
+        const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
+        Swal.fire({
+            icon: 'warning',
+            title: 'Documento inválido',
+            text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            btn.disabled = false; // 🔓 Rehabilita el botón si hubo error
+        });
+        return;
+    }
+
+    const form = document.querySelector('#modalRegistrarCliente form.needs-validation');
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        Swal.fire({
+            icon: 'info',
+            title: 'Por favor complete todos los campos obligatorios'
+        }).then(() => {
+            btn.disabled = false; // 🔓 Rehabilita si validación falla
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Está seguro de registrar el Cliente?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deseo registrarlo!',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (!result.isConfirmed) {
+            btn.disabled = false; // 🔓 Si se cancela el registro
+            return;
+        }
+
+        const datos = new FormData();
+        datos.append("accion", 2);
+        datos.append("IdCliente", $("#IdCliente").val());
+        datos.append("tipoIdentificacion", tipoIdentificacion);
+        datos.append("NumeroDocumento", numeroDocumento);
+        datos.append("Nombre", $("#iptNombre").val());
+        datos.append("Apellido", $("#iptApellido").val());
+        datos.append("Direccion", $("#iptDireccion").val());
+        datos.append("Telefono", $("#iptTelefono").val());
+        datos.append("Email", $("#iptEmail").val());
+        datos.append("Estado", 1);
+
+        $.ajax({
+            url: "ajax/clientes.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (respuesta) {
+                mostrarAlertaRespuesta(respuesta, function () {
+                    CargarCliente(numeroDocumento);
+                    fun_limpiar();
+                    $("#modalRegistrarCliente").modal('hide');
+                    btn.disabled = false; // 🔓 Solo se habilita si terminó bien
+                }, {
+                    mensajeExito: "éxito",
+                    mensajeAdvertencia: "Warning",
+                    mensajeError: "Excepción"
+                });
+            },
+            error: function () {
+                manejarErrorAjax();
+                btn.disabled = false; // 🔓 Si hubo error en Ajax
+            }
+        });
+    });
+});
+
          
       function actualizarIVAs(porcentaje) {
     porcentaje = porcentaje * 100; // Convierte el decimal a porcentaje para mostrar.
@@ -1546,24 +1644,6 @@ function recalcularTotales() {
            return input.length > 0 ? input.val() : html || fallback;
        }
 
-    //    function construirDetalleVenta(table) {
-    //        let arr = [];
-    //        table.rows().eq(0).each(function(index) {
-    //            let data = table.row(index).data();
-                  
-    //            arr.push(JSON.stringify({
-    //                id_producto: data['id_producto'] || '',
-    //                codigo_barra: data['codigo_barra'] || '',
-    //                cantidad: parseFloat(getInputValueFromHTML(data['cantidad'], 0)),
-    //                precio_venta: getInputValueFromHTML(data['precio_venta']).toString().replace("$./ ", ""),
-    //                iva: data['iva'],
-    //                subtotal: data['subtotal'],
-    //                total: data['total'].toString().replace("$./ ", ""),
-    //                descripcion_producto: getInputValueFromHTML(data['descripcion_producto'])
-    //            }));
-    //        });
-    //        return arr;
-    //    }
     function construirDetalleVenta(table) {
     let arr = [];
     table.rows().eq(0).each(function(index) {
@@ -1621,90 +1701,83 @@ function recalcularTotales() {
            });
        }
 
-       function enviarVenta(tipoVenta) {
-           const totalVenta = parseFloat($("#totalVenta").html());
-           const efectivoRecibido = parseFloat(
-               tipoVenta === 'contado' ? $("#iptEfectivoRecibido").val() : $("#montoAbonado").val()
-           ) || 0;
+function enviarVenta(tipoVenta) {
+    const totalVenta = parseFloat($("#totalVenta").html());
+    const efectivoRecibido = parseFloat(
+        tipoVenta === 'contado' ? $("#iptEfectivoRecibido").val() : $("#montoAbonado").val()
+    ) || 0;
 
-           const count = producto_ventas.rows().count();
-           const fechaVencimiento = $("#fechaVencimiento").val();
+    const count = producto_ventas.rows().count();
+    const fechaVencimiento = $("#fechaVencimiento").val();
 
-           if (count === 0) {
-               mostrarAlerta('warning', 'No hay productos en el listado.');
-               habilitarBotones();
-               return;
-           }
+    if (count === 0) {
+        mostrarAlerta('warning', 'No hay productos en el listado.');
+        habilitarBotones();
+        return;
+    }
 
-        //    if (tipoVenta === 'contado' &&  efectivoRecibido <= 0 || isNaN(efectivoRecibido)) {
-        //        mostrarAlerta('warning', 'Ingrese el monto en efectivo');
-        //        habilitarBotones();
-        //        return;
-        //    }
-           const esContado = tipoVenta === 'contado';
-           const efectivoInvalido = efectivoRecibido <= 0 || isNaN(efectivoRecibido);
+    const esContado = tipoVenta === 'contado';
+    const efectivoInvalido = efectivoRecibido <= 0 || isNaN(efectivoRecibido);
 
-           if (esContado && efectivoInvalido) {
-             mostrarAlerta('warning', 'Ingrese el monto en efectivo');
-             habilitarBotones();
-              return;
-             }
+    if (esContado && efectivoInvalido) {
+        mostrarAlerta('warning', 'Ingrese el monto en efectivo');
+        habilitarBotones();
+        return;
+    }
 
-           if (tipoVenta === 'contado' && efectivoRecibido < totalVenta) {
-               mostrarAlerta('warning', 'El efectivo es menor al costo total');
-               habilitarBotones();
-               return;
-           }
+    if (tipoVenta === 'contado' && efectivoRecibido < totalVenta) {
+        mostrarAlerta('warning', 'El efectivo es menor al costo total');
+        habilitarBotones();
+        return;
+    }
 
-           if (tipoVenta === 'credito') {
-               if (!fechaVencimiento) {
-                   mostrarAlerta('warning', 'Ingrese la fecha Vencimiento');
-                   habilitarBotones();
-                   return;
-               }
+    if (tipoVenta === 'credito') {
+        if (!fechaVencimiento) {
+            mostrarAlerta('warning', 'Ingrese la fecha Vencimiento');
+            habilitarBotones();
+            return;
+        }
 
-               if (efectivoRecibido >= totalVenta) {
-                   mostrarAlerta('warning', 'No se puede aplicar crédito, ya que no hay saldo');
-                   habilitarBotones();
-                   return;
-               }
-           }
+        if (efectivoRecibido >= totalVenta) {
+            mostrarAlerta('warning', 'No se puede aplicar crédito, ya que no hay saldo');
+            habilitarBotones();
+            return;
+        }
+    }
 
-           const detalles = construirDetalleVenta(producto_ventas);
-           const vuelto = tipoVenta === 'contado' ? $("#Vuelto").html() : (totalVenta - efectivoRecibido);
+    const detalles = construirDetalleVenta(producto_ventas);
+    const vuelto = tipoVenta === 'contado' ? $("#Vuelto").html() : (totalVenta - efectivoRecibido);
 
-           const formData = construirFormDataVenta(tipoVenta, detalles, totalVenta, efectivoRecibido, vuelto);
+    const formData = construirFormDataVenta(tipoVenta, detalles, totalVenta, efectivoRecibido, vuelto);
 
-           $.ajax({
-               url: "ajax/realizar_ventas.ajax.php",
-               method: "POST",
-               data: formData,
-               cache: false,
-               contentType: false,
-               processData: false,
-               success: function(respuesta) {
-                //    const res = JSON.parse(respuesta);
-
-                      mostrarAlertaRespuesta(respuesta, function() {
-                      $("#modalCredito").modal('hide');
-                       LimpiarInputs();
-                        habilitarBotones();
-                       const nro_boleta = $("#iptNroVenta").val();
-                       window.open(`http://localhost/WebPuntoVenta2025/Views/modulos/Ventas/RealizarVentas/generar_tick.php?nro_boleta=${nro_boleta}`);
-                    CargarNroBoleta();
-                    }, {
-                        mensajeExito: "éxito",
-                        mensajeAdvertencia: "Warning",
-                        mensajeError: "Excepción"
-                    });
-             
-               },
-               error: function() {
-                   mostrarAlerta('error', 'Error en la conexión', 'No se pudo conectar con el servidor. Intente nuevamente.');
-                   habilitarBotones();
-               }
-           });
-       }
+    $.ajax({
+        url: "ajax/realizar_ventas.ajax.php",
+        method: "POST",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (respuesta) {
+            mostrarAlertaRespuesta(respuesta, function () {
+                $("#modalCredito").modal('hide');
+                LimpiarInputs();
+                const nro_boleta = $("#iptNroVenta").val();
+                window.open(`http://localhost/WebPuntoVenta2025/Views/modulos/Ventas/RealizarVentas/generar_tick.php?nro_boleta=${nro_boleta}`);
+                CargarNroBoleta();
+            }, {
+                mensajeExito: "éxito",
+                mensajeAdvertencia: "Warning",
+                mensajeError: "Excepción"
+            });
+        },
+        error: function () {
+            mostrarAlerta('error', 'Error en la conexión', 'No se pudo conectar con el servidor. Intente nuevamente.');
+        },
+        complete: function () {
+            habilitarBotones(); // 🔓 Siempre se reactiva el botón aquí (éxito o error)
+        }
+    });
+}
 
        function vaciarListado() {
            producto_ventas.clear().draw();
@@ -1725,8 +1798,6 @@ function recalcularTotales() {
            $("#fechaVencimiento").val("");
            $("#productoSearch").val("");
            $("#clienteSearch").val("");
-
-
        };
 
        function fun_limpiar() {
@@ -1747,6 +1818,9 @@ function recalcularTotales() {
 
 
        document.getElementById("btnGuardarCaja").addEventListener("click", function() {
+         const $btnCajaGuardar = $("#btnGuardarCaja");
+    $btnCajaGuardar.prop('disabled', true); // 🔒 Evitar múltiples clics
+
             Swal.fire({
                 title: 'Está seguro de realizar este movimiento en la Caja?',
                 icon: 'warning',
@@ -1777,12 +1851,14 @@ function recalcularTotales() {
                                   $("#mdlGestionarCaja").modal('hide');
               table_categorias.ajax.reload();
               LimpiarMoviemiento();
+                 $btnCajaGuardar.prop('disabled', false);
             
             }, {
               mensajeExito: "éxito",
               mensajeAdvertencia: "Warning",
               mensajeError: "Excepción"
             });
+             $btnCajaGuardar.prop('disabled', false);
               },
           error: manejarErrorAjax
           });
@@ -1798,5 +1874,49 @@ function recalcularTotales() {
                     $(".needs-validation").removeClass("was-validated");
     
  }
+
+ 
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
+
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                $("#btnIniciarVentaContado").prop('disabled', true);
+                $("#btnVentaCredit").prop('disabled', true);
+                $("#btnSalidadaDinero").prop('disabled', true);
+                $("#btnEntradaDinero").prop('disabled', true);
+                $("#btnRegistrarCliente").prop("disabled", true);
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
+            }
+        }
+    });
+}
 
    </script>

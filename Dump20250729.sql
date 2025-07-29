@@ -39,7 +39,7 @@ CREATE TABLE `abonos_compra_credito` (
   KEY `id_movimiento_caja` (`id_movimiento_caja`),
   CONSTRAINT `abonos_compra_credito_ibfk_1` FOREIGN KEY (`id_compra_credito`) REFERENCES `compras_credito` (`id_compra_credito`),
   CONSTRAINT `abonos_compra_credito_ibfk_2` FOREIGN KEY (`id_movimiento_caja`) REFERENCES `movimiento_caja` (`id_movimiento_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,6 @@ CREATE TABLE `abonos_compra_credito` (
 
 LOCK TABLES `abonos_compra_credito` WRITE;
 /*!40000 ALTER TABLE `abonos_compra_credito` DISABLE KEYS */;
-INSERT INTO `abonos_compra_credito` VALUES (6,NULL,6,17,4.00,'2025-07-13 21:11:04','1',NULL,'1'),(7,NULL,7,17,1.00,'2025-07-13 21:21:50','1',NULL,'1'),(8,NULL,7,17,0.30,'2025-07-13 21:30:12','1',NULL,'1'),(9,NULL,8,17,3.00,'2025-07-14 16:17:16','1','pGO EN VIENES','1');
 /*!40000 ALTER TABLE `abonos_compra_credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +73,7 @@ CREATE TABLE `abonos_credito` (
   KEY `id_movimiento_caja` (`id_movimiento_caja`),
   CONSTRAINT `abonos_credito_ibfk_1` FOREIGN KEY (`id_venta_credito`) REFERENCES `ventas_credito` (`id_venta_credito`),
   CONSTRAINT `abonos_credito_ibfk_2` FOREIGN KEY (`id_movimiento_caja`) REFERENCES `movimiento_caja` (`id_movimiento_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +82,6 @@ CREATE TABLE `abonos_credito` (
 
 LOCK TABLES `abonos_credito` WRITE;
 /*!40000 ALTER TABLE `abonos_credito` DISABLE KEYS */;
-INSERT INTO `abonos_credito` VALUES (8,1,7,16,5.50,'2025-07-15 17:34:43','1',NULL,'1'),(9,1,7,16,2.00,'2025-07-15 17:48:36','1',NULL,'1');
 /*!40000 ALTER TABLE `abonos_credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +104,7 @@ CREATE TABLE `ajuste_lote` (
   PRIMARY KEY (`id_ajuste`),
   KEY `id_lote` (`id_lote`),
   CONSTRAINT `ajuste_lote_ibfk_1` FOREIGN KEY (`id_lote`) REFERENCES `lote_producto` (`id_lote`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +113,6 @@ CREATE TABLE `ajuste_lote` (
 
 LOCK TABLES `ajuste_lote` WRITE;
 /*!40000 ALTER TABLE `ajuste_lote` DISABLE KEYS */;
-INSERT INTO `ajuste_lote` VALUES (18,117,3,'DEVOLUCION','2025-07-13 16:03:08','debolu',1,'2025-07-13 16:03:08'),(19,113,7,'PERDIDA','2025-07-13 16:05:46','por perdida',1,'2025-07-13 16:05:46');
 /*!40000 ALTER TABLE `ajuste_lote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +169,7 @@ CREATE TABLE `arqueo_caja` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `arqueo_caja_ibfk_1` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id_caja`),
   CONSTRAINT `arqueo_caja_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +178,7 @@ CREATE TABLE `arqueo_caja` (
 
 LOCK TABLES `arqueo_caja` WRITE;
 /*!40000 ALTER TABLE `arqueo_caja` DISABLE KEYS */;
-INSERT INTO `arqueo_caja` VALUES (7,1,1,'2025-07-13 20:55:19','2025-07-21 15:01:36',50.00,858.30,18.30,890.00,840.00,0.00,50.00,'0',' cieere de hoy','0'),(8,1,1,'2025-07-21 15:02:11','2025-07-21 15:07:35',80.00,0.00,0.00,80.00,100.00,20.00,0.00,'0',' cieere rapido','0'),(9,1,1,'2025-07-21 15:07:49',NULL,30.00,0.00,0.00,0.00,0.00,0.00,0.00,'por canoeee',NULL,'1');
+INSERT INTO `arqueo_caja` VALUES (1,1,1,'2025-07-28 21:02:53',NULL,80.00,0.00,0.00,0.00,0.00,0.00,0.00,'hasta ',NULL,'1');
 /*!40000 ALTER TABLE `arqueo_caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +201,7 @@ CREATE TABLE `asiento_contable` (
   `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
   `tipo_referencia` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_asiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +210,7 @@ CREATE TABLE `asiento_contable` (
 
 LOCK TABLES `asiento_contable` WRITE;
 /*!40000 ALTER TABLE `asiento_contable` DISABLE KEYS */;
-INSERT INTO `asiento_contable` VALUES (1,'2025-05-25','Inventario inicial del producto sdsssssdd','INVENTARIO_INICIAL',11,'PRODUCTO',10.00,10.00,'2025-05-25 17:42:46','producto'),(2,'2025-05-25','Ingreso de producto 7501033210778 - por pro','COMPRA',NULL,'INVENTARIO',5.00,5.00,'2025-05-25 20:13:23','KARDEX'),(3,'2025-05-25','Ingreso de producto 525452312 - fdddffdfd','COMPRA',NULL,'INVENTARIO',5.00,5.00,'2025-05-25 20:13:49','KARDEX'),(4,'2025-05-26','Ingreso de producto 7501033210778 - por olvedeo','COMPRA',NULL,'INVENTARIO',1.00,1.00,'2025-05-26 17:31:53','KARDEX'),(5,'2025-05-26','Ingreso de producto 7501033210778 - gratis','COMPRA',NULL,'INVENTARIO',0.00,0.00,'2025-05-26 17:32:08','KARDEX'),(6,'2025-05-26','Ingreso de producto 525452312 - 1','COMPRA',NULL,'INVENTARIO',1.00,1.00,'2025-05-26 22:08:57','KARDEX'),(7,'2025-05-26','Ingreso de producto 7501033210778 - 1','COMPRA',NULL,'INVENTARIO',1.00,1.00,'2025-05-26 22:09:08','KARDEX'),(8,'2025-05-27','Ingreso de producto 00004 - ffdddddd','COMPRA',NULL,'INVENTARIO',1.00,1.00,'2025-05-27 09:36:51','KARDEX'),(9,'2025-05-27','Ingreso de producto 00004 - fd','COMPRA',NULL,'INVENTARIO',3.00,3.00,'2025-05-27 09:39:48','KARDEX'),(10,'2025-05-27','Ingreso de producto 00004 - ddsss','COMPRA',NULL,'INVENTARIO',1.00,1.00,'2025-05-27 09:40:06','KARDEX'),(11,'2025-05-27','Ajuste de stock por DEVOLUCION: debolucion','AJUSTE',4,'INVENTARIO',0.00,0.00,'2025-05-27 10:24:25','PRODUCTO'),(12,'2025-05-27','Inventario inicial del producto Producod','INVENTARIO_INICIAL',12,'PRODUCTO',10.00,10.00,'2025-05-27 11:25:32','producto'),(13,'2025-05-27','Ingreso de producto 0000089 - dddddddd','COMPRA',NULL,'INVENTARIO',2.00,2.00,'2025-05-27 11:27:40','KARDEX'),(14,'2025-05-27','Ingreso de producto 0000089 - eeeee','COMPRA',NULL,'INVENTARIO',0.00,0.00,'2025-05-27 11:28:00','KARDEX'),(15,'2025-05-27','Ajuste de stock por PERDIDA: fsffffffffd','AJUSTE',12,'INVENTARIO',10.00,10.00,'2025-05-27 11:37:44','PRODUCTO'),(16,'2025-05-27','Ajuste de stock por DEVOLUCION: ffdfdffdfdfffdfd','AJUSTE',9,'INVENTARIO',0.00,0.00,'2025-05-27 11:42:22','PRODUCTO'),(17,'2025-05-27','Ajuste de stock por PERDIDA: hhhjhjhj','AJUSTE',9,'INVENTARIO',5.00,5.00,'2025-05-27 11:42:52','PRODUCTO'),(18,'2025-05-27','Ajuste de stock por DEVOLUCION: dddd','AJUSTE',9,'INVENTARIO',0.00,0.00,'2025-05-27 11:46:36','PRODUCTO'),(19,'2025-05-27','Ajuste de stock por PERDIDA: eee','AJUSTE',12,'INVENTARIO',1.00,1.00,'2025-05-27 11:47:02','PRODUCTO'),(20,'2025-05-27','Ajuste de stock por DEVOLUCION: dddd','AJUSTE',9,'INVENTARIO',0.00,0.00,'2025-05-27 11:47:27','PRODUCTO'),(21,'2025-05-27','Inventario inicial del producto gfrrrrfrfrrfrf','INVENTARIO_INICIAL',13,'PRODUCTO',40.00,40.00,'2025-05-27 12:19:52','producto'),(22,'2025-05-27','Inventario inicial del producto 4404404','INVENTARIO_INICIAL',14,'PRODUCTO',20.00,20.00,'2025-05-27 12:26:47','producto'),(23,'2025-06-07','Inventario inicial del producto ffdffddffddfffff','INVENTARIO_INICIAL',15,'PRODUCTO',65.00,65.00,'2025-06-07 23:00:16','producto'),(24,'2025-06-07','Inventario inicial del producto pruenabbsbssasa','INVENTARIO_INICIAL',16,'PRODUCTO',60.00,60.00,'2025-06-07 23:01:55','producto'),(25,'2025-06-08','Inventario inicial del producto Dell 14 ispiro','INVENTARIO_INICIAL',17,'PRODUCTO',20.00,20.00,'2025-06-08 21:15:43','producto'),(26,'2025-06-08','Inventario inicial del producto modelo 13 dd','INVENTARIO_INICIAL',18,'PRODUCTO',20.00,20.00,'2025-06-08 23:24:17','producto'),(27,'2025-06-09','Inventario inicial del producto Canande fuente de vida','INVENTARIO_INICIAL',19,'PRODUCTO',5.00,5.00,'2025-06-09 16:54:29','producto'),(28,'2025-06-09','Inventario inicial del producto aMSLMSLSLAMSALALS','INVENTARIO_INICIAL',20,'PRODUCTO',20.00,20.00,'2025-06-09 17:14:25','producto'),(29,'2025-06-13','Inventario inicial del producto dcckscdkcdmdcmdkds','INVENTARIO_INICIAL',21,'PRODUCTO',12.00,12.00,'2025-06-13 16:08:54','producto'),(30,'2025-06-13','Inventario inicial del producto dsssfdssdfsdfsdfssfsfd','INVENTARIO_INICIAL',22,'PRODUCTO',1.00,1.00,'2025-06-13 18:09:32','producto'),(31,'2025-06-13','Inventario inicial del producto wedewewew','INVENTARIO_INICIAL',23,'PRODUCTO',1.00,1.00,'2025-06-13 18:15:16','producto'),(32,'2025-06-13','Ingreso de producto 012115 - por compra','COMPRA',NULL,'INVENTARIO',10.00,10.00,'2025-06-13 20:54:41','KARDEX'),(33,'2025-06-13','Ingreso de producto 031512 - fmfmfdf','COMPRA',NULL,'INVENTARIO',4.00,4.00,'2025-06-13 20:55:15','KARDEX'),(34,'2025-06-14','Inventario inicial del producto Glyphosate Isopropylamine salt (480 g/l)','INVENTARIO_INICIAL',24,'PRODUCTO',24.00,24.00,'2025-06-14 18:46:23','producto'),(35,'2025-06-14','Inventario inicial del producto SDDSDSDSDSD','INVENTARIO_INICIAL',25,'PRODUCTO',12.00,12.00,'2025-06-14 18:47:40','producto'),(36,'2025-06-15','Inventario inicial del producto bbjugugugugugugugu','INVENTARIO_INICIAL',26,'PRODUCTO',1.00,1.00,'2025-06-15 08:38:15','producto'),(37,'2025-06-16','Ingreso de producto 34464646 - nmnn','COMPRA',NULL,'INVENTARIO',5.00,5.00,'2025-06-16 18:19:32','KARDEX'),(38,'2025-07-13','Inventario inicial del producto BATHUTIC - 1L','INVENTARIO_INICIAL',27,'PRODUCTO',13.00,13.00,'2025-07-13 14:31:26','producto'),(39,'2025-07-13','Inventario inicial del producto Solfoxidante fungicida - Acaricida','INVENTARIO_INICIAL',28,'PRODUCTO',20.00,20.00,'2025-07-13 14:50:21','producto'),(40,'2025-07-13','Inventario inicial del producto SPARKO - 100 G','INVENTARIO_INICIAL',29,'PRODUCTO',12.00,12.00,'2025-07-13 15:06:02','producto'),(41,'2025-07-13','Inventario inicial del producto aFEPASA','INVENTARIO_INICIAL',30,'PRODUCTO',24.00,24.00,'2025-07-13 15:08:23','producto'),(42,'2025-07-13','Inventario inicial del producto Adame','INVENTARIO_INICIAL',31,'PRODUCTO',21.00,21.00,'2025-07-13 15:13:46','producto'),(43,'2025-07-13','Ingreso de producto 09088 - ingrese por mercaderia','COMPRA',NULL,'INVENTARIO',15.00,15.00,'2025-07-13 15:23:46','KARDEX'),(44,'2025-07-13','Ingreso de producto 09088 - promocion','COMPRA',NULL,'INVENTARIO',0.00,0.00,'2025-07-13 15:25:41','KARDEX'),(45,'2025-07-13','Ingreso de producto 09088 - por ganacia','COMPRA',NULL,'INVENTARIO',0.00,0.00,'2025-07-13 15:58:45','KARDEX'),(46,'2025-07-13','Ajuste de stock por DEVOLUCION: debolu','AJUSTE',30,'INVENTARIO',0.00,0.00,'2025-07-13 16:03:08','PRODUCTO'),(47,'2025-07-13','Ajuste de stock por PERDIDA: por perdida','AJUSTE',30,'INVENTARIO',10.50,10.50,'2025-07-13 16:05:46','PRODUCTO'),(48,'2025-07-19','Inventario inicial del producto por ssss','INVENTARIO_INICIAL',32,'PRODUCTO',3.00,3.00,'2025-07-19 17:31:34','producto'),(49,'2025-07-19','Inventario inicial del producto ewwewewewewew','INVENTARIO_INICIAL',33,'PRODUCTO',12.00,12.00,'2025-07-19 17:42:40','producto'),(50,'2025-07-19','Inventario inicial del producto sssswswswwswsws','INVENTARIO_INICIAL',34,'PRODUCTO',10.00,10.00,'2025-07-19 17:48:27','producto'),(51,'2025-07-19','Inventario inicial del producto dewdmewiefwnfnfkewfefef','INVENTARIO_INICIAL',35,'PRODUCTO',12.00,12.00,'2025-07-19 17:55:14','producto');
+INSERT INTO `asiento_contable` VALUES (1,'2025-07-28','Inventario inicial del producto Refresco Cola 2L','INVENTARIO_INICIAL',1,'PRODUCTO',10.00,10.00,'2025-07-28 20:56:35','producto'),(2,'2025-07-28','Inventario inicial del producto Leche Entera 1L','INVENTARIO_INICIAL',2,'PRODUCTO',24.00,24.00,'2025-07-28 21:00:06','producto');
 /*!40000 ALTER TABLE `asiento_contable` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +263,7 @@ CREATE TABLE `categorias` (
   `fecha_eliminacion` datetime DEFAULT NULL,
   `estado` char(1) DEFAULT '1',
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +272,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (30,'Galletas',NULL,1,'2025-07-13 14:17:54',1,'2025-07-13 14:18:22',NULL,NULL,'1'),(31,'Agricola',NULL,1,'2025-07-13 14:18:54',NULL,NULL,NULL,NULL,'1'),(32,'Figuizda',NULL,1,'2025-07-13 14:27:17',NULL,NULL,NULL,NULL,'1');
+INSERT INTO `categorias` VALUES (1,'fungisidad',NULL,1,'2025-07-28 20:54:50',NULL,NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +303,7 @@ CREATE TABLE `cliente` (
   UNIQUE KEY `idx_cliente_numeroDocumento` (`numeroDocumento`),
   KEY `fk_cliente_tipo_identificacion` (`tipo_identificacion`),
   CONSTRAINT `fk_cliente_tipo_identificacion` FOREIGN KEY (`tipo_identificacion`) REFERENCES `tipo_identificacion` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,7 +312,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (10,'05','0804610814','Momo Di','Diviluke','kjkkk','09090978788','edisongarofalo88@gmail.com',1,'2025-07-13 16:19:27',1,'2025-07-16 20:50:14',NULL,NULL,'1');
+INSERT INTO `cliente` VALUES (1,'04','0908989787878','Edison Gabriel','Garofalo Bustamante','barrio','000980999898','garfolaoeedisn@gmail.com',1,'2025-07-28 21:24:25',NULL,NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,7 +346,7 @@ CREATE TABLE `compras` (
   PRIMARY KEY (`IdCompra`),
   KEY `fk_compra_IdUsuario` (`id_usuario_creacion`),
   CONSTRAINT `fk_compra_IdUsuario` FOREIGN KEY (`id_usuario_creacion`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +355,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (36,8,NULL,'00000027',12.60,2.00,14.60,'FACTURA',NULL,'00012','2025-08-24',1,'2025-07-13 20:57:14',NULL,'2025-07-13 21:01:20',NULL,NULL,'2','EFECTIVO'),(37,8,NULL,'00000028',3.39,0.60,4.00,'FACTURA',NULL,'0009','2025-07-12',1,'2025-07-13 21:08:50',NULL,NULL,NULL,NULL,'1','CREDITO'),(38,8,NULL,'00000029',1.10,0.20,1.30,'FACTURA',NULL,'009','2025-09-20',1,'2025-07-13 21:21:36',NULL,NULL,NULL,NULL,'1','CREDITO'),(39,8,NULL,'00000030',7.60,0.20,7.80,'FACTURA',NULL,'099','2025-08-01',1,'2025-07-14 14:44:11',NULL,NULL,NULL,NULL,'1','CREDITO'),(40,8,NULL,'00000031',35.27,3.93,39.20,'FACTURA',NULL,'001-21-2122','2025-07-19',1,'2025-07-19 17:58:35',NULL,NULL,NULL,NULL,'1','CREDITO'),(41,8,NULL,'00000032',8.64,1.52,10.16,'FACTURA',NULL,'088-1-22-12','2025-10-12',1,'2025-07-21 12:16:29',NULL,NULL,NULL,NULL,'1','EFECTIVO'),(42,8,NULL,'00000033',10.15,1.79,11.94,'FACTURA',NULL,'09090909','2025-08-02',1,'2025-07-22 19:34:34',NULL,NULL,NULL,NULL,'1','CREDITO');
+INSERT INTO `compras` VALUES (1,1,NULL,'00000044',19.57,2.93,22.50,'FACTURA',NULL,'009','2025-08-30',1,'2025-07-29 15:43:57',NULL,'2025-07-29 15:44:15',NULL,NULL,'0','CREDITO');
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,11 +376,11 @@ CREATE TABLE `compras_credito` (
   `fecha_compra` date DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL,
   `fecha_registro` datetime DEFAULT CURRENT_TIMESTAMP,
-  `estado` enum('Pendiente','Pagado','Vencido','Otros','Inactivo') DEFAULT 'Pendiente',
+  `estado` enum('Pendiente','Pagado','Vencido','Otros','Inactivo','Eliminado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Pendiente',
   PRIMARY KEY (`id_compra_credito`),
   KEY `id_compra` (`id_compra`),
   CONSTRAINT `compras_credito_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`IdCompra`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,7 +389,7 @@ CREATE TABLE `compras_credito` (
 
 LOCK TABLES `compras_credito` WRITE;
 /*!40000 ALTER TABLE `compras_credito` DISABLE KEYS */;
-INSERT INTO `compras_credito` VALUES (6,37,'00000001',4.00,4.00,0.00,'2025-07-12','2026-01-24','2025-07-13 21:08:50','Pagado'),(7,38,'00000001',1.30,1.30,0.00,'2025-09-20','2025-10-18','2025-07-13 21:21:36','Pagado'),(8,39,'00000001',7.80,3.00,4.80,'2025-08-01','2025-09-28','2025-07-14 14:44:11','Pendiente'),(9,40,'00000001',39.20,0.00,39.20,'2025-07-19','2025-11-02','2025-07-19 17:58:35','Pendiente'),(10,42,'00000001',11.94,0.00,11.94,'2025-08-02','2025-09-27','2025-07-22 19:34:34','Pendiente');
+INSERT INTO `compras_credito` VALUES (1,1,'00000001',22.50,0.00,22.50,'2025-08-30','2025-11-01','2025-07-29 15:43:58','Eliminado');
 /*!40000 ALTER TABLE `compras_credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +438,7 @@ CREATE TABLE `comprobantes_electronicos` (
   CONSTRAINT `comprobantes_electronicos_ibfk_3` FOREIGN KEY (`id_estado_emision`) REFERENCES `estado_emision` (`id_estado`),
   CONSTRAINT `comprobantes_electronicos_ibfk_4` FOREIGN KEY (`id_tipo_emision`) REFERENCES `tipo_emision` (`id_tipo_emision`),
   CONSTRAINT `comprobantes_electronicos_ibfk_5` FOREIGN KEY (`id_enviado_cliente`) REFERENCES `enviado_cliente` (`id_enviado`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -450,7 +447,6 @@ CREATE TABLE `comprobantes_electronicos` (
 
 LOCK TABLES `comprobantes_electronicos` WRITE;
 /*!40000 ALTER TABLE `comprobantes_electronicos` DISABLE KEYS */;
-INSERT INTO `comprobantes_electronicos` VALUES (1,NULL,'01',38,10,'1507202501080461081400110010010000000071407851116','1507202501080461081400110010010000000071407851116','001001000000007',1,4,'2025-07-15 00:00:00','2025-07-16 15:38:17',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000007_15-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000007_15-07-2025_autorizacion.xml',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000007_15-07-2025.pdf',1,'2025-07-16 21:09:55','2025-07-16 15:35:17'),(2,NULL,'01',42,10,NULL,'1807202501080461081400110010010000000080733323114','001001000000008',1,2,'2025-07-18 00:00:00',NULL,1,'RECIBIDA: Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2025-07-18 23:15:59'),(3,NULL,'01',42,10,NULL,'1807202501080461081400110010010000000091784883019','001001000000009',1,2,'2025-07-18 00:00:00',NULL,1,'RECIBIDA: Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2025-07-18 23:17:26'),(4,NULL,'01',42,10,NULL,'1807202501080461081400110010010000000101754257712','001001000000010',1,2,'2025-07-18 00:00:00',NULL,1,'RECIBIDA: Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2025-07-18 23:21:30'),(5,NULL,'01',42,10,'1807202501080461081400110010010000000081740339316','1807202501080461081400110010010000000081740339316','001001000000008',1,4,'2025-07-18 00:00:00','2025-07-18 23:52:35',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000008_18-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000008_18-07-2025_autorizacion.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000008_18-07-2025_barcode.png','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000008_18-07-2025.pdf',1,'2025-07-18 23:59:01','2025-07-18 23:51:34'),(6,1,'01',43,10,'1907202501080461081400110010010000000090964186810','1907202501080461081400110010010000000090964186810','001-001-000000009',1,4,'2025-07-19 00:00:00','2025-07-19 15:07:44',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000009_19-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000009_19-07-2025_autorizacion.xml',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000009_19-07-2025.pdf',1,'2025-07-19 15:35:02','2025-07-19 15:07:42'),(7,1,'01',44,10,'1907202501080461081400110010010000000101708926817','1907202501080461081400110010010000000101708926817','001-001-000000010',1,4,'2025-07-19 00:00:00','2025-07-19 15:10:13',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000010_19-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000010_19-07-2025_autorizacion.xml',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000010_19-07-2025.pdf',1,'2025-07-19 16:38:12','2025-07-19 15:10:12'),(8,1,'01',45,10,'1907202501080461081400110010010000000113698837312','1907202501080461081400110010010000000113698837312','001-001-000000011',1,4,'2025-07-19 00:00:00','2025-07-19 15:16:20',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000011_19-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000011_19-07-2025_autorizacion.xml',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000011_19-07-2025.pdf',1,'2025-07-19 17:17:24','2025-07-19 15:16:14'),(9,1,'01',46,10,'1907202501080461081400110010010000000125609301712','1907202501080461081400110010010000000125609301712','001-001-000000012',1,4,'2025-07-19 00:00:00','2025-07-19 19:00:41',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000012_19-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000012_19-07-2025_autorizacion.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000012_19-07-2025_barcode.png','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000012_19-07-2025.pdf',NULL,NULL,'2025-07-19 19:00:37'),(10,1,'01',47,10,'2007202501080461081400110010010000000131356369611','2007202501080461081400110010010000000131356369611','001-001-000000013',1,4,'2025-07-20 00:00:00','2025-07-20 18:20:44',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000013_20-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000013_20-07-2025_autorizacion.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000013_20-07-2025_barcode.png','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000013_20-07-2025.pdf',NULL,NULL,'2025-07-20 18:20:43'),(11,1,'01',48,10,'2007202501080461081400110010010000000141602126611','2007202501080461081400110010010000000141602126611','001-001-000000014',1,4,'2025-07-20 00:00:00','2025-07-20 23:54:25',1,'AUTORIZADO',NULL,'C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000014_20-07-2025_comprobante.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000014_20-07-2025_autorizacion.xml','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000014_20-07-2025_barcode.png','C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000014_20-07-2025.pdf',NULL,NULL,'2025-07-20 23:54:22');
 /*!40000 ALTER TABLE `comprobantes_electronicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +596,7 @@ CREATE TABLE `det_compra` (
   KEY `fk_det_compra_IdProducto` (`IdProducto`),
   CONSTRAINT `fk_det_compra_IdCompra` FOREIGN KEY (`IdCompra`) REFERENCES `compras` (`IdCompra`),
   CONSTRAINT `fk_det_compra_IdProducto` FOREIGN KEY (`IdProducto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -609,7 +605,7 @@ CREATE TABLE `det_compra` (
 
 LOCK TABLES `det_compra` WRITE;
 /*!40000 ALTER TABLE `det_compra` DISABLE KEYS */;
-INSERT INTO `det_compra` VALUES (60,'00000027',36,28,'00002',1,1.30,NULL,1.30,0.00,1.30,'2025-07-13 20:57:14','2025-07-13 21:01:20',NULL,'2'),(61,'00000027',36,27,'00001',1,1.30,NULL,1.10,0.20,1.30,'2025-07-13 20:57:14','2025-07-13 21:01:20',NULL,'2'),(62,'00000027',36,31,'000010',8,1.50,NULL,10.20,1.80,12.00,'2025-07-13 20:57:14','2025-07-13 21:01:20',NULL,'2'),(63,'00000028',37,29,'00009',1,1.20,NULL,1.02,0.18,1.20,'2025-07-13 21:08:50',NULL,NULL,'1'),(64,'00000028',37,27,'00001',1,1.30,NULL,1.10,0.20,1.30,'2025-07-13 21:08:50',NULL,NULL,'1'),(65,'00000028',37,30,'09088',1,1.50,NULL,1.27,0.22,1.50,'2025-07-13 21:08:50',NULL,NULL,'1'),(66,'00000029',38,27,'00001',1,1.30,NULL,1.10,0.20,1.30,'2025-07-13 21:21:36',NULL,NULL,'1'),(67,'00000030',39,27,'00001',1,1.30,NULL,1.10,0.20,1.30,'2025-07-14 14:44:11',NULL,NULL,'1'),(68,'00000030',39,28,'00002',5,1.30,NULL,6.50,0.00,6.50,'2025-07-14 14:44:11',NULL,NULL,'1'),(69,'00000031',40,28,'00002',10,1.30,NULL,13.00,0.00,13.00,'2025-07-19 17:58:35',NULL,NULL,'1'),(70,'00000031',40,32,'000011',6,1.00,NULL,5.10,0.90,6.00,'2025-07-19 17:58:35',NULL,NULL,'1'),(71,'00000031',40,35,'00012',6,1.20,NULL,6.12,1.08,7.20,'2025-07-19 17:58:35',NULL,NULL,'1'),(72,'00000031',40,27,'00001',10,1.30,NULL,11.05,1.95,13.00,'2025-07-19 17:58:35',NULL,NULL,'1'),(76,'00000032',41,29,'00009',4,1.20,NULL,4.08,0.72,4.80,'2025-07-21 12:16:29',NULL,NULL,'1'),(77,'00000032',41,27,'00001',4,1.34,NULL,4.56,0.80,5.36,'2025-07-21 12:16:29',NULL,NULL,'1'),(79,'00000033',42,27,'00001',6,1.99,NULL,10.15,1.79,11.94,'2025-07-22 19:34:34',NULL,NULL,'1');
+INSERT INTO `det_compra` VALUES (1,'00000044',1,1,'PROD0001',10,1.00,NULL,8.70,1.30,10.00,'2025-07-29 15:43:57','2025-07-29 15:44:15',NULL,'0'),(2,'00000044',1,2,'PROD0002',10,1.25,NULL,10.87,1.63,12.50,'2025-07-29 15:43:57','2025-07-29 15:44:15',NULL,'0');
 /*!40000 ALTER TABLE `det_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,7 +638,7 @@ CREATE TABLE `det_venta` (
   KEY `fk_det_venta_id_venta` (`IdVenta`),
   KEY `fk_det_venta_id_producto` (`IdProducto`),
   CONSTRAINT `fk_det_venta_id_venta` FOREIGN KEY (`IdVenta`) REFERENCES `ventas` (`IdVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -651,7 +647,7 @@ CREATE TABLE `det_venta` (
 
 LOCK TABLES `det_venta` WRITE;
 /*!40000 ALTER TABLE `det_venta` DISABLE KEYS */;
-INSERT INTO `det_venta` VALUES (84,'00000033',37,31,'000010','Adame 1',1,NULL,1.90,0.28,1.61,1.90,NULL,'2025-07-15 06:51:16','2025-07-15 06:54:48',NULL,'2'),(85,'00000033',37,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.22,1.27,1.50,NULL,'2025-07-15 06:51:16','2025-07-15 06:54:48',NULL,'2'),(86,'00000033',37,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-15 06:51:16','2025-07-15 06:54:48',NULL,'2'),(87,'00000033',37,27,'00001','BATHUTIC - 1L',1,NULL,1.40,0.21,1.19,1.40,NULL,'2025-07-15 06:51:16','2025-07-15 06:54:48',NULL,'2'),(88,'00000034',38,31,'000010','Adame 1',1,NULL,1.90,0.28,1.61,1.90,NULL,'2025-07-15 07:19:38',NULL,NULL,'1'),(89,'00000034',38,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.22,1.27,1.50,NULL,'2025-07-15 07:19:38',NULL,NULL,'1'),(90,'00000034',38,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-15 07:19:38',NULL,NULL,'1'),(91,'00000034',38,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.24,1.36,1.60,NULL,'2025-07-15 07:19:38',NULL,NULL,'1'),(92,'00000035',39,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.39,2.61,3.00,NULL,'2025-07-17 22:00:46',NULL,NULL,'1'),(93,'00000035',39,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,5.00,5.00,NULL,'2025-07-17 22:00:46',NULL,NULL,'1'),(94,'00000035',39,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.42,2.78,3.20,NULL,'2025-07-17 22:00:46',NULL,NULL,'1'),(95,'00000036',40,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.42,2.78,3.20,NULL,'2025-07-17 22:46:28',NULL,NULL,'1'),(96,'00000037',41,27,'00001','BATHUTIC - 1L',3,NULL,1.60,0.63,4.17,4.80,NULL,'2025-07-17 23:00:13',NULL,NULL,'1'),(97,'00000038',42,31,'000010','Adame 1',2,NULL,1.90,0.50,3.30,3.80,NULL,'2025-07-18 23:15:23',NULL,NULL,'1'),(98,'00000038',42,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-18 23:15:23',NULL,NULL,'1'),(99,'00000038',42,28,'00002','Solfoxidante fungicida - Acaricida',2,NULL,2.50,0.00,5.00,5.00,NULL,'2025-07-18 23:15:23',NULL,NULL,'1'),(100,'00000038',42,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-18 23:15:23',NULL,NULL,'1'),(101,'00000039',43,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-19 15:06:57',NULL,NULL,'1'),(102,'00000039',43,27,'00001','BATHUTIC - 1L',2,NULL,1.60,0.42,2.78,3.20,NULL,'2025-07-19 15:06:57',NULL,NULL,'1'),(103,'00000040',44,31,'000010','Adame 1',1,NULL,1.90,0.25,1.65,1.90,NULL,'2025-07-19 15:09:17',NULL,NULL,'1'),(104,'00000040',44,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-19 15:09:17',NULL,NULL,'1'),(105,'00000040',44,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-19 15:09:17',NULL,NULL,'1'),(106,'00000041',45,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-19 15:09:38',NULL,NULL,'1'),(107,'00000041',45,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-19 15:09:38',NULL,NULL,'1'),(108,'00000042',46,31,'000010','Adame 1',2,NULL,1.90,0.50,3.30,3.80,NULL,'2025-07-19 18:59:59',NULL,NULL,'1'),(109,'00000042',46,28,'00002','Solfoxidante fungicida - Acaricida',2,NULL,2.50,0.00,5.00,5.00,NULL,'2025-07-19 18:59:59',NULL,NULL,'1'),(110,'00000043',47,31,'000010','Adame 1',1,NULL,1.90,0.25,1.65,1.90,NULL,'2025-07-20 18:18:38',NULL,NULL,'1'),(111,'00000043',47,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-20 18:18:38',NULL,NULL,'1'),(112,'00000044',48,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-20 18:53:34',NULL,NULL,'1'),(113,'00000044',48,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-20 18:53:34',NULL,NULL,'1'),(114,'00000045',50,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-21 11:01:25',NULL,NULL,'1'),(115,'00000045',50,32,'000011','por ssss',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-21 11:01:25',NULL,NULL,'1'),(116,'00000045',50,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-21 11:01:25',NULL,NULL,'1'),(117,'00000045',50,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-21 11:01:25',NULL,NULL,'1'),(118,'00000046',51,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-22 17:58:17',NULL,NULL,'1'),(119,'00000046',51,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-22 17:58:17',NULL,NULL,'1'),(120,'00000047',52,27,'00001','BATHUTIC - 1L',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-22 18:09:42',NULL,NULL,'1'),(121,'00000048',53,33,'0000099','ewwewewewewew',1,NULL,1.60,0.21,1.39,1.60,NULL,'2025-07-23 15:33:45',NULL,NULL,'1'),(122,'00000049',54,29,'00009','SPARKO - 100 G',1,NULL,1.50,0.20,1.30,1.50,NULL,'2025-07-23 15:35:46',NULL,NULL,'1'),(123,'00000050',55,28,'00002','Solfoxidante fungicida - Acaricida',1,NULL,2.50,0.00,2.50,2.50,NULL,'2025-07-23 15:38:28',NULL,NULL,'1');
+INSERT INTO `det_venta` VALUES (1,'00000053',1,2,'PROD0002','Leche Entera 1L',2,NULL,1.50,0.39,2.61,3.00,NULL,'2025-07-28 21:33:35','2025-07-29 14:19:45',NULL,'0'),(2,'00000053',1,1,'PROD0001','Refresco Cola 2L',2,NULL,1.50,0.39,2.61,3.00,NULL,'2025-07-28 21:33:35','2025-07-29 14:19:45',NULL,'0'),(3,'00000054',2,2,'PROD0002','Leche Entera 1L',3,NULL,1.50,0.59,3.91,4.50,NULL,'2025-07-28 21:48:21','2025-07-29 14:16:03',NULL,'0'),(4,'00000054',2,1,'PROD0001','Refresco Cola 2L',3,NULL,1.50,0.59,3.91,4.50,NULL,'2025-07-28 21:48:21','2025-07-29 14:16:03',NULL,'0');
 /*!40000 ALTER TABLE `det_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -676,7 +672,7 @@ CREATE TABLE `det_venta_lote` (
   KEY `id_lote` (`id_lote`),
   CONSTRAINT `det_venta_lote_ibfk_1` FOREIGN KEY (`id_det_venta`) REFERENCES `det_venta` (`IdDetalleVenta`),
   CONSTRAINT `det_venta_lote_ibfk_2` FOREIGN KEY (`id_lote`) REFERENCES `lote_producto` (`id_lote`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -685,7 +681,7 @@ CREATE TABLE `det_venta_lote` (
 
 LOCK TABLES `det_venta_lote` WRITE;
 /*!40000 ALTER TABLE `det_venta_lote` DISABLE KEYS */;
-INSERT INTO `det_venta_lote` (`id_detalle_venta_stock`, `id_det_venta`, `id_lote`, `cantidad_vendida`, `precio_venta`, `costo_unitario`, `estado`) VALUES (86,84,114,1,1.90,1.50,'2'),(87,85,121,1,1.50,1.20,'2'),(88,86,126,1,2.50,1.30,'2'),(89,87,125,1,1.40,1.30,'2'),(90,88,114,1,1.90,1.50,'1'),(91,89,112,1,1.50,1.20,'1'),(92,90,126,1,2.50,1.30,'1'),(93,91,124,1,1.60,1.30,'1'),(94,92,112,1,1.50,1.20,'1'),(95,93,126,1,2.50,1.30,'1'),(96,94,110,1,1.60,1.30,'1'),(97,95,110,1,1.60,1.30,'1'),(98,96,110,3,1.60,1.30,'1'),(99,97,114,2,1.90,1.50,'1'),(100,98,112,1,1.50,1.20,'1'),(101,99,126,2,2.50,1.30,'1'),(102,100,110,1,1.60,1.30,'1'),(103,101,112,1,1.50,1.20,'1'),(104,102,110,2,1.60,1.30,'1'),(105,103,114,1,1.90,1.50,'1'),(106,104,126,1,2.50,1.30,'1'),(107,105,110,1,1.60,1.30,'1'),(108,106,111,1,2.50,1.30,'1'),(109,107,110,1,1.60,1.30,'1'),(110,108,114,2,1.90,1.50,'1'),(111,109,131,2,2.50,1.30,'1'),(112,110,114,1,1.90,1.50,'1'),(113,111,131,1,2.50,1.30,'1'),(114,112,112,1,1.50,1.20,'1'),(115,113,134,1,1.60,1.30,'1'),(116,114,112,1,1.50,1.20,'1'),(117,115,127,1,1.50,1.00,'1'),(118,116,131,1,2.50,1.30,'1'),(119,117,134,1,1.60,1.30,'1'),(120,118,131,1,2.50,1.30,'1'),(121,119,134,1,1.60,1.30,'1'),(122,120,134,1,1.60,1.30,'1'),(123,121,128,1,1.60,1.20,'1'),(124,122,138,1,1.50,1.20,'1'),(125,123,131,1,2.50,1.30,'1');
+INSERT INTO `det_venta_lote` (`id_detalle_venta_stock`, `id_det_venta`, `id_lote`, `cantidad_vendida`, `precio_venta`, `costo_unitario`, `estado`) VALUES (1,1,2,2,1.50,1.20,'0'),(2,2,1,2,1.50,1.00,'0'),(3,3,2,3,1.50,1.20,'0'),(4,4,1,3,1.50,1.00,'0');
 /*!40000 ALTER TABLE `det_venta_lote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -709,7 +705,7 @@ CREATE TABLE `detalle_asiento` (
   KEY `id_cuenta` (`id_cuenta`),
   CONSTRAINT `detalle_asiento_ibfk_1` FOREIGN KEY (`id_asiento`) REFERENCES `asiento_contable` (`id_asiento`),
   CONSTRAINT `detalle_asiento_ibfk_2` FOREIGN KEY (`id_cuenta`) REFERENCES `cuenta_contable` (`id_cuenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -718,7 +714,7 @@ CREATE TABLE `detalle_asiento` (
 
 LOCK TABLES `detalle_asiento` WRITE;
 /*!40000 ALTER TABLE `detalle_asiento` DISABLE KEYS */;
-INSERT INTO `detalle_asiento` VALUES (1,1,9,10.00,0.00,'Registro de inventario inicialsdsssssdd',1),(2,1,13,0.00,10.00,'Contrapartida por ajuste de producto sdsssssdd',2),(3,2,9,5.00,0.00,'Ingreso inventario por compra',1),(4,2,6,5.00,0.00,'Caja efectivo  por compra',2),(5,3,9,5.00,0.00,'Ingreso inventario por compra',1),(6,3,6,5.00,0.00,'Caja efectivo  por compra',2),(7,4,9,1.00,0.00,'Ingreso inventario por compra',1),(8,4,6,1.00,0.00,'Caja efectivo  por compra',2),(9,5,9,0.00,0.00,'Ingreso producto bonificado',1),(10,5,16,0.00,0.00,'Bonificación proveedor',2),(11,6,9,1.00,0.00,'Ingreso inventario por compra',1),(12,6,6,1.00,0.00,'Caja efectivo  por compra',2),(13,7,9,1.00,0.00,'Ingreso inventario por compra',1),(14,7,6,1.00,0.00,'Caja efectivo  por compra',2),(15,8,9,1.00,0.00,'Ingreso inventario por compra',1),(16,8,6,1.00,0.00,'Caja efectivo  por compra',2),(17,9,9,3.00,0.00,'Ingreso inventario por compra',1),(18,9,6,3.00,0.00,'Caja efectivo  por compra',2),(19,10,9,1.00,0.00,'Ingreso inventario por compra',1),(20,10,6,1.00,0.00,'Caja efectivo  por compra',2),(21,11,9,0.00,0.00,'Reposición por devolución',1),(22,11,11,0.00,0.00,'Reversión de ingreso por devolución',2),(23,12,9,10.00,0.00,'Registro de inventario inicialProducod',1),(24,12,13,0.00,10.00,'Contrapartida por ajuste de producto Producod',2),(25,13,9,2.00,0.00,'Ingreso inventario por compra',1),(26,13,6,2.00,0.00,'Caja efectivo  por compra',2),(27,14,9,0.00,0.00,'Ingreso producto bonificado',1),(28,14,16,0.00,0.00,'Bonificación proveedor',2),(29,15,15,10.00,0.00,'Pérdida por ajuste de inventario',1),(30,15,9,0.00,10.00,'Disminución de inventario',2),(31,16,9,0.00,0.00,'Reposición por devolución',1),(32,16,11,0.00,0.00,'Reversión de ingreso por devolución',2),(33,17,15,5.00,0.00,'Pérdida por ajuste de inventario',1),(34,17,9,0.00,5.00,'Disminución de inventario',2),(35,18,9,0.00,0.00,'Reposición por devolución',1),(36,18,11,0.00,0.00,'Reversión de ingreso por devolución',2),(37,19,15,1.00,0.00,'Pérdida por ajuste de inventario',1),(38,19,9,0.00,1.00,'Disminución de inventario',2),(39,20,9,0.00,0.00,'Reposición por devolución',1),(40,20,11,0.00,0.00,'Reversión de ingreso por devolución',2),(41,21,9,40.00,0.00,'Registro de inventario inicialgfrrrrfrfrrfrf',1),(42,21,13,0.00,40.00,'Contrapartida por ajuste de producto gfrrrrfrfrrfrf',2),(43,22,9,20.00,0.00,'Registro de inventario inicial4404404',1),(44,22,13,0.00,20.00,'Contrapartida por ajuste de producto 4404404',2),(45,23,9,65.00,0.00,'Registro de inventario inicialffdffddffddfffff',1),(46,23,13,0.00,65.00,'Contrapartida por ajuste de producto ffdffddffddfffff',2),(47,24,9,60.00,0.00,'Registro de inventario inicialpruenabbsbssasa',1),(48,24,13,0.00,60.00,'Contrapartida por ajuste de producto pruenabbsbssasa',2),(49,25,9,20.00,0.00,'Registro de inventario inicialDell 14 ispiro',1),(50,25,13,0.00,20.00,'Contrapartida por ajuste de producto Dell 14 ispiro',2),(51,26,9,20.00,0.00,'Registro de inventario inicialmodelo 13 dd',1),(52,26,13,0.00,20.00,'Contrapartida por ajuste de producto modelo 13 dd',2),(53,27,9,5.00,0.00,'Registro de inventario inicialCanande fuente de vida',1),(54,27,13,0.00,5.00,'Contrapartida por ajuste de producto Canande fuente de vida',2),(55,28,9,20.00,0.00,'Registro de inventario inicialaMSLMSLSLAMSALALS',1),(56,28,13,0.00,20.00,'Contrapartida por ajuste de producto aMSLMSLSLAMSALALS',2),(57,29,9,12.00,0.00,'Registro de inventario inicialdcckscdkcdmdcmdkds',1),(58,29,13,0.00,12.00,'Contrapartida por ajuste de producto dcckscdkcdmdcmdkds',2),(59,30,9,1.00,0.00,'Registro de inventario inicialdsssfdssdfsdfsdfssfsfd',1),(60,30,13,0.00,1.00,'Contrapartida por ajuste de producto dsssfdssdfsdfsdfssfsfd',2),(61,31,9,1.00,0.00,'Registro de inventario inicialwedewewew',1),(62,31,13,0.00,1.00,'Contrapartida por ajuste de producto wedewewew',2),(63,32,9,10.00,0.00,'Ingreso inventario por compra',1),(64,32,6,10.00,0.00,'Caja efectivo  por compra',2),(65,33,9,4.00,0.00,'Ingreso inventario por compra',1),(66,33,6,4.00,0.00,'Caja efectivo  por compra',2),(67,34,9,24.00,0.00,'Registro de inventario inicialGlyphosate Isopropylamine salt (480 g/l)',1),(68,34,13,0.00,24.00,'Contrapartida por ajuste de producto Glyphosate Isopropylamine salt (480 g/l)',2),(69,35,9,12.00,0.00,'Registro de inventario inicialSDDSDSDSDSD',1),(70,35,13,0.00,12.00,'Contrapartida por ajuste de producto SDDSDSDSDSD',2),(71,36,9,1.00,0.00,'Registro de inventario inicialbbjugugugugugugugu',1),(72,36,13,0.00,1.00,'Contrapartida por ajuste de producto bbjugugugugugugugu',2),(73,37,9,5.00,0.00,'Ingreso inventario por compra',1),(74,37,6,5.00,0.00,'Caja efectivo  por compra',2),(75,38,9,13.00,0.00,'Registro de inventario inicialBATHUTIC - 1L',1),(76,38,13,0.00,13.00,'Contrapartida por ajuste de producto BATHUTIC - 1L',2),(77,39,9,20.00,0.00,'Registro de inventario inicialSolfoxidante fungicida - Acaricida',1),(78,39,13,0.00,20.00,'Contrapartida por ajuste de producto Solfoxidante fungicida - Acaricida',2),(79,40,9,12.00,0.00,'Registro de inventario inicialSPARKO - 100 G',1),(80,40,13,0.00,12.00,'Contrapartida por ajuste de producto SPARKO - 100 G',2),(81,41,9,24.00,0.00,'Registro de inventario inicialaFEPASA',1),(82,41,13,0.00,24.00,'Contrapartida por ajuste de producto aFEPASA',2),(83,42,9,21.00,0.00,'Registro de inventario inicialAdame',1),(84,42,13,0.00,21.00,'Contrapartida por ajuste de producto Adame',2),(85,43,9,15.00,0.00,'Ingreso inventario por compra',1),(86,43,6,15.00,0.00,'Caja efectivo  por compra',2),(87,44,9,0.00,0.00,'Ingreso producto bonificado',1),(88,44,16,0.00,0.00,'Bonificación proveedor',2),(89,45,9,0.00,0.00,'Ingreso producto bonificado',1),(90,45,16,0.00,0.00,'Bonificación proveedor',2),(91,46,9,0.00,0.00,'Reposición por devolución',1),(92,46,11,0.00,0.00,'Reversión de ingreso por devolución',2),(93,47,15,10.50,0.00,'Pérdida por ajuste de inventario',1),(94,47,9,0.00,10.50,'Disminución de inventario',2),(95,48,9,3.00,0.00,'Registro de inventario inicialpor ssss',1),(96,48,13,0.00,3.00,'Contrapartida por ajuste de producto por ssss',2),(97,49,9,12.00,0.00,'Registro de inventario inicialewwewewewewew',1),(98,49,13,0.00,12.00,'Contrapartida por ajuste de producto ewwewewewewew',2),(99,50,9,10.00,0.00,'Registro de inventario inicialsssswswswwswsws',1),(100,50,13,0.00,10.00,'Contrapartida por ajuste de producto sssswswswwswsws',2),(101,51,9,12.00,0.00,'Registro de inventario inicialdewdmewiefwnfnfkewfefef',1),(102,51,13,0.00,12.00,'Contrapartida por ajuste de producto dewdmewiefwnfnfkewfefef',2);
+INSERT INTO `detalle_asiento` VALUES (1,1,9,10.00,0.00,'Registro de inventario inicialRefresco Cola 2L',1),(2,1,13,0.00,10.00,'Contrapartida por ajuste de producto Refresco Cola 2L',2),(3,2,9,24.00,0.00,'Registro de inventario inicialLeche Entera 1L',1),(4,2,13,0.00,24.00,'Contrapartida por ajuste de producto Leche Entera 1L',2);
 /*!40000 ALTER TABLE `detalle_asiento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -747,7 +743,7 @@ CREATE TABLE `detalle_devoluciones` (
   PRIMARY KEY (`id`),
   KEY `id_movimiento_caja` (`id_movimiento_caja`),
   CONSTRAINT `detalle_devoluciones_ibfk_1` FOREIGN KEY (`id_movimiento_caja`) REFERENCES `movimiento_caja` (`id_movimiento_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -756,7 +752,7 @@ CREATE TABLE `detalle_devoluciones` (
 
 LOCK TABLES `detalle_devoluciones` WRITE;
 /*!40000 ALTER TABLE `detalle_devoluciones` DISABLE KEYS */;
-INSERT INTO `detalle_devoluciones` VALUES (6,18,0,NULL,'Compra',NULL,36,'00000027',14.60,'Eliminación de compra Id: 36','1','2025-07-13 21:01:20',NULL,NULL),(7,18,0,37,'Venta','00000033',NULL,NULL,7.30,'Devolucion de Venta Id: 37','1','2025-07-15 06:54:48',NULL,NULL);
+INSERT INTO `detalle_devoluciones` VALUES (1,3,0,2,'Venta','00000054',NULL,NULL,9.00,'Devolucion de Venta Id: 2','1','2025-07-29 13:58:56',NULL,NULL),(2,3,0,2,'Venta','00000054',NULL,NULL,9.00,'Devolucion de Venta Id: 2','1','2025-07-29 14:16:03',NULL,NULL),(3,3,0,1,'Venta','00000053',NULL,NULL,6.00,'Devolucion de Venta Id: 1','1','2025-07-29 14:19:45',NULL,NULL),(4,3,0,NULL,'Compra',NULL,1,'00000044',22.50,'Eliminación de compra Id: 1','1','2025-07-29 15:44:15',NULL,NULL);
 /*!40000 ALTER TABLE `detalle_devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -787,7 +783,7 @@ CREATE TABLE `detalle_gastos` (
   PRIMARY KEY (`id`),
   KEY `id_movimiento_caja` (`id_movimiento_caja`),
   CONSTRAINT `detalle_gastos_ibfk_1` FOREIGN KEY (`id_movimiento_caja`) REFERENCES `movimiento_caja` (`id_movimiento_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -796,7 +792,7 @@ CREATE TABLE `detalle_gastos` (
 
 LOCK TABLES `detalle_gastos` WRITE;
 /*!40000 ALTER TABLE `detalle_gastos` DISABLE KEYS */;
-INSERT INTO `detalle_gastos` VALUES (39,17,1,'Compras',1,36,NULL,'00012','00000027','00000001',14.60,'Compra de mercaderia','2','2025-07-13 20:57:14','2025-07-13 21:01:20',NULL),(40,17,1,'Compras',2,37,NULL,'0009','00000028','00000001',0.00,'Compra de mercaderia','1','2025-07-13 21:08:50','2025-07-21 15:44:45',NULL),(41,17,1,'Creditos',1,37,NULL,NULL,NULL,NULL,4.00,'pago','1','2025-07-13 21:11:04',NULL,NULL),(42,17,1,'Compras',2,38,NULL,'009','00000029','00000001',0.00,'Compra de mercaderia','1','2025-07-13 21:21:36','2025-07-21 15:44:45',NULL),(43,17,1,'Creditos',1,38,NULL,NULL,NULL,NULL,1.00,'ee','1','2025-07-13 21:21:50',NULL,NULL),(44,17,1,'Creditos',1,38,NULL,NULL,NULL,NULL,0.30,'faddd','1','2025-07-13 21:30:12',NULL,NULL),(45,17,1,'Compras',2,39,NULL,'099','00000030','00000001',0.00,'Compra de mercaderia','1','2025-07-14 14:44:11','2025-07-21 15:44:45',NULL),(46,17,1,'Creditos',1,39,NULL,NULL,NULL,NULL,3.00,'pGO EN VIENES','1','2025-07-14 16:17:16',NULL,NULL),(47,17,1,'Otros',1,NULL,NULL,NULL,NULL,NULL,20.50,'pago de luz','2','2025-07-15 09:55:22','2025-07-15 14:30:35',NULL),(48,17,1,'Otros',1,NULL,NULL,NULL,NULL,NULL,10.00,'pago de luz','1','2025-07-19 08:02:46',NULL,NULL),(49,17,1,'Compras',2,40,NULL,'001-21-2122','00000031','00000001',0.00,'Compra de mercaderia','1','2025-07-19 17:58:35','2025-07-21 15:44:45',NULL),(50,17,1,'Compras',1,41,NULL,'088-1-22-12','00000032','00000001',10.16,'Compra de mercaderia','1','2025-07-21 12:16:29','2025-07-21 15:44:45',NULL),(51,22,0,'Compras',2,42,NULL,'09090909','00000033','00000001',0.00,'Compra de mercaderia','1','2025-07-22 19:34:34',NULL,NULL);
+INSERT INTO `detalle_gastos` VALUES (1,2,0,'Compras',2,1,NULL,'009','00000044','00000001',0.00,'Compra de mercaderia','0','2025-07-29 15:43:57','2025-07-29 15:44:15',NULL);
 /*!40000 ALTER TABLE `detalle_gastos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -825,7 +821,7 @@ CREATE TABLE `detalle_ingresos` (
   PRIMARY KEY (`id`),
   KEY `id_movimiento_caja` (`id_movimiento_caja`),
   CONSTRAINT `detalle_ingresos_ibfk_1` FOREIGN KEY (`id_movimiento_caja`) REFERENCES `movimiento_caja` (`id_movimiento_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -834,7 +830,7 @@ CREATE TABLE `detalle_ingresos` (
 
 LOCK TABLES `detalle_ingresos` WRITE;
 /*!40000 ALTER TABLE `detalle_ingresos` DISABLE KEYS */;
-INSERT INTO `detalle_ingresos` VALUES (40,16,'Ventas',1,37,NULL,'00000033',NULL,10.00,'Venta de producto','2','2025-07-15 06:51:16','2025-07-15 06:54:48',NULL),(41,16,'Ventas',2,38,NULL,'00000034',NULL,0.00,'Venta de producto','1','2025-07-15 07:19:38',NULL,NULL),(42,16,'Otros',1,NULL,NULL,NULL,NULL,100.00,'venta de  de mi bisicletad','1','2025-07-15 09:52:50','2025-07-15 11:19:47',NULL),(43,16,'Otros',1,NULL,NULL,NULL,NULL,50.00,'Salddd','2','2025-07-15 09:55:04','2025-07-15 14:30:16',NULL),(44,16,'Otros',1,NULL,NULL,NULL,NULL,649.80,'venta de moto al contado','1','2025-07-15 11:08:37','2025-07-15 13:56:24',NULL),(45,16,'Creditos',1,38,8,NULL,NULL,5.50,'pago de','1','2025-07-15 17:34:43',NULL,NULL),(46,16,'Creditos',1,38,9,NULL,NULL,2.00,'pago total','1','2025-07-15 17:48:36',NULL,NULL),(47,16,'Ventas',1,39,NULL,'00000035',NULL,15.00,'Venta de producto','1','2025-07-17 22:00:46',NULL,NULL),(48,16,'Ventas',1,40,NULL,'00000036',NULL,5.00,'Venta de producto','1','2025-07-17 22:46:28',NULL,NULL),(49,16,'Ventas',1,41,NULL,'00000037',NULL,10.00,'Venta de producto','1','2025-07-17 23:00:13',NULL,NULL),(50,16,'Ventas',1,42,NULL,'00000038',NULL,15.00,'Venta de producto','1','2025-07-18 23:15:23',NULL,NULL),(51,16,'Ventas',1,43,NULL,'00000039',NULL,10.00,'Venta de producto','1','2025-07-19 15:06:57',NULL,NULL),(52,16,'Ventas',1,44,NULL,'00000040',NULL,10.00,'Venta de producto','1','2025-07-19 15:09:17',NULL,NULL),(53,16,'Ventas',1,45,NULL,'00000041',NULL,5.00,'Venta de producto','1','2025-07-19 15:09:38',NULL,NULL),(54,16,'Ventas',1,46,NULL,'00000042',NULL,10.00,'Venta de producto','1','2025-07-19 18:59:59',NULL,NULL),(55,16,'Ventas',1,47,NULL,'00000043',NULL,10.00,'Venta de producto','1','2025-07-20 18:18:38',NULL,NULL),(56,16,'Ventas',1,48,NULL,'00000044',NULL,10.00,'Venta de producto','1','2025-07-20 18:53:34',NULL,NULL),(57,16,'Ventas',2,50,NULL,'00000045',NULL,1.00,'Venta de producto','1','2025-07-21 11:01:25',NULL,NULL),(58,21,'Ventas',1,51,NULL,'00000046',NULL,5.00,'Venta de producto','1','2025-07-22 17:58:17',NULL,NULL),(59,21,'Ventas',1,52,NULL,'00000047',NULL,5.00,'Venta de producto','1','2025-07-22 18:09:42',NULL,NULL),(60,21,'Ventas',1,53,NULL,'00000048',NULL,2.00,'Venta de producto','1','2025-07-23 15:33:45',NULL,NULL),(61,21,'Ventas',1,54,NULL,'00000049',NULL,2.00,'Venta de producto','1','2025-07-23 15:35:46',NULL,NULL),(62,21,'Ventas',2,55,NULL,'00000050',NULL,0.00,'Venta de producto','1','2025-07-23 15:38:28',NULL,NULL);
+INSERT INTO `detalle_ingresos` VALUES (1,1,'Ventas',1,1,NULL,'00000053',NULL,10.00,'Venta de producto','0','2025-07-28 21:33:35','2025-07-29 14:19:45',NULL),(2,1,'Ventas',2,2,NULL,'00000054',NULL,1.00,'Venta de producto','0','2025-07-28 21:48:21','2025-07-29 13:58:56',NULL);
 /*!40000 ALTER TABLE `detalle_ingresos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -873,7 +869,7 @@ CREATE TABLE `dinero` (
   KEY `fk_dinero_id_usuario` (`id_usuario`),
   CONSTRAINT `fk_dinero_id_arqueo` FOREIGN KEY (`id_arqueo`) REFERENCES `arqueo_caja` (`id_arqueo_caja`),
   CONSTRAINT `fk_dinero_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -882,7 +878,6 @@ CREATE TABLE `dinero` (
 
 LOCK TABLES `dinero` WRITE;
 /*!40000 ALTER TABLE `dinero` DISABLE KEYS */;
-INSERT INTO `dinero` VALUES (5,7,1,1,6.00,2.00,6.00,1.00,0.00,0.00,1.00,5.00,4.00,4.00,7.00,5.00,5.00,9.00,831.00,'2025-07-21 15:01:36',NULL,'1'),(6,8,1,1,1.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,100.00,'2025-07-21 15:07:35',NULL,'1');
 /*!40000 ALTER TABLE `dinero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -950,7 +945,7 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (1,NULL,'Ventas de Producto Agricola','El Agricultor','0804610814001','Esmeralda','AV Las Golondrinas',NULL,'NO','1','1','001','001',1,NULL,NULL,'00000050','00000009','00000033','0','garofaloedison8@gmail.com','0992335080',NULL,'2025-05-03 19:57:34','2025-07-23 15:38:28',NULL,'1',4,NULL,'01','14',NULL,NULL,NULL,NULL,NULL,'01','2'),(2,1,'ffffffdff','2','1234678995','barrio entre rios','das','si','SI','1','1','001','001',1,'dwww',NULL,NULL,NULL,NULL,NULL,'edisongarofalo88@gmail.com','5555555','ddddddddddd','2025-06-12 14:34:45','2025-07-23 15:35:46',NULL,'2',0,'Views/assets/imagenes/logo/logo_684b2bd5447c5.PNG','01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,2,'Proveedor anime ','Mundo del aime ','0804610014001','barrio entre rios1','Guayauqii 1','SI','NO','2','2','001','002',2,'Bleacjha ',NULL,NULL,NULL,NULL,NULL,'edisongarofalo881@gmail.com','55555551','gracias por su comras1','2025-06-12 14:41:08','2025-07-23 15:35:46',NULL,'1',2,'Views/assets/imagenes/logo/logo_684b2d54d9e4a.PNG','01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,1,'ffffffdff','Mundo del aime 1','0804610814','barrio entre rios','ffffffff','SI','SI','1','2','090','090',2,'Bleacjha 1',NULL,NULL,NULL,NULL,NULL,'edisongarofalo88@gmail.com','5555555','dffdfffffff','2025-06-12 22:09:36','2025-07-23 15:35:46',NULL,'2',4,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,1,'Aniemis','Salinas','0920910920191','ddddd','dndndnd','SI','SI','1','2','001','002',1,'Maee',NULL,NULL,NULL,NULL,NULL,'mariajtkm_2011@hotmail.com','(095) 918-8170','sdsdssdsddssdsdsd','2025-07-19 19:38:12','2025-07-23 15:35:46',NULL,'1',4,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,NULL,'DausukiAnime','Guaya quli','0920910920191','sadsdasdsa','ssdasdssdads','SI','SI','1','2','001','002',1,'dai',NULL,NULL,NULL,NULL,NULL,'mariajtkm_2011@hotmail.com','(095) 918-8170','ddsadsaadsadsads','2025-07-19 21:12:18','2025-07-23 15:35:46',NULL,'1',4,'','01','0',NULL,NULL,NULL,NULL,NULL,'21','2');
+INSERT INTO `empresa` VALUES (1,NULL,'Ventas de Producto Agricola','El Agricultor','0804610814001','Esmeralda','AV Las Golondrinas',NULL,'NO','1','1','001','001',1,NULL,NULL,'00000054','00000010','00000044','0','garofaloedison8@gmail.com','0992335080',NULL,'2025-05-03 19:57:34','2025-07-29 15:43:57',NULL,'1',4,NULL,'01','14',NULL,NULL,NULL,NULL,NULL,'01','2'),(2,1,'ffffffdff','2','1234678995','barrio entre rios','das','si','SI','1','1','001','001',1,'dwww',NULL,NULL,NULL,NULL,NULL,'edisongarofalo88@gmail.com','5555555','ddddddddddd','2025-06-12 14:34:45','2025-07-29 15:43:57',NULL,'2',0,'Views/assets/imagenes/logo/logo_684b2bd5447c5.PNG','01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,2,'Proveedor anime ','Mundo del aime ','0804610014001','barrio entre rios1','Guayauqii 1','SI','NO','2','2','001','002',2,'Bleacjha ',NULL,NULL,NULL,NULL,NULL,'edisongarofalo881@gmail.com','55555551','gracias por su comras1','2025-06-12 14:41:08','2025-07-29 15:43:57',NULL,'1',2,'Views/assets/imagenes/logo/logo_684b2d54d9e4a.PNG','01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,1,'ffffffdff','Mundo del aime 1','0804610814','barrio entre rios','ffffffff','SI','SI','1','2','090','090',2,'Bleacjha 1',NULL,NULL,NULL,NULL,NULL,'edisongarofalo88@gmail.com','5555555','dffdfffffff','2025-06-12 22:09:36','2025-07-29 15:43:57',NULL,'2',4,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,1,'Aniemis','Salinas','0920910920191','ddddd','dndndnd','SI','SI','1','2','001','002',1,'Maee',NULL,NULL,NULL,NULL,NULL,'mariajtkm_2011@hotmail.com','(095) 918-8170','sdsdssdsddssdsdsd','2025-07-19 19:38:12','2025-07-29 15:43:57',NULL,'1',4,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,NULL,'DausukiAnime','Guaya quli','0920910920191','sadsdasdsa','ssdasdssdads','SI','SI','1','2','001','002',1,'dai',NULL,NULL,NULL,NULL,NULL,'mariajtkm_2011@hotmail.com','(095) 918-8170','ddsadsaadsadsads','2025-07-19 21:12:18','2025-07-29 15:43:57',NULL,'1',4,'','01','0',NULL,NULL,NULL,NULL,NULL,'21','2');
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1107,7 +1102,7 @@ CREATE TABLE `kardex` (
   PRIMARY KEY (`id`),
   KEY `fk_kardex_id_producto` (`id_producto`),
   CONSTRAINT `fk_kardex_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1116,7 +1111,7 @@ CREATE TABLE `kardex` (
 
 LOCK TABLES `kardex` WRITE;
 /*!40000 ALTER TABLE `kardex` DISABLE KEYS */;
-INSERT INTO `kardex` VALUES (218,1,27,'00001','2025-07-13 14:31:26','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.30,13.00),(219,1,28,'00002','2025-07-13 14:50:21','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,15,1.30,20.00),(220,1,29,'00009','2025-07-13 15:06:02','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.20,12.00),(221,1,30,'09088','2025-07-13 15:08:23','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,16,1.50,24.00),(222,1,31,'000010','2025-07-13 15:13:46','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,14,1.50,21.00),(223,1,30,'09088','2025-07-13 15:23:46','ingrese por mercaderia',NULL,10,1.50,15.00,NULL,NULL,NULL,26,1.50,39.00),(224,1,30,'09088','2025-07-13 15:25:41','promocion',NULL,2,0.00,0.00,NULL,NULL,NULL,28,1.39,39.00),(225,1,30,'09088','2025-07-13 15:58:45','por ganacia',NULL,3,0.00,0.00,NULL,NULL,NULL,31,1.26,39.00),(226,1,30,'09088','2025-07-13 16:03:08','debolu',NULL,NULL,NULL,NULL,3,0.00,0.00,28,1.39,39.00),(227,1,30,'09088','2025-07-13 16:05:46','por perdida',NULL,NULL,NULL,NULL,7,1.50,10.50,21,1.36,28.50),(228,1,28,'00002','2025-07-13 20:57:14','Compra de productos','00000027',1,1.30,1.30,NULL,NULL,NULL,16,1.30,22.10),(229,1,27,'00001','2025-07-13 20:57:14','Compra de productos','00000027',1,1.30,1.30,NULL,NULL,NULL,11,1.30,15.60),(230,1,31,'000010','2025-07-13 20:57:14','Compra de productos','00000027',8,1.50,12.00,NULL,NULL,NULL,22,1.50,45.00),(231,1,28,'00002','2025-07-13 21:01:20','Eliminación de compra Id:36','00000027',NULL,NULL,NULL,1,1.30,1.30,15,1.30,19.50),(232,1,27,'00001','2025-07-13 21:01:20','Eliminación de compra Id:36','00000027',NULL,NULL,NULL,1,1.30,1.30,10,1.30,13.00),(233,1,31,'000010','2025-07-13 21:01:20','Eliminación de compra Id:36','00000027',NULL,NULL,NULL,8,1.50,12.00,14,1.50,21.00),(234,1,29,'00009','2025-07-13 21:08:50','Compra de productos','00000028',1,1.20,1.20,NULL,NULL,NULL,11,1.20,14.40),(235,1,27,'00001','2025-07-13 21:08:50','Compra de productos','00000028',1,1.30,1.30,NULL,NULL,NULL,11,1.30,15.60),(236,1,30,'09088','2025-07-13 21:08:50','Compra de productos','00000028',1,1.50,1.50,NULL,NULL,NULL,22,1.50,34.50),(237,1,27,'00001','2025-07-13 21:21:36','Compra de productos','00000029',1,1.30,1.30,NULL,NULL,NULL,12,1.30,16.90),(238,1,27,'00001','2025-07-14 14:44:11','Compra de productos','00000030',1,1.30,1.30,NULL,NULL,NULL,13,1.30,18.20),(239,1,28,'00002','2025-07-14 14:44:11','Compra de productos','00000030',5,1.30,6.50,NULL,NULL,NULL,20,1.30,32.50),(241,1,31,'000010','2025-07-15 06:51:16','Venta de producto','00000033',NULL,NULL,NULL,1,1.50,1.50,13,1.50,19.50),(242,1,29,'00009','2025-07-15 06:51:16','Venta de producto','00000033',NULL,NULL,NULL,1,1.20,1.20,10,1.20,12.00),(243,1,28,'00002','2025-07-15 06:51:16','Venta de producto','00000033',NULL,NULL,NULL,1,1.30,1.30,19,1.30,24.70),(244,1,27,'00001','2025-07-15 06:51:16','Venta de producto','00000033',NULL,NULL,NULL,1,1.30,1.30,12,1.30,15.60),(245,1,31,'000010','2025-07-15 06:54:48','Devolucion de Venta: Id37','00000033',1,1.50,1.50,NULL,NULL,NULL,14,1.50,21.00),(246,1,29,'00009','2025-07-15 06:54:48','Devolucion de Venta: Id37','00000033',1,1.20,1.20,NULL,NULL,NULL,11,1.20,13.20),(247,1,28,'00002','2025-07-15 06:54:48','Devolucion de Venta: Id37','00000033',1,1.30,1.30,NULL,NULL,NULL,20,1.30,26.00),(248,1,27,'00001','2025-07-15 06:54:48','Devolucion de Venta: Id37','00000033',1,1.30,1.30,NULL,NULL,NULL,13,1.30,16.90),(249,1,31,'000010','2025-07-15 07:19:38','Venta de producto','00000034',NULL,NULL,NULL,1,1.50,1.50,13,1.50,19.50),(250,1,29,'00009','2025-07-15 07:19:38','Venta de producto','00000034',NULL,NULL,NULL,1,1.20,1.20,10,1.20,12.00),(251,1,28,'00002','2025-07-15 07:19:38','Venta de producto','00000034',NULL,NULL,NULL,1,1.30,1.30,19,1.30,24.70),(252,1,27,'00001','2025-07-15 07:19:38','Venta de producto','00000034',NULL,NULL,NULL,1,1.30,1.30,12,1.30,15.60),(253,1,29,'00009','2025-07-17 22:00:46','Venta de producto','00000035',NULL,NULL,NULL,1,1.20,1.20,9,1.20,10.80),(254,1,28,'00002','2025-07-17 22:00:46','Venta de producto','00000035',NULL,NULL,NULL,1,1.30,1.30,18,1.30,23.40),(255,1,27,'00001','2025-07-17 22:00:46','Venta de producto','00000035',NULL,NULL,NULL,1,1.30,1.30,11,1.30,14.30),(256,1,27,'00001','2025-07-17 22:46:28','Venta de producto','00000036',NULL,NULL,NULL,1,1.30,1.30,10,1.30,13.00),(257,1,27,'00001','2025-07-17 23:00:13','Venta de producto','00000037',NULL,NULL,NULL,3,1.30,3.90,7,1.30,9.10),(258,1,31,'000010','2025-07-18 23:15:23','Venta de producto','00000038',NULL,NULL,NULL,2,1.50,3.00,11,1.50,16.50),(259,1,29,'00009','2025-07-18 23:15:23','Venta de producto','00000038',NULL,NULL,NULL,1,1.20,1.20,8,1.20,9.60),(260,1,28,'00002','2025-07-18 23:15:23','Venta de producto','00000038',NULL,NULL,NULL,2,1.30,2.60,16,1.30,20.80),(261,1,27,'00001','2025-07-18 23:15:23','Venta de producto','00000038',NULL,NULL,NULL,1,1.30,1.30,6,1.30,7.80),(262,1,29,'00009','2025-07-19 15:06:57','Venta de producto','00000039',NULL,NULL,NULL,1,1.20,1.20,7,1.20,8.40),(263,1,27,'00001','2025-07-19 15:06:57','Venta de producto','00000039',NULL,NULL,NULL,2,1.30,2.60,4,1.30,5.20),(264,1,31,'000010','2025-07-19 15:09:17','Venta de producto','00000040',NULL,NULL,NULL,1,1.50,1.50,10,1.50,15.00),(265,1,28,'00002','2025-07-19 15:09:17','Venta de producto','00000040',NULL,NULL,NULL,1,1.30,1.30,15,1.30,19.50),(266,1,27,'00001','2025-07-19 15:09:17','Venta de producto','00000040',NULL,NULL,NULL,1,1.30,1.30,3,1.30,3.90),(267,1,28,'00002','2025-07-19 15:09:38','Venta de producto','00000041',NULL,NULL,NULL,1,1.30,1.30,14,1.30,18.20),(268,1,27,'00001','2025-07-19 15:09:38','Venta de producto','00000041',NULL,NULL,NULL,1,1.30,1.30,2,1.30,2.60),(269,1,32,'000011','2025-07-19 17:31:34','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,1.00,3.00),(270,1,33,'0000099','2025-07-19 17:42:40','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.20,12.00),(271,1,34,'0090909','2025-07-19 17:48:27','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.00,10.00),(272,1,35,'00012','2025-07-19 17:55:14','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.20,12.00),(273,1,28,'00002','2025-07-19 17:58:35','Compra de productos','00000031',10,1.30,13.00,NULL,NULL,NULL,24,1.30,44.20),(274,1,32,'000011','2025-07-19 17:58:35','Compra de productos','00000031',6,1.00,6.00,NULL,NULL,NULL,9,1.00,15.00),(275,1,35,'00012','2025-07-19 17:58:35','Compra de productos','00000031',6,1.20,7.20,NULL,NULL,NULL,16,1.20,26.40),(276,1,27,'00001','2025-07-19 17:58:35','Compra de productos','00000031',10,1.30,13.00,NULL,NULL,NULL,12,1.30,28.60),(280,1,31,'000010','2025-07-19 18:59:59','Venta de producto','00000042',NULL,NULL,NULL,2,1.50,3.00,8,1.50,12.00),(281,1,28,'00002','2025-07-19 18:59:59','Venta de producto','00000042',NULL,NULL,NULL,2,1.30,2.60,22,1.30,28.60),(282,1,31,'000010','2025-07-20 18:18:38','Venta de producto','00000043',NULL,NULL,NULL,1,1.50,1.50,7,1.50,10.50),(283,1,28,'00002','2025-07-20 18:18:38','Venta de producto','00000043',NULL,NULL,NULL,1,1.30,1.30,21,1.30,27.30),(284,1,29,'00009','2025-07-20 18:53:34','Venta de producto','00000044',NULL,NULL,NULL,1,1.20,1.20,6,1.20,7.20),(285,1,27,'00001','2025-07-20 18:53:34','Venta de producto','00000044',NULL,NULL,NULL,1,1.30,1.30,11,1.30,14.30),(286,1,29,'00009','2025-07-21 11:01:25','Venta de producto','00000045',NULL,NULL,NULL,1,1.20,1.20,5,1.20,6.00),(287,1,32,'000011','2025-07-21 11:01:25','Venta de producto','00000045',NULL,NULL,NULL,1,1.00,1.00,8,1.00,8.00),(288,1,28,'00002','2025-07-21 11:01:25','Venta de producto','00000045',NULL,NULL,NULL,1,1.30,1.30,20,1.30,26.00),(289,1,27,'00001','2025-07-21 11:01:25','Venta de producto','00000045',NULL,NULL,NULL,1,1.30,1.30,10,1.30,13.00),(290,1,29,'00009','2025-07-21 12:16:29','Compra de productos','00000032',4,1.20,4.80,NULL,NULL,NULL,9,1.20,15.60),(291,1,27,'00001','2025-07-21 12:16:29','Compra de productos','00000032',4,1.34,5.36,NULL,NULL,NULL,14,1.34,24.12),(293,1,28,'00002','2025-07-22 17:58:17','Venta de producto','00000046',NULL,NULL,NULL,1,1.30,1.30,19,1.30,24.70),(294,1,27,'00001','2025-07-22 17:58:17','Venta de producto','00000046',NULL,NULL,NULL,1,1.30,1.30,13,1.30,16.90),(295,1,27,'00001','2025-07-22 18:09:42','Venta de producto','00000047',NULL,NULL,NULL,1,1.30,1.30,12,1.30,15.60),(296,1,27,'00001','2025-07-22 19:34:34','Compra de productos','00000033',6,1.99,11.94,NULL,NULL,NULL,18,1.99,47.76),(297,1,33,'0000099','2025-07-23 15:33:45','Venta de producto','00000048',NULL,NULL,NULL,1,1.20,1.20,9,1.20,10.80),(298,1,29,'00009','2025-07-23 15:35:46','Venta de producto','00000049',NULL,NULL,NULL,1,1.20,1.20,8,1.20,9.60),(299,1,28,'00002','2025-07-23 15:38:28','Venta de producto','00000050',NULL,NULL,NULL,1,1.30,1.30,18,1.30,23.40);
+INSERT INTO `kardex` VALUES (1,1,1,'PROD0001','2025-07-28 20:56:35','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,1.00,10.00),(2,1,2,'PROD0002','2025-07-28 21:00:06','INVENTARIO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,20,1.20,24.00),(3,1,2,'PROD0002','2025-07-28 21:33:35','Venta de producto','00000053',NULL,NULL,NULL,2,1.20,2.40,18,1.20,21.60),(4,1,1,'PROD0001','2025-07-28 21:33:35','Venta de producto','00000053',NULL,NULL,NULL,2,1.00,2.00,8,1.00,8.00),(5,1,2,'PROD0002','2025-07-28 21:48:21','Venta de producto','00000054',NULL,NULL,NULL,3,1.20,3.60,15,1.20,18.00),(6,1,1,'PROD0001','2025-07-28 21:48:21','Venta de producto','00000054',NULL,NULL,NULL,3,1.00,3.00,5,1.00,5.00),(7,1,2,'PROD0002','2025-07-29 14:16:03','Devolucion de Venta: Id2','00000054',3,1.20,3.60,NULL,NULL,NULL,18,1.20,21.60),(8,1,1,'PROD0001','2025-07-29 14:16:03','Devolucion de Venta: Id2','00000054',3,1.00,3.00,NULL,NULL,NULL,8,1.00,8.00),(9,1,2,'PROD0002','2025-07-29 14:19:45','Devolucion de Venta: Id1','00000053',2,1.20,2.40,NULL,NULL,NULL,20,1.20,24.00),(10,1,1,'PROD0001','2025-07-29 14:19:45','Devolucion de Venta: Id1','00000053',2,1.00,2.00,NULL,NULL,NULL,10,1.00,10.00),(11,1,1,'PROD0001','2025-07-29 15:43:57','Compra de productos','00000044',10,1.00,10.00,NULL,NULL,NULL,20,1.00,30.00),(12,1,2,'PROD0002','2025-07-29 15:43:57','Compra de productos','00000044',10,1.25,12.50,NULL,NULL,NULL,30,1.25,50.00),(14,1,1,'PROD0001','2025-07-29 15:44:15','Eliminación de compra Id:1','00000044',NULL,NULL,NULL,10,1.00,10.00,10,1.00,10.00),(15,1,2,'PROD0002','2025-07-29 15:44:15','Eliminación de compra Id:1','00000044',NULL,NULL,NULL,10,1.25,12.50,20,1.25,25.00);
 /*!40000 ALTER TABLE `kardex` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1196,7 +1191,7 @@ CREATE TABLE `log_auditoria` (
   `id_registro_afectado` int DEFAULT NULL,
   `modulo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1205,7 +1200,7 @@ CREATE TABLE `log_auditoria` (
 
 LOCK TABLES `log_auditoria` WRITE;
 /*!40000 ALTER TABLE `log_auditoria` DISABLE KEYS */;
-INSERT INTO `log_auditoria` VALUES (1,'medidas','registrar',1,'2025-04-29 17:35:16','Registrar una Medidas',NULL,NULL),(2,'medidas','Actualizar',1,'2025-04-29 17:36:54','Actualizar una Medidas con el id:9',NULL,NULL),(3,'medidas','Eliminar',1,'2025-04-29 17:54:12','Eliminar una Medidas con el id:5',NULL,NULL),(4,'medidas','registrar',1,'2025-04-29 17:54:59','Registrar una Medidas',NULL,NULL),(5,'medidas','Actualizar',1,'2025-04-29 17:55:12','Actualizar una Medidas con el id:10',NULL,NULL),(6,'medidas','registrar',1,'2025-04-29 18:04:28','Registrar una Medidas',NULL,NULL),(7,'medidas','Actualizar',1,'2025-04-29 18:05:16','Actualizar una Medidas con el id: 11',NULL,NULL),(8,'medidas','Eliminar',1,'2025-04-29 18:08:26','Eliminar una Medidas con el id: 11',NULL,NULL),(9,'categorias','registrar',1,'2025-04-29 19:24:51','Registrar una Categoria',NULL,NULL),(10,'categorias','registrar',1,'2025-04-29 19:31:07','Registrar una Categoria',NULL,NULL),(11,'categorias','registrar',1,'2025-04-29 20:04:52','Registrar una Categoria',NULL,NULL),(12,'categorias','Actualizar',1,'2025-04-29 20:05:12','Actualizar una Categoria con el id: 5',NULL,NULL),(13,'categorias','Actualizar',1,'2025-04-29 20:30:49','Actualizar una Categoria con el id: 5',NULL,NULL),(14,'categorias','registrar',1,'2025-04-29 20:31:03','Registrar una Categoria',NULL,NULL),(15,'categorias','Eliminar',1,'2025-04-29 20:31:17','Eliminar una categoria con el id: 6',NULL,NULL),(16,'producto','registrar',1,'2025-04-30 10:49:35','Registrar una Producto',NULL,NULL),(17,'producto','registrar',1,'2025-04-30 10:53:12','Registrar una Producto',NULL,NULL),(18,'producto','registrar',1,'2025-04-30 11:05:11','Registrar una Producto',NULL,NULL),(19,'producto','registrar',1,'2025-04-30 11:24:26','Registrar una Producto',NULL,NULL),(20,'producto','registrar',1,'2025-04-30 11:27:38','Registrar una Producto',NULL,NULL),(21,'producto','registrar',1,'2025-04-30 11:38:06','Registrar una Producto',NULL,NULL),(22,'producto','registrar',1,'2025-04-30 11:42:01','Registrar una Producto',NULL,NULL),(23,'producto','registrar',1,'2025-04-30 11:42:13','Registrar una Producto',NULL,NULL),(24,'producto','registrar',1,'2025-04-30 11:42:27','Registrar una Producto',NULL,NULL),(25,'producto','registrar',1,'2025-04-30 11:44:22','Registrar una Producto',NULL,NULL),(26,'producto','registrar',1,'2025-04-30 11:48:32','Registrar una Producto',NULL,NULL),(27,'producto','registrar',1,'2025-04-30 11:49:20','Registrar una Producto',NULL,NULL),(28,'producto','registrar',1,'2025-04-30 11:51:16','Registrar una Producto',NULL,NULL),(29,'producto','registrar',1,'2025-04-30 11:57:29','Registrar una Producto',NULL,NULL),(30,'producto','registrar',1,'2025-04-30 12:05:11','Registrar una Producto',NULL,NULL),(31,'producto','Actualizar',1,'2025-04-30 13:43:04','Actualizar un Producto con el id: 1',NULL,NULL),(32,'producto','registrar',1,'2025-04-30 13:46:44','Registrar una Producto',NULL,NULL),(33,'producto','Actualizar',1,'2025-04-30 13:49:31','Actualizar un Producto con el id: 2',NULL,NULL),(34,'producto','Actualizar',1,'2025-04-30 13:51:40','Actualizar un Producto con el id: 2',NULL,NULL),(35,'producto','registrar',1,'2025-04-30 15:00:31','Registrar una Producto',NULL,NULL),(36,'producto','Actualizar',1,'2025-04-30 15:01:05','Actualizar un Producto con el id: 3',NULL,NULL),(37,'proveedor','registrar',1,'2025-04-30 16:33:47','Registrar un Proveedor',NULL,NULL),(38,'proveedor','Actualizar',1,'2025-04-30 16:34:53','Actualizar un Proveedor con el id: 1',NULL,NULL),(39,'medidas','Eliminar',1,'2025-04-30 16:43:48','Eliminar una Medidas con el id: 10',NULL,NULL),(40,'medidas','Eliminar',1,'2025-04-30 16:52:31','Eliminar una Medidas con el id: 11',NULL,NULL),(41,'categorias','Eliminar',1,'2025-04-30 16:52:55','Eliminar una categoria con el id: 6',NULL,NULL),(42,'proveedor','Actualizar',1,'2025-04-30 17:04:03','Actualizar un Proveedor con el id: 1',NULL,NULL),(43,'proveedor','Eliminar',1,'2025-04-30 17:09:54','Eliminar un Proveedor con el id: 1',NULL,NULL),(44,'cliente','registrar',1,'2025-04-30 18:35:50','Registrar un Cliente',NULL,NULL),(45,'cliente','Actualizar',1,'2025-04-30 18:43:34','Actualizar un Cliente con el id: 1',NULL,NULL),(46,'cliente','Eliminar',1,'2025-04-30 19:08:07','Eliminar un Cliente con el id: 1',NULL,NULL),(47,'cliente','registrar',1,'2025-04-30 19:54:01','Registrar un Cliente',NULL,NULL),(48,'producto','Actualizar',1,'2025-05-03 10:23:23','Actualizar un Producto con el id: 1',NULL,NULL),(49,'producto','registrar',1,'2025-05-05 16:20:59','Registrar una Producto',NULL,NULL),(50,'producto','registrar',1,'2025-05-05 16:21:22','Registrar una Producto',NULL,NULL),(51,'producto','Actualizar',1,'2025-05-06 14:07:13','Actualizar un Producto con el id: 4',NULL,NULL),(52,'medidas','registrar',1,'2025-05-09 08:51:36','Registrar una Medidas',NULL,NULL),(53,'medidas','Actualizar',1,'2025-05-09 08:52:07','Actualizar una Medidas con el id: 12',NULL,NULL),(54,'categorias','registrar',1,'2025-05-09 09:23:13','Registrar una Categoria',NULL,NULL),(55,'categorias','Actualizar',1,'2025-05-09 09:30:45','Actualizar una Categoria con el id: 7',NULL,NULL),(56,'categorias','registrar',1,'2025-05-09 09:30:53','Registrar una Categoria',NULL,NULL),(57,'categorias','Actualizar',1,'2025-05-09 09:31:02','Actualizar una Categoria con el id: 8',NULL,NULL),(58,'cliente','registrar',1,'2025-05-09 10:58:07','Registrar un Cliente',NULL,NULL),(59,'cliente','Actualizar',1,'2025-05-09 10:59:39','Actualizar un Cliente con el id: 3',NULL,NULL),(60,'proveedor','registrar',1,'2025-05-09 11:04:38','Registrar un Proveedor',NULL,NULL),(61,'proveedor','Actualizar',1,'2025-05-09 11:05:19','Actualizar un Proveedor con el id: 2',NULL,NULL),(62,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 14:51:40','Compra registrada completa con ID: 18',18,'Compra'),(63,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:06','Compra registrada completa con ID: 1',1,'Compra'),(64,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:08','Compra registrada completa con ID: 1',1,'Compra'),(65,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:09','Compra registrada completa con ID: 1',1,'Compra'),(66,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:09','Compra registrada completa con ID: 1',1,'Compra'),(67,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:10','Compra registrada completa con ID: 1',1,'Compra'),(68,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:10','Compra registrada completa con ID: 1',1,'Compra'),(69,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 15:11:51','Compra registrada completa con ID: 21',21,'Compra'),(70,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 15:13:18','Compra registrada completa con ID: 23',23,'Compra'),(71,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-15 15:14:25','Compra registrada completa con ID: 24',24,'Compra'),(72,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-15 15:58:50','Compra registrada completa con ID: 25',25,'Compra'),(73,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 16:51:55','Compra registrada completa con ID: 26',26,'Compra'),(74,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 13:31:31','Compra registrada completa con ID: 28',28,'Compra'),(75,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 17:43:02','Compra registrada completa con ID: 29',29,'Compra'),(76,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 18:17:24','Compra registrada completa con ID: 30',30,'Compra'),(77,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 18:44:15','Compra registrada completa con ID: 31',31,'Compra'),(78,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-16 18:48:01','Compra registrada completa con ID: 32',32,'Compra'),(79,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-16 18:52:49','Compra registrada completa con ID: 33',33,'Compra'),(80,'medidas','Registrar',1,'2025-05-24 14:03:13','Registrar una Medidas',NULL,NULL),(81,'medidas','Actualizar',1,'2025-05-24 14:03:36','Actualizar una Medidas con el id: 13',NULL,NULL),(82,'medidas','Eliminar',1,'2025-05-24 14:34:20','Eliminar una Medidas con el id: 13',NULL,NULL),(83,'medidas','Eliminar',1,'2025-05-24 14:35:00','Eliminar una Medidas con el id: 12',NULL,NULL),(84,'medidas','Eliminar',1,'2025-05-24 15:09:15','Eliminar una Medidas con el id: 10',NULL,NULL),(85,'medidas','Actualizar',1,'2025-05-24 17:08:01','Actualizar una Medidas con el id: 9',NULL,NULL),(86,'medidas','Actualizar',1,'2025-05-24 17:10:55','Actualizar una Medidas con el id: 9',NULL,NULL),(87,'medidas','Registrar',1,'2025-05-24 17:11:07','Registrar una Medidas',NULL,NULL),(88,'medidas','Actualizar',1,'2025-05-24 17:11:20','Actualizar una Medidas con el id: 14',NULL,NULL),(89,'medidas','Actualizar',1,'2025-05-24 17:48:57','Actualizar una Medidas con el id: 1',NULL,NULL),(90,'medidas','Registrar',1,'2025-05-24 17:51:57','Registrar una Medidas',NULL,NULL),(91,'medidas','Actualizar',1,'2025-05-24 17:52:19','Actualizar una Medidas con el id: 15',NULL,NULL),(92,'medidas','Eliminar',1,'2025-05-24 17:53:11','Eliminar una Medidas con el id: 13',NULL,NULL),(93,'cliente','Actualizar',1,'2025-05-24 20:36:07','Registrar un Cliente con el id: 7',7,'Cliente'),(94,'cliente','Actualizar',1,'2025-05-24 20:36:44','Actualizar un Cliente con el id: 7',7,'Cliente'),(95,'cliente','Eliminar',1,'2025-05-24 20:37:02','Eliminar un Cliente con el id: 7',7,'Cliente'),(96,'proveedor','Actualizar',1,'2025-05-24 21:41:11','Registrar un Proveedor con el id: 3',3,'Proveedor'),(97,'proveedor','Actualizar',1,'2025-05-24 21:46:44','Registrar un Proveedor con el id: 4',4,'Proveedor'),(98,'proveedor','Actualizar',1,'2025-05-24 21:49:09','Actualizar un Proveedor con el id: 3',3,'Proveedor'),(99,'proveedor','Actualizar',1,'2025-05-24 21:51:16','Actualizar un Proveedor con el id: 3',3,'Proveedor'),(100,'proveedor','Actualizar',1,'2025-05-24 21:51:37','Actualizar un Proveedor con el id: 4',4,'Proveedor'),(101,'proveedor','Actualizar',1,'2025-05-24 21:54:12','Registrar un Proveedor con el id: 5',5,'Proveedor'),(102,'proveedor','Actualizar',1,'2025-05-24 21:54:31','Actualizar un Proveedor con el id: 5',5,'Proveedor'),(103,'proveedor','Eliminar',1,'2025-05-24 21:54:48','Eliminar un Proveedor con el ID: 5',5,'Proveedor'),(105,'producto / lote_producto / kardex','INSERT',1,'2025-05-25 17:42:46','Registro de producto nuevo. Código: 05151515151, Descripción: sdsssssdd',11,'PRODUCTO'),(106,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-25 20:13:23','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 5',9,'INVENTARIO'),(107,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-25 20:13:49','Ingreso de producto ID: 7, código: 525452312, tipo ingreso: COMPRA, cantidad: 5',7,'INVENTARIO'),(108,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 17:31:53','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 1',9,'INVENTARIO'),(109,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 17:32:08','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: PROMOCION, cantidad: 1',9,'INVENTARIO'),(110,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 22:08:57','Ingreso de producto ID: 7, código: 525452312, tipo ingreso: COMPRA, cantidad: 1',7,'INVENTARIO'),(111,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 22:09:08','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 1',9,'INVENTARIO'),(112,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:36:51','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 1',4,'INVENTARIO'),(113,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:39:48','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 3',4,'INVENTARIO'),(114,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:40:06','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 1',4,'INVENTARIO'),(115,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 10:24:25','Ajuste realizado al producto ID 4 con cantidad 4. Observación: debolucion. Fecha vencimiento: 2025-05-27. Nuevo stock: 24',4,'INVENTARIO'),(116,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 11:25:32','Registro de producto nuevo. Código: 0000089, Descripción: Producod',12,'PRODUCTO'),(117,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 11:27:40','Ingreso de producto ID: 12, código: 0000089, tipo ingreso: COMPRA, cantidad: 2',12,'INVENTARIO'),(118,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 11:28:00','Ingreso de producto ID: 12, código: 0000089, tipo ingreso: PROMOCION, cantidad: 2',12,'INVENTARIO'),(119,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:37:44','Ajuste realizado al producto ID 12 con cantidad 10. Observación: fsffffffffd. Nuevo stock: 4',12,'INVENTARIO'),(120,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:42:22','Ajuste realizado al producto ID 9 con cantidad 10. Observación: ffdfdffdfdfffdfd. Nuevo stock: 11',9,'INVENTARIO'),(121,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:42:52','Ajuste realizado al producto ID 9 con cantidad 5. Observación: hhhjhjhj. Nuevo stock: 6',9,'INVENTARIO'),(122,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:46:36','Ajuste realizado al producto ID 9 con cantidad 2. Observación: dddd. Nuevo stock: 4',9,'INVENTARIO'),(123,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:47:02','Ajuste realizado al producto ID 12 con cantidad 1. Observación: eee. Nuevo stock: 3',12,'INVENTARIO'),(124,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:47:27','Ajuste realizado al producto ID 9 con cantidad 3. Observación: dddd. Nuevo stock: 1',9,'INVENTARIO'),(125,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 12:19:52','Registro de producto nuevo. Código: 051516461002, Descripción: gfrrrrfrfrrfrf',13,'PRODUCTO'),(126,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 12:26:47','Registro de producto nuevo. Código: 0100444, Descripción: 4404404',14,'PRODUCTO'),(127,'producto','UPDATE',1,'2025-05-27 12:27:13','Actualización del producto. ID: 9, Descripción: SPEED STICK',9,'PRODUCTO'),(128,'proveedor','Actualizar',1,'2025-05-30 18:27:49','Registrar un Proveedor con el id: 6',6,'Proveedor'),(129,'proveedor','Actualizar',1,'2025-05-30 18:33:55','Registrar un Proveedor con el id: 7',7,'Proveedor'),(130,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-30 22:46:10','Compra registrada completa con ID: 34',34,'Compra'),(131,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-30 23:18:35','Compra registrada completa con ID: 35',35,'Compra'),(132,'cliente','Actualizar',1,'2025-05-31 20:00:55','Registrar un Cliente con el id: 8',8,'Cliente'),(133,'producto / lote_producto / kardex','INSERT',1,'2025-06-07 23:00:16','Registro de producto nuevo. Código: 211662626, Descripción: ffdffddffddfffff',15,'PRODUCTO'),(134,'producto / lote_producto / kardex','INSERT',1,'2025-06-07 23:01:55','Registro de producto nuevo. Código: 00000888, Descripción: pruenabbsbssasa',16,'PRODUCTO'),(135,'medidas','Registrar',1,'2025-06-08 17:13:29','Registrar una Medidas',NULL,NULL),(136,'medidas','Actualizar',1,'2025-06-08 17:13:47','Actualizar una Medidas con el id: 16',NULL,NULL),(137,'medidas','Actualizar',1,'2025-06-08 17:14:03','Actualizar una Medidas con el id: 16',NULL,NULL),(138,'medidas','Registrar',1,'2025-06-08 17:16:46','Registrar una Medidas',NULL,NULL),(139,'medidas','Registrar',1,'2025-06-08 17:18:05','Registrar una Medidas',NULL,NULL),(140,'medidas','Registrar',1,'2025-06-08 17:53:37','Registrar una Medidas',NULL,NULL),(141,'medidas','Registrar',1,'2025-06-08 18:14:13','Registrar una Medidas',NULL,NULL),(142,'medidas','Registrar',1,'2025-06-08 18:34:15','Registrar una Medidas',NULL,NULL),(143,'producto / lote_producto / kardex','INSERT',1,'2025-06-08 21:15:43','Registro de producto nuevo. Código: 02502555, Descripción: Dell 14 ispiro',17,'PRODUCTO'),(144,'producto','UPDATE',1,'2025-06-08 21:27:34','Actualización del producto. ID: 17, Descripción: Dell 14 ispiro',17,'PRODUCTO'),(145,'producto / lote_producto / kardex','INSERT',1,'2025-06-08 23:24:17','Registro de producto nuevo. Código: 0599999, Descripción: modelo 13 dd',18,'PRODUCTO'),(146,'producto','UPDATE',1,'2025-06-08 23:25:22','Actualización del producto. ID: 18, Descripción: modelo 13 dd',18,'PRODUCTO'),(147,'producto','UPDATE',1,'2025-06-08 23:25:40','Actualización del producto. ID: 18, Descripción: modelo 13 dd',18,'PRODUCTO'),(148,'producto / lote_producto / kardex','INSERT',1,'2025-06-09 16:54:29','Registro de producto nuevo. Código: 054844558844, Descripción: Canande fuente de vida',19,'PRODUCTO'),(149,'producto','UPDATE',1,'2025-06-09 16:55:02','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(150,'producto','UPDATE',1,'2025-06-09 16:55:19','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(151,'producto','UPDATE',1,'2025-06-09 16:57:19','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(152,'producto','UPDATE',1,'2025-06-09 16:58:33','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(153,'producto','UPDATE',1,'2025-06-09 16:59:03','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(154,'producto / lote_producto / kardex','INSERT',1,'2025-06-09 17:14:25','Registro de producto nuevo. Código: 00331316114, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(155,'producto','UPDATE',1,'2025-06-09 17:14:45','Actualización del producto. ID: 20, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(156,'producto','UPDATE',1,'2025-06-09 17:15:01','Actualización del producto. ID: 20, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(157,'producto','UPDATE',1,'2025-06-11 16:47:24','Actualización del producto. ID: 1, Descripción: Dell 14p',1,'PRODUCTO'),(158,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 16:08:54','Registro de producto nuevo. Código: 264646, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(159,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 18:09:32','Registro de producto nuevo. Código: 012115, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(160,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 18:15:16','Registro de producto nuevo. Código: 031512, Descripción: wedewewew',23,'PRODUCTO'),(161,'producto','UPDATE',1,'2025-06-13 18:47:06','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(162,'producto','UPDATE',1,'2025-06-13 19:58:43','Actualización del producto. ID: 21, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(163,'producto','UPDATE',1,'2025-06-13 20:52:28','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(164,'producto','UPDATE',1,'2025-06-13 20:52:45','Actualización del producto. ID: 22, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(165,'producto','UPDATE',1,'2025-06-13 20:52:56','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(166,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-13 20:54:41','Ingreso de producto ID: 22, código: 012115, tipo ingreso: COMPRA, cantidad: 10',22,'INVENTARIO'),(167,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-13 20:55:15','Ingreso de producto ID: 23, código: 031512, tipo ingreso: COMPRA, cantidad: 4',23,'INVENTARIO'),(168,'producto','UPDATE',1,'2025-06-13 22:23:35','Actualización del producto. ID: 21, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(169,'medidas','Registrar',1,'2025-06-14 09:58:56','Registrar una Medidas',NULL,NULL),(170,'medidas','Registrar',1,'2025-06-14 10:12:12','Registrar una Medidas',NULL,NULL),(171,'producto','UPDATE',1,'2025-06-14 10:41:44','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(172,'producto','UPDATE',1,'2025-06-14 10:44:07','Actualización del producto. ID: 22, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(173,'medidas','Registrar',1,'2025-06-14 18:42:19','Registrar una Medidas',NULL,NULL),(174,'producto / lote_producto / kardex','INSERT',1,'2025-06-14 18:46:23','Registro de producto nuevo. Código: 0032655655, Descripción: Glyphosate Isopropylamine salt (480 g/l)',24,'PRODUCTO'),(175,'producto / lote_producto / kardex','INSERT',1,'2025-06-14 18:47:40','Registro de producto nuevo. Código: 00321, Descripción: SDDSDSDSDSD',25,'PRODUCTO'),(176,'medidas','Registrar',1,'2025-06-15 08:37:01','Registrar una Medidas',NULL,NULL),(177,'producto / lote_producto / kardex','INSERT',1,'2025-06-15 08:38:15','Registro de producto nuevo. Código: 34464646, Descripción: bbjugugugugugugugu',26,'PRODUCTO'),(178,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-16 18:19:32','Ingreso de producto ID: 26, código: 34464646, tipo ingreso: COMPRA, cantidad: 5',26,'INVENTARIO'),(179,'cliente','Actualizar',1,'2025-06-16 18:20:27','Registrar un Cliente con el id: 9',9,'Cliente'),(180,'medidas','Registrar',1,'2025-07-13 14:10:35','Registrar una Medidas',NULL,NULL),(181,'medidas','Registrar',1,'2025-07-13 14:15:38','Registrar una Medidas',NULL,NULL),(182,'medidas','Registrar',1,'2025-07-13 14:26:36','Registrar una Medidas',NULL,NULL),(183,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 14:31:26','Registro de producto nuevo. Código: 00001, Descripción: BATHUTIC - 1L',27,'PRODUCTO'),(184,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 14:50:21','Registro de producto nuevo. Código: 00002, Descripción: Solfoxidante fungicida - Acaricida',28,'PRODUCTO'),(185,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:06:02','Registro de producto nuevo. Código: 00009, Descripción: SPARKO - 100 G',29,'PRODUCTO'),(186,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:08:23','Registro de producto nuevo. Código: 09088, Descripción: aFEPASA',30,'PRODUCTO'),(187,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:13:46','Registro de producto nuevo. Código: 000010, Descripción: Adame',31,'PRODUCTO'),(188,'producto','UPDATE',1,'2025-07-13 15:20:12','Actualización del producto. ID: 31, Descripción: Adame 1',31,'PRODUCTO'),(189,'producto','UPDATE',1,'2025-07-13 15:20:48','Actualización del producto. ID: 30, Descripción: Afepasa',30,'PRODUCTO'),(190,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:23:46','Ingreso de producto ID: 30, código: 09088, tipo ingreso: COMPRA, cantidad: 10',30,'INVENTARIO'),(191,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:25:41','Ingreso de producto ID: 30, código: 09088, tipo ingreso: PROMOCION, cantidad: 2',30,'INVENTARIO'),(192,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:58:45','Ingreso de producto ID: 30, código: 09088, tipo ingreso: PROMOCION, cantidad: 3',30,'INVENTARIO'),(193,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-13 16:03:08','Ajuste realizado al producto ID 30 con cantidad 3. Observación: debolu. Fecha vencimiento: 2025-10-25. Nuevo stock: 28',30,'INVENTARIO'),(194,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-13 16:05:46','Ajuste realizado al producto ID 30 con cantidad 7. Observación: por perdida. Nuevo stock: 21',30,'INVENTARIO'),(195,'proveedor','Actualizar',1,'2025-07-13 16:17:27','Registrar un Proveedor con el id: 8',8,'Proveedor'),(196,'proveedor','Actualizar',1,'2025-07-13 16:17:41','Actualizar un Proveedor con el id: 8',8,'Proveedor'),(197,'proveedor','Actualizar',1,'2025-07-13 16:18:03','Actualizar un Proveedor con el id: 8',8,'Proveedor'),(198,'cliente','Actualizar',1,'2025-07-13 16:19:27','Registrar un Cliente con el id: 10',10,'Cliente'),(199,'cliente','Actualizar',1,'2025-07-13 16:20:00','Actualizar un Cliente con el id: 10',10,'Cliente'),(200,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-13 20:57:14','Compra registrada completa con ID: 36',36,'Compra'),(201,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-13 21:08:50','Compra registrada completa con ID: 37',37,'Compra'),(202,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-13 21:21:36','Compra registrada completa con ID: 38',38,'Compra'),(203,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-14 14:44:11','Compra registrada completa con ID: 39',39,'Compra'),(204,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:31:34','Registro de producto nuevo. Código: 000011, Descripción: por ssss',32,'PRODUCTO'),(205,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:42:40','Registro de producto nuevo. Código: 0000099, Descripción: ewwewewewewew',33,'PRODUCTO'),(206,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:48:27','Registro de producto nuevo. Código: 0090909, Descripción: sssswswswwswsws',34,'PRODUCTO'),(207,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:55:14','Registro de producto nuevo. Código: 00012, Descripción: dewdmewiefwnfnfkewfefef',35,'PRODUCTO'),(208,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-19 17:58:35','Compra registrada completa con ID: 40',40,'Compra'),(209,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-21 12:16:29','Compra registrada completa con ID: 41',41,'Compra'),(210,'producto','UPDATE',1,'2025-07-22 19:01:03','Actualización del producto. ID: 27, Descripción: BATHUTIC - 1swaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddL',27,'PRODUCTO'),(211,'producto','UPDATE',1,'2025-07-22 19:04:58','Actualización del producto. ID: 27, Descripción: BATHUTIC queso con pollo y mantega',27,'PRODUCTO'),(212,'producto','UPDATE',1,'2025-07-22 19:05:23','Actualización del producto. ID: 27, Descripción: BATHUTIC queso con',27,'PRODUCTO'),(213,'producto','UPDATE',1,'2025-07-22 19:09:38','Actualización del producto. ID: 27, Descripción: BATHUTIC queso',27,'PRODUCTO'),(214,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-22 19:34:34','Compra registrada completa con ID: 42',42,'Compra');
+INSERT INTO `log_auditoria` VALUES (1,'medidas','registrar',1,'2025-04-29 17:35:16','Registrar una Medidas',NULL,NULL),(2,'medidas','Actualizar',1,'2025-04-29 17:36:54','Actualizar una Medidas con el id:9',NULL,NULL),(3,'medidas','Eliminar',1,'2025-04-29 17:54:12','Eliminar una Medidas con el id:5',NULL,NULL),(4,'medidas','registrar',1,'2025-04-29 17:54:59','Registrar una Medidas',NULL,NULL),(5,'medidas','Actualizar',1,'2025-04-29 17:55:12','Actualizar una Medidas con el id:10',NULL,NULL),(6,'medidas','registrar',1,'2025-04-29 18:04:28','Registrar una Medidas',NULL,NULL),(7,'medidas','Actualizar',1,'2025-04-29 18:05:16','Actualizar una Medidas con el id: 11',NULL,NULL),(8,'medidas','Eliminar',1,'2025-04-29 18:08:26','Eliminar una Medidas con el id: 11',NULL,NULL),(9,'categorias','registrar',1,'2025-04-29 19:24:51','Registrar una Categoria',NULL,NULL),(10,'categorias','registrar',1,'2025-04-29 19:31:07','Registrar una Categoria',NULL,NULL),(11,'categorias','registrar',1,'2025-04-29 20:04:52','Registrar una Categoria',NULL,NULL),(12,'categorias','Actualizar',1,'2025-04-29 20:05:12','Actualizar una Categoria con el id: 5',NULL,NULL),(13,'categorias','Actualizar',1,'2025-04-29 20:30:49','Actualizar una Categoria con el id: 5',NULL,NULL),(14,'categorias','registrar',1,'2025-04-29 20:31:03','Registrar una Categoria',NULL,NULL),(15,'categorias','Eliminar',1,'2025-04-29 20:31:17','Eliminar una categoria con el id: 6',NULL,NULL),(16,'producto','registrar',1,'2025-04-30 10:49:35','Registrar una Producto',NULL,NULL),(17,'producto','registrar',1,'2025-04-30 10:53:12','Registrar una Producto',NULL,NULL),(18,'producto','registrar',1,'2025-04-30 11:05:11','Registrar una Producto',NULL,NULL),(19,'producto','registrar',1,'2025-04-30 11:24:26','Registrar una Producto',NULL,NULL),(20,'producto','registrar',1,'2025-04-30 11:27:38','Registrar una Producto',NULL,NULL),(21,'producto','registrar',1,'2025-04-30 11:38:06','Registrar una Producto',NULL,NULL),(22,'producto','registrar',1,'2025-04-30 11:42:01','Registrar una Producto',NULL,NULL),(23,'producto','registrar',1,'2025-04-30 11:42:13','Registrar una Producto',NULL,NULL),(24,'producto','registrar',1,'2025-04-30 11:42:27','Registrar una Producto',NULL,NULL),(25,'producto','registrar',1,'2025-04-30 11:44:22','Registrar una Producto',NULL,NULL),(26,'producto','registrar',1,'2025-04-30 11:48:32','Registrar una Producto',NULL,NULL),(27,'producto','registrar',1,'2025-04-30 11:49:20','Registrar una Producto',NULL,NULL),(28,'producto','registrar',1,'2025-04-30 11:51:16','Registrar una Producto',NULL,NULL),(29,'producto','registrar',1,'2025-04-30 11:57:29','Registrar una Producto',NULL,NULL),(30,'producto','registrar',1,'2025-04-30 12:05:11','Registrar una Producto',NULL,NULL),(31,'producto','Actualizar',1,'2025-04-30 13:43:04','Actualizar un Producto con el id: 1',NULL,NULL),(32,'producto','registrar',1,'2025-04-30 13:46:44','Registrar una Producto',NULL,NULL),(33,'producto','Actualizar',1,'2025-04-30 13:49:31','Actualizar un Producto con el id: 2',NULL,NULL),(34,'producto','Actualizar',1,'2025-04-30 13:51:40','Actualizar un Producto con el id: 2',NULL,NULL),(35,'producto','registrar',1,'2025-04-30 15:00:31','Registrar una Producto',NULL,NULL),(36,'producto','Actualizar',1,'2025-04-30 15:01:05','Actualizar un Producto con el id: 3',NULL,NULL),(37,'proveedor','registrar',1,'2025-04-30 16:33:47','Registrar un Proveedor',NULL,NULL),(38,'proveedor','Actualizar',1,'2025-04-30 16:34:53','Actualizar un Proveedor con el id: 1',NULL,NULL),(39,'medidas','Eliminar',1,'2025-04-30 16:43:48','Eliminar una Medidas con el id: 10',NULL,NULL),(40,'medidas','Eliminar',1,'2025-04-30 16:52:31','Eliminar una Medidas con el id: 11',NULL,NULL),(41,'categorias','Eliminar',1,'2025-04-30 16:52:55','Eliminar una categoria con el id: 6',NULL,NULL),(42,'proveedor','Actualizar',1,'2025-04-30 17:04:03','Actualizar un Proveedor con el id: 1',NULL,NULL),(43,'proveedor','Eliminar',1,'2025-04-30 17:09:54','Eliminar un Proveedor con el id: 1',NULL,NULL),(44,'cliente','registrar',1,'2025-04-30 18:35:50','Registrar un Cliente',NULL,NULL),(45,'cliente','Actualizar',1,'2025-04-30 18:43:34','Actualizar un Cliente con el id: 1',NULL,NULL),(46,'cliente','Eliminar',1,'2025-04-30 19:08:07','Eliminar un Cliente con el id: 1',NULL,NULL),(47,'cliente','registrar',1,'2025-04-30 19:54:01','Registrar un Cliente',NULL,NULL),(48,'producto','Actualizar',1,'2025-05-03 10:23:23','Actualizar un Producto con el id: 1',NULL,NULL),(49,'producto','registrar',1,'2025-05-05 16:20:59','Registrar una Producto',NULL,NULL),(50,'producto','registrar',1,'2025-05-05 16:21:22','Registrar una Producto',NULL,NULL),(51,'producto','Actualizar',1,'2025-05-06 14:07:13','Actualizar un Producto con el id: 4',NULL,NULL),(52,'medidas','registrar',1,'2025-05-09 08:51:36','Registrar una Medidas',NULL,NULL),(53,'medidas','Actualizar',1,'2025-05-09 08:52:07','Actualizar una Medidas con el id: 12',NULL,NULL),(54,'categorias','registrar',1,'2025-05-09 09:23:13','Registrar una Categoria',NULL,NULL),(55,'categorias','Actualizar',1,'2025-05-09 09:30:45','Actualizar una Categoria con el id: 7',NULL,NULL),(56,'categorias','registrar',1,'2025-05-09 09:30:53','Registrar una Categoria',NULL,NULL),(57,'categorias','Actualizar',1,'2025-05-09 09:31:02','Actualizar una Categoria con el id: 8',NULL,NULL),(58,'cliente','registrar',1,'2025-05-09 10:58:07','Registrar un Cliente',NULL,NULL),(59,'cliente','Actualizar',1,'2025-05-09 10:59:39','Actualizar un Cliente con el id: 3',NULL,NULL),(60,'proveedor','registrar',1,'2025-05-09 11:04:38','Registrar un Proveedor',NULL,NULL),(61,'proveedor','Actualizar',1,'2025-05-09 11:05:19','Actualizar un Proveedor con el id: 2',NULL,NULL),(62,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 14:51:40','Compra registrada completa con ID: 18',18,'Compra'),(63,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:06','Compra registrada completa con ID: 1',1,'Compra'),(64,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:08','Compra registrada completa con ID: 1',1,'Compra'),(65,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:09','Compra registrada completa con ID: 1',1,'Compra'),(66,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:09','Compra registrada completa con ID: 1',1,'Compra'),(67,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:10','Compra registrada completa con ID: 1',1,'Compra'),(68,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compras a credito','INSERT/UPDATE',1,'2025-05-15 15:10:10','Compra registrada completa con ID: 1',1,'Compra'),(69,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 15:11:51','Compra registrada completa con ID: 21',21,'Compra'),(70,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 15:13:18','Compra registrada completa con ID: 23',23,'Compra'),(71,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-15 15:14:25','Compra registrada completa con ID: 24',24,'Compra'),(72,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-15 15:58:50','Compra registrada completa con ID: 25',25,'Compra'),(73,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-15 16:51:55','Compra registrada completa con ID: 26',26,'Compra'),(74,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 13:31:31','Compra registrada completa con ID: 28',28,'Compra'),(75,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 17:43:02','Compra registrada completa con ID: 29',29,'Compra'),(76,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 18:17:24','Compra registrada completa con ID: 30',30,'Compra'),(77,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-16 18:44:15','Compra registrada completa con ID: 31',31,'Compra'),(78,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-16 18:48:01','Compra registrada completa con ID: 32',32,'Compra'),(79,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-16 18:52:49','Compra registrada completa con ID: 33',33,'Compra'),(80,'medidas','Registrar',1,'2025-05-24 14:03:13','Registrar una Medidas',NULL,NULL),(81,'medidas','Actualizar',1,'2025-05-24 14:03:36','Actualizar una Medidas con el id: 13',NULL,NULL),(82,'medidas','Eliminar',1,'2025-05-24 14:34:20','Eliminar una Medidas con el id: 13',NULL,NULL),(83,'medidas','Eliminar',1,'2025-05-24 14:35:00','Eliminar una Medidas con el id: 12',NULL,NULL),(84,'medidas','Eliminar',1,'2025-05-24 15:09:15','Eliminar una Medidas con el id: 10',NULL,NULL),(85,'medidas','Actualizar',1,'2025-05-24 17:08:01','Actualizar una Medidas con el id: 9',NULL,NULL),(86,'medidas','Actualizar',1,'2025-05-24 17:10:55','Actualizar una Medidas con el id: 9',NULL,NULL),(87,'medidas','Registrar',1,'2025-05-24 17:11:07','Registrar una Medidas',NULL,NULL),(88,'medidas','Actualizar',1,'2025-05-24 17:11:20','Actualizar una Medidas con el id: 14',NULL,NULL),(89,'medidas','Actualizar',1,'2025-05-24 17:48:57','Actualizar una Medidas con el id: 1',NULL,NULL),(90,'medidas','Registrar',1,'2025-05-24 17:51:57','Registrar una Medidas',NULL,NULL),(91,'medidas','Actualizar',1,'2025-05-24 17:52:19','Actualizar una Medidas con el id: 15',NULL,NULL),(92,'medidas','Eliminar',1,'2025-05-24 17:53:11','Eliminar una Medidas con el id: 13',NULL,NULL),(93,'cliente','Actualizar',1,'2025-05-24 20:36:07','Registrar un Cliente con el id: 7',7,'Cliente'),(94,'cliente','Actualizar',1,'2025-05-24 20:36:44','Actualizar un Cliente con el id: 7',7,'Cliente'),(95,'cliente','Eliminar',1,'2025-05-24 20:37:02','Eliminar un Cliente con el id: 7',7,'Cliente'),(96,'proveedor','Actualizar',1,'2025-05-24 21:41:11','Registrar un Proveedor con el id: 3',3,'Proveedor'),(97,'proveedor','Actualizar',1,'2025-05-24 21:46:44','Registrar un Proveedor con el id: 4',4,'Proveedor'),(98,'proveedor','Actualizar',1,'2025-05-24 21:49:09','Actualizar un Proveedor con el id: 3',3,'Proveedor'),(99,'proveedor','Actualizar',1,'2025-05-24 21:51:16','Actualizar un Proveedor con el id: 3',3,'Proveedor'),(100,'proveedor','Actualizar',1,'2025-05-24 21:51:37','Actualizar un Proveedor con el id: 4',4,'Proveedor'),(101,'proveedor','Actualizar',1,'2025-05-24 21:54:12','Registrar un Proveedor con el id: 5',5,'Proveedor'),(102,'proveedor','Actualizar',1,'2025-05-24 21:54:31','Actualizar un Proveedor con el id: 5',5,'Proveedor'),(103,'proveedor','Eliminar',1,'2025-05-24 21:54:48','Eliminar un Proveedor con el ID: 5',5,'Proveedor'),(105,'producto / lote_producto / kardex','INSERT',1,'2025-05-25 17:42:46','Registro de producto nuevo. Código: 05151515151, Descripción: sdsssssdd',11,'PRODUCTO'),(106,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-25 20:13:23','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 5',9,'INVENTARIO'),(107,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-25 20:13:49','Ingreso de producto ID: 7, código: 525452312, tipo ingreso: COMPRA, cantidad: 5',7,'INVENTARIO'),(108,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 17:31:53','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 1',9,'INVENTARIO'),(109,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 17:32:08','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: PROMOCION, cantidad: 1',9,'INVENTARIO'),(110,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 22:08:57','Ingreso de producto ID: 7, código: 525452312, tipo ingreso: COMPRA, cantidad: 1',7,'INVENTARIO'),(111,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-26 22:09:08','Ingreso de producto ID: 9, código: 7501033210778, tipo ingreso: COMPRA, cantidad: 1',9,'INVENTARIO'),(112,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:36:51','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 1',4,'INVENTARIO'),(113,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:39:48','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 3',4,'INVENTARIO'),(114,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 09:40:06','Ingreso de producto ID: 4, código: 00004, tipo ingreso: COMPRA, cantidad: 1',4,'INVENTARIO'),(115,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 10:24:25','Ajuste realizado al producto ID 4 con cantidad 4. Observación: debolucion. Fecha vencimiento: 2025-05-27. Nuevo stock: 24',4,'INVENTARIO'),(116,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 11:25:32','Registro de producto nuevo. Código: 0000089, Descripción: Producod',12,'PRODUCTO'),(117,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 11:27:40','Ingreso de producto ID: 12, código: 0000089, tipo ingreso: COMPRA, cantidad: 2',12,'INVENTARIO'),(118,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-05-27 11:28:00','Ingreso de producto ID: 12, código: 0000089, tipo ingreso: PROMOCION, cantidad: 2',12,'INVENTARIO'),(119,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:37:44','Ajuste realizado al producto ID 12 con cantidad 10. Observación: fsffffffffd. Nuevo stock: 4',12,'INVENTARIO'),(120,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:42:22','Ajuste realizado al producto ID 9 con cantidad 10. Observación: ffdfdffdfdfffdfd. Nuevo stock: 11',9,'INVENTARIO'),(121,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:42:52','Ajuste realizado al producto ID 9 con cantidad 5. Observación: hhhjhjhj. Nuevo stock: 6',9,'INVENTARIO'),(122,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:46:36','Ajuste realizado al producto ID 9 con cantidad 2. Observación: dddd. Nuevo stock: 4',9,'INVENTARIO'),(123,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-05-27 11:47:02','Ajuste realizado al producto ID 12 con cantidad 1. Observación: eee. Nuevo stock: 3',12,'INVENTARIO'),(124,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-05-27 11:47:27','Ajuste realizado al producto ID 9 con cantidad 3. Observación: dddd. Nuevo stock: 1',9,'INVENTARIO'),(125,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 12:19:52','Registro de producto nuevo. Código: 051516461002, Descripción: gfrrrrfrfrrfrf',13,'PRODUCTO'),(126,'producto / lote_producto / kardex','INSERT',1,'2025-05-27 12:26:47','Registro de producto nuevo. Código: 0100444, Descripción: 4404404',14,'PRODUCTO'),(127,'producto','UPDATE',1,'2025-05-27 12:27:13','Actualización del producto. ID: 9, Descripción: SPEED STICK',9,'PRODUCTO'),(128,'proveedor','Actualizar',1,'2025-05-30 18:27:49','Registrar un Proveedor con el id: 6',6,'Proveedor'),(129,'proveedor','Actualizar',1,'2025-05-30 18:33:55','Registrar un Proveedor con el id: 7',7,'Proveedor'),(130,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-05-30 22:46:10','Compra registrada completa con ID: 34',34,'Compra'),(131,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-05-30 23:18:35','Compra registrada completa con ID: 35',35,'Compra'),(132,'cliente','Actualizar',1,'2025-05-31 20:00:55','Registrar un Cliente con el id: 8',8,'Cliente'),(133,'producto / lote_producto / kardex','INSERT',1,'2025-06-07 23:00:16','Registro de producto nuevo. Código: 211662626, Descripción: ffdffddffddfffff',15,'PRODUCTO'),(134,'producto / lote_producto / kardex','INSERT',1,'2025-06-07 23:01:55','Registro de producto nuevo. Código: 00000888, Descripción: pruenabbsbssasa',16,'PRODUCTO'),(135,'medidas','Registrar',1,'2025-06-08 17:13:29','Registrar una Medidas',NULL,NULL),(136,'medidas','Actualizar',1,'2025-06-08 17:13:47','Actualizar una Medidas con el id: 16',NULL,NULL),(137,'medidas','Actualizar',1,'2025-06-08 17:14:03','Actualizar una Medidas con el id: 16',NULL,NULL),(138,'medidas','Registrar',1,'2025-06-08 17:16:46','Registrar una Medidas',NULL,NULL),(139,'medidas','Registrar',1,'2025-06-08 17:18:05','Registrar una Medidas',NULL,NULL),(140,'medidas','Registrar',1,'2025-06-08 17:53:37','Registrar una Medidas',NULL,NULL),(141,'medidas','Registrar',1,'2025-06-08 18:14:13','Registrar una Medidas',NULL,NULL),(142,'medidas','Registrar',1,'2025-06-08 18:34:15','Registrar una Medidas',NULL,NULL),(143,'producto / lote_producto / kardex','INSERT',1,'2025-06-08 21:15:43','Registro de producto nuevo. Código: 02502555, Descripción: Dell 14 ispiro',17,'PRODUCTO'),(144,'producto','UPDATE',1,'2025-06-08 21:27:34','Actualización del producto. ID: 17, Descripción: Dell 14 ispiro',17,'PRODUCTO'),(145,'producto / lote_producto / kardex','INSERT',1,'2025-06-08 23:24:17','Registro de producto nuevo. Código: 0599999, Descripción: modelo 13 dd',18,'PRODUCTO'),(146,'producto','UPDATE',1,'2025-06-08 23:25:22','Actualización del producto. ID: 18, Descripción: modelo 13 dd',18,'PRODUCTO'),(147,'producto','UPDATE',1,'2025-06-08 23:25:40','Actualización del producto. ID: 18, Descripción: modelo 13 dd',18,'PRODUCTO'),(148,'producto / lote_producto / kardex','INSERT',1,'2025-06-09 16:54:29','Registro de producto nuevo. Código: 054844558844, Descripción: Canande fuente de vida',19,'PRODUCTO'),(149,'producto','UPDATE',1,'2025-06-09 16:55:02','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(150,'producto','UPDATE',1,'2025-06-09 16:55:19','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(151,'producto','UPDATE',1,'2025-06-09 16:57:19','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(152,'producto','UPDATE',1,'2025-06-09 16:58:33','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(153,'producto','UPDATE',1,'2025-06-09 16:59:03','Actualización del producto. ID: 19, Descripción: Canande fuente de vida',19,'PRODUCTO'),(154,'producto / lote_producto / kardex','INSERT',1,'2025-06-09 17:14:25','Registro de producto nuevo. Código: 00331316114, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(155,'producto','UPDATE',1,'2025-06-09 17:14:45','Actualización del producto. ID: 20, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(156,'producto','UPDATE',1,'2025-06-09 17:15:01','Actualización del producto. ID: 20, Descripción: aMSLMSLSLAMSALALS',20,'PRODUCTO'),(157,'producto','UPDATE',1,'2025-06-11 16:47:24','Actualización del producto. ID: 1, Descripción: Dell 14p',1,'PRODUCTO'),(158,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 16:08:54','Registro de producto nuevo. Código: 264646, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(159,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 18:09:32','Registro de producto nuevo. Código: 012115, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(160,'producto / lote_producto / kardex','INSERT',1,'2025-06-13 18:15:16','Registro de producto nuevo. Código: 031512, Descripción: wedewewew',23,'PRODUCTO'),(161,'producto','UPDATE',1,'2025-06-13 18:47:06','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(162,'producto','UPDATE',1,'2025-06-13 19:58:43','Actualización del producto. ID: 21, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(163,'producto','UPDATE',1,'2025-06-13 20:52:28','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(164,'producto','UPDATE',1,'2025-06-13 20:52:45','Actualización del producto. ID: 22, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(165,'producto','UPDATE',1,'2025-06-13 20:52:56','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(166,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-13 20:54:41','Ingreso de producto ID: 22, código: 012115, tipo ingreso: COMPRA, cantidad: 10',22,'INVENTARIO'),(167,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-13 20:55:15','Ingreso de producto ID: 23, código: 031512, tipo ingreso: COMPRA, cantidad: 4',23,'INVENTARIO'),(168,'producto','UPDATE',1,'2025-06-13 22:23:35','Actualización del producto. ID: 21, Descripción: dcckscdkcdmdcmdkds',21,'PRODUCTO'),(169,'medidas','Registrar',1,'2025-06-14 09:58:56','Registrar una Medidas',NULL,NULL),(170,'medidas','Registrar',1,'2025-06-14 10:12:12','Registrar una Medidas',NULL,NULL),(171,'producto','UPDATE',1,'2025-06-14 10:41:44','Actualización del producto. ID: 23, Descripción: 1113',23,'PRODUCTO'),(172,'producto','UPDATE',1,'2025-06-14 10:44:07','Actualización del producto. ID: 22, Descripción: dsssfdssdfsdfsdfssfsfd',22,'PRODUCTO'),(173,'medidas','Registrar',1,'2025-06-14 18:42:19','Registrar una Medidas',NULL,NULL),(174,'producto / lote_producto / kardex','INSERT',1,'2025-06-14 18:46:23','Registro de producto nuevo. Código: 0032655655, Descripción: Glyphosate Isopropylamine salt (480 g/l)',24,'PRODUCTO'),(175,'producto / lote_producto / kardex','INSERT',1,'2025-06-14 18:47:40','Registro de producto nuevo. Código: 00321, Descripción: SDDSDSDSDSD',25,'PRODUCTO'),(176,'medidas','Registrar',1,'2025-06-15 08:37:01','Registrar una Medidas',NULL,NULL),(177,'producto / lote_producto / kardex','INSERT',1,'2025-06-15 08:38:15','Registro de producto nuevo. Código: 34464646, Descripción: bbjugugugugugugugu',26,'PRODUCTO'),(178,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-06-16 18:19:32','Ingreso de producto ID: 26, código: 34464646, tipo ingreso: COMPRA, cantidad: 5',26,'INVENTARIO'),(179,'cliente','Actualizar',1,'2025-06-16 18:20:27','Registrar un Cliente con el id: 9',9,'Cliente'),(180,'medidas','Registrar',1,'2025-07-13 14:10:35','Registrar una Medidas',NULL,NULL),(181,'medidas','Registrar',1,'2025-07-13 14:15:38','Registrar una Medidas',NULL,NULL),(182,'medidas','Registrar',1,'2025-07-13 14:26:36','Registrar una Medidas',NULL,NULL),(183,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 14:31:26','Registro de producto nuevo. Código: 00001, Descripción: BATHUTIC - 1L',27,'PRODUCTO'),(184,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 14:50:21','Registro de producto nuevo. Código: 00002, Descripción: Solfoxidante fungicida - Acaricida',28,'PRODUCTO'),(185,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:06:02','Registro de producto nuevo. Código: 00009, Descripción: SPARKO - 100 G',29,'PRODUCTO'),(186,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:08:23','Registro de producto nuevo. Código: 09088, Descripción: aFEPASA',30,'PRODUCTO'),(187,'producto / lote_producto / kardex','INSERT',1,'2025-07-13 15:13:46','Registro de producto nuevo. Código: 000010, Descripción: Adame',31,'PRODUCTO'),(188,'producto','UPDATE',1,'2025-07-13 15:20:12','Actualización del producto. ID: 31, Descripción: Adame 1',31,'PRODUCTO'),(189,'producto','UPDATE',1,'2025-07-13 15:20:48','Actualización del producto. ID: 30, Descripción: Afepasa',30,'PRODUCTO'),(190,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:23:46','Ingreso de producto ID: 30, código: 09088, tipo ingreso: COMPRA, cantidad: 10',30,'INVENTARIO'),(191,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:25:41','Ingreso de producto ID: 30, código: 09088, tipo ingreso: PROMOCION, cantidad: 2',30,'INVENTARIO'),(192,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-13 15:58:45','Ingreso de producto ID: 30, código: 09088, tipo ingreso: PROMOCION, cantidad: 3',30,'INVENTARIO'),(193,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-13 16:03:08','Ajuste realizado al producto ID 30 con cantidad 3. Observación: debolu. Fecha vencimiento: 2025-10-25. Nuevo stock: 28',30,'INVENTARIO'),(194,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-13 16:05:46','Ajuste realizado al producto ID 30 con cantidad 7. Observación: por perdida. Nuevo stock: 21',30,'INVENTARIO'),(195,'proveedor','Actualizar',1,'2025-07-13 16:17:27','Registrar un Proveedor con el id: 8',8,'Proveedor'),(196,'proveedor','Actualizar',1,'2025-07-13 16:17:41','Actualizar un Proveedor con el id: 8',8,'Proveedor'),(197,'proveedor','Actualizar',1,'2025-07-13 16:18:03','Actualizar un Proveedor con el id: 8',8,'Proveedor'),(198,'cliente','Actualizar',1,'2025-07-13 16:19:27','Registrar un Cliente con el id: 10',10,'Cliente'),(199,'cliente','Actualizar',1,'2025-07-13 16:20:00','Actualizar un Cliente con el id: 10',10,'Cliente'),(200,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-13 20:57:14','Compra registrada completa con ID: 36',36,'Compra'),(201,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-13 21:08:50','Compra registrada completa con ID: 37',37,'Compra'),(202,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-13 21:21:36','Compra registrada completa con ID: 38',38,'Compra'),(203,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-14 14:44:11','Compra registrada completa con ID: 39',39,'Compra'),(204,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:31:34','Registro de producto nuevo. Código: 000011, Descripción: por ssss',32,'PRODUCTO'),(205,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:42:40','Registro de producto nuevo. Código: 0000099, Descripción: ewwewewewewew',33,'PRODUCTO'),(206,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:48:27','Registro de producto nuevo. Código: 0090909, Descripción: sssswswswwswsws',34,'PRODUCTO'),(207,'producto / lote_producto / kardex','INSERT',1,'2025-07-19 17:55:14','Registro de producto nuevo. Código: 00012, Descripción: dewdmewiefwnfnfkewfefef',35,'PRODUCTO'),(208,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-19 17:58:35','Compra registrada completa con ID: 40',40,'Compra'),(209,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-21 12:16:29','Compra registrada completa con ID: 41',41,'Compra'),(210,'producto','UPDATE',1,'2025-07-22 19:01:03','Actualización del producto. ID: 27, Descripción: BATHUTIC - 1swaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddL',27,'PRODUCTO'),(211,'producto','UPDATE',1,'2025-07-22 19:04:58','Actualización del producto. ID: 27, Descripción: BATHUTIC queso con pollo y mantega',27,'PRODUCTO'),(212,'producto','UPDATE',1,'2025-07-22 19:05:23','Actualización del producto. ID: 27, Descripción: BATHUTIC queso con',27,'PRODUCTO'),(213,'producto','UPDATE',1,'2025-07-22 19:09:38','Actualización del producto. ID: 27, Descripción: BATHUTIC queso',27,'PRODUCTO'),(214,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-22 19:34:34','Compra registrada completa con ID: 42',42,'Compra'),(215,'producto / lote_producto / kardex','INSERT',1,'2025-07-23 23:16:25','Registro de producto nuevo. Código: 00999, Descripción: eweewwwewewew',36,'PRODUCTO'),(216,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-24 09:02:05','Ajuste realizado al producto ID 27 con cantidad 5. Observación: pormfecha de vencimi le le entrog al proveedor. Fecha vencimiento: 2025-09-28. Nuevo stock: 13',27,'INVENTARIO'),(217,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-24 10:27:31','Compra registrada completa con ID: 43',43,'Compra'),(218,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-24 10:32:51','Compra registrada completa con ID: 44',44,'Compra'),(219,'proveedor','Actualizar',1,'2025-07-24 11:07:19','Registrar un Proveedor con el id: 9',9,'Proveedor'),(220,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-24 11:09:19','Compra registrada completa con ID: 45',45,'Compra'),(221,'proveedor','Actualizar',1,'2025-07-24 11:18:32','Registrar un Proveedor con el id: 10',10,'Proveedor'),(222,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-24 11:19:36','Compra registrada completa con ID: 46',46,'Compra'),(223,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-24 20:26:30','Compra registrada completa con ID: 47',47,'Compra'),(224,'cliente','Actualizar',1,'2025-07-24 21:41:53','Registrar un Cliente con el id: 11',11,'Cliente'),(225,'cliente','Actualizar',1,'2025-07-24 21:54:45','Registrar un Cliente con el id: 12',12,'Cliente'),(226,'proveedor','Actualizar',1,'2025-07-24 23:35:58','Actualizar un Proveedor con el id: 8',8,'Proveedor'),(227,'cliente','Actualizar',1,'2025-07-24 23:41:23','Actualizar un Cliente con el id: 12',12,'Cliente'),(228,'producto','UPDATE',1,'2025-07-25 13:01:38','Actualización del producto. ID: 150, Descripción: Pan Integral',150,'PRODUCTO'),(229,'producto','UPDATE',1,'2025-07-25 13:19:23','Actualización del producto. ID: 150, Descripción: Pan Integral',150,'PRODUCTO'),(230,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:27:36','Registro de producto nuevo. Código: 099090808, Descripción: porororrorrojro',50,'PRODUCTO'),(231,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:31:04','Registro de producto nuevo. Código: 09098080809, Descripción: ssnkdfjfdkdjdks',51,'PRODUCTO'),(232,'producto','UPDATE',1,'2025-07-25 13:32:23','Actualización del producto. ID: 150, Descripción: Pan Integral',150,'PRODUCTO'),(233,'producto','UPDATE',1,'2025-07-25 13:37:29','Actualización del producto. ID: 150, Descripción: Pan Integral',150,'PRODUCTO'),(234,'producto','UPDATE',1,'2025-07-25 13:38:16','Actualización del producto. ID: 150, Descripción: Pan Integral',150,'PRODUCTO'),(235,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:52:49','Registro de producto nuevo. Código: 7891234567, Descripción: Leche Entera',61,'PRODUCTO'),(236,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:52:49','Registro de producto nuevo. Código: 7891234568, Descripción: Manzanas',62,'PRODUCTO'),(237,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:52:49','Registro de producto nuevo. Código: 7891234569, Descripción: Pan Integral',63,'PRODUCTO'),(238,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:55:17','Registro de producto nuevo. Código: 7891234567, Descripción: Leche Entera',64,'PRODUCTO'),(239,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:55:17','Registro de producto nuevo. Código: 7891234568, Descripción: Manzanas',65,'PRODUCTO'),(240,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 13:55:17','Registro de producto nuevo. Código: 7891234569, Descripción: Pan Integral',66,'PRODUCTO'),(241,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:40:39','Registro de producto nuevo. Código: 7891234567, Descripción: Leche Entera',68,'PRODUCTO'),(242,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:40:39','Registro de producto nuevo. Código: 7891234568, Descripción: Manzanas',69,'PRODUCTO'),(243,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:40:39','Registro de producto nuevo. Código: 7891234569, Descripción: Pan Integral',70,'PRODUCTO'),(244,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:49:39','Registro de producto nuevo. Código: 7891234570, Descripción: Leche Entera',72,'PRODUCTO'),(245,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:49:39','Registro de producto nuevo. Código: 7891234571, Descripción: Manzanas',73,'PRODUCTO'),(246,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 14:49:39','Registro de producto nuevo. Código: 7891234572, Descripción: Pan Integral',74,'PRODUCTO'),(247,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:06:02','Registro de producto nuevo. Código: 7891234573, Descripción: Leche Entera',75,'PRODUCTO'),(248,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:13:41','Registro de producto nuevo. Código: 7891234576, Descripción: Leche Entera',76,'PRODUCTO'),(249,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:13:41','Registro de producto nuevo. Código: 7891234577, Descripción: Manzanas',77,'PRODUCTO'),(250,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:13:41','Registro de producto nuevo. Código: 7891234578, Descripción: Pan Integral',78,'PRODUCTO'),(251,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:24:09','Registro de producto nuevo. Código: 7891234579, Descripción: Leche Entera',79,'PRODUCTO'),(252,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:24:09','Registro de producto nuevo. Código: 7891234581, Descripción: Manzanas',80,'PRODUCTO'),(253,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:24:09','Registro de producto nuevo. Código: 7891234582, Descripción: Pan Integral',81,'PRODUCTO'),(254,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:25:20','Registro de producto nuevo. Código: 7891234583, Descripción: Leche Entera',82,'PRODUCTO'),(255,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:25:20','Registro de producto nuevo. Código: 7891234584, Descripción: Manzanas',83,'PRODUCTO'),(256,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 15:25:20','Registro de producto nuevo. Código: 7891234585, Descripción: Pan Integral',84,'PRODUCTO'),(257,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:32:24','Registro de producto nuevo. Código: 7891234586, Descripción: Leche Entera',85,'PRODUCTO'),(258,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:32:24','Registro de producto nuevo. Código: 7891234587, Descripción: Manzanas',86,'PRODUCTO'),(259,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:32:24','Registro de producto nuevo. Código: 7891234588, Descripción: Pan Integral',87,'PRODUCTO'),(260,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:37:51','Registro de producto nuevo. Código: 7891234589, Descripción: Leche Entera',88,'PRODUCTO'),(261,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:37:51','Registro de producto nuevo. Código: 7891234590, Descripción: Manzanas',89,'PRODUCTO'),(262,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 16:37:51','Registro de producto nuevo. Código: 7891234591, Descripción: Pan Integral',90,'PRODUCTO'),(263,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:08','Registro de producto nuevo. Código: PROD0002, Descripción: Arroz Grano Oro 1Kg',103,'PRODUCTO'),(264,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:08','Registro de producto nuevo. Código: PROD0003, Descripción: Leche Entera 1L',104,'PRODUCTO'),(265,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:08','Registro de producto nuevo. Código: PROD0004, Descripción: Detergente Ropa 1Kg',105,'PRODUCTO'),(266,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:09','Registro de producto nuevo. Código: PROD0005, Descripción: Agua Embotellada 500ml',106,'PRODUCTO'),(267,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:09','Registro de producto nuevo. Código: PROD0006, Descripción: Yogurt Frutado 250g',107,'PRODUCTO'),(268,'producto / lote_producto / kardex','INSERT',1,'2025-07-25 17:33:09','Registro de producto nuevo. Código: PROD0007, Descripción: Galletas Chispas 100g',108,'PRODUCTO'),(269,'medidas','Registrar',1,'2025-07-26 16:19:11','Registrar una Medidas',NULL,NULL),(270,'medidas','Registrar',1,'2025-07-26 16:25:35','Registrar una Medidas',NULL,NULL),(271,'medidas','Actualizar',1,'2025-07-26 16:26:03','Actualizar una Medidas con el id: 2',NULL,NULL),(272,'medidas','Actualizar',1,'2025-07-26 16:26:50','Actualizar una Medidas con el id: 2',NULL,NULL),(273,'medidas','Eliminar',1,'2025-07-26 16:53:08','Eliminar una Medidas con el id: 2',NULL,NULL),(274,'medidas','Actualizar',1,'2025-07-26 16:53:21','Actualizar una Medidas con el id: 2',NULL,NULL),(275,'proveedor','Actualizar',1,'2025-07-26 17:34:53','Registrar un Proveedor con el id: 1',1,'Proveedor'),(276,'proveedor','Actualizar',1,'2025-07-26 17:35:27','Actualizar un Proveedor con el id: 1',1,'Proveedor'),(277,'proveedor','Actualizar',1,'2025-07-26 17:36:11','Actualizar un Proveedor con el id: 1',1,'Proveedor'),(278,'medidas','Registrar',1,'2025-07-26 17:59:55','Registrar una Medidas',NULL,NULL),(279,'medidas','Actualizar',1,'2025-07-26 18:00:17','Actualizar una Medidas con el id: 3',NULL,NULL),(280,'proveedor','Actualizar',1,'2025-07-26 18:07:18','Registrar un Proveedor con el id: 2',2,'Proveedor'),(281,'proveedor','Actualizar',1,'2025-07-26 18:10:16','Registrar un Proveedor con el id: 3',3,'Proveedor'),(282,'proveedor','Eliminar',1,'2025-07-26 18:12:42','Eliminar un Proveedor con el ID: 2',2,'Proveedor'),(283,'cliente','Actualizar',1,'2025-07-26 18:22:52','Registrar un Cliente con el id: 1',1,'Cliente'),(284,'cliente','Actualizar',1,'2025-07-26 18:23:30','Actualizar un Cliente con el id: 1',1,'Cliente'),(285,'cliente','Actualizar',1,'2025-07-26 18:27:24','Registrar un Cliente con el id: 2',2,'Cliente'),(286,'medidas','Registrar',1,'2025-07-26 19:38:15','Registrar una Medidas',NULL,NULL),(287,'medidas','Registrar',1,'2025-07-26 19:42:31','Registrar una Medidas',NULL,NULL),(288,'producto / lote_producto / kardex','INSERT',1,'2025-07-27 09:27:35','Registro de producto nuevo. Código: Producto1, Descripción: de arroz x',1,'PRODUCTO'),(289,'producto / lote_producto / kardex','INSERT',1,'2025-07-27 09:45:19','Registro de producto nuevo. Código: 0090909090909, Descripción: Anime de portada',2,'PRODUCTO'),(290,'producto','UPDATE',1,'2025-07-27 09:47:42','Actualización del producto. ID: 2, Descripción: Anime de portada1',2,'PRODUCTO'),(291,'producto','UPDATE',1,'2025-07-27 10:12:37','Actualización del producto. ID: 1, Descripción: de arroz x',1,'PRODUCTO'),(292,'producto / lote_producto / kardex','INSERT',1,'2025-07-27 11:50:23','Registro de producto nuevo. Código: 00900089809, Descripción: producto de prueba',3,'PRODUCTO'),(293,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 12:12:37','Ingreso de producto ID: 1, código: Producto1, tipo ingreso: COMPRA, cantidad: 10',1,'INVENTARIO'),(294,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 12:40:15','Ingreso de producto ID: 1, código: Producto1, tipo ingreso: COMPRA, cantidad: 12',1,'INVENTARIO'),(295,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 12:43:30','Ingreso de producto ID: 1, código: Producto1, tipo ingreso: PROMOCION, cantidad: 5',1,'INVENTARIO'),(296,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 14:44:31','Ingreso de producto ID: 1, código: Producto1, tipo ingreso: PROMOCION, cantidad: 4',1,'INVENTARIO'),(297,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 14:54:40','Ingreso de producto ID: 2, código: 0090909090909, tipo ingreso: COMPRA, cantidad: 1',2,'INVENTARIO'),(298,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 15:00:12','Ingreso de producto ID: 2, código: 0090909090909, tipo ingreso: PROMOCION, cantidad: 5',2,'INVENTARIO'),(299,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-27 15:16:19','Ajuste realizado al producto ID 1 con cantidad 4. Observación: devoluncion de fecha 2025-11-29. Fecha vencimiento: 2025-11-29. Nuevo stock: 37',1,'INVENTARIO'),(300,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 15:21:32','Ajuste realizado al producto ID 1 con cantidad 10. Observación: devolucion. Nuevo stock: 31',1,'INVENTARIO'),(301,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 15:41:50','Ajuste realizado al producto ID 2 con cantidad 1. Observación: peridida. Nuevo stock: 25',2,'INVENTARIO'),(302,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 15:54:40','Ajuste realizado al producto ID 2 con cantidad 2. Observación: perid idada dañado. Nuevo stock: 23',2,'INVENTARIO'),(303,'producto / lote_producto / kardex','REGISTRO_INGRESO',1,'2025-07-27 16:08:42','Ingreso de producto ID: 2, código: 0090909090909, tipo ingreso: COMPRA, cantidad: 1',2,'INVENTARIO'),(304,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 16:09:03','Ajuste realizado al producto ID 1 con cantidad 1. Observación: dddsssssssss. Nuevo stock: 30',1,'INVENTARIO'),(305,'producto / lote_producto / kardex','INSERT',1,'2025-07-27 16:34:21','Registro de producto nuevo. Código: 0909090909, Descripción: fdfdfdfdggfgfgd',4,'PRODUCTO'),(306,'producto','UPDATE',1,'2025-07-27 16:34:40','Actualización del producto. ID: 4, Descripción: fdfdfdfdggfgfgd',4,'PRODUCTO'),(307,'producto','UPDATE',1,'2025-07-27 16:35:09','Actualización del producto. ID: 4, Descripción: fdfdfdfdggfgfgd',4,'PRODUCTO'),(308,'producto','UPDATE',1,'2025-07-27 16:40:29','Actualización del producto. ID: 4, Descripción: fdfdfdfdggfgfgd',4,'PRODUCTO'),(309,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 16:47:01','Ajuste realizado al producto ID 1 con cantidad 1. Observación: 2222222. Nuevo stock: 29',1,'INVENTARIO'),(310,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 16:53:08','Ajuste realizado al producto ID 1 con cantidad 1. Observación: peridmsis dia 23. Nuevo stock: 28',1,'INVENTARIO'),(311,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-27 16:56:32','Ajuste realizado al producto ID 1 con cantidad 5. Observación: sssssss. Fecha vencimiento: 2027-05-23. Nuevo stock: 23',1,'INVENTARIO'),(312,'producto / lote_producto / kardex','Ajuste de stock - PERDIDA',1,'2025-07-27 17:10:03','Ajuste realizado al producto ID 1 con cantidad 1. Observación: 1. Nuevo stock: 27',1,'INVENTARIO'),(313,'producto / lote_producto / kardex','Ajuste de stock - DEVOLUCION',1,'2025-07-27 17:10:39','Ajuste realizado al producto ID 1 con cantidad 1. Observación: dddddddddpe4o 23. Fecha vencimiento: 2027-05-23. Nuevo stock: 26',1,'INVENTARIO'),(314,'proveedor','Actualizar',1,'2025-07-27 17:54:04','Registrar un Proveedor con el id: 4',4,'Proveedor'),(315,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-27 17:54:11','Compra registrada completa con ID: 1',1,'Compra'),(316,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-27 18:09:17','Compra registrada completa con ID: 2',2,'Compra'),(317,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-27 18:28:28','Compra registrada completa con ID: 3',3,'Compra'),(318,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-27 18:35:26','Compra registrada completa con ID: 4',4,'Compra'),(319,'compras/det_compra/producto/kardex/Movimiento en caja/gasto','INSERT/UPDATE',1,'2025-07-27 21:19:56','Compra registrada completa con ID: 5',5,'Compra'),(320,'medidas','Eliminar',1,'2025-07-28 08:37:03','Eliminar una Medidas con el id: 4',NULL,NULL),(321,'cliente','Eliminar',1,'2025-07-28 08:48:46','Eliminar un Cliente con el id: 2',2,'Cliente'),(322,'cliente','Eliminar',1,'2025-07-28 08:52:46','Eliminar un Cliente con el id: 2',2,'Cliente'),(323,'cliente','Eliminar',1,'2025-07-28 08:53:40','Eliminar un Cliente con el id: 2',2,'Cliente'),(324,'proveedor','Eliminar',1,'2025-07-28 08:55:05','Eliminar un Proveedor con el ID: 4',4,'Proveedor'),(325,'medidas','Registrar',1,'2025-07-28 20:54:25','Registrar una Medidas',NULL,NULL),(326,'producto / lote_producto / kardex','INSERT',1,'2025-07-28 20:56:35','Registro de producto nuevo. Código: PROD0001, Descripción: Refresco Cola 2L',1,'PRODUCTO'),(327,'producto / lote_producto / kardex','INSERT',1,'2025-07-28 21:00:06','Registro de producto nuevo. Código: PROD0002, Descripción: Leche Entera 1L',2,'PRODUCTO'),(328,'cliente','Actualizar',1,'2025-07-28 21:24:25','Registrar un Cliente con el id: 1',1,'Cliente'),(329,'proveedor','Actualizar',1,'2025-07-29 15:43:02','Registrar un Proveedor con el id: 1',1,'Proveedor'),(330,'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito','INSERT/UPDATE',1,'2025-07-29 15:43:58','Compra registrada completa con ID: 1',1,'Compra');
 /*!40000 ALTER TABLE `log_auditoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1235,7 +1230,7 @@ CREATE TABLE `lote_producto` (
   KEY `id_producto` (`id_producto`),
   KEY `idx_vencimiento` (`fecha_vencimiento`),
   CONSTRAINT `lote_producto_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1244,7 +1239,7 @@ CREATE TABLE `lote_producto` (
 
 LOCK TABLES `lote_producto` WRITE;
 /*!40000 ALTER TABLE `lote_producto` DISABLE KEYS */;
-INSERT INTO `lote_producto` (`id_lote`, `id_usuario_creacion`, `id_det_compra`, `id_producto`, `cantidad_comprada`, `cantidad_bonificada`, `stock_disponible`, `costo_unitario`, `fecha_registro`, `fecha_vencimiento`, `estado`, `id_usuario_actualizacion`, `fecha_actualizacion`) VALUES (110,1,72,27,10,0,0,1.30,'2025-07-13 14:31:26','2025-10-26',0,NULL,'2025-07-19 17:58:35'),(111,1,NULL,28,15,0,14,1.30,'2025-07-13 14:50:21','2026-01-31',1,NULL,'2025-07-19 15:09:38'),(112,1,NULL,29,10,0,4,1.20,'2025-07-13 15:06:02','2026-03-07',1,NULL,'2025-07-21 11:01:25'),(113,1,NULL,30,16,0,9,1.50,'2025-07-13 15:08:23','2025-08-03',1,1,'2025-07-13 16:05:46'),(114,1,NULL,31,14,0,7,1.50,'2025-07-13 15:13:46','2025-11-30',1,NULL,'2025-07-20 18:18:38'),(115,1,NULL,30,10,0,10,1.50,'2025-07-13 15:23:46','2026-02-01',1,NULL,NULL),(116,1,NULL,30,0,2,2,1.50,'2025-07-13 15:25:41','2025-10-19',1,NULL,NULL),(117,1,NULL,30,0,3,0,0.00,'2025-07-13 15:58:45','2025-10-25',0,1,'2025-07-13 16:03:08'),(118,1,60,28,0,0,0,1.30,'2025-07-13 20:57:14','2025-11-29',2,NULL,'2025-07-13 21:01:20'),(119,1,61,27,0,0,0,1.30,'2025-07-13 20:57:14','2026-01-02',2,NULL,'2025-07-13 21:01:20'),(120,1,62,31,0,0,0,1.50,'2025-07-13 20:57:14','2025-11-02',2,NULL,'2025-07-13 21:01:20'),(121,1,63,29,1,0,0,1.20,'2025-07-13 21:08:50','2025-10-25',0,NULL,'2025-07-15 06:51:16'),(122,1,64,27,1,0,1,1.30,'2025-07-13 21:08:50','2025-10-26',1,NULL,'2025-07-13 21:08:50'),(123,1,65,30,1,0,1,1.50,'2025-07-13 21:08:50','2025-11-01',1,NULL,'2025-07-13 21:08:50'),(124,1,66,27,1,0,0,1.30,'2025-07-13 21:21:36','2025-07-26',0,NULL,'2025-07-15 07:19:38'),(125,1,67,27,1,0,0,1.30,'2025-07-14 14:44:11','2025-07-26',0,NULL,'2025-07-15 06:51:16'),(126,1,68,28,5,0,0,1.30,'2025-07-14 14:44:11','2025-09-21',0,NULL,'2025-07-19 15:09:17'),(127,1,NULL,32,3,0,2,1.00,'2025-07-19 17:31:34','2025-09-28',1,NULL,'2025-07-21 11:01:25'),(128,1,NULL,33,10,0,9,1.20,'2025-07-19 17:42:40','2025-08-24',1,NULL,'2025-07-23 15:33:45'),(129,1,NULL,34,10,0,10,1.00,'2025-07-19 17:48:27','2025-09-28',1,NULL,NULL),(130,1,NULL,35,10,0,10,1.20,'2025-07-19 17:55:14','2025-11-01',1,NULL,NULL),(131,1,69,28,10,0,4,1.30,'2025-07-19 17:58:35','2025-09-14',1,NULL,'2025-07-23 15:38:28'),(132,1,70,32,6,0,6,1.00,'2025-07-19 17:58:35','2025-10-25',1,NULL,'2025-07-19 17:58:35'),(133,1,71,35,6,0,6,1.20,'2025-07-19 17:58:35','2025-10-25',1,NULL,'2025-07-19 17:58:35'),(134,1,72,27,10,0,6,1.30,'2025-07-19 17:58:35','2025-10-05',1,NULL,'2025-07-22 18:09:42'),(138,1,76,29,4,0,3,1.20,'2025-07-21 12:16:29','2025-09-27',1,NULL,'2025-07-23 15:35:46'),(139,1,77,27,4,0,4,1.34,'2025-07-21 12:16:29','2025-10-18',1,NULL,'2025-07-21 12:16:29'),(141,1,79,27,6,0,6,1.99,'2025-07-22 19:34:34','2025-09-28',1,NULL,'2025-07-22 19:34:34');
+INSERT INTO `lote_producto` (`id_lote`, `id_usuario_creacion`, `id_det_compra`, `id_producto`, `cantidad_comprada`, `cantidad_bonificada`, `stock_disponible`, `costo_unitario`, `fecha_registro`, `fecha_vencimiento`, `estado`, `id_usuario_actualizacion`, `fecha_actualizacion`) VALUES (1,1,NULL,1,10,0,10,1.00,'2025-07-28 20:56:35','2025-10-05',1,NULL,'2025-07-29 14:19:45'),(2,1,NULL,2,20,0,20,1.20,'2025-07-28 21:00:06','2026-07-05',1,NULL,'2025-07-29 14:19:45'),(3,1,1,1,0,0,0,1.00,'2025-07-29 15:43:57','2025-08-31',0,NULL,'2025-07-29 15:44:15'),(4,1,2,2,0,0,0,1.25,'2025-07-29 15:43:57','2025-10-05',0,NULL,'2025-07-29 15:44:15');
 /*!40000 ALTER TABLE `lote_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1266,7 +1261,7 @@ CREATE TABLE `marca` (
   `fecha_eliminacion` datetime DEFAULT NULL,
   `estado` char(1) DEFAULT '1',
   PRIMARY KEY (`id_marca`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1275,7 +1270,7 @@ CREATE TABLE `marca` (
 
 LOCK TABLES `marca` WRITE;
 /*!40000 ALTER TABLE `marca` DISABLE KEYS */;
-INSERT INTO `marca` VALUES (1,'Dell S',1,'2025-07-13 12:28:28',1,'2025-07-13 14:05:24',NULL,NULL,'1'),(2,'Figuesida',1,'2025-07-13 14:26:52',NULL,NULL,NULL,NULL,'1');
+INSERT INTO `marca` VALUES (1,'Agripa',1,'2025-07-28 20:54:38',NULL,NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1295,7 +1290,7 @@ CREATE TABLE `medidas` (
   `fecha_eliminacion` datetime DEFAULT NULL,
   `estado` char(1) DEFAULT '1',
   PRIMARY KEY (`id_medida`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1304,7 +1299,7 @@ CREATE TABLE `medidas` (
 
 LOCK TABLES `medidas` WRITE;
 /*!40000 ALTER TABLE `medidas` DISABLE KEYS */;
-INSERT INTO `medidas` VALUES (26,'UNIDAD','UND','2025-07-13 14:10:35',NULL,NULL,'1'),(27,'CAJA','CJ','2025-07-13 14:15:38',NULL,NULL,'1'),(28,'KILOGRAMO','KG','2025-07-13 14:26:36',NULL,NULL,'1');
+INSERT INTO `medidas` VALUES (1,'KILOGRAMOS','KG','2025-07-28 20:54:25',NULL,NULL,'1');
 /*!40000 ALTER TABLE `medidas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1325,7 +1320,7 @@ CREATE TABLE `modulos` (
   `fecha_creacion` datetime DEFAULT NULL,
   `fecha_actualizacion` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1334,7 +1329,7 @@ CREATE TABLE `modulos` (
 
 LOCK TABLES `modulos` WRITE;
 /*!40000 ALTER TABLE `modulos` DISABLE KEYS */;
-INSERT INTO `modulos` VALUES (1,'Tablero Principal',0,'dashboard.php','fas fa-tachometer-alt',0,NULL,NULL),(2,'Roles y Perfiles',0,'Administracion/ModulosyPerfiles/modulos_perfiles.php','fas fa-tablet-alt',1,NULL,NULL),(3,'Producto',4,'Gestion/Producto/productos.php','far fa-circle',7,'2023-01-06 12:48:37',NULL),(4,'Mantenedor',0,'','fas fa-tachometer-alt',2,'2023-01-06 13:02:08',NULL),(5,'Medidas',4,'Gestion/Medidas/medidas.php','far fa-circle',10,'2023-01-08 13:12:05',NULL),(6,'Categorias',4,'Gestion/Categorias/categorias.php','far fa-circle',9,'2023-01-09 12:34:34',NULL),(7,'Proveedor',4,'Gestion/Proveedor/proveedor.php','	far fa-circle',6,'2023-01-15 07:33:34',NULL),(8,'Clientes',4,'Gestion/Clientes/clientes.php','	far fa-circle',5,'2023-01-15 07:34:53',NULL),(9,'Perecederos',4,'Gestion/Perecederos/perecederos.php','	far fa-circle',8,'2023-01-15 07:35:46',NULL),(10,'prueva',0,'Gestion/Producto/productos.php','',11,'2023-01-15 07:38:28',NULL),(11,'Administrar Caja',0,'','fas fa-cash-register',12,'2023-01-15 09:43:53',NULL),(12,'ArqueoCaja',11,'AdministrarCaja/ArqueoCaja/arqueo_caja.php','	far fa-circle',14,'2023-01-15 09:54:10',NULL),(13,'Caja',11,'AdministrarCaja/Caja/caja.php','	far fa-circle',13,'2023-01-15 09:54:43',NULL),(14,'Rol',0,'Administracion/Rol/rol.php','fas fa-cash-register',16,'2023-01-15 11:33:00',NULL),(15,'Usuarios',0,'Administracion/Usuario/usuario.php','fas fa-users',17,'2023-01-15 14:07:39',NULL),(16,'VentasCreditos',0,'','fas fa-credit-card',28,'2023-01-16 12:44:30',NULL),(17,'AdministrarCreditos',16,'VentasCreditos/AdministrarCreditos/administrar_creditos.php','far fa-circle',30,'2023-01-16 12:46:05',NULL),(18,'Compras',0,'','fas fa-dolly',18,'2023-01-16 17:45:49',NULL),(19,'Ventas',0,'','fas fa-cart-plus',24,'2023-01-16 17:46:04',NULL),(20,'Realizar Compras',18,'Compras/RealizarCompras/compras.php','far fa-circle',20,'2023-01-16 17:47:23',NULL),(21,'Ventas',19,'Ventas/RealizarVentas/realizar_ventas.php','far fa-circle',27,'2023-01-16 17:49:11',NULL),(22,'HistorialAbonos',16,'VentasCreditos/HistorialAbonos/historial_abonos.php','far fa-circle',31,'2023-01-17 10:16:03',NULL),(23,'Empresa',0,'Administracion/Configuracion/empresa.php','fas fa-store-alt',32,'2023-01-18 11:18:48',NULL),(24,'Movimiento',11,'AdministrarCaja/MovimientoCaja/movimiento_cajas.php','far fa-circle',15,'2023-01-20 11:16:21',NULL),(25,'Administra Ventas',19,'Ventas/Administrar_ventas/administrar_ventas.php','far fa-circle',26,'2023-01-25 16:14:23',NULL),(26,'Compras al Credito',0,'','fas fa-credit-card',21,'2023-03-11 12:03:44',NULL),(27,'Administrar Creditos',26,'ComprasCredito/AdministrarCreditos/administrar_credito.php','far fa-circle',23,'2023-03-11 12:07:07',NULL),(28,'Administrar Creditos',16,'VentasCreditos/AdministrarCreditos/administrar_credito.php','far fa-circle',29,'2023-03-11 12:24:39',NULL),(29,'Historial Credito',26,'ComprasCredito/HistorialAbonos/historial_abono.php','far fa-circle',22,'2023-03-19 12:34:53',NULL),(30,'Administra Compras',18,'Compras/Administrar_compras/historial_de_compras.php','far fa-circle',19,'2023-03-23 17:36:57',NULL),(31,'kardex',0,'kardex/kardex_promedial_ponderado/kardex.php','fas fa-snowflake',33,'2023-03-29 11:15:26',NULL),(32,'Administrar Factura',19,'Ventas/Administrar_ventas/administrar_factura.php','far fa-circle',25,'2023-04-21 17:13:56',NULL),(33,'Reportes',0,'','fas fa-file',34,'2023-10-21 20:10:31',NULL),(34,'Producto Poco Stock',33,'Reportes/poco_stock.php','far fa-circle',37,'2023-10-21 20:12:44',NULL),(35,'Ganacias',33,'Reportes/ganacias.php','far fa-circle',38,'2023-10-21 20:13:31',NULL),(36,'Producto mas Vendidos',33,'Reportes/reporte_producto_mas_vendidos.php','far fa-circle',36,'2023-10-21 22:31:23',NULL),(37,'Ventas Hoy',33,'Reportes/ventas_hoy.php','far fa-circle',35,'2023-10-23 17:49:39',NULL),(38,'lote',4,'Gestion/Perecederos/lote_producto.php','far fa-circle',4,'2025-05-13 20:04:32',NULL),(39,'Marca',4,'Gestion/Marcas/marcas.php','far fa-circle',3,'2025-06-08 23:31:15',NULL),(40,'FacturacionElectronica',0,'FacturacionElectronica/facturacionElectronica.php','fas fa-file-invoice-dollar',39,'2025-07-16 06:03:27',NULL);
+INSERT INTO `modulos` VALUES (1,'Tablero Principal',0,'dashboard.php','fas fa-tachometer-alt',0,NULL,NULL),(2,'Roles y Perfiles',0,'Administracion/ModulosyPerfiles/modulos_perfiles.php','fas fa-tablet-alt',1,NULL,NULL),(3,'Producto',4,'Gestion/Producto/productos.php','far fa-circle',7,'2023-01-06 12:48:37',NULL),(4,'Mantenedor',0,'','fas fa-tachometer-alt',2,'2023-01-06 13:02:08',NULL),(5,'Medidas',4,'Gestion/Medidas/medidas.php','far fa-circle',10,'2023-01-08 13:12:05',NULL),(6,'Categorias',4,'Gestion/Categorias/categorias.php','far fa-circle',9,'2023-01-09 12:34:34',NULL),(7,'Proveedor',4,'Gestion/Proveedor/proveedor.php','	far fa-circle',6,'2023-01-15 07:33:34',NULL),(8,'Clientes',4,'Gestion/Clientes/clientes.php','	far fa-circle',5,'2023-01-15 07:34:53',NULL),(9,'Perecederos',4,'Gestion/Perecederos/perecederos.php','	far fa-circle',8,'2023-01-15 07:35:46',NULL),(10,'prueva',0,'Gestion/Producto/productos.php','',12,'2023-01-15 07:38:28',NULL),(11,'Administrar Caja',0,'','fas fa-cash-register',13,'2023-01-15 09:43:53',NULL),(12,'ArqueoCaja',11,'AdministrarCaja/ArqueoCaja/arqueo_caja.php','	far fa-circle',15,'2023-01-15 09:54:10',NULL),(13,'Caja',11,'AdministrarCaja/Caja/caja.php','	far fa-circle',14,'2023-01-15 09:54:43',NULL),(14,'Rol',0,'Administracion/Rol/rol.php','fas fa-cash-register',17,'2023-01-15 11:33:00',NULL),(15,'Usuarios',0,'Administracion/Usuario/usuario.php','fas fa-users',18,'2023-01-15 14:07:39',NULL),(16,'VentasCreditos',0,'','fas fa-credit-card',29,'2023-01-16 12:44:30',NULL),(17,'AdministrarCreditos',16,'VentasCreditos/AdministrarCreditos/administrar_creditos.php','far fa-circle',31,'2023-01-16 12:46:05',NULL),(18,'Compras',0,'','fas fa-dolly',19,'2023-01-16 17:45:49',NULL),(19,'Ventas',0,'','fas fa-cart-plus',25,'2023-01-16 17:46:04',NULL),(20,'Realizar Compras',18,'Compras/RealizarCompras/compras.php','far fa-circle',21,'2023-01-16 17:47:23',NULL),(21,'Ventas',19,'Ventas/RealizarVentas/realizar_ventas.php','far fa-circle',28,'2023-01-16 17:49:11',NULL),(22,'HistorialAbonos',16,'VentasCreditos/HistorialAbonos/historial_abonos.php','far fa-circle',32,'2023-01-17 10:16:03',NULL),(23,'Empresa',0,'Administracion/Configuracion/empresa.php','fas fa-store-alt',33,'2023-01-18 11:18:48',NULL),(24,'Movimiento',11,'AdministrarCaja/MovimientoCaja/movimiento_cajas.php','far fa-circle',16,'2023-01-20 11:16:21',NULL),(25,'Administra Ventas',19,'Ventas/Administrar_ventas/administrar_ventas.php','far fa-circle',27,'2023-01-25 16:14:23',NULL),(26,'Compras al Credito',0,'','fas fa-credit-card',22,'2023-03-11 12:03:44',NULL),(27,'Administrar Creditos',26,'ComprasCredito/AdministrarCreditos/administrar_credito.php','far fa-circle',24,'2023-03-11 12:07:07',NULL),(28,'Administrar Creditos',16,'VentasCreditos/AdministrarCreditos/administrar_credito.php','far fa-circle',30,'2023-03-11 12:24:39',NULL),(29,'Historial Credito',26,'ComprasCredito/HistorialAbonos/historial_abono.php','far fa-circle',23,'2023-03-19 12:34:53',NULL),(30,'Administra Compras',18,'Compras/Administrar_compras/historial_de_compras.php','far fa-circle',20,'2023-03-23 17:36:57',NULL),(31,'kardex',0,'kardex/kardex_promedial_ponderado/kardex.php','fas fa-snowflake',34,'2023-03-29 11:15:26',NULL),(32,'Administrar Factura',19,'Ventas/Administrar_ventas/administrar_factura.php','far fa-circle',26,'2023-04-21 17:13:56',NULL),(33,'Reportes',0,'','fas fa-file',35,'2023-10-21 20:10:31',NULL),(34,'Producto Poco Stock',33,'Reportes/poco_stock.php','far fa-circle',38,'2023-10-21 20:12:44',NULL),(35,'Ganacias',33,'Reportes/ganacias.php','far fa-circle',39,'2023-10-21 20:13:31',NULL),(36,'Producto mas Vendidos',33,'Reportes/reporte_producto_mas_vendidos.php','far fa-circle',37,'2023-10-21 22:31:23',NULL),(37,'Ventas Hoy',33,'Reportes/ventas_hoy.php','far fa-circle',36,'2023-10-23 17:49:39',NULL),(38,'lote',4,'Gestion/Perecederos/lote_producto.php','far fa-circle',4,'2025-05-13 20:04:32',NULL),(39,'Marca',4,'Gestion/Marcas/marcas.php','far fa-circle',3,'2025-06-08 23:31:15',NULL),(40,'FacturacionElectronica',0,'FacturacionElectronica/facturacionElectronica.php','fas fa-file-invoice-dollar',40,'2025-07-16 06:03:27',NULL),(41,'Carga Masiva',4,'Gestion/carga_masiva/carga_masiva_productos.php','far fa-circle',11,'2025-07-25 16:24:19',NULL);
 /*!40000 ALTER TABLE `modulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1359,7 +1354,7 @@ CREATE TABLE `movimiento_caja` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `movimiento_caja_ibfk_1` FOREIGN KEY (`id_arqueo`) REFERENCES `arqueo_caja` (`id_arqueo_caja`),
   CONSTRAINT `movimiento_caja_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1368,7 +1363,7 @@ CREATE TABLE `movimiento_caja` (
 
 LOCK TABLES `movimiento_caja` WRITE;
 /*!40000 ALTER TABLE `movimiento_caja` DISABLE KEYS */;
-INSERT INTO `movimiento_caja` VALUES (16,7,'Ingreso','Ingreso',1,'2025-07-13 20:55:19',NULL,'1'),(17,7,'Egreso','Gasto',1,'2025-07-13 20:55:19',NULL,'1'),(18,7,'Devolucion','Devolucion',1,'2025-07-13 21:01:20',NULL,'1'),(19,8,'Ingreso','Ingreso',1,'2025-07-21 15:02:11',NULL,'1'),(20,8,'Egreso','Gasto',1,'2025-07-21 15:02:11',NULL,'1'),(21,9,'Ingreso','Ingreso',1,'2025-07-21 15:07:49',NULL,'1'),(22,9,'Egreso','Gasto',1,'2025-07-21 15:07:49',NULL,'1');
+INSERT INTO `movimiento_caja` VALUES (1,1,'Ingreso','Ingreso',1,'2025-07-28 21:02:53',NULL,'1'),(2,1,'Egreso','Gasto',1,'2025-07-28 21:02:53',NULL,'1'),(3,1,'Devolucion','Devolucion',1,'2025-07-29 13:58:56',NULL,'1');
 /*!40000 ALTER TABLE `movimiento_caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1444,7 +1439,7 @@ CREATE TABLE `perfil_modulo` (
   `vista_inicio` tinyint DEFAULT NULL,
   `estado` char(1) DEFAULT '1',
   PRIMARY KEY (`idperfil_modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=368 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1453,7 +1448,7 @@ CREATE TABLE `perfil_modulo` (
 
 LOCK TABLES `perfil_modulo` WRITE;
 /*!40000 ALTER TABLE `perfil_modulo` DISABLE KEYS */;
-INSERT INTO `perfil_modulo` VALUES (299,1,1,1,'1'),(300,1,2,0,'1'),(301,1,38,0,'1'),(302,1,4,0,'1'),(303,1,8,0,'1'),(304,1,7,0,'1'),(305,1,3,0,'1'),(306,1,6,0,'1'),(307,1,5,0,'1'),(308,1,15,0,'1'),(309,1,30,0,'1'),(310,1,18,0,'1'),(311,1,20,0,'1'),(312,1,29,0,'1'),(313,1,26,0,'1'),(314,1,27,0,'1'),(315,1,25,0,'1'),(316,1,19,0,'1'),(317,1,21,0,'1'),(318,1,28,0,'1'),(319,1,16,0,'1'),(320,1,22,0,'1'),(321,1,23,0,'1'),(322,1,31,0,'1'),(323,1,37,0,'1'),(324,1,33,0,'1'),(325,1,36,0,'1'),(326,1,34,0,'1'),(327,1,35,0,'1'),(328,1,39,0,'1'),(329,2,1,1,'1'),(330,2,2,0,'1'),(331,2,39,0,'1'),(332,2,4,0,'1'),(333,2,38,0,'1'),(334,2,8,0,'1'),(335,2,7,0,'1'),(336,2,3,0,'1'),(337,2,9,0,'1'),(338,2,6,0,'1'),(339,2,5,0,'1'),(340,2,13,0,'1'),(341,2,11,0,'1'),(342,2,12,0,'1'),(343,2,24,0,'1'),(344,2,14,0,'1'),(345,2,15,0,'1'),(346,2,30,0,'1'),(347,2,18,0,'1'),(348,2,20,0,'1'),(349,2,29,0,'1'),(350,2,26,0,'1'),(351,2,27,0,'1'),(352,2,32,0,'1'),(353,2,19,0,'1'),(354,2,25,0,'1'),(355,2,21,0,'1'),(356,2,28,0,'1'),(357,2,16,0,'1'),(358,2,17,0,'1'),(359,2,22,0,'1'),(360,2,23,0,'1'),(361,2,31,0,'1'),(362,2,37,0,'1'),(363,2,33,0,'1'),(364,2,36,0,'1'),(365,2,34,0,'1'),(366,2,35,0,'1'),(367,2,40,0,'1');
+INSERT INTO `perfil_modulo` VALUES (299,1,1,1,'1'),(300,1,2,0,'1'),(301,1,38,0,'1'),(302,1,4,0,'1'),(303,1,8,0,'1'),(304,1,7,0,'1'),(305,1,3,0,'1'),(306,1,6,0,'1'),(307,1,5,0,'1'),(308,1,15,0,'1'),(309,1,30,0,'1'),(310,1,18,0,'1'),(311,1,20,0,'1'),(312,1,29,0,'1'),(313,1,26,0,'1'),(314,1,27,0,'1'),(315,1,25,0,'1'),(316,1,19,0,'1'),(317,1,21,0,'1'),(318,1,28,0,'1'),(319,1,16,0,'1'),(320,1,22,0,'1'),(321,1,23,0,'1'),(322,1,31,0,'1'),(323,1,37,0,'1'),(324,1,33,0,'1'),(325,1,36,0,'1'),(326,1,34,0,'1'),(327,1,35,0,'1'),(328,1,39,0,'1'),(368,2,1,1,'1'),(369,2,2,0,'1'),(370,2,39,0,'1'),(371,2,4,0,'1'),(372,2,38,0,'1'),(373,2,8,0,'1'),(374,2,7,0,'1'),(375,2,3,0,'1'),(376,2,9,0,'1'),(377,2,6,0,'1'),(378,2,5,0,'1'),(379,2,13,0,'1'),(380,2,11,0,'1'),(381,2,12,0,'1'),(382,2,24,0,'1'),(383,2,14,0,'1'),(384,2,15,0,'1'),(385,2,30,0,'1'),(386,2,18,0,'1'),(387,2,20,0,'1'),(388,2,29,0,'1'),(389,2,26,0,'1'),(390,2,27,0,'1'),(391,2,32,0,'1'),(392,2,19,0,'1'),(393,2,25,0,'1'),(394,2,21,0,'1'),(395,2,28,0,'1'),(396,2,16,0,'1'),(397,2,17,0,'1'),(398,2,22,0,'1'),(399,2,23,0,'1'),(400,2,31,0,'1'),(401,2,37,0,'1'),(402,2,33,0,'1'),(403,2,36,0,'1'),(404,2,34,0,'1'),(405,2,35,0,'1'),(406,2,40,0,'1'),(407,2,41,0,'1');
 /*!40000 ALTER TABLE `perfil_modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1537,7 +1532,7 @@ CREATE TABLE `producto` (
   `unidades` float DEFAULT NULL,
   `stock_fraccion` decimal(10,2) DEFAULT NULL,
   `minimo_stock_producto` float DEFAULT NULL,
-  `inventariable_producto` char(1) DEFAULT NULL,
+  `inventariable_producto` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '1',
   `perecedero_producto` char(1) DEFAULT NULL,
   `ventas_producto` decimal(10,2) DEFAULT NULL,
   `compra_producto` decimal(10,2) DEFAULT NULL,
@@ -1556,7 +1551,7 @@ CREATE TABLE `producto` (
   KEY `fk_producto_id_unidades` (`id_unidades`),
   CONSTRAINT `fk_producto_id_categoria_producto` FOREIGN KEY (`id_categoria_producto`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `fk_producto_id_unidades` FOREIGN KEY (`id_unidades`) REFERENCES `medidas` (`id_medida`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1565,7 +1560,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (27,'00001',30,2,26,'BATHUTIC queso','Views/assets/imagenes/productos/logo_6874098e432bd.jpg',1.99,1.60,1.40,1.55,NULL,NULL,NULL,'1',NULL,18,NULL,NULL,3,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-13 14:31:26',1,'2025-07-22 19:34:34',NULL,NULL,NULL,'1'),(28,'00002',32,2,26,'Solfoxidante fungicida - Acaricida','Views/assets/imagenes/productos/logo_68740dfd45e97.jpg',1.30,2.50,1.20,1.90,NULL,NULL,NULL,'0',NULL,18,NULL,NULL,4,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-13 14:50:21',NULL,'2025-07-23 15:38:28',NULL,NULL,NULL,'1'),(29,'00009',32,2,26,'SPARKO - 100 G','Views/assets/imagenes/productos/logo_687411aa80926.png',1.20,1.50,1.40,1.40,NULL,NULL,NULL,'1',NULL,8,NULL,NULL,4,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-13 15:06:02',NULL,'2025-07-23 15:35:46',NULL,NULL,NULL,'1'),(30,'09088',32,2,28,'Afepasa','Views/assets/imagenes/productos/logo_687412377eba0.jpg',1.50,1.90,1.80,14.00,NULL,NULL,NULL,'1',NULL,22,NULL,NULL,2,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-13 15:08:23',1,'2025-07-13 21:08:50',NULL,NULL,NULL,'1'),(31,'000010',32,2,26,'Adame 1','Views/assets/imagenes/productos/logo_6874137a1e19c.png',1.50,1.90,1.50,1.50,NULL,NULL,NULL,'1',NULL,7,NULL,NULL,4,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-13 15:13:46',1,'2025-07-20 18:18:38',NULL,NULL,NULL,'1'),(32,'000011',32,2,26,'por ssss','Views/assets/imagenes/productos/img_por_defecto.png',1.00,1.50,1.60,1.60,NULL,NULL,NULL,'1',NULL,8,NULL,NULL,1,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-19 17:31:34',NULL,'2025-07-21 11:01:25',NULL,NULL,NULL,'1'),(33,'0000099',32,2,28,'ewwewewewewew','Views/assets/imagenes/productos/img_por_defecto.png',1.20,1.60,1.80,1.70,NULL,NULL,NULL,'1',NULL,9,NULL,NULL,1,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-19 17:42:40',NULL,'2025-07-23 15:33:45',NULL,NULL,NULL,'1'),(34,'0090909',32,1,28,'sssswswswwswsws','',1.00,1.20,1.50,1.40,NULL,NULL,NULL,'1',NULL,10,NULL,NULL,2,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-19 17:48:27',NULL,NULL,NULL,NULL,NULL,'1'),(35,'00012',32,1,27,'dewdmewiefwnfnfkewfefef','Views/assets/imagenes/productos/img_por_defecto.png',1.20,1.30,1.60,1.30,NULL,NULL,NULL,'1',NULL,16,NULL,NULL,1,NULL,'1',NULL,NULL,NULL,NULL,1,'2025-07-19 17:55:14',NULL,'2025-07-19 17:58:35',NULL,NULL,NULL,'1');
+INSERT INTO `producto` VALUES (1,'PROD0001',1,1,1,'Refresco Cola 2L','Views/assets/imagenes/productos/img_por_defecto.png',1.00,1.50,1.30,1.40,NULL,NULL,NULL,'1',NULL,10,NULL,NULL,5,'1','1',NULL,NULL,NULL,NULL,1,'2025-07-28 20:56:35',NULL,'2025-07-29 15:44:15',NULL,NULL,NULL,'1'),(2,'PROD0002',1,1,1,'Leche Entera 1L','Views/assets/imagenes/productos/img_por_defecto.png',1.25,1.50,1.40,1.56,NULL,NULL,NULL,'1',NULL,20,NULL,NULL,5,'1','1',NULL,NULL,NULL,NULL,1,'2025-07-28 21:00:06',NULL,'2025-07-29 15:44:15',NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1592,7 +1587,7 @@ CREATE TABLE `proveedor` (
   `fecha_eliminacion` datetime DEFAULT NULL,
   `estado` char(1) DEFAULT '1',
   PRIMARY KEY (`id_proveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1601,7 +1596,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-INSERT INTO `proveedor` VALUES (8,'0804610814001','Juan Peres','Proveedor de colar','fffff','090909','dddd@gmail.com',1,'2025-07-13 16:17:27',1,'2025-07-13 16:18:03',NULL,NULL,'1');
+INSERT INTO `proveedor` VALUES (1,'0090940394494','susan gomez','Porveedor amor','Salinas ecuador','09800900933','susangomez@gmail.com',1,'2025-07-29 15:43:02',NULL,NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1625,7 +1620,7 @@ CREATE TABLE `sri_logs` (
   PRIMARY KEY (`id_log`),
   KEY `id_comprobante` (`id_comprobante`),
   CONSTRAINT `sri_logs_ibfk_1` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobantes_electronicos` (`id_comprobante`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1634,7 +1629,6 @@ CREATE TABLE `sri_logs` (
 
 LOCK TABLES `sri_logs` WRITE;
 /*!40000 ALTER TABLE `sri_logs` DISABLE KEYS */;
-INSERT INTO `sri_logs` VALUES (1,1,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1507202501080461081400110010010000000071407851116','INFO',NULL,'2025-07-16 15:37:15'),(2,1,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-16 15:37:25'),(3,1,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-16 15:39:28'),(4,1,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-16 17:46:24'),(5,1,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1507202501080461081400110010010000000071407851116','INFO',NULL,'2025-07-16 17:50:25'),(6,1,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-16 21:10:10'),(7,2,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1807202501080461081400110010010000000080733323114','INFO',NULL,'2025-07-18 23:15:59'),(8,2,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-18 23:15:59'),(9,2,'ENVIO_SRI','DEVUELTA','SRI_DEV','Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA','ERROR',NULL,'2025-07-18 23:16:01'),(10,3,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1807202501080461081400110010010000000091784883019','INFO',NULL,'2025-07-18 23:17:26'),(11,3,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-18 23:17:26'),(12,3,'ENVIO_SRI','DEVUELTA','SRI_DEV','Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA','ERROR',NULL,'2025-07-18 23:17:30'),(13,4,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1807202501080461081400110010010000000101754257712','INFO',NULL,'2025-07-18 23:22:37'),(14,4,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-18 23:32:00'),(15,4,'ENVIO_SRI','DEVUELTA','SRI_DEV','Factura NO RECIBIDA (DEVUELTA) por el SRI:\nEl SRI no detalló los errores. Estado de la respuesta: DEVUELTA','ERROR',NULL,'2025-07-18 23:33:01'),(16,5,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-18 23:52:02'),(17,5,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-18 23:52:17'),(18,5,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-18 23:53:02'),(19,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-18 23:55:59'),(20,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-18 23:56:14'),(21,5,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-18 23:59:03'),(22,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 09:40:03'),(23,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 09:40:51'),(24,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 09:43:07'),(25,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 09:43:10'),(26,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 09:51:02'),(27,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:00:04'),(28,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:09:59'),(29,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:30:50'),(30,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:36:00'),(31,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:49:42'),(32,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 10:55:44'),(33,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:01:03'),(34,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:07:58'),(35,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:13:53'),(36,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:17:39'),(37,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:23:24'),(38,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:27:47'),(39,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:31:20'),(40,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:32:38'),(41,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:33:29'),(42,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:34:46'),(43,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:36:39'),(44,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:38:18'),(45,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 11:46:13'),(46,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:02:57'),(47,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:21:03'),(48,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:40:35'),(49,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:45:14'),(50,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:50:28'),(51,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 12:59:21'),(52,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 12:59:25'),(53,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 13:01:43'),(54,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 13:01:45'),(55,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 13:06:44'),(56,5,'AUTORIZACION','ERROR_PDF_BARCODE','PDF_BARCODE_GEN_ERR','Error al generar PDF o código de barras: C:\\DocumentosApp\\2025\\07\\FACTURA_001-001-000000008_18-07-2025_comprobante_for_pdf.xml: El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso.\r\n','ERROR',NULL,'2025-07-19 13:06:47'),(57,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 13:06:47'),(58,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 13:36:35'),(59,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 13:36:37'),(60,5,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 13:54:54'),(61,5,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1807202501080461081400110010010000000081740339316','INFO',NULL,'2025-07-19 13:54:58'),(62,6,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1907202501080461081400110010010000000090964186810','INFO',NULL,'2025-07-19 15:07:42'),(63,6,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-19 15:07:42'),(64,6,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-19 15:07:44'),(65,7,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1907202501080461081400110010010000000101708926817','INFO',NULL,'2025-07-19 15:10:12'),(66,7,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-19 15:10:12'),(67,7,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-19 15:10:13'),(68,8,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1907202501080461081400110010010000000113698837312','INFO',NULL,'2025-07-19 15:16:14'),(69,8,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-19 15:16:14'),(70,8,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-19 15:16:20'),(71,6,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 15:28:11'),(72,6,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1907202501080461081400110010010000000090964186810','INFO',NULL,'2025-07-19 15:28:13'),(73,6,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-19 15:30:23'),(74,6,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-19 15:35:02'),(75,7,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 16:37:41'),(76,7,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1907202501080461081400110010010000000101708926817','INFO',NULL,'2025-07-19 16:37:42'),(77,7,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-19 16:38:12'),(78,8,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 17:17:10'),(79,8,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1907202501080461081400110010010000000113698837312','INFO',NULL,'2025-07-19 17:17:11'),(80,8,'ENVIO_CLIENTE','EXITOSO',NULL,'Comprobante enviado por correo exitosamente al cliente: edisongarofalo88@gmail.com','INFO',NULL,'2025-07-19 17:17:24'),(81,9,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 1907202501080461081400110010010000000125609301712','INFO',NULL,'2025-07-19 19:00:37'),(82,9,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-19 19:00:37'),(83,9,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-19 19:00:39'),(84,9,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-19 19:01:03'),(85,9,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 1907202501080461081400110010010000000125609301712','INFO',NULL,'2025-07-19 19:01:03'),(86,10,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 2007202501080461081400110010010000000131356369611','INFO',NULL,'2025-07-20 18:20:43'),(87,10,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-20 18:20:43'),(88,10,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-20 18:20:45'),(89,10,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-20 18:20:50'),(90,10,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 2007202501080461081400110010010000000131356369611','INFO',NULL,'2025-07-20 18:20:54'),(91,11,'GENERACION','EXITOSO',NULL,'Factura XML generada y firmada. Clave de Acceso: 2007202501080461081400110010010000000141602126611','INFO',NULL,'2025-07-20 23:54:22'),(92,11,'ENVIO_SRI','INTENTO_ENVIO',NULL,'Intentando enviar XML al SRI.','INFO',NULL,'2025-07-20 23:54:22'),(93,11,'ENVIO_SRI','RECIBIDA',NULL,'Factura RECIBIDA por el SRI.','INFO',NULL,'2025-07-20 23:54:25'),(94,11,'AUTORIZACION','INICIADO',NULL,'Iniciando consulta de autorización al SRI.','INFO',NULL,'2025-07-20 23:54:33'),(95,11,'AUTORIZACION','AUTORIZADO',NULL,'Factura AUTORIZADA por el SRI. Número de autorización: 2007202501080461081400110010010000000141602126611','INFO',NULL,'2025-07-20 23:54:37');
 /*!40000 ALTER TABLE `sri_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1793,7 +1787,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuarios_id_caja` (`id_caja`),
   CONSTRAINT `fk_usuarios_id_caja` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id_caja`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1802,7 +1796,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'080214555','Edison','Garofalo','Jeily','123456',2,1,NULL,NULL,NULL,NULL,'2025-04-28 17:04:42','2025-04-28 18:48:24',NULL,'1',NULL,NULL),(2,'087666622','Susanw777','777','Susan7','3c2a6eb64cc629de76c419308830c53bbe63b874f6a526f7cd784182b33a2f5f3daaab47b5bde5868b82e4dd3b521d147a7542292b689acdf60122b97e99523f',3,1,'garofalo@gmail.com','sssddssddssdddsdsds','55555557777',NULL,'2025-04-30 07:25:09','2025-06-13 00:11:02',NULL,'1',NULL,NULL),(3,'0804610814','0','Garofalo','Edison','123',3,1,'edisongarofalo88@gmail.com','sssddssdd','202 555 0111','','2025-06-12 22:11:32','2025-06-13 23:10:45',NULL,'1','Views/assets/imagenes/imgUsuario/logo_684cf64563f39.PNG','Esmeralda'),(4,'0804610814','Susan','Gomez','Edison','123',2,1,'edisongarofalo88@gmail.com','barrio entre rios','202 555 0111','Via la T','2025-06-12 22:15:18','2025-06-13 00:19:06',NULL,'2','Views/assets/imagenes/imgUsuario/logo_684b97c69e16c.PNG','Esmeraldas');
+INSERT INTO `usuarios` VALUES (1,'080214555','Edison','Garofalo','Jeily','123456',2,1,NULL,NULL,NULL,NULL,'2025-04-28 17:04:42','2025-04-28 18:48:24',NULL,'1',NULL,NULL),(2,'087666622','Susanw777','777','Susan7','3c2a6eb64cc629de76c419308830c53bbe63b874f6a526f7cd784182b33a2f5f3daaab47b5bde5868b82e4dd3b521d147a7542292b689acdf60122b97e99523f',3,1,'garofalo@gmail.com','sssddssddssdddsdsds','55555557777',NULL,'2025-04-30 07:25:09','2025-06-13 00:11:02',NULL,'1',NULL,NULL),(3,'0804610814','0','Garofalo','Edison','123',3,1,'edisongarofalo88@gmail.com','sssddssdd','202 555 0111','','2025-06-12 22:11:32','2025-06-13 23:10:45',NULL,'1','Views/assets/imagenes/imgUsuario/logo_684cf64563f39.PNG','Esmeralda'),(4,'0804610814','Susan','Gomez','Edison','123',2,1,'edisongarofalo88@gmail.com','barrio entre rios','202 555 0111','Via la T','2025-06-12 22:15:18','2025-06-13 00:19:06',NULL,'2','Views/assets/imagenes/imgUsuario/logo_684b97c69e16c.PNG','Esmeraldas'),(5,'0080009089891','Susan 1','Gomez 1','Pamela1','12345',3,1,'garofaloedison20241@gmail.com','salinas1','202 555 01115','','2025-07-26 18:30:23','2025-07-26 18:34:17',NULL,'1','','Esmeralas 1');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1848,7 +1842,7 @@ CREATE TABLE `ventas` (
   CONSTRAINT `fk_venta_cabecera_IdCliente` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`id_cliente`),
   CONSTRAINT `fk_venta_cabecera_IdUsuario` FOREIGN KEY (`id_usuario_creacion`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `fk_ventas_tipo_documento` FOREIGN KEY (`TipoDocumento`) REFERENCES `tipo_comprobante` (`codigo_sri`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1857,7 +1851,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (37,1,1,10,NULL,'00000033','EFECTIVO','03',NULL,NULL,4.00,0.71,6.59,7.30,10.00,2.70,0.00,1,'2025-07-15 06:51:16',NULL,'2025-07-15 06:54:48',NULL,NULL,'2',NULL,NULL,NULL),(38,1,1,10,NULL,'00000034','CREDITO','03',NULL,NULL,4.00,0.74,6.76,7.50,0.00,7.50,0.00,1,'2025-07-15 07:19:38',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(39,1,1,10,NULL,'00000035','EFECTIVO','03',NULL,NULL,3.00,0.81,10.39,11.20,15.00,3.80,0.00,1,'2025-07-17 22:00:46',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(40,1,1,10,NULL,'00000036','EFECTIVO','03',NULL,NULL,1.00,0.42,2.78,3.20,5.00,1.80,0.00,1,'2025-07-17 22:46:28',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(41,1,1,10,NULL,'00000037','EFECTIVO','03',NULL,NULL,1.00,0.63,4.17,4.80,10.00,5.20,0.00,1,'2025-07-17 23:00:13',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(42,1,1,10,NULL,'00000038','EFECTIVO','03',NULL,NULL,4.00,0.91,10.99,11.90,15.00,3.10,0.00,1,'2025-07-18 23:15:23',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(43,1,1,10,NULL,'00000039','EFECTIVO','03',NULL,NULL,2.00,0.62,4.08,4.70,10.00,5.30,0.00,1,'2025-07-19 15:06:57',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(44,1,1,10,NULL,'00000040','EFECTIVO','03',NULL,NULL,3.00,0.46,5.54,6.00,10.00,4.00,0.00,1,'2025-07-19 15:09:17',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(45,1,1,10,NULL,'00000041','EFECTIVO','03',NULL,NULL,2.00,0.21,3.89,4.10,5.00,0.90,0.00,1,'2025-07-19 15:09:38',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(46,1,1,10,NULL,'00000042','EFECTIVO','03',NULL,NULL,2.00,0.50,8.30,8.80,10.00,1.20,0.00,1,'2025-07-19 18:59:59',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(47,1,1,10,NULL,'00000043','EFECTIVO','03',NULL,NULL,2.00,0.25,4.15,4.40,10.00,5.60,0.00,1,'2025-07-20 18:18:38',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(48,1,1,10,NULL,'00000044','EFECTIVO','03',NULL,NULL,2.00,0.41,2.69,3.10,10.00,6.90,0.00,1,'2025-07-20 18:53:34',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(50,1,1,10,NULL,'00000045','CREDITO','03',NULL,NULL,4.00,0.61,6.49,7.10,1.00,6.10,1.00,1,'2025-07-21 11:01:25',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(51,1,1,10,NULL,'00000046','EFECTIVO','03',NULL,NULL,2.00,0.21,3.89,4.10,5.00,0.90,0.00,1,'2025-07-22 17:58:17',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(52,1,1,10,NULL,'00000047','EFECTIVO','03',NULL,NULL,1.00,0.21,1.39,1.60,5.00,3.40,0.00,1,'2025-07-22 18:09:42',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(53,1,1,10,NULL,'00000048','EFECTIVO','03',NULL,NULL,1.00,0.21,1.39,1.60,2.00,0.40,0.00,1,'2025-07-23 15:33:45',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(54,1,1,10,NULL,'00000049','EFECTIVO','03',NULL,NULL,1.00,0.20,1.30,1.50,2.00,0.50,0.00,1,'2025-07-23 15:35:46',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),(55,1,1,10,NULL,'00000050','CREDITO','03',NULL,NULL,1.00,0.00,2.50,2.50,0.00,2.50,0.00,1,'2025-07-23 15:38:28',NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL);
+INSERT INTO `ventas` VALUES (1,1,1,1,NULL,'00000053','EFECTIVO','03',NULL,NULL,2.00,0.78,5.22,6.00,10.00,4.00,0.00,1,'2025-07-28 21:33:35',NULL,'2025-07-29 14:19:45',NULL,NULL,'0',NULL,NULL,NULL),(2,1,1,1,NULL,'00000054','CREDITO','03',NULL,NULL,2.00,1.18,7.82,9.00,1.00,8.00,1.00,1,'2025-07-28 21:48:21',NULL,'2025-07-29 14:16:03',NULL,NULL,'0',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1878,11 +1872,11 @@ CREATE TABLE `ventas_credito` (
   `saldo_pendiente` decimal(10,2) DEFAULT NULL,
   `fecha_venta` datetime DEFAULT CURRENT_TIMESTAMP,
   `fecha_vencimiento` date DEFAULT NULL,
-  `estado` enum('Pendiente','Pagado','Vencido','Otros','Inactivo') DEFAULT 'Pendiente',
+  `estado` enum('Pendiente','Pagado','Vencido','Otros','Inactivo','Eliminado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Pendiente',
   PRIMARY KEY (`id_venta_credito`),
   KEY `id_venta` (`id_venta`),
   CONSTRAINT `ventas_credito_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`IdVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1891,7 +1885,7 @@ CREATE TABLE `ventas_credito` (
 
 LOCK TABLES `ventas_credito` WRITE;
 /*!40000 ALTER TABLE `ventas_credito` DISABLE KEYS */;
-INSERT INTO `ventas_credito` VALUES (7,38,10,'00000007',7.50,7.50,0.00,'2025-07-15 07:19:38','2025-11-15','Pagado'),(8,50,10,'00000008',7.10,1.00,6.10,'2025-07-21 11:01:25','2025-12-21','Pendiente'),(9,55,10,'00000009',2.50,0.00,2.50,'2025-07-23 15:38:28','2025-09-27','Pendiente');
+INSERT INTO `ventas_credito` VALUES (1,2,1,'00000010',9.00,1.00,8.00,'2025-07-28 21:48:21','2025-10-24','Pendiente');
 /*!40000 ALTER TABLE `ventas_credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2096,7 +2090,10 @@ BEGIN
 
             INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
             VALUES (v_id_arqueo, 'Egreso', 'Gasto', p_IdUsuario);
-
+            
+            INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
+             VALUES (v_id_arqueo, 'Devolucion', 'Devolucion', p_IdUsuario);
+ 
             -- Si todo fue exitoso, establecer el mensaje de éxito.
             SET mensaje = 'Caja abierta con éxito.';
             SELECT mensaje AS resultado;
@@ -2209,7 +2206,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ajustar_stock_disminuir`(
-     IN p_id_producto INT,
+        IN p_id_producto INT,
     IN p_codigo_producto VARCHAR(20),
     IN p_observacion TEXT,
     IN p_nuevo_stock INT,
@@ -2217,9 +2214,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ajustar_stock_disminuir`(
     IN p_precio_compra DECIMAL(10,2),
     IN p_tipo_ajuste VARCHAR(50), -- ('PERDIDA', 'DEVOLUCION', 'CAMBIO')
     IN p_fecha_vencimiento DATE,   -- puede ser NULL para productos no perecibles
+    IN p_Nuevafecha_vencimiento DATE,
+    IN p_precioCosto DECIMAL(10,2),
     IN p_id_usuario INT
 )
 main_block: BEGIN
+    -- Declaración de variables
     DECLARE v_total_disponible INT DEFAULT 0;
     DECLARE v_resto INT DEFAULT p_cantidad;
     DECLARE done INT DEFAULT FALSE;
@@ -2239,11 +2239,8 @@ main_block: BEGIN
     DECLARE v_count_fecha INT;
     -- Variables para el asiento contable
     DECLARE v_id_asiento INT;
-    
 
-
-    
-    -- Cursor para recorrer lotes FIFO
+    -- Cursor para recorrer lotes FIFO (MOVIDO AQUÍ)
     DECLARE cur_lotes CURSOR FOR
         SELECT id_lote, stock_disponible
         FROM lote_producto
@@ -2254,34 +2251,43 @@ main_block: BEGIN
           AND stock_disponible > 0
         ORDER BY id_lote;
 
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE; -- MOVIDO AQUÍ
 
-     	-- Eliminar espacios al inicio y fin
-   SET p_codigo_producto = LTRIM(RTRIM(p_codigo_producto));
-   SET p_observacion = LTRIM(RTRIM(p_observacion));
- 	   SET p_tipo_ajuste = LTRIM(RTRIM(p_tipo_ajuste));
-     	
+    -- Declarar un handler para errores SQL que realizará un ROLLBACK
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Si ocurre un error, revertir todos los cambios
+        ROLLBACK;
+        -- Mensaje de error para el usuario
+        SELECT 'Error: Se ha producido un error inesperado. Los cambios han sido revertidos.' AS resultado;
+    END;
+
+    -- Iniciar la transacción
+    START TRANSACTION;
+
+    -- Eliminar espacios al inicio y fin de los parámetros de texto
+    SET p_codigo_producto = LTRIM(RTRIM(p_codigo_producto));
+    SET p_observacion = LTRIM(RTRIM(p_observacion));
+    SET p_tipo_ajuste = LTRIM(RTRIM(p_tipo_ajuste));
+
     -- Validar stock disponible
     SELECT SUM(stock_disponible) INTO v_total_disponible
     FROM lote_producto
     WHERE id_producto = p_id_producto
        AND (p_precio_compra IS NULL OR costo_unitario = p_precio_compra)
-      AND (p_fecha_vencimiento IS NULL OR fecha_vencimiento = p_fecha_vencimiento)
-      AND estado = 1
-      AND stock_disponible > 0;
+       AND (p_fecha_vencimiento IS NULL OR fecha_vencimiento = p_fecha_vencimiento)
+       AND estado = 1
+       AND stock_disponible > 0;
 
-     -- Validar existencia de lotes con fecha de vencimiento específica (si se envió)
- 
-        
+    -- Si el stock es insuficiente, mostrar advertencia y salir sin realizar cambios
     IF v_total_disponible IS NULL OR v_total_disponible < p_cantidad THEN
-     
-     SELECT CONCAT('Warning: Stock insuficiente en lotes disponibles. Stock actual: ', 
-                  IFNULL(v_total_disponible, 0)) AS resultado;
-         LEAVE main_block; -- Usamos la etiqueta correctamente
+        SELECT CONCAT('Warning: Stock insuficiente en lotes disponibles. Stock actual: ',
+                      IFNULL(v_total_disponible, 0)) AS resultado;
+        ROLLBACK; -- Revertir si hay un problema de stock inicial
+        LEAVE main_block;
     END IF;
 
-
-    -- Procesar lotes
+    -- Procesar lotes (FIFO)
     OPEN cur_lotes;
     read_loop: LOOP
         FETCH cur_lotes INTO v_id_lote, v_stock;
@@ -2323,16 +2329,48 @@ main_block: BEGIN
     END LOOP;
     CLOSE cur_lotes;
 
-    -- Determinar costo de salida
+    -- Determinar costo de salida y actualizar stock de producto
     IF p_tipo_ajuste = 'PERDIDA' THEN
-        SET v_costo_final = p_precio_compra;
+        SET v_costo_final = p_precioCosto;
+        -- Actualizar stock en producto
+        UPDATE producto
+        SET stock_producto = stock_producto - p_cantidad,
+            id_usuario_actualizacion = p_id_usuario
+        WHERE id_producto = p_id_producto;
+
     ELSEIF p_tipo_ajuste = 'DEVOLUCION' THEN
-        SET v_costo_final = 0.00; -- no se descuenta costo
-    ELSE
-        SET v_costo_final = p_precio_compra;
+        SET v_costo_final = p_precioCosto; -- no se descuenta costo
+
+        -- Insertar un nuevo lote para la devolución
+        INSERT INTO lote_producto(
+            id_usuario_creacion,
+            id_producto,
+            cantidad_comprada,
+            stock_disponible,
+            costo_unitario,
+            fecha_vencimiento
+        ) VALUES (
+            p_id_usuario,
+            p_id_producto,
+            p_cantidad,
+            p_cantidad,
+            p_precioCosto,
+            p_Nuevafecha_vencimiento
+        );
+        -- Para DEVOLUCION, el efecto neto en stock_producto es cero,
+        -- ya que se retira stock de lotes antiguos y se añade stock como un nuevo lote.
+        -- Por lo tanto, no se requiere una actualización explícita a producto.stock_producto aquí.
+
+    ELSE -- Para 'CAMBIO' o cualquier otro tipo
+        SET v_costo_final = p_precioCosto;
+        -- Actualizar stock en producto (solo disminuir para 'CAMBIO' si no se maneja como 'PERDIDA')
+        UPDATE producto
+        SET stock_producto = stock_producto - p_cantidad,
+            id_usuario_actualizacion = p_id_usuario
+        WHERE id_producto = p_id_producto;
     END IF;
 
-    -- Obtener últimas existencias del producto
+    -- Obtener últimas existencias del producto para el Kardex
     SELECT k.existencia_costo_unitario, k.existencia_unidades, k.existencia_costo_total
     INTO v_costo_unitario_ex, v_unidades_ex, v_costo_total_ex
     FROM kardex k
@@ -2340,22 +2378,22 @@ main_block: BEGIN
     ORDER BY id DESC
     LIMIT 1;
 
-    -- Calcular salida
-    SET v_unidades_salida = (v_unidades_ex - p_nuevo_stock);
+    -- Calcular salida para el Kardex
+    SET v_unidades_salida = p_cantidad; -- La cantidad que sale es p_cantidad
     SET v_costo_unitario_salida = v_costo_final;
     SET v_costo_total_salida = v_unidades_salida * v_costo_unitario_salida;
 
-    -- Calcular nuevas existencias
-    SET v_unidades_ex = ROUND(p_nuevo_stock, 2);
+    -- Calcular nuevas existencias después de la salida
+    SET v_unidades_ex = ROUND(v_unidades_ex - p_cantidad, 2);
     SET v_costo_total_ex = ROUND(v_costo_total_ex - v_costo_total_salida, 2);
 
-    IF v_costo_total_ex > 0 THEN
+    IF v_unidades_ex > 0 THEN
         SET v_costo_unitario_ex = ROUND(v_costo_total_ex / v_unidades_ex, 2);
     ELSE
         SET v_costo_unitario_ex = 0.00;
     END IF;
 
-    -- Registrar en kardex
+    -- Registrar la SALIDA en kardex
     INSERT INTO kardex(
         id_usuario_creacion,
         id_producto,
@@ -2372,7 +2410,7 @@ main_block: BEGIN
         p_id_usuario,
         p_id_producto,
         p_codigo_producto,
-        p_observacion,
+        CONCAT('AJUSTE DE STOCK - SALIDA POR ', p_tipo_ajuste, ': ', p_observacion),
         v_unidades_salida,
         v_costo_unitario_salida,
         v_costo_total_salida,
@@ -2381,61 +2419,90 @@ main_block: BEGIN
         v_costo_total_ex
     );
 
-    -- Actualizar stock en producto
-    UPDATE producto
-    SET stock_producto = stock_producto - p_cantidad,
-        id_usuario_actualizacion = p_id_usuario
-    WHERE id_producto = p_id_producto;
-    
-    
--- Registrar asiento contable solo para PERDIDA o DEVOLUCION
-IF p_tipo_ajuste IN ('PERDIDA', 'DEVOLUCION') THEN
-
-    -- Insertar cabecera de asiento contable
-    INSERT INTO asiento_contable (
-        fecha,
-        descripcion,
-        tipo_asiento,
-        id_referencia,
-        modulo_origen,
-        total_debe,
-        total_haber,
-        tipo_referencia
-    ) VALUES (
-        CURRENT_DATE,
-        CONCAT('Ajuste de stock por ', p_tipo_ajuste, ': ', p_observacion),
-        'AJUSTE',
-        p_id_producto,
-        'INVENTARIO',
-        v_costo_total_salida,
-        v_costo_total_salida,
-        'PRODUCTO'
-    );
-    
-    SET v_id_asiento = LAST_INSERT_ID();
-
-    -- Insertar detalle contable
-    IF p_tipo_ajuste = 'PERDIDA' THEN
-        -- DEBE: Pérdida por inventario (502)
-        INSERT INTO detalle_asiento (id_asiento, id_cuenta, debe, descripcion, orden)
-        VALUES (v_id_asiento, 15, v_costo_total_salida, 'Pérdida por ajuste de inventario', 1);
-
-        -- HABER: Inventario (104)
-        INSERT INTO detalle_asiento (id_asiento, id_cuenta, haber, descripcion, orden)
-        VALUES (v_id_asiento, 9, v_costo_total_salida, 'Disminución de inventario', 2);
-
-    ELSEIF p_tipo_ajuste = 'DEVOLUCION' THEN
-        -- DEBE: Inventario (104)
-        INSERT INTO detalle_asiento (id_asiento, id_cuenta, debe, descripcion, orden)
-        VALUES (v_id_asiento, 9, v_costo_total_salida, 'Reposición por devolución', 1);
-
-        -- HABER: Ventas (401) o cliente según el caso
-        INSERT INTO detalle_asiento (id_asiento, id_cuenta, haber, descripcion, orden)
-        VALUES (v_id_asiento, 11, v_costo_total_salida, 'Reversión de ingreso por devolución', 2);
+    -- Si el ajuste es por DEVOLUCION, registrar también la ENTRADA del nuevo producto
+    IF p_tipo_ajuste = 'DEVOLUCION' THEN
+        -- Actualizar existencias para la entrada por devolución
+        SET v_unidades_ex = ROUND(v_unidades_ex + p_cantidad, 2);
+        SET v_costo_total_ex = ROUND(v_costo_total_ex + (p_cantidad * p_precioCosto), 2);
+        IF v_unidades_ex > 0 THEN
+            SET v_costo_unitario_ex = ROUND(v_costo_total_ex / v_unidades_ex, 2);
+        ELSE
+            SET v_costo_unitario_ex = 0.00;
         END IF;
-     END IF;
-        
-            -- Registrar log de auditoría
+
+        INSERT INTO kardex(
+            id_usuario_creacion,
+            id_producto,
+            codigo_producto,
+            concepto,
+            entrada_unidades,
+            entrada_costo_unitario,
+            entrada_costo_total,
+            existencia_unidades,
+            existencia_costo_unitario,
+            existencia_costo_total
+        )
+        VALUES (
+            p_id_usuario,
+            p_id_producto,
+            p_codigo_producto,
+            CONCAT('AJUSTE DE STOCK - ENTRADA POR DEVOLUCION: ', p_observacion),
+            p_cantidad,
+            p_precioCosto,
+            p_cantidad * p_precioCosto,
+            v_unidades_ex, -- existencias después del ingreso
+            v_costo_unitario_ex,
+            v_costo_total_ex
+        );
+    END IF;
+
+    -- Registrar asiento contable solo para PERDIDA o DEVOLUCION
+    IF p_tipo_ajuste IN ('PERDIDA', 'DEVOLUCION') THEN
+        -- Insertar cabecera de asiento contable
+        INSERT INTO asiento_contable (
+            fecha,
+            descripcion,
+            tipo_asiento,
+            id_referencia,
+            modulo_origen,
+            total_debe,
+            total_haber,
+            tipo_referencia
+        ) VALUES (
+            CURRENT_DATE,
+            CONCAT('Ajuste de stock por ', p_tipo_ajuste, ': ', p_observacion),
+            'AJUSTE',
+            p_id_producto,
+            'INVENTARIO',
+            v_costo_total_salida,
+            v_costo_total_salida,
+            'PRODUCTO'
+        );
+
+        SET v_id_asiento = LAST_INSERT_ID();
+
+        -- Insertar detalle contable
+        IF p_tipo_ajuste = 'PERDIDA' THEN
+            -- DEBE: Pérdida por inventario (cuenta 502, asumiendo id_cuenta 15)
+            INSERT INTO detalle_asiento (id_asiento, id_cuenta, debe, descripcion, orden)
+            VALUES (v_id_asiento, 15, v_costo_total_salida, 'Pérdida por ajuste de inventario', 1);
+
+            -- HABER: Inventario (cuenta 104, asumiendo id_cuenta 9)
+            INSERT INTO detalle_asiento (id_asiento, id_cuenta, haber, descripcion, orden)
+            VALUES (v_id_asiento, 9, v_costo_total_salida, 'Disminución de inventario', 2);
+
+        ELSEIF p_tipo_ajuste = 'DEVOLUCION' THEN
+            -- DEBE: Inventario (cuenta 104, asumiendo id_cuenta 9)
+            INSERT INTO detalle_asiento (id_asiento, id_cuenta, debe, descripcion, orden)
+            VALUES (v_id_asiento, 9, v_costo_total_salida, 'Reposición por devolución', 1);
+
+            -- HABER: Ventas (cuenta 401, asumiendo id_cuenta 11) o cliente según el caso
+            INSERT INTO detalle_asiento (id_asiento, id_cuenta, haber, descripcion, orden)
+            VALUES (v_id_asiento, 11, v_costo_total_salida, 'Reversión de ingreso por devolución', 2);
+        END IF;
+    END IF;
+
+    -- Registrar log de auditoría
     INSERT INTO log_auditoria (
         tabla,
         accion,
@@ -2449,21 +2516,225 @@ IF p_tipo_ajuste IN ('PERDIDA', 'DEVOLUCION') THEN
         CONCAT('Ajuste de stock - ', p_tipo_ajuste),
         p_id_usuario,
         NOW(),
-        CONCAT('Ajuste realizado al producto ID ', p_id_producto, 
+        CONCAT('Ajuste realizado al producto ID ', p_id_producto,
                ' con cantidad ', p_cantidad,
                '. Observación: ', p_observacion,
-               IF(p_fecha_vencimiento IS NOT NULL, 
-                  CONCAT('. Fecha vencimiento: ', p_fecha_vencimiento), 
+               IF(p_fecha_vencimiento IS NOT NULL,
+                  CONCAT('. Fecha vencimiento: ', p_fecha_vencimiento),
                   ''),
                '. Nuevo stock: ', p_nuevo_stock),
         p_id_producto,
         'INVENTARIO'
     );
 
+    -- Si todo fue exitoso, confirmar la transacción
+    COMMIT;
 
     -- Retornar mensaje de éxito
     SELECT 'Ajuste realizado con éxito.' AS resultado;
 
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_AnularVenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_AnularVenta`(
+        IN p_IdVenta INT,
+        IN p_id_usuario INT
+
+)
+BEGIN
+    DECLARE mensaje VARCHAR(255);
+    DECLARE v_nro_boleta VARCHAR(25);
+    DECLARE v_id_arqueo INT;
+    DECLARE v_id_movimiento INT;
+    DECLARE v_id_detalle INT;
+    DECLARE v_id_stock INT;
+    DECLARE v_id_producto INT;
+    DECLARE v_cantidad_vendida INT;
+    DECLARE v_precio_venta DECIMAL(10,2);
+    DECLARE v_costo_unitario DECIMAL(10,2);
+    DECLARE v_codigo_barra VARCHAR(20);
+    DECLARE v_total_venta DECIMAL(10,2);
+
+
+      -- Kardex
+
+    DECLARE v_stock_actual INT;
+    DECLARE v_existencia_costo_total DECIMAL(10,2);
+
+    DECLARE done INT DEFAULT FALSE;
+
+   -- Cursor para recorrer los productos vendidos
+
+    DECLARE cur CURSOR FOR 
+
+     SELECT dvl.id_detalle_venta_stock, dvl.id_lote, dv.IdProducto, dvl.cantidad_vendida, dvl.precio_venta, dvl.costo_unitario, dv.codigo_barra
+         FROM det_venta_lote dvl
+        INNER JOIN det_venta dv ON dvl.id_det_venta = dv.IdDetalleVenta
+        WHERE dv.estado = 1 AND dv.IdVenta = p_IdVenta;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+
+  -- Obtener la venta y su total
+
+    SELECT total_venta ,nro_boleta 
+    INTO  v_total_venta,v_nro_boleta 
+    FROM ventas  
+    WHERE IdVenta = p_IdVenta
+    AND estado = 1;
+
+    -- Verificar si la venta existe y está activa
+
+    IF EXISTS (SELECT 1 FROM ventas WHERE IdVenta = p_IdVenta AND estado = '1') THEN
+
+   
+         -- Obtener el arqueo de caja activo del usuario
+
+        SELECT id_arqueo_caja 
+        INTO v_id_arqueo
+        FROM arqueo_caja
+        WHERE id_usuario = p_id_usuario AND estado = 1
+        ORDER BY fecha_inicio DESC
+
+        LIMIT 1;
+
+         IF v_id_arqueo IS NOT NULL then
+
+     -- Obtener el movimiento de caja para devoluciones
+
+            SELECT id_movimiento_caja 
+            INTO v_id_movimiento
+            FROM movimiento_caja
+            WHERE id_arqueo = v_id_arqueo AND tipo_movimiento = 'Devolucion' 
+            AND tipo_referencia = 'Devolucion'
+            ORDER BY fecha_registro DESC
+
+            LIMIT 1;
+
+           
+         if v_id_movimiento is null then
+       
+       -- Insertar movimiento en caja si no existe
+          INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
+          VALUES (v_id_arqueo, 'Devolucion', 'Devolucion', p_id_usuario);
+       
+          SET v_id_movimiento = LAST_INSERT_ID();
+         end if;
+
+        -- Revertir el stock de los productos vendidos
+
+        OPEN cur;
+
+
+        read_loop: LOOP
+
+           FETCH cur INTO v_id_detalle, v_id_stock, v_id_producto, v_cantidad_vendida, v_precio_venta, v_costo_unitario, v_codigo_barra;
+
+
+            IF done THEN 
+
+                LEAVE read_loop;
+
+            END IF;
+
+            IF v_id_producto IS NOT NULL THEN
+
+        -- Restaurar stock en stock_producto
+
+                UPDATE lote_producto 
+                SET stock_disponible = stock_disponible + v_cantidad_vendida
+                WHERE id_lote = v_id_stock and estado=1;
+
+                -- Restaurar stock en stock_producto
+
+            UPDATE producto 
+            SET stock_producto = stock_producto + v_cantidad_vendida
+            WHERE id_producto = v_id_producto and estado=1;
+
+               -- Obtener el stock actual después de la reversión
+
+                SELECT stock_producto INTO v_stock_actual FROM producto WHERE id_producto = v_id_producto;
+                
+                -- Calcular existencia en Kardex
+
+                SET v_existencia_costo_total = v_stock_actual * v_costo_unitario;
+
+
+                -- Registrar entrada en Kardex
+
+                INSERT INTO kardex (
+                   id_usuario_creacion, id_producto, codigo_producto, concepto, comprobante, 
+                    entrada_unidades, entrada_costo_unitario, entrada_costo_total, 
+                    existencia_unidades, existencia_costo_unitario, existencia_costo_total
+
+                ) VALUES (
+                   p_id_usuario, v_id_producto, v_codigo_barra,  concat('Devolucion de Venta: Id', p_IdVenta), v_nro_boleta, 
+                    v_cantidad_vendida, v_costo_unitario, v_cantidad_vendida * v_costo_unitario, 
+                    v_stock_actual, v_costo_unitario, v_existencia_costo_total
+
+                );
+
+                -- Marcar detalle de venta stock como inactivo
+
+                UPDATE det_venta_lote 
+                SET estado = 0
+                WHERE id_detalle_venta_stock = v_id_detalle AND estado = 1;
+                 END IF;
+
+
+        END LOOP;
+        CLOSE cur;
+
+              -- Insertar en detalle_devoluciones
+
+        INSERT INTO detalle_devoluciones (id_movimiento_caja, tipo_devolucion, id_ventas, nro_ventas,monto,descripcion)
+        VALUES (v_id_movimiento, 'Venta',p_IdVenta,v_nro_boleta, v_total_venta, concat('Devolucion de Venta Id: ', p_IdVenta));
+
+
+         -- Eliminar el detalle de venta
+
+          UPDATE det_venta 
+          SET estado = 0 
+          WHERE IdVenta = p_IdVenta and estado=1;
+
+          -- Marcar la venta como anulada
+
+        UPDATE ventas 
+        SET estado = '0'
+        WHERE IdVenta = p_IdVenta and estado = '1';
+
+      
+        UPDATE detalle_ingresos 
+        SET estado = 0
+        WHERE id_ventas = p_IdVenta and estado = 1;
+
+        UPDATE ventas_credito 
+        SET estado = 'Eliminado'
+        WHERE id_venta = p_IdVenta and estado = 'Activo';
+
+
+    END IF;
+
+    END IF;
+
+    
+      SET mensaje = 'Venta eliminada correctamente.';
+     SELECT mensaje AS resultado;
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3113,14 +3384,14 @@ DECLARE mensaje VARCHAR(255);
     END;
 
     -- Verificar existencia y estado activo
-    IF EXISTS (SELECT 1 FROM categorias WHERE id_categoria = p_id_categoria AND estado = 1) THEN
+    IF EXISTS (SELECT 1 FROM categorias WHERE id_categoria = p_id_categoria AND estado = 1 or estado=2) THEN
 
         -- Eliminación lógica
         UPDATE categorias
         SET 
             id_usuario_eliminacion = p_id_usuario,
             fecha_eliminacion = NOW(),
-            estado = 2
+            estado = 0
         WHERE id_categoria = p_id_categoria;
 
         -- Auditoría (descomenta si la usas)
@@ -3163,7 +3434,7 @@ BEGIN
     SELECT COUNT(1)
     INTO existe_cliente
     FROM cliente
-    WHERE id_cliente = p_id_cliente AND estado = 1;
+    WHERE id_cliente = p_id_cliente AND estado = 1 ;
 
     IF p_id_cliente <= 0 THEN
         SET mensaje = 'Warning: Cliente inválido.';
@@ -3175,7 +3446,7 @@ BEGIN
         -- Marcar cliente como eliminado (borrado lógico)
         UPDATE cliente
         SET
-            estado = 2,
+            estado = 0,
             id_usuario_eliminacion = p_id_usuario,
             fecha_eliminacion = NOW()
         WHERE id_cliente = p_id_cliente;
@@ -3244,19 +3515,19 @@ BEGIN
     -- Marcar la compra como inactiva
 
     UPDATE compras 
-    SET estado = 2 
+    SET estado = 0
     WHERE IdCompra = p_IdCompra;
 
     -- Marcar los detalles de compra como inactivos
 
     UPDATE det_compra 
-    SET estado = 2 
+    SET estado = 0
     WHERE IdCompra = p_IdCompra;
 
        -- Marcar el detalle_gastos como inactiva
 
     UPDATE detalle_gastos 
-    SET estado = 2 
+    SET estado = 0 
     WHERE id_compras = p_IdCompra;
 
 
@@ -3324,7 +3595,7 @@ AND lp.id_det_compra=dc.IdDetCompra
 SET lp.stock_disponible = lp.stock_disponible - dc.Cantidad,
 
     lp.cantidad_comprada = lp.cantidad_comprada - dc.Cantidad,
-    lp.estado=2
+    lp.estado=0
 
 WHERE dc.IdCompra = p_IdCompra;
 
@@ -3356,7 +3627,7 @@ WHERE dc.IdCompra = p_IdCompra;
         VALUES (v_id_movimiento, 'Compra',p_IdCompra,v_numeroBoleta, v_TOTAL, CONCAT('Eliminación de compra Id: ', p_IdCompra));
   IF v_tipoPago = 'CREDITO' THEN
        UPDATE compras_credito 
-       SET estado = 'Inactivo'
+       SET estado = 'Eliminado'
         WHERE id_compra = p_IdCompra;
    END IF;
 
@@ -3559,7 +3830,7 @@ begin
         -- Eliminar lógicamente la medida
         UPDATE medidas
         SET fecha_eliminacion = v_fecha_eliminacion,
-            estado = 2
+            estado = 0
         WHERE id_medida = p_id_medidas;
 
         -- Registrar auditoría
@@ -3691,7 +3962,7 @@ BEGIN
         SET
             id_usuario_eliminacion = p_id_usuario,
             fecha_eliminacion = NOW(),
-            estado = 2
+            estado = 0
         WHERE id_proveedor = p_id_proveedor;
 
         -- Registrar en log de auditoría
@@ -3712,207 +3983,6 @@ BEGIN
 
     -- Devolver mensaje
     SELECT mensaje AS resultado;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `usp_EliminarVenta` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_EliminarVenta`(
-        IN p_IdVenta INT,
-        IN p_id_usuario INT
-
-)
-BEGIN
-    DECLARE mensaje VARCHAR(255);
-    DECLARE v_nro_boleta VARCHAR(25);
-    DECLARE v_id_arqueo INT;
-    DECLARE v_id_movimiento INT;
-    DECLARE v_id_detalle INT;
-    DECLARE v_id_stock INT;
-    DECLARE v_id_producto INT;
-    DECLARE v_cantidad_vendida INT;
-    DECLARE v_precio_venta DECIMAL(10,2);
-    DECLARE v_costo_unitario DECIMAL(10,2);
-    DECLARE v_codigo_barra VARCHAR(20);
-    DECLARE v_total_venta DECIMAL(10,2);
-
-
-      -- Kardex
-
-    DECLARE v_stock_actual INT;
-    DECLARE v_existencia_costo_total DECIMAL(10,2);
-
-    DECLARE done INT DEFAULT FALSE;
-
-   -- Cursor para recorrer los productos vendidos
-
-    DECLARE cur CURSOR FOR 
-
-     SELECT dvl.id_detalle_venta_stock, dvl.id_lote, dv.IdProducto, dvl.cantidad_vendida, dvl.precio_venta, dvl.costo_unitario, dv.codigo_barra
-         FROM det_venta_lote dvl
-        INNER JOIN det_venta dv ON dvl.id_det_venta = dv.IdDetalleVenta
-        WHERE dv.estado = 1 AND dv.IdVenta = p_IdVenta;
-
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-  -- Obtener la venta y su total
-
-    SELECT total_venta ,nro_boleta 
-    INTO  v_total_venta,v_nro_boleta 
-    FROM ventas  
-    WHERE IdVenta = p_IdVenta
-    AND estado = 1;
-
-    -- Verificar si la venta existe y está activa
-
-    IF EXISTS (SELECT 1 FROM ventas WHERE IdVenta = p_IdVenta AND estado = '1') THEN
-
-   
-         -- Obtener el arqueo de caja activo del usuario
-
-        SELECT id_arqueo_caja 
-        INTO v_id_arqueo
-        FROM arqueo_caja
-        WHERE id_usuario = p_id_usuario AND estado = 1
-        ORDER BY fecha_inicio DESC
-
-        LIMIT 1;
-
-         IF v_id_arqueo IS NOT NULL then
-
-     -- Obtener el movimiento de caja para devoluciones
-
-            SELECT id_movimiento_caja 
-            INTO v_id_movimiento
-            FROM movimiento_caja
-            WHERE id_arqueo = v_id_arqueo AND tipo_movimiento = 'Devolucion' 
-            AND tipo_referencia = 'Devolucion'
-            ORDER BY fecha_registro DESC
-
-            LIMIT 1;
-
-           
-         if v_id_movimiento is null then
-       
-       -- Insertar movimiento en caja si no existe
-          INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
-          VALUES (v_id_arqueo, 'Devolucion', 'Devolucion', p_id_usuario);
-       
-          SET v_id_movimiento = LAST_INSERT_ID();
-         end if;
-
-        -- Revertir el stock de los productos vendidos
-
-        OPEN cur;
-
-
-        read_loop: LOOP
-
-           FETCH cur INTO v_id_detalle, v_id_stock, v_id_producto, v_cantidad_vendida, v_precio_venta, v_costo_unitario, v_codigo_barra;
-
-
-            IF done THEN 
-
-                LEAVE read_loop;
-
-            END IF;
-
-            IF v_id_producto IS NOT NULL THEN
-
-        -- Restaurar stock en stock_producto
-
-                UPDATE lote_producto 
-                SET stock_disponible = stock_disponible + v_cantidad_vendida
-                WHERE id_lote = v_id_stock and estado=1;
-
-                -- Restaurar stock en stock_producto
-
-            UPDATE producto 
-            SET stock_producto = stock_producto + v_cantidad_vendida
-            WHERE id_producto = v_id_producto and estado=1;
-
-               -- Obtener el stock actual después de la reversión
-
-                SELECT stock_producto INTO v_stock_actual FROM producto WHERE id_producto = v_id_producto;
-                
-                -- Calcular existencia en Kardex
-
-                SET v_existencia_costo_total = v_stock_actual * v_costo_unitario;
-
-
-                -- Registrar entrada en Kardex
-
-                INSERT INTO kardex (
-                   id_usuario_creacion, id_producto, codigo_producto, concepto, comprobante, 
-                    entrada_unidades, entrada_costo_unitario, entrada_costo_total, 
-                    existencia_unidades, existencia_costo_unitario, existencia_costo_total
-
-                ) VALUES (
-                   p_id_usuario, v_id_producto, v_codigo_barra,  concat('Devolucion de Venta: Id', p_IdVenta), v_nro_boleta, 
-                    v_cantidad_vendida, v_costo_unitario, v_cantidad_vendida * v_costo_unitario, 
-                    v_stock_actual, v_costo_unitario, v_existencia_costo_total
-
-                );
-
-                -- Marcar detalle de venta stock como inactivo
-
-                UPDATE det_venta_lote 
-                SET estado = 2 
-                WHERE id_detalle_venta_stock = v_id_detalle AND estado = 1;
-                 END IF;
-
-
-        END LOOP;
-        CLOSE cur;
-
-              -- Insertar en detalle_devoluciones
-
-        INSERT INTO detalle_devoluciones (id_movimiento_caja, tipo_devolucion, id_ventas, nro_ventas,monto,descripcion)
-        VALUES (v_id_movimiento, 'Venta',p_IdVenta,v_nro_boleta, v_total_venta, concat('Devolucion de Venta Id: ', p_IdVenta));
-
-
-         -- Eliminar el detalle de venta
-
-          UPDATE det_venta 
-          SET estado = 2 
-          WHERE IdVenta = p_IdVenta and estado=1;
-
-          -- Marcar la venta como anulada
-
-        UPDATE ventas 
-        SET estado = '2'
-        WHERE IdVenta = p_IdVenta and estado = '1';
-
-      
-        UPDATE detalle_ingresos 
-        SET estado = 2
-        WHERE id_ventas = p_IdVenta and estado = 1;
-
-        UPDATE ventas_credito 
-        SET estado = 'Inactivo'
-        WHERE id_venta = p_IdVenta and estado = 'Activo';
-
-
-    END IF;
-
-    END IF;
-
-    
-      SET mensaje = 'Venta eliminada correctamente.';
-     SELECT mensaje AS resultado;
-    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4390,127 +4460,93 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_GuardarCompraCreditos`(
-           in p_IdUsuario int,
-            in p_IdCaja int,
-            in p_afectarCaja int,
-            in p_IdProveedor int,
-            in p_abono float,
-            in p_restante float,
-            in p_tipo_pago int,
-            in p_TipoDocumento int,
-            in p_fechaCompra date,
-            in p_fechaVence date,
-            in p_NumeroFactura varchar(20),
-            in p_iva float,
-            in p_subtotal float, 
-            in p_total_compra float, 
-            in p_Nro_compras varchar(20),
-            in p_Nro_credito_compras varchar(20),
-            IN p_detalle JSON)
+      in p_IdUsuario int,
+    in p_IdCaja int,
+    in p_afectarCaja int,
+    in p_IdProveedor int,
+    in p_abono float,
+    in p_restante float,
+    in p_tipo_pago int,
+    in p_TipoDocumento int,
+    in p_fechaCompra date,
+    in p_fechaVence date,
+    in p_NumeroFactura varchar(20),
+    in p_iva float,
+    in p_subtotal float,
+    in p_total_compra float,
+    in p_Nro_compras varchar(20),
+    in p_Nro_credito_compras varchar(20),
+    IN p_detalle JSON)
 begin
 
-	
-	DECLARE v_id_arqueo INT;
+    DECLARE v_id_arqueo INT;
     DECLARE v_id_movimiento INT;
     DECLARE v_IdCompra INT;
 
-
-        -- Manejador de excepciones para hacer rollback si hay un error
-
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-
+    -- Manejador de excepciones para hacer rollback si hay un error
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-
         -- Realizar ROLLBACK para deshacer cualquier cambio si ocurre un error
-
         ROLLBACK;
-
-                SELECT 'Error: Error al procesar la Compra.' AS resultado;
-
+        SELECT 'Error: Error al procesar la Compra.' AS resultado;
     END;
-  
-    -- 4️⃣ Iniciar Transacción
 
+    -- 4️⃣ Iniciar Transacción
     START TRANSACTION;
 
     -- Obtener el arqueo de caja abierto
-
     SELECT id_arqueo_caja INTO v_id_arqueo
     FROM arqueo_caja
-    WHERE id_usuario = p_IdUsuario  and id_caja=p_IdCaja AND estado = 1
+    WHERE id_usuario = p_IdUsuario and id_caja=p_IdCaja AND estado = 1
     ORDER BY fecha_inicio DESC
-
     LIMIT 1;
-
- 
 
     -- 1️⃣ Insertar en compras (cabecera)
-
     INSERT INTO compras(
-       tipo_pago, id_usuario_creacion, IdProveedor, subtotalcosto, iva, TotalCosto, TipoComprobante,  
+        tipo_pago, id_usuario_creacion, IdProveedor, subtotalcosto, iva, TotalCosto, TipoComprobante,
         NumeroFactura, nro_boletacompras,fecha_factura
-
     ) VALUES (
-
-       'CREDITO', p_IdUsuario, p_IdProveedor, p_subtotal, p_iva, p_total_compra, p_TipoDocumento,
+        'CREDITO', p_IdUsuario, p_IdProveedor, p_subtotal, p_iva, p_total_compra, p_TipoDocumento,
         p_NumeroFactura, p_Nro_compras,p_fechaCompra
-
     );
--- Obtener el ID de la compra recién insertada
 
+    -- Obtener el ID de la compra recién insertada
     SET v_IdCompra = LAST_INSERT_ID();
-    
+
     -- Actualizar correlativo de compras
-
-    UPDATE empresa 
-
+    UPDATE empresa
     SET nro_correlativo_compras = LPAD(nro_correlativo_compras + 1, 8, '0');
-    
-    
 
-      IF v_id_arqueo IS NOT NULL then
-  
-         -- Obtener movimiento
-    SELECT id_movimiento_caja INTO v_id_movimiento
-    FROM movimiento_caja
-    WHERE id_arqueo= v_id_arqueo and id_usuario = p_IdUsuario AND estado = 1 and tipo_movimiento='Egreso'
-    and tipo_referencia='Gasto'
-    ORDER BY fecha_registro DESC
+    IF v_id_arqueo IS NOT NULL then
+        -- Obtener movimiento
+        SELECT id_movimiento_caja INTO v_id_movimiento
+        FROM movimiento_caja
+        WHERE id_arqueo= v_id_arqueo and id_usuario = p_IdUsuario AND estado = 1 and tipo_movimiento='Egreso'
+        and tipo_referencia='Gasto'
+        ORDER BY fecha_registro DESC
+        LIMIT 1;
 
-    LIMIT 1;
+        if v_id_movimiento is null then
+            -- Insertar movimiento en caja
+            INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
+            VALUES (v_id_arqueo, 'Egreso', 'Gasto', p_IdUsuario);
 
-      if v_id_movimiento is null then
-
-        -- Insertar movimiento en caja
-
-        INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
-
-        VALUES (v_id_arqueo, 'Egreso', 'Gasto', p_IdUsuario);
-        
-        SET v_id_movimiento = LAST_INSERT_ID();
-
+            SET v_id_movimiento = LAST_INSERT_ID();
         END IF;
 
         -- Insertar en detalle_gastos
-
         INSERT INTO detalle_gastos (afectarCaja,id_movimiento_caja,tipo_gastos, tipo_pago, id_compras, nro_factura, nro_compras, nro_credito_compras,monto,descripcion)
-
         VALUES (p_afectarCaja,v_id_movimiento,'Compras', p_tipo_pago, v_IdCompra, p_NumeroFactura, p_Nro_compras, p_Nro_credito_compras,p_abono, 'Compra de mercaderia');
-     
-       END IF;
+    END IF;
 
     -- 2️⃣ Insertar en detalle de compra
-
     INSERT INTO det_compra (
-
         IdCompra, IdProducto, Cantidad, PrecioUnitarioCompra,
-         subtotalcosto, iva, TotalCosto,
+        subtotalcosto, iva, TotalCosto,
         codigo_barra, nro_boleta
     )
-
-    SELECT 
-
-        v_IdCompra, 
+    SELECT
+        v_IdCompra,
         j.IdProducto,
         j.cantidad,
         j.PrecioUnitarioCompra,
@@ -4518,12 +4554,9 @@ begin
         j.iva,
         j.TotalCosto,
         j.codigo_barra,
-        p_Nro_compras        
-
-    FROM JSON_TABLE(p_detalle, '$[*]' 
-
+        p_Nro_compras
+    FROM JSON_TABLE(p_detalle, '$[*]'
         COLUMNS (
-
             IdProducto INT PATH '$.id_producto',
             cantidad DECIMAL(10,2) PATH '$.cantidad',
             PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
@@ -4532,148 +4565,99 @@ begin
             TotalCosto DECIMAL(10,2) PATH '$.total',
             codigo_barra VARCHAR(25) PATH '$.codigo_producto'
         )
-
     ) AS j;
 
     -- 3️⃣ Actualizar stock en la tabla `producto`
-
     UPDATE producto p
-
     JOIN (
-
-        SELECT 
-
+        SELECT
             IdProducto,
             SUM(cantidad) AS cantidad_comprada,
-           MAX(PrecioUnitarioCompra) AS precio_reciente
-
-        FROM JSON_TABLE(p_detalle, '$[*]' 
-
+            MAX(PrecioUnitarioCompra) AS precio_reciente
+        FROM JSON_TABLE(p_detalle, '$[*]'
             COLUMNS (
-
                 IdProducto INT PATH '$.id_producto',
                 cantidad DECIMAL(10,2) PATH '$.cantidad',
-                 PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto'
-
+                PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto'
             )
-
         ) AS j
-
         GROUP BY IdProducto
-
     ) AS detalles_compra
-
     ON p.id_producto = detalles_compra.IdProducto
     SET p.stock_producto = p.stock_producto + detalles_compra.cantidad_comprada,
     p.precio_compra_producto = detalles_compra.precio_reciente;
 
-    -- 4️⃣ Insertar o actualizar en stock_producto
-
+    -- 4️⃣ Insertar en lote_producto, obteniendo id_det_compra de det_compra
     INSERT INTO lote_producto (
-        id_usuario_creacion,id_producto, cantidad_comprada, cantidad_bonificada, stock_disponible, 
+        id_usuario_creacion, id_det_compra, id_producto, cantidad_comprada, cantidad_bonificada, stock_disponible,
         costo_unitario, fecha_vencimiento
     )
+    SELECT
+        p_IdUsuario,
+        dc.IdDetCompra, -- Aquí se obtiene el IdDetCompra
+        dc.IdProducto,
+        dc.Cantidad,
+        0, -- Ajustar cantidad bonificada si aplica
+        dc.Cantidad,
+        dc.PrecioUnitarioCompra,
+        j.vence -- Fecha de vencimiento del JSON
+    FROM det_compra dc
+    JOIN JSON_TABLE(p_detalle, '$[*]'
+        COLUMNS (
+            IdProducto INT PATH '$.id_producto',
+            vence DATE PATH '$.vence'
+        )
+    ) AS j ON dc.IdProducto = j.IdProducto AND dc.IdCompra = v_IdCompra; -- Asegurarse de que coincida con la compra actual
 
-    SELECT 
+    -- 5️⃣ Registrar en `kardex`
+    INSERT INTO kardex (
+        id_usuario_creacion,id_producto, codigo_producto, concepto, comprobante,
+        entrada_unidades, entrada_costo_unitario, entrada_costo_total,
+        existencia_unidades, existencia_costo_unitario, existencia_costo_total
+    )
+    SELECT
         p_IdUsuario,
         j.IdProducto,
-        j.cantidad,
-        0, -- Ajustar cantidad bonificada si aplica
+        j.codigo_barra,
+        'Compra de productos',
+        p_Nro_compras,
         j.cantidad,
         j.PrecioUnitarioCompra,
-        j.vence -- Modificar si manejas fecha de vencimiento
-    FROM JSON_TABLE(p_detalle, '$[*]' 
-
+        j.TotalCosto,
+        (SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto), -- Existencia antes de la compra
+        j.PrecioUnitarioCompra,
+        ((SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto) + j.cantidad) * j.PrecioUnitarioCompra -- Nuevo costo total
+    FROM JSON_TABLE(p_detalle, '$[*]'
         COLUMNS (
-
             IdProducto INT PATH '$.id_producto',
             cantidad DECIMAL(10,2) PATH '$.cantidad',
             PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
-            vence DATE PATH '$.vence'
-
+            TotalCosto DECIMAL(10,2) PATH '$.total',
+            codigo_barra VARCHAR(25) PATH '$.codigo_producto'
         )
+    ) AS j
+    JOIN producto p ON p.id_producto = j.IdProducto;
 
-    ) AS j;
-
-       UPDATE lote_producto lp
-                 JOIN det_compra dc ON 
-                   lp.id_producto = dc.IdProducto AND
-                   lp.costo_unitario = dc.PrecioUnitarioCompra AND
-                   lp.cantidad_comprada = dc.Cantidad AND
-                   dc.IdCompra = v_IdCompra
-                  SET lp.id_det_compra = dc.IdDetCompra
-                  WHERE lp.id_det_compra IS NULL;
-   -- ON DUPLICATE KEY UPDATE 
-
-     --   cantidad_comprada = cantidad_comprada + VALUES(cantidad_comprada),
-     --   stock_disponible = stock_disponible + VALUES(stock_disponible);
-
-    -- 5️⃣ Registrar en `kardex`
-
-INSERT INTO kardex (
-    id_usuario_creacion,id_producto, codigo_producto, concepto, comprobante, 
-    entrada_unidades, entrada_costo_unitario, entrada_costo_total, 
-    existencia_unidades, existencia_costo_unitario, existencia_costo_total
-)
-
-SELECT 
-    p_IdUsuario,
-    j.IdProducto,
-    j.codigo_barra,
-    'Compra de productos',
-    p_Nro_compras,
-    j.cantidad,
-    j.PrecioUnitarioCompra,
-    j.TotalCosto,
-
-    (SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto),  -- Existencia antes de la compra
-
-    j.PrecioUnitarioCompra, 
-
-    ((SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto) + j.cantidad) * j.PrecioUnitarioCompra -- Nuevo costo total
-
-FROM JSON_TABLE(p_detalle, '$[*]' 
-
-    COLUMNS (
-
-        IdProducto INT PATH '$.id_producto',
-        cantidad DECIMAL(10,2) PATH '$.cantidad',
-        PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
-        TotalCosto DECIMAL(10,2) PATH '$.total',
-        codigo_barra VARCHAR(25) PATH '$.codigo_producto'
-
-    )
-
-) AS j
-
-JOIN producto p ON p.id_producto = j.IdProducto;
-
- --  Insertar en ventas_credito
-
+    -- Insertar en compras_credito
     INSERT INTO compras_credito (
-
         id_compra ,nroCreditoCompra, monto_total ,monto_abonado, saldo_pendiente ,fecha_compra,fecha_vencimiento
-
     ) VALUES (
-
         v_IdCompra,p_Nro_credito_compras, p_total_compra, p_abono,p_restante,p_fechaCompra,p_fechaVence
-
     );
 
-INSERT INTO log_auditoria (tabla, accion, usuario_id, detalle, id_registro_afectado, modulo)
-VALUES (
-  'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito', 
-  'INSERT/UPDATE', 
-  p_IdUsuario, 
-  CONCAT('Compra registrada completa con ID: ', v_IdCompra), 
-  v_IdCompra, 
-  'Compra'
-);
+    INSERT INTO log_auditoria (tabla, accion, usuario_id, detalle, id_registro_afectado, modulo)
+    VALUES (
+        'compras/det_compra/producto/kardex/Movimiento en caja/gasto/compra a credito',
+        'INSERT/UPDATE',
+        p_IdUsuario,
+        CONCAT('Compra registrada completa con ID: ', v_IdCompra),
+        v_IdCompra,
+        'Compra'
+    );
 
-       -- Confirmar transacción
-
+    -- Confirmar transacción
     COMMIT;
-         SELECT 'Se realizado con éxito la Compra.' AS resultado; 
+    SELECT 'Se ha realizado con éxito la Compra.' AS resultado;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4691,7 +4675,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_GuardarCompraEfectivo`(
-            in p_IdUsuario int,
+                       in p_IdUsuario int,
             in p_IdCaja int,
             in p_afectarCaja int,
             in p_IdProveedor int,
@@ -4703,115 +4687,89 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_GuardarCompraEfectivo`(
             in p_fechaVence date,
             in p_NumeroFactura varchar(20),
             in p_iva float,
-            in p_subtotal float, 
-            in p_total_compra float, 
+            in p_subtotal float,
+            in p_total_compra float,
             in p_Nro_compras varchar(20),
             in p_Nro_credito_compras varchar(20),
             IN p_detalle JSON)
 begin
 
-	
-	DECLARE v_id_arqueo INT;
+
+    DECLARE v_id_arqueo INT;
     DECLARE v_id_movimiento INT;
     DECLARE v_IdCompra INT;
 
 
-        -- Manejador de excepciones para hacer rollback si hay un error
-
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-
+    -- Manejador de excepciones para hacer rollback si hay un error
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-
         -- Realizar ROLLBACK para deshacer cualquier cambio si ocurre un error
-
         ROLLBACK;
-
               SELECT 'Error: Error al procesar la Compra.' AS resultado;
-
     END;
-  
-    -- 4️⃣ Iniciar Transacción
 
+    -- 4️⃣ Iniciar Transacción
     START TRANSACTION;
 
     -- Obtener el arqueo de caja abierto
-
     SELECT id_arqueo_caja INTO v_id_arqueo
     FROM arqueo_caja
     WHERE id_usuario = p_IdUsuario  and id_caja=p_IdCaja AND estado = 1
     ORDER BY fecha_inicio DESC
-
     LIMIT 1;
 
- 
 
     -- 1️⃣ Insertar en compras (cabecera)
-
     INSERT INTO compras(
-        tipo_pago,id_usuario_creacion, IdProveedor, subtotalcosto, iva, TotalCosto, TipoComprobante,  
+        tipo_pago,id_usuario_creacion, IdProveedor, subtotalcosto, iva, TotalCosto, TipoComprobante,
         NumeroFactura, nro_boletacompras,fecha_factura
-
     ) VALUES (
-
        'EFECTIVO', p_IdUsuario, p_IdProveedor, p_subtotal, p_iva, p_total_compra, p_TipoDocumento,
         p_NumeroFactura, p_Nro_compras,p_fechaCompra
-
     );
--- Obtener el ID de la compra recién insertada
 
+    -- Obtener el ID de la compra recién insertada
     SET v_IdCompra = LAST_INSERT_ID();
-    
+
     -- Actualizar correlativo de compras
-
-    UPDATE empresa 
-
+    UPDATE empresa
     SET nro_correlativo_compras = LPAD(nro_correlativo_compras + 1, 8, '0');
-    
-    
 
-      IF v_id_arqueo IS NOT NULL then
-  
+
+    IF v_id_arqueo IS NOT NULL then
+
          -- Obtener movimiento
     SELECT id_movimiento_caja INTO v_id_movimiento
     FROM movimiento_caja
     WHERE id_arqueo= v_id_arqueo and id_usuario = p_IdUsuario AND estado = 1 and tipo_movimiento='Egreso'
     and tipo_referencia='Gasto'
     ORDER BY fecha_registro DESC
-
     LIMIT 1;
 
       if v_id_movimiento is null then
 
         -- Insertar movimiento en caja
-
         INSERT INTO movimiento_caja (id_arqueo, tipo_movimiento, tipo_referencia, id_usuario)
-
         VALUES (v_id_arqueo, 'Egreso', 'Gasto', p_IdUsuario);
-        
+
         SET v_id_movimiento = LAST_INSERT_ID();
 
         END IF;
 
         -- Insertar en detalle_gastos
-
         INSERT INTO detalle_gastos (afectarCaja,id_movimiento_caja,tipo_gastos, tipo_pago, id_compras, nro_factura, nro_compras, nro_credito_compras,monto,descripcion)
-
         VALUES (p_afectarCaja,v_id_movimiento,'Compras', p_tipo_pago, v_IdCompra, p_NumeroFactura, p_Nro_compras, p_Nro_credito_compras,p_total_compra, 'Compra de mercaderia');
-     
+
        END IF;
 
     -- 2️⃣ Insertar en detalle de compra
-
     INSERT INTO det_compra (
-
         IdCompra, IdProducto, Cantidad, PrecioUnitarioCompra,
          subtotalcosto, iva, TotalCosto,
         codigo_barra, nro_boleta
     )
-
-    SELECT 
-
-        v_IdCompra, 
+    SELECT
+        v_IdCompra,
         j.IdProducto,
         j.cantidad,
         j.PrecioUnitarioCompra,
@@ -4819,12 +4777,9 @@ begin
         j.iva,
         j.TotalCosto,
         j.codigo_barra,
-        p_Nro_compras        
-
-    FROM JSON_TABLE(p_detalle, '$[*]' 
-
+        p_Nro_compras
+    FROM JSON_TABLE(p_detalle, '$[*]'
         COLUMNS (
-
             IdProducto INT PATH '$.id_producto',
             cantidad DECIMAL(10,2) PATH '$.cantidad',
             PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
@@ -4833,91 +4788,58 @@ begin
             TotalCosto DECIMAL(10,2) PATH '$.total',
             codigo_barra VARCHAR(25) PATH '$.codigo_producto'
         )
-
     ) AS j;
 
     -- 3️⃣ Actualizar stock en la tabla `producto`
-
     UPDATE producto p
-
     JOIN (
-
-        SELECT 
-
+        SELECT
             IdProducto,
             SUM(cantidad) AS cantidad_comprada,
                MAX(PrecioUnitarioCompra) AS precio_reciente
-
-        FROM JSON_TABLE(p_detalle, '$[*]' 
-
+        FROM JSON_TABLE(p_detalle, '$[*]'
             COLUMNS (
-
                 IdProducto INT PATH '$.id_producto',
                 cantidad DECIMAL(10,2) PATH '$.cantidad',
                   PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto'
             )
-
         ) AS j
-
         GROUP BY IdProducto
-
     ) AS detalles_compra
-
     ON p.id_producto = detalles_compra.IdProducto
     SET p.stock_producto = p.stock_producto + detalles_compra.cantidad_comprada,
         p.precio_compra_producto = detalles_compra.precio_reciente;
 
 
-    -- 4️⃣ Insertar o actualizar en stock_producto
-
+    -- 4️⃣ Insertar en lote_producto, obteniendo id_det_compra de det_compra
     INSERT INTO lote_producto (
-        id_usuario_creacion,id_producto, cantidad_comprada, cantidad_bonificada, stock_disponible, 
+        id_usuario_creacion, id_det_compra, id_producto, cantidad_comprada, cantidad_bonificada, stock_disponible,
         costo_unitario, fecha_vencimiento
     )
-
-    SELECT 
+    SELECT
         p_IdUsuario,
-        j.IdProducto,
-        j.cantidad,
+        dc.IdDetCompra, -- Aquí se obtiene el IdDetCompra
+        dc.IdProducto,
+        dc.Cantidad,
         0, -- Ajustar cantidad bonificada si aplica
-        j.cantidad,
-        j.PrecioUnitarioCompra,
-        j.vence -- Modificar si manejas fecha de vencimiento
-    FROM JSON_TABLE(p_detalle, '$[*]' 
-
+        dc.Cantidad,
+        dc.PrecioUnitarioCompra,
+        j.vence -- Fecha de vencimiento del JSON
+    FROM det_compra dc
+    JOIN JSON_TABLE(p_detalle, '$[*]'
         COLUMNS (
-
             IdProducto INT PATH '$.id_producto',
-            cantidad DECIMAL(10,2) PATH '$.cantidad',
-            PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
             vence DATE PATH '$.vence'
-
         )
-
-    ) AS j;
-
-       UPDATE lote_producto lp
-                 JOIN det_compra dc ON 
-                   lp.id_producto = dc.IdProducto AND
-                   lp.costo_unitario = dc.PrecioUnitarioCompra AND
-                   lp.cantidad_comprada = dc.Cantidad AND
-                   dc.IdCompra = v_IdCompra
-                  SET lp.id_det_compra = dc.IdDetCompra
-                  WHERE lp.id_det_compra IS NULL;
-   -- ON DUPLICATE KEY UPDATE 
-
-     --   cantidad_comprada = cantidad_comprada + VALUES(cantidad_comprada),
-     --   stock_disponible = stock_disponible + VALUES(stock_disponible);
+    ) AS j ON dc.IdProducto = j.IdProducto AND dc.IdCompra = v_IdCompra; -- Asegurarse de que coincida con la compra actual
 
     -- 5️⃣ Registrar en `kardex`
-
 INSERT INTO kardex (
-    id_usuario_creacion,id_producto, codigo_producto, concepto, comprobante, 
-    entrada_unidades, entrada_costo_unitario, entrada_costo_total, 
+    id_usuario_creacion,id_producto, codigo_producto, concepto, comprobante,
+    entrada_unidades, entrada_costo_unitario, entrada_costo_total,
     existencia_unidades, existencia_costo_unitario, existencia_costo_total
 )
-
-SELECT 
+SELECT
     p_IdUsuario,
     j.IdProducto,
     j.codigo_barra,
@@ -4926,44 +4848,33 @@ SELECT
     j.cantidad,
     j.PrecioUnitarioCompra,
     j.TotalCosto,
-
     (SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto),  -- Existencia antes de la compra
-
-    j.PrecioUnitarioCompra, 
-
+    j.PrecioUnitarioCompra,
     ((SELECT stock_producto FROM producto WHERE id_producto = j.IdProducto) + j.cantidad) * j.PrecioUnitarioCompra -- Nuevo costo total
-
-FROM JSON_TABLE(p_detalle, '$[*]' 
-
+FROM JSON_TABLE(p_detalle, '$[*]'
     COLUMNS (
-
         IdProducto INT PATH '$.id_producto',
         cantidad DECIMAL(10,2) PATH '$.cantidad',
         PrecioUnitarioCompra DECIMAL(10,2) PATH '$.precio_compra_producto',
         TotalCosto DECIMAL(10,2) PATH '$.total',
         codigo_barra VARCHAR(25) PATH '$.codigo_producto'
-
     )
-
 ) AS j
-
 JOIN producto p ON p.id_producto = j.IdProducto;
 
 INSERT INTO log_auditoria (tabla, accion, usuario_id, detalle, id_registro_afectado, modulo)
 VALUES (
-  'compras/det_compra/producto/kardex/Movimiento en caja/gasto', 
-  'INSERT/UPDATE', 
-  p_IdUsuario, 
-  CONCAT('Compra registrada completa con ID: ', v_IdCompra), 
-  v_IdCompra, 
+  'compras/det_compra/producto/kardex/Movimiento en caja/gasto',
+  'INSERT/UPDATE',
+  p_IdUsuario,
+  CONCAT('Compra registrada completa con ID: ', v_IdCompra),
+  v_IdCompra,
   'Compra'
 );
 
        -- Confirmar transacción
-
     COMMIT;
-
-     SELECT 'Se realizado con éxito la Compra.' AS resultado; 
+     SELECT 'Se realizado con éxito la Compra.' AS resultado;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5326,9 +5237,7 @@ BEGIN
     END;
 
     START TRANSACTION;
-
     main: BEGIN
-       
 	        -- Eliminar espacios al inicio y fin
     SET p_codigo_barra = LTRIM(RTRIM(p_codigo_barra));
 	SET p_descripcion_producto = LTRIM(RTRIM(p_descripcion_producto));
@@ -5397,7 +5306,6 @@ BEGIN
             );
 
             SET J_IdProducto = LAST_INSERT_ID();
-
             -- Log auditoría
             INSERT INTO log_auditoria (
                 tabla, accion, usuario_id, detalle, id_registro_afectado, modulo
@@ -5406,7 +5314,6 @@ BEGIN
                 CONCAT('Registro de producto nuevo. Código: ', p_codigo_barra, ', Descripción: ', p_descripcion_producto),
                 J_IdProducto, 'PRODUCTO'
             );
-
             -- Insertar lote
             IF p_perecedero_producto = 1 THEN
                 INSERT INTO lote_producto (
@@ -5476,6 +5383,224 @@ BEGIN
         SELECT mensaje AS resultado;
 
     END main;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_GuardarProductoLote` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_GuardarProductoLote`(
+    IN p_id_producto INT,
+    IN p_codigo_barra VARCHAR(20),
+    IN p_id_categoria_producto INT,
+    IN p_id_marca_producto INT,
+    IN p_id_unidades INT,
+    IN p_descripcion_producto VARCHAR(100),
+    IN p_img_producto VARCHAR(100),
+    IN p_precio_compra_producto DECIMAL(10,2),
+    IN p_precio_venta_producto DECIMAL(10,2),
+    IN p_precio_1_producto DECIMAL(10,2),
+    IN p_precio_2_producto DECIMAL(10,2),
+    IN p_lleva_iva_producto INT,
+    IN p_stock_producto DECIMAL(10,2),
+    IN p_minimo_stock_producto DECIMAL(10,2),    
+    IN p_perecedero_producto INT,
+    IN p_id_usuario INT,
+    IN p_fecha_vencimiento DATE
+)
+BEGIN
+    DECLARE v_status VARCHAR(10);
+    DECLARE v_mensaje VARCHAR(255);
+    DECLARE v_sql_state VARCHAR(10);
+    DECLARE v_sql_message VARCHAR(255);
+    DECLARE v_j_id_producto INT;
+    DECLARE v_existe INT;
+    DECLARE v_asiento_id INT;
+    DECLARE v_costo_total_producto DECIMAL(10,2); 
+    
+    -- ¡CORRECCIÓN AQUÍ! Declarar v_concepto_kardex como variable local
+    DECLARE v_concepto_kardex VARCHAR(600); 
+
+    -- Manejador de errores general para cualquier SQLEXCEPTION
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        GET DIAGNOSTICS CONDITION 1
+            v_sql_state = RETURNED_SQLSTATE,
+            v_sql_message = MESSAGE_TEXT;
+        
+        IF (@in_transaction IS NOT NULL AND @in_transaction = 1) THEN
+            ROLLBACK;
+            SET @in_transaction = 0;
+        END IF;
+
+        SET v_status = 'error';
+        SET v_mensaje = CONCAT('Error de BD (', v_sql_state, '): ', v_sql_message);
+        SELECT JSON_OBJECT('status', v_status, 'mensaje', v_mensaje) AS resultado;
+    END;
+
+    SET @in_transaction = 1;
+    START TRANSACTION;
+
+    main: BEGIN
+       
+	    SET p_codigo_barra = LTRIM(RTRIM(p_codigo_barra));
+	    SET p_descripcion_producto = LTRIM(RTRIM(p_descripcion_producto));
+	    
+	    SET v_costo_total_producto = p_stock_producto * p_precio_compra_producto;
+
+	    IF p_id_producto > 0 THEN
+            SELECT COUNT(*) INTO v_existe 
+            FROM producto 
+            WHERE codigo_barra = p_codigo_barra AND id_producto != p_id_producto;
+        ELSE
+            SELECT COUNT(*) INTO v_existe 
+            FROM producto 
+            WHERE codigo_barra = p_codigo_barra;
+        END IF;
+
+        IF v_existe > 0 THEN
+            SET v_status = 'warning';
+            SET v_mensaje = 'El código de barra ya está registrado para otro producto.';
+            SELECT JSON_OBJECT('status', v_status, 'mensaje', v_mensaje) AS resultado;
+            LEAVE main;
+        END IF;
+
+        IF p_id_producto > 0 THEN
+            UPDATE producto SET
+                id_categoria_producto = p_id_categoria_producto,
+                id_marca = p_id_marca_producto,
+                id_unidades = p_id_unidades,
+                descripcion_producto = p_descripcion_producto,
+                precio_venta_producto = p_precio_venta_producto,
+                precio_1_producto = p_precio_1_producto,
+                precio_2_producto = p_precio_2_producto,
+                lleva_iva_producto = p_lleva_iva_producto,
+                minimo_stock_producto = p_minimo_stock_producto,
+                perecedero_producto = p_perecedero_producto,
+                id_usuario_actualizacion = p_id_usuario,
+                img_producto = p_img_producto
+            WHERE id_producto = p_id_producto;
+
+            INSERT INTO log_auditoria (
+                tabla, accion, usuario_id, detalle, id_registro_afectado, modulo
+            ) VALUES (
+                'producto', 'UPDATE', p_id_usuario,
+                CONCAT('Actualización del producto. ID: ', p_id_producto, ', Descripción: ', p_descripcion_producto),
+                p_id_producto, 'PRODUCTO'
+            );
+
+            SET v_status = 'success';
+            SET v_mensaje = 'Producto actualizado con éxito.';
+
+        ELSE
+            INSERT INTO producto (
+                codigo_barra, id_categoria_producto, id_marca, id_unidades,
+                descripcion_producto, img_producto, precio_compra_producto,
+                precio_venta_producto, precio_1_producto, precio_2_producto,
+                lleva_iva_producto, stock_producto,
+                minimo_stock_producto, perecedero_producto,
+                id_usuario_creacion
+            ) VALUES (
+                p_codigo_barra, p_id_categoria_producto, p_id_marca_producto, p_id_unidades,
+                p_descripcion_producto, p_img_producto, p_precio_compra_producto,
+                p_precio_venta_producto, p_precio_1_producto, p_precio_2_producto,
+                p_lleva_iva_producto, p_stock_producto,
+                p_minimo_stock_producto, p_perecedero_producto,
+                p_id_usuario
+            );
+
+            SET v_j_id_producto = LAST_INSERT_ID();
+
+            INSERT INTO log_auditoria (
+                tabla, accion, usuario_id, detalle, id_registro_afectado, modulo
+            ) VALUES (
+                'producto / lote_producto / kardex', 'INSERT', p_id_usuario,
+                CONCAT('Registro de producto nuevo. Código: ', p_codigo_barra, ', Descripción: ', p_descripcion_producto),
+                v_j_id_producto, 'PRODUCTO'
+            );
+
+            IF p_perecedero_producto = 1 THEN
+                INSERT INTO lote_producto (
+                    id_usuario_creacion, id_producto,
+                    cantidad_comprada, stock_disponible,
+                    costo_unitario, fecha_vencimiento
+                ) VALUES (
+                    p_id_usuario, v_j_id_producto,
+                    p_stock_producto, p_stock_producto,
+                    p_precio_compra_producto, p_fecha_vencimiento
+                );
+            ELSE
+                INSERT INTO lote_producto (
+                    id_usuario_creacion, id_producto,
+                    cantidad_comprada, stock_disponible,
+                    costo_unitario
+                ) VALUES (
+                    p_id_usuario, v_j_id_producto,
+                    p_stock_producto, p_stock_producto,
+                    p_precio_compra_producto
+                );
+            END IF;
+
+            -- ¡CORRECCIÓN AQUÍ! Usar v_concepto_kardex
+            SET v_concepto_kardex = 'INVENTARIO INICIAL'; 
+            INSERT INTO KARDEX (
+                id_usuario_creacion, id_producto, codigo_producto,
+                concepto, existencia_unidades, existencia_costo_unitario,
+                existencia_costo_total
+            ) VALUES (
+                p_id_usuario, v_j_id_producto, p_codigo_barra,
+                v_concepto_kardex, p_stock_producto, p_precio_compra_producto,
+                v_costo_total_producto
+            );
+
+            INSERT INTO asiento_contable (
+                fecha, descripcion, tipo_asiento, id_referencia,
+                modulo_origen, total_debe, total_haber, tipo_referencia
+            ) VALUES (
+                CURDATE(), CONCAT('Inventario inicial del producto ', p_descripcion_producto),
+                'INVENTARIO_INICIAL', v_j_id_producto,
+                'PRODUCTO', v_costo_total_producto, v_costo_total_producto,
+                'producto'
+            );
+
+            SET v_asiento_id = LAST_INSERT_ID();
+
+            INSERT INTO detalle_asiento (
+                id_asiento, id_cuenta, debe, descripcion, orden
+            ) VALUES (
+                v_asiento_id, 9, v_costo_total_producto, CONCAT( 'Registro de inventario inicial', p_descripcion_producto), 1
+            );
+
+            INSERT INTO detalle_asiento (
+                id_asiento, id_cuenta, haber, descripcion, orden
+            ) VALUES (
+                v_asiento_id, 13, v_costo_total_producto, CONCAT('Contrapartida por ajuste de producto ', p_descripcion_producto), 2
+            );
+
+            SET v_status = 'success';
+            SET v_mensaje = 'Producto registrado con éxito.';
+        END IF;
+
+        COMMIT;
+        SET @in_transaction = 0;
+        
+        SELECT JSON_OBJECT(
+            'status', v_status,
+            'mensaje', v_mensaje
+        ) AS resultado;
+
+    END main;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5567,151 +5692,6 @@ BEGIN
     -- Devolver resultado
     SELECT mensaje AS resultado;
 
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `usp_GuardarVenta` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_GuardarVenta`(
- IN p_IdUsuario INT,
-
-    IN p_IdCaja INT,
-
-    IN p_IdCliente INT,
-
-    IN p_nro_boleta VARCHAR(25),
-
-    IN p_tipo_pago INT,
-
-    IN p_TipoDocumento INT,
-
-    IN p_CantidadTotal DECIMAL(10,2),
-
-    IN p_iva DECIMAL(10,2),
-
-    IN p_subtotal DECIMAL(10,2),
-
-    IN p_total_venta DECIMAL(10,2),
-
-    IN p_ImporteRecibido DECIMAL(10,2),
-
-    IN p_ImporteCambio DECIMAL(10,2),
-
-    IN p_nro_credito_venta VARCHAR(25),
-
-    IN p_detalle JSON -- Se recibe un JSON con los productos vendidos
-
-)
-BEGIN
-
-    DECLARE v_IdVenta INT;
-
-    DECLARE v_fecha_registro DATETIME DEFAULT NOW();
-
-    DECLARE v_id_arqueo INT;
-
-    DECLARE v_id_producto INT;
-
-    DECLARE v_cantidad_vender INT;
-
-    -- 1️⃣ Insertar en venta_cabecera
-
-    INSERT INTO ventas (
-
-        IdUsuario, Id_caja, IdCliente, nro_boleta, tipo_pago, 
-
-        TipoDocumento, CantidadTotal, iva, subtotal, total_venta, 
-
-        ImporteRecibido, ImporteCambio, abono_credito, fecha_venta, Activo
-
-    ) VALUES (
-
-        p_IdUsuario, p_IdCaja, p_IdCliente, p_nro_boleta, p_tipo_pago, 
-
-        p_TipoDocumento, p_CantidadTotal, p_iva, p_subtotal, p_total_venta, 
-
-        p_ImporteRecibido, p_ImporteCambio, p_nro_credito_venta, v_fecha_registro, '1'
-
-    );
-
-
-
-    SET v_IdVenta = LAST_INSERT_ID();
-
-
-
-    -- 2️⃣ Insertar en det_venta
-
-    INSERT INTO det_venta (
-
-        IdVenta, IdProducto, codigo_barra, descripcion_producto, cantidad, 
-
-        PrecioUnidad, iva, Sub_total, total_venta, fecha_venta, Activo
-
-    )
-
-        SELECT 
-
-        v_IdVenta, 
-
-        j.IdProducto,
-
-        j.codigo_barra,
-
-        j.descripcion_producto,
-
-        j.cantidad,
-
-        j.PrecioUnidad,
-
-        j.iva,
-
-        j.Sub_total,
-
-        j.total_venta,
-
-        v_fecha_registro,
-
-        '1'
-
-    FROM JSON_TABLE(p_detalle, '$[*]' 
-
-        COLUMNS (
-
-            IdProducto INT PATH '$.id_producto',
-
-            codigo_barra VARCHAR(25) PATH '$.codigo_barra',
-
-            descripcion_producto VARCHAR(25) PATH '$.descripcion_producto',
-
-            cantidad DECIMAL(10,2) PATH '$.cantidad',
-
-            PrecioUnidad DECIMAL(10,2) PATH '$.precio_venta',
-
-            iva DECIMAL(10,2) PATH '$.iva',
-
-            Sub_total DECIMAL(10,2) PATH '$.subtotal',
-
-            total_venta DECIMAL(10,2) PATH '$.total'
-
-            
-
-        )
-
-    ) AS j;
-
-  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -5927,7 +5907,7 @@ begin
                     WHERE id_lote = v_id_stock;
             
                UPDATE lote_producto
-                    SET estado = 0
+                    SET estado = 2
                    WHERE id_lote = v_id_stock AND stock_disponible = 0;
                     
                     -- Registrar en detalle_venta_stock
@@ -5944,7 +5924,7 @@ begin
                     WHERE id_lote = v_id_stock;
                     
                      UPDATE lote_producto
-                    SET estado = 0
+                    SET estado = 2
                    WHERE id_lote = v_id_stock AND stock_disponible = 0;
                     
                     -- Registrar en detalle_venta_stock
@@ -6200,7 +6180,7 @@ begin
                     WHERE id_lote = v_id_stock;
             
                    UPDATE lote_producto
-                    SET estado = 0
+                    SET estado = 2
                    WHERE id_lote = v_id_stock AND stock_disponible = 0;
                     
                     -- Registrar en detalle_venta_stock
@@ -6217,7 +6197,7 @@ begin
                     WHERE id_lote = v_id_stock;
                     
                     UPDATE lote_producto
-                    SET estado = 0
+                    SET estado = 2
                    WHERE id_lote = v_id_stock AND stock_disponible = 0;
                     
                     -- Registrar en detalle_venta_stock
@@ -6752,14 +6732,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ListarComprasCreditoFiltrado`(
     IN p_fecha_fin DATE
 )
 BEGIN
-    -- Eliminar espacios al inicio y fin
+ -- Eliminar espacios al inicio y fin
     SET p_filtro = LTRIM(RTRIM(p_filtro));
     SET p_filtro_estado = LTRIM(RTRIM(p_filtro_estado));
 
     SELECT 
         '' AS vacio,
         c.IdCompra,
-        cc.id_compra_credito as IdCompraCreditos,
+        cc.id_compra_credito AS IdCompraCreditos,
         p.id_proveedor,
         p.nombre,
         p.razon_social,
@@ -6769,7 +6749,13 @@ BEGIN
         cc.saldo_pendiente,
         cc.fecha_compra,
         cc.fecha_vencimiento,
-        cc.estado,
+        
+        -- Estado real calculado
+        CASE 
+            WHEN cc.estado = 'Pendiente' AND cc.fecha_vencimiento < CURDATE() THEN 'Vencido'
+            ELSE cc.estado
+        END AS estado,
+
         '' AS acciones
     FROM 
         compras_credito cc 
@@ -6777,14 +6763,19 @@ BEGIN
         compras c ON cc.id_compra = c.IdCompra
     INNER JOIN 
         proveedor p ON c.IdProveedor = p.id_proveedor 
+
     WHERE 
         (
-            (p_filtro_estado = 'Cobrables' AND cc.estado IN ('Pendiente', 'Vencido'))
+            -- Evaluamos estado calculado, no el real
+            (p_filtro_estado = 'Cobrables' AND 
+                (cc.estado = 'Pendiente' AND cc.fecha_vencimiento >= CURDATE()
+                OR cc.estado = 'Pendiente' AND cc.fecha_vencimiento < CURDATE()
+                OR cc.estado = 'Vencido') )
             OR (p_filtro_estado = 'Finalizado' AND cc.estado IN ('Pagado', 'Inactivo'))
             OR (p_filtro_estado = 'Pagado' AND cc.estado = 'Pagado')
             OR (p_filtro_estado = 'Inactivo' AND cc.estado = 'Inactivo')
-            OR (p_filtro_estado = 'Pendiente' AND cc.estado = 'Pendiente')
-            OR (p_filtro_estado = 'Vencido' AND cc.estado = 'Vencido')
+            OR (p_filtro_estado = 'Pendiente' AND cc.estado = 'Pendiente' AND cc.fecha_vencimiento >= CURDATE())
+            OR (p_filtro_estado = 'Vencido' AND (cc.estado = 'Pendiente' AND cc.fecha_vencimiento < CURDATE() OR cc.estado = 'Vencido'))
             OR (p_filtro_estado = 'Todos')
         )
         AND (
@@ -6794,8 +6785,8 @@ BEGIN
         )
         AND (p_fecha_inicio IS NULL OR cc.fecha_compra >= p_fecha_inicio)
         AND (p_fecha_fin IS NULL OR cc.fecha_compra <= p_fecha_fin)
-        
-        -- Aplicar filtro de saldo solo si el estado lo requiere
+
+        -- Filtro por saldo si aplica
         AND (
             (p_filtro_estado IN ('Cobrables', 'Pendiente', 'Vencido') AND cc.saldo_pendiente > 0)
             OR (p_filtro_estado IN ('Pagado', 'Inactivo', 'Finalizado', 'Todos'))
@@ -7497,44 +7488,58 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ListarVentasCreditoFiltrado`(
      IN p_fecha_fin DATE
    )
 BEGIN
- SELECT 
-       '' AS vacio,
-       vc.id_venta_credito,
-       cl.id_cliente,
-       concat(cl.nombre,' ',cl.apellido) AS nombre_cliente,
-       vc.nroCreditoVentas,
-       vc.monto_total,
-       vc.monto_abonado,
-       vc.saldo_pendiente,
-       vc.fecha_venta,
-       vc.fecha_vencimiento,
-       vc.estado,
-       '' AS acciones
-  FROM 
-       ventas_credito vc
-  INNER JOIN 
-       ventas v ON vc.id_venta = v.IdVenta
-  INNER JOIN 
-       cliente cl ON v.IdCliente = cl.id_cliente
-  WHERE 
-       (
-           (p_filtro_estado = 'Cobrables' AND vc.estado IN ('Pendiente', 'Vencido'))
-           OR (p_filtro_estado = 'Finalizado' AND vc.estado IN ('Pagado', 'Inactivo'))
-           OR (p_filtro_estado = 'Pagado' AND vc.estado = 'Pagado')
-           OR (p_filtro_estado = 'Inactivo' AND vc.estado = 'Inactivo')
-           OR (p_filtro_estado = 'Pendiente' AND vc.estado = 'Pendiente')
-           OR (p_filtro_estado = 'Vencido' AND vc.estado = 'Vencido')
-           OR (p_filtro_estado = 'Todos')
-       )
-       AND (
-           (p_filtro = 'Con abonos' AND vc.monto_abonado > 0)
-           OR (p_filtro = 'Sin abonos' AND vc.monto_abonado = 0)
-           OR (p_filtro = 'Todos')
-       )
-       AND (p_fecha_inicio IS NULL OR vc.fecha_venta >= p_fecha_inicio)
-       AND (p_fecha_fin IS NULL OR vc.fecha_venta <= p_fecha_fin)
-  ORDER BY 
-       vc.fecha_venta ASC;
+ -- Limpiar espacios
+    SET p_filtro = LTRIM(RTRIM(p_filtro));
+    SET p_filtro_estado = LTRIM(RTRIM(p_filtro_estado));
+
+    SELECT 
+        '' AS vacio,
+        vc.id_venta_credito,
+        cl.id_cliente,
+        CONCAT(cl.nombre, ' ', cl.apellido) AS nombre_cliente,
+        vc.nroCreditoVentas,
+        vc.monto_total,
+        vc.monto_abonado,
+        vc.saldo_pendiente,
+        vc.fecha_venta,
+        vc.fecha_vencimiento,
+        
+        -- Estado calculado en tiempo real
+        CASE 
+            WHEN vc.estado = 'Pendiente' AND vc.fecha_vencimiento < CURDATE() THEN 'Vencido'
+            ELSE vc.estado
+        END AS estado,
+
+        '' AS acciones
+    FROM 
+        ventas_credito vc
+    INNER JOIN 
+        ventas v ON vc.id_venta = v.IdVenta
+    INNER JOIN 
+        cliente cl ON v.IdCliente = cl.id_cliente
+    WHERE 
+        (
+            -- Usar estado dinámico para aplicar filtros
+            (p_filtro_estado = 'Cobrables' AND 
+                (vc.estado = 'Pendiente' AND vc.fecha_vencimiento >= CURDATE()
+                 OR vc.estado = 'Pendiente' AND vc.fecha_vencimiento < CURDATE()
+                 OR vc.estado = 'Vencido'))
+            OR (p_filtro_estado = 'Finalizado' AND vc.estado IN ('Pagado', 'Inactivo'))
+            OR (p_filtro_estado = 'Pagado' AND vc.estado = 'Pagado')
+            OR (p_filtro_estado = 'Inactivo' AND vc.estado = 'Inactivo')
+            OR (p_filtro_estado = 'Pendiente' AND vc.estado = 'Pendiente' AND vc.fecha_vencimiento >= CURDATE())
+            OR (p_filtro_estado = 'Vencido' AND (vc.estado = 'Pendiente' AND vc.fecha_vencimiento < CURDATE() OR vc.estado = 'Vencido'))
+            OR (p_filtro_estado = 'Todos')
+        )
+        AND (
+            (p_filtro = 'Con abonos' AND vc.monto_abonado > 0)
+            OR (p_filtro = 'Sin abonos' AND vc.monto_abonado = 0)
+            OR (p_filtro = 'Todos')
+        )
+        AND (p_fecha_inicio IS NULL OR vc.fecha_venta >= p_fecha_inicio)
+        AND (p_fecha_fin IS NULL OR vc.fecha_venta <= p_fecha_fin)
+    ORDER BY 
+        vc.fecha_venta ASC;
 
 END ;;
 DELIMITER ;
@@ -7626,6 +7631,42 @@ BEGIN
     FROM lote_producto lp
     INNER JOIN producto p ON lp.id_producto = p.id_producto
     ORDER BY lp.fecha_registro DESC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_lotes_por_vencer` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_lotes_por_vencer`(IN p_Dias INT )
+BEGIN
+
+	SELECT 
+	'' as expandri,
+    p.id_producto,
+    p.codigo_barra,
+    p.descripcion_producto,
+    lp.id_lote,
+    lp.fecha_vencimiento,
+    DATEDIFF(lp.fecha_vencimiento, CURDATE()) AS dias_para_vencer,
+    lp.stock_disponible
+  FROM 
+    lote_producto lp
+  JOIN 
+    producto p ON p.id_producto = lp.id_producto
+  WHERE 
+    lp.fecha_vencimiento IS NOT NULL
+    AND lp.estado = 1
+    AND DATEDIFF(lp.fecha_vencimiento, CURDATE()) <= p_Dias;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -8888,7 +8929,7 @@ BEGIN
     END IF;
 
     SET v_unidades_entrada = (p_nuevo_stock - v_unidades_ex);
-    SET v_costo_unitario_entrada = v_costo_final;
+    SET v_costo_unitario_entrada = p_precio_compra;
     SET v_costo_total_entrada = v_unidades_entrada * v_costo_unitario_entrada;
 
     SET v_unidades_ex = ROUND(p_nuevo_stock, 2);
@@ -8970,7 +9011,8 @@ BEGIN
     -- Actualizar stock del producto
     UPDATE producto 
     SET stock_producto = stock_producto + p_cantidad,
-        id_usuario_actualizacion = p_id_usuario
+        id_usuario_actualizacion = p_id_usuario,
+        precio_compra_producto=p_precio_compra
     WHERE id_producto = p_id_producto;
 
     -- Registrar asiento contable
@@ -9019,7 +9061,7 @@ BEGIN
         INSERT INTO detalle_asiento(
             id_asiento,
             id_cuenta,
-            debe,
+            haber,
             descripcion,
             orden
         ) VALUES (
@@ -9031,7 +9073,8 @@ BEGIN
         );
     ELSEIF p_tipo_ingreso = 'PROMOCION' THEN
     
-        -- Debe: Inventario (104)
+       
+      -- Haber: Productos bonificados (600)
         INSERT INTO detalle_asiento(
             id_asiento,
             id_cuenta,
@@ -9039,14 +9082,14 @@ BEGIN
             descripcion,
             orden
         ) VALUES (
-            v_id_asiento,
-            9, -- cuenta productos bonificados (gasto)
+            v_id_asiento,  
+            16, -- cuenta inventario
             v_costo_total_entrada,
-            'Ingreso producto bonificado',
+             'Bonificación proveedor',
             1
         );
 
-         -- Haber: Productos bonificados (600)
+        -- Debe: Inventario (104)
         INSERT INTO detalle_asiento(
             id_asiento,
             id_cuenta,
@@ -9055,9 +9098,9 @@ BEGIN
             orden
         ) VALUES (
             v_id_asiento,
-            16, -- cuenta inventario
+           9, -- cuenta productos bonificados (gasto)
             v_costo_total_entrada,
-            'Bonificación proveedor',
+            'Ingreso producto bonificado',
             2
         );
     END IF;
@@ -10271,6 +10314,121 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_ValidarEliminacionCompra` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ValidarEliminacionCompra`(
+ IN p_IdCompra INT
+)
+validar: BEGIN -- se declara un bloque etiquetado 'validar'
+    DECLARE v_total_problemas INT DEFAULT 0;
+    DECLARE v_mensaje VARCHAR(255);
+
+    IF NOT EXISTS (
+        SELECT 1 FROM compras WHERE IdCompra = p_IdCompra AND estado = '1'
+    ) THEN
+        SET v_mensaje = 'La compra no existe o ya está anulada.';
+        SELECT v_mensaje AS resultado;
+        LEAVE validar;
+    END IF;
+
+      -- Validar si existen lotes con stock insuficiente
+    SELECT COUNT(*) INTO v_total_problemas
+    FROM lote_producto lp
+    INNER JOIN det_compra dc ON dc.IdDetCompra = lp.id_det_compra
+    WHERE dc.IdCompra = p_IdCompra
+      AND lp.stock_disponible < lp.cantidad_comprada
+      AND lp.estado = 1;
+
+    IF v_total_problemas > 0 THEN
+        SET v_mensaje = CONCAT('No se puede anular: ', v_total_problemas, ' lote(s) tienen stock insuficiente.');
+        SELECT v_mensaje AS resultado;
+        LEAVE validar;
+    END IF;
+    
+     -- Validar si tiene abonos en crédito
+    IF EXISTS (
+        SELECT 1
+        FROM compras_credito
+        WHERE id_compra = p_IdCompra
+          AND monto_abonado > 0
+          AND estado NOT IN ('Eliminado', 'Inactivo')
+    ) THEN
+        SET v_mensaje = 'No se puede anular: la compra tiene abonos registrados.';
+        SELECT v_mensaje AS resultado;
+        LEAVE validar;
+    END IF;
+
+    SELECT v_mensaje AS resultado;
+END validar ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_ValidarEliminacionVenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ValidarEliminacionVenta`(
+  IN p_IdVenta INT,
+    IN p_id_usuario INT
+)
+BEGIN
+    DECLARE v_clave_acceso VARCHAR(50);
+    DECLARE v_fecha_autorizacion DATETIME;
+    DECLARE v_abonos INT;
+    DECLARE v_mensaje VARCHAR(255);
+
+    -- Validar si la venta existe
+    IF NOT EXISTS (SELECT 1 FROM ventas WHERE IdVenta = p_IdVenta) THEN
+        SET v_mensaje = 'La venta no existe.';
+    ELSE
+        -- Validar si fue autorizada por SRI
+        SELECT clave_acceso, fecha_autorizacion
+        INTO v_clave_acceso, v_fecha_autorizacion
+        FROM ventas
+        WHERE IdVenta = p_IdVenta;
+
+        IF v_clave_acceso IS NOT NULL OR v_fecha_autorizacion IS NOT NULL THEN
+            SET v_mensaje = 'La venta ya fue autorizada por el SRI. No se puede eliminar.';
+        ELSE
+            -- Validar si tiene abonos registrados en crédito
+            SELECT COUNT(*)
+            INTO v_abonos
+            FROM abonos_credito ab
+            JOIN ventas_credito vc ON vc.id_venta_credito = ab.id_venta_credito
+            WHERE vc.id_venta = p_IdVenta AND ab.estado = '1';
+
+            IF v_abonos > 0 THEN
+                SET v_mensaje = 'La venta tiene abonos de crédito. No se puede eliminar.';
+            ELSE
+                SET v_mensaje = 'OK';
+            END IF;
+        END IF;
+    END IF;
+
+    -- Retornar resultado
+    SELECT v_mensaje AS resultado;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `usp_ValidarEliminarCompra` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -10383,122 +10541,45 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_ValidarEliminarVenta`(
-
-IN p_nroBoleta VARCHAR(20),
-
-    IN p_IdUsuario INT
-
+    IN p_IdVenta INT,
+    IN p_id_usuario INT
 )
 BEGIN
+    DECLARE v_clave_acceso VARCHAR(50);
+    DECLARE v_fecha_autorizacion DATETIME;
+    DECLARE v_abonos INT;
+    DECLARE v_mensaje VARCHAR(255);
 
-    DECLARE v_IdVenta INT;
-
-    DECLARE v_id_arqueo INT;
-
-    DECLARE v_mensaje VARCHAR(255) DEFAULT '';
-
-
-
-    -- Obtener ID de la venta
-
-    SELECT IdVenta INTO v_IdVenta FROM ventas 
-
-    WHERE CAST(nro_boleta AS CHAR) = CAST(p_nroBoleta AS CHAR) 
-
-    AND Activo = 1;
-
-
-
-    --  Validar que la venta exista
-
-    IF v_IdVenta IS NULL THEN
-
-        SET v_mensaje = CONCAT(v_mensaje, 'Error: La venta no existe o ya fue anulada. ');
-
-    END IF;
-
-
-
-    --  Validar que la venta no tenga devoluciones previas
-
-    IF EXISTS (SELECT 1 FROM detalle_devoluciones WHERE id_ventas = v_IdVenta) THEN
-
-        SET v_mensaje = CONCAT(v_mensaje, 'Error: Esta venta ya tiene una devolución registrada. ');
-
-    END IF;
-
-
-
-    --  Validar que el usuario tenga un arqueo de caja activo
-
-    SELECT id_arqueo_caja INTO v_id_arqueo 
-
-    FROM arqueo_caja 
-
-    WHERE id_usuario = p_IdUsuario AND estado = 1 
-
-    ORDER BY fecha_inicio DESC 
-
-    LIMIT 1;
-
-
-
-    IF v_id_arqueo IS NULL THEN
-
-        SET v_mensaje = CONCAT(v_mensaje, 'Error: No hay un arqueo de caja activo para el usuario. ');
-
-    END IF;
-
-
-
-    --  Validar que la venta tenga productos en detalle_venta_stock
-
-    IF NOT EXISTS (
-
-        SELECT 1 FROM detalle_venta_stock dvs 
-
-        INNER JOIN det_venta dv ON dvs.id_det_venta = dv.IdDetalleVenta
-
-        WHERE dv.IdVenta = v_IdVenta
-
-    ) THEN
-
-        SET v_mensaje = CONCAT(v_mensaje, 'Error: No se encontraron productos en detalle_venta_stock para esta venta. ');
-
-    END IF;
-
-
-
-    --  Validar que la venta no tenga pagos pendientes a crédito
-
-    IF EXISTS (
-
-        SELECT 1 FROM abonos_credito ac  
-
-        INNER JOIN ventas_credito vc ON ac.id_venta_credito = vc.id_venta_credito  
-
-        WHERE ac.estado = 1 AND vc.id_venta = v_IdVenta
-
-    ) THEN
-
-        SET v_mensaje = CONCAT(v_mensaje, 'Error: La venta tiene pagos a crédito pendientes. ');
-
-    END IF;
-
-
-
-    -- Si hay mensajes de error, los devolvemos
-
-    IF v_mensaje <> '' THEN
-
-        SELECT v_mensaje AS mensaje_error;
-
+    -- Validar si la venta existe
+    IF NOT EXISTS (SELECT 1 FROM ventas WHERE IdVenta = p_IdVenta) THEN
+        SET v_mensaje = 'La venta no existe.';
     ELSE
+        -- Validar si fue autorizada por SRI
+        SELECT clave_acceso, fecha_autorizacion
+        INTO v_clave_acceso, v_fecha_autorizacion
+        FROM ventas
+        WHERE IdVenta = p_IdVenta;
 
-        SELECT 'OK' AS mensaje_error;
+        IF v_clave_acceso IS NOT NULL OR v_fecha_autorizacion IS NOT NULL THEN
+            SET v_mensaje = 'La venta ya fue autorizada por el SRI. No se puede eliminar.';
+        ELSE
+            -- Validar si tiene abonos registrados en crédito
+            SELECT COUNT(*)
+            INTO v_abonos
+            FROM abonos_credito ab
+            JOIN ventas_credito vc ON vc.id_venta_credito = ab.id_venta_credito
+            WHERE vc.id_venta = p_IdVenta AND ab.estado = '1';
 
+            IF v_abonos > 0 THEN
+                SET v_mensaje = 'La venta tiene abonos de crédito. No se puede eliminar.';
+            ELSE
+                SET v_mensaje = 'OK';
+            END IF;
+        END IF;
     END IF;
 
+    -- Retornar resultado
+    SELECT v_mensaje AS resultado;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -10692,4 +10773,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-23 17:35:42
+-- Dump completed on 2025-07-29 16:01:35

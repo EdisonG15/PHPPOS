@@ -22,14 +22,14 @@ class Models{
 
 
 	static public function mdlMostrar_producto_mas_vendido($opcion, $fechaInicio, $fechaFin){
-	 return  $fechaInicio;
-	//    $stmt = Conexion::conectar()-> prepare('call usp_reportes(:p_opcion,:p_fechaDesde,:p_fechaHasta)');
-	//    $stmt -> bindParam(":p_opcion", $opcion , PDO::PARAM_STR);
-	//    $stmt -> bindParam(":p_fechaDesde", $fechaInicio , PDO::PARAM_STR);
-	//    $stmt -> bindParam(":p_fechaHasta",  $fechaFin , PDO::PARAM_STR);
-	//    $stmt -> execute();
-	//    return $stmt -> fetchAll();
-	//    $stmt = null;
+
+	   $stmt = Conexion::conectar()-> prepare('call usp_reportes(:p_opcion,:p_fechaDesde,:p_fechaHasta)');
+	   $stmt -> bindParam(":p_opcion", $opcion , PDO::PARAM_STR);
+	   $stmt -> bindParam(":p_fechaDesde", $fechaInicio , PDO::PARAM_STR);
+	   $stmt -> bindParam(":p_fechaHasta",  $fechaFin , PDO::PARAM_STR);
+	   $stmt -> execute();
+	   return $stmt -> fetchAll();
+	   $stmt = null;
 		   
 	   }
    
@@ -45,5 +45,17 @@ class Models{
 	   $stmt = null;
 		   
 	   }
+
+	   static public function mdlLotes_proximos_a_vencer($numeroDias){
+	   $stmt = Conexion::conectar()-> prepare('call usp_lotes_por_vencer(:p_Dias)');
+	   $stmt -> bindParam(":p_Dias", $numeroDias , PDO::PARAM_INT);
+	   $stmt -> execute();
+	   return $stmt -> fetchAll();
+	   $stmt = null;
+		   
+	   }
+
+
+   
 
 }

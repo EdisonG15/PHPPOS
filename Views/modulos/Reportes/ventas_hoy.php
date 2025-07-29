@@ -80,7 +80,8 @@
                 {
                     // Start of PDF export button configuration
                     extend: 'pdfHtml5',
-                    text: 'Exportar PDF',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-danger',
                     title: 'Reporte de Ventas del Día',
                     orientation: 'portrait', // Usually portrait for this type of report
                     pageSize: 'A4',
@@ -126,8 +127,16 @@
                         });
                     }
                 }, // End of PDF export button configuration
-                'excel', // Ahora Excel estará después de PDF
-                'print',
+                 {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success',
+                      title: 'Reporte de Ventas del Día',
+                      exportOptions: {
+                    // ¡AQUÍ ESTÁ EL CAMBIO! Define las mismas columnas que para PDF.
+                     columns: [1, 2, 3, 4, 5, 6]
+                }
+                },
                 'pageLength'
             ],
             lengthMenu: [0, 5, 10, 15, 20, 50],

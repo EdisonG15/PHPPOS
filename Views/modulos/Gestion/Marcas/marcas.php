@@ -61,7 +61,7 @@
                                 <input type="text" class="form-control form-control-modern" id="txtMarca"
                                     name="txtMarca" maxlength="50" minlength="3" placeholder="Ej. Dell"
                                     required autocomplete="off">
-                                <label for="txtMarca">Categoría <span class="text-danger"></span></label>
+                                <label for="txtMarca">Marca <span class="text-danger"></span></label>
                                 <div class="invalid-feedback">Debe ingresar el nombre de la Marca.</div>
                             </div>
                             <div class="d-flex justify-content-end">
@@ -137,7 +137,7 @@
                     var datos = new FormData();
                     datos.append("accion", 3);
                     datos.append("Idmarca", codigo_producto); //codigo_producto
-                    datos.append("estado", 2); //codigo_producto
+                    datos.append("estado", 0); //codigo_producto
                     $.ajax({
                         url: "ajax/marca.ajax.php",
                         method: "POST",
@@ -167,6 +167,8 @@
     document.getElementById("btnGuardarMarca").addEventListener("click", function() {
         const forms = document.getElementsByClassName('needs-validation');
            const idMarca = $("#idMarca").val() || "0";
+            const nombreMarca = $("#txtMarca").val().trim(); // ✅ Eliminar espacios al inicio/final
+
         Array.from(forms).forEach((form) => {
             if (!form.checkValidity()) {
                 form.classList.add('was-validated');
@@ -176,6 +178,19 @@
                 });
                 return;
             }
+
+               // ✅ Validación personalizada: campo vacío o solo espacios
+    if (nombreMarca === "") {
+        formularioValido = false;
+        $("#txtMarca").addClass("is-invalid"); // Marca visual de error
+        Swal.fire({
+            icon: 'info',
+            title: 'El campo Marca no puede estar vacío o contener solo espacios.'
+        });
+        return;
+    } else {
+        $("#txtMarca").removeClass("is-invalid");
+    }
             // Confirmación con SweetAlert
             Swal.fire({
                 title: 'Está seguro de registrar el Marca?',
@@ -190,7 +205,7 @@
                 const datos = new FormData();
                 datos.append("accion", accion); // asegúrate de que `accion` esté definido en el contexto
                 datos.append("Idmarca", idMarca);
-                datos.append("nombre", $("#txtMarca").val());
+                datos.append("nombre", $("#txtMarca").val().trim());
                 $.ajax({
                     url: "ajax/marca.ajax.php",
                     method: "POST",
@@ -204,6 +219,7 @@
                             table.ajax.reload();
                             Limpiar();
                             $("#mdlGestionarMarca").modal('hide');
+             
                         }, {
                             mensajeExito: "éxito",
                             mensajeAdvertencia: "Warning",

@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="card card-dark">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> Historial Producto  </h3>          
+                        <h3 class="card-title"><i class="fas fa-list"></i> PRODUCTOS CON POCO STOCK   </h3>          
                         <div class="card-tools">
                         </div> 
                     </div>     
@@ -48,7 +48,8 @@
                 {
                     // Configuración del botón de PDF
                     extend: 'pdfHtml5',
-                    text: 'Exportar PDF', // Texto que se mostrará en el botón
+                     text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-danger', // Texto que se mostrará en el botón
                     title: 'Reporte de Ganancias', // Título para el documento PDF
                     orientation: 'portrait', // Orientación del PDF (portrait o landscape)
                     pageSize: 'A4', // Tamaño de la página (A4, Letter, etc.)
@@ -65,8 +66,16 @@
                         // de forma similar aquí y añadirlo al 'doc.content'.
                     }
                 },
-                'excel',
-                'print',
+                 {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success',
+                      title: 'Reporte de Ganancias',
+                      exportOptions: {
+                    // ¡AQUÍ ESTÁ EL CAMBIO! Define las mismas columnas que para PDF.
+                   columns: [1, 2, 3, 4]
+                }
+                },
                 'pageLength'
             ],
             ajax: {

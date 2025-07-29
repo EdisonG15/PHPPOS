@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <br>
 <style>
   .flatpickr-calendar.rangeMode .flatpickr-innerContainer {
@@ -96,11 +99,13 @@
                         </div> 
                     </div>      
                     <br>
+                    <input id="txtId_usuario" type="hidden" value="<?php echo $_SESSION["usuario"]->id_usuario ?>" />
+           <input id="txtId_caja" type="hidden" value="<?php echo $_SESSION['usuario']->id_caja ?>" />
                      <div class="card-body">
 <div class="row mb-4">       
             <div class="col-md-3">
-              <label for="rangoFecha" class="form-label">Fecha:</label>
-              <input type="text" class="form-control" id="rangoFecha" placeholder="Buscar por Fecha " autocomplete="off" />
+              <label for="rangoFechaAdminitrar" class="form-label">Fecha:</label>
+              <input type="text" class="form-control" id="rangoFechaAdminitrar" placeholder="Buscar por Fecha " autocomplete="off" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
               <button class="btn btn-outline-primary w-100" id="btnBuscarVenta"><i class="fas fa-search"></i> Buscar</button>
@@ -111,7 +116,7 @@
                                      <hr />
                 <div class="row mt-3">
                     <div class="col-sm-12">
-                        <table id="tb_venta"  class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+                        <table id="tb_ventaAdministrar"  class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
                         <thead class="bg-dark ">
                                 <tr>
                                     <th></th>
@@ -142,7 +147,7 @@
      
     var table_ventas;
     var selectedRange = [];
-  flatpickr("#rangoFecha", {
+  flatpickr("#rangoFechaAdminitrar", {
         mode: "range",
         dateFormat: "d/m/Y",
         showMonths: 2,
@@ -189,9 +194,9 @@
     // 3. Llama a la función con el rango de fechas correcto
     cargarTableVentas(formatDate(fechaInicio), formatDate(fechaFin));
     // También puedes establecer la fecha seleccionada en el input de flatpickr si quieres
-    // document.querySelector("#rangoFecha").value = `${fechaHoy} a ${fechaHoy}`;
-
-      $('#tb_venta').on('click', '.btnEliminar', function(e) {
+    // document.querySelector("#rangoFechaAdminitrar").value = `${fechaHoy} a ${fechaHoy}`;
+verificarSiExisteCajaAbierta();
+      $('#tb_ventaAdministrar').on('click', '.btnEliminar', function(e) {
             // e.preventDefault();
           const idEliminar = $(this).data('id');  
            Swal.fire({
@@ -241,13 +246,13 @@
             }
         })
       });
-$('#tb_venta tbody').on('click', '.btnImprimir', function () {
+$('#tb_ventaAdministrar tbody').on('click', '.btnImprimir', function () {
     const nro_boleta = $(this).data('nro');
     const url = `http://localhost/WebPuntoVenta2025/Views/modulos/Ventas/RealizarVentas/generar_tick.php?nro_boleta=${nro_boleta}`;
     window.open(url, '_blank');
 });
 
-      $('#tb_venta').on('click', '.btnXML', function(e) {
+      $('#tb_ventaAdministrar').on('click', '.btnXML', function(e) {
             // e.preventDefault();
           const idVenta = $(this).data('id');  
               $.ajax({
@@ -274,10 +279,10 @@ $('#tb_venta tbody').on('click', '.btnImprimir', function () {
   });
 
     function cargarTableVentas(fechaDesde, fechaHasta){
-          if ($.fn.DataTable.isDataTable('#tb_venta')) {
-             $('#tb_venta').DataTable().destroy();
+          if ($.fn.DataTable.isDataTable('#tb_ventaAdministrar')) {
+             $('#tb_ventaAdministrar').DataTable().destroy();
           }
-        table_ventas = $("#tb_venta").DataTable({           
+        table_ventas = $("#tb_ventaAdministrar").DataTable({           
         dom: 'Bfrtip',
         buttons: [
             {
@@ -372,5 +377,48 @@ $(document).on('click', '#btnBuscarVenta', function() {
         const year = d.getFullYear();
         return `${year}-${month}-${day}`;
     }
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
+
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                // $("#btnRegistrarProveedor").prop('disabled', true);
+                // $("#btnAgregarProducto").prop('disabled', true);
+                // $("#btnIniciarComprasContado").prop('disabled', true);
+                // $("#btnIniciarComprasCredit").prop('disabled', true);
+                $(".btnEliminar").prop("disabled", true);
+                   $(".btnImprimir").prop("disabled", true);
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
+            }
+        }
+    });
+}
 
 </script>

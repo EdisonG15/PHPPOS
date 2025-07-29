@@ -38,7 +38,11 @@ session_start();
   </ul>
 
   <div class="tab-content py-4" id="tabsContent-creditos">
+   <input id="txtId_usuario" type="hidden" value="<?php
+                                                                                echo  $_SESSION["usuario"]->id_usuario ?>" />
 
+                               <input id="txtId_caja" type="hidden" value="<?php
+                                                                            echo  $_SESSION["usuario"]->id_caja ?>" />
     <!-- TAB Finalizado -->
     <div class="tab-pane fade " id="content-finalizados" role="tabpanel">
       <div class="card shadow-sm">
@@ -61,15 +65,15 @@ session_start();
 
             </div>
             <div class="col-md-3">
-              <label for="rangoFecha" class="form-label">Fecha:</label>
-              <input type="text" class="form-control" id="rangoFecha" placeholder="Buscar por rango fecha " autocomplete="off" />
+              <label for="rangoFechaVenta" class="form-label">Fecha:</label>
+              <input type="text" class="form-control" id="rangoFechaVenta" placeholder="Buscar por rango fecha " autocomplete="off" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
               <button class="btn btn-outline-primary w-100" id="btnBuscarFinalizado"><i class="fas fa-search"></i> Buscar</button>
             </div>
           </div>
           <div>
-            <table id="tbl_credito_finalizado" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+            <table id="tbl_credito_finalizadoVentas" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
               <thead class="bg-dark text-left">
                 <th></th>
                 <th>Id Crédito</th>
@@ -120,7 +124,7 @@ session_start();
           </div>
 
           <div>
-            <table id="tbl_credito_vigente" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+            <table id="tbl_credito_vigenteVenta" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
               <thead class="bg-dark text-left">
                 <th></th>
                 <th>Id Crédito</th>
@@ -287,11 +291,11 @@ session_start();
   </style>
 
 <script>
- var table_credito_vigente = 0;
-  var table_credito_finalizado = 0;
+ var table_credito_vigenteVenta = 0;
+  var table_credito_finalizadoVenta = 0;
   var accion = 0;
   var tipoAbono=0;
-  var selectedRange = [];
+  var selectedRangeVenta = [];
 
 function formatDate(date) {
     let d = new Date(date),
@@ -308,7 +312,8 @@ function formatDate(date) {
 }
 
 $(document).ready(function() {
-  flatpickr("#rangoFecha", {
+  verificarSiExisteCajaAbierta();
+  flatpickr("#rangoFechaVenta", {
         mode: "range",
         dateFormat: "d/m/Y",
         showMonths: 2,
@@ -343,7 +348,7 @@ $(document).ready(function() {
             }
         },
         onChange: function(selectedDates) {
-            selectedRange = selectedDates;
+            selectedRangeVenta = selectedDates;
         }
   });
 
@@ -367,14 +372,14 @@ $(document).ready(function() {
 
         if (targetTabId === '#content-vigentes') {
             // Solo carga si la tabla no ha sido inicializada
-            if (!$.fn.DataTable.isDataTable('#table_credito_vigente')) {
+            if (!$.fn.DataTable.isDataTable('#tbl_credito_vigenteVenta')) {
                  cargarCreditoVentaVigente('Cobrables', "", "");
             }
         } else if (targetTabId === '#content-finalizados') {
              // Carga siempre que se cambia a esta pestaña o solo si no ha sido inicializada
-            let tieneFechas = selectedRange.length === 2;
-            let fechaInicio = tieneFechas ? formatDate(selectedRange[0]) : '';
-            let fechaFin = tieneFechas ? formatDate(selectedRange[1]) : '';
+            let tieneFechas = selectedRangeVenta.length === 2;
+            let fechaInicio = tieneFechas ? formatDate(selectedRangeVenta[0]) : '';
+            let fechaFin = tieneFechas ? formatDate(selectedRangeVenta[1]) : '';
             cargarCreditoVentaFinalizado('Finalizado', fechaInicio, fechaFin);
         }
 
@@ -389,17 +394,17 @@ $(document).ready(function() {
     //   $("#iptNombreCliente").keyup(function() {
     //   const index = $(this).data('index'); // obtiene el índice desde el atributo
     //   const valor = this.value; // obtiene el valor del input
-    //   table_credito_vigente.column(index).search(valor).draw(); // aplica el filtro
+    //   table_credito_vigenteVenta.column(index).search(valor).draw(); // aplica el filtro
     // });
 
     // Filtro para nombre de proveedor
     $(document).on('keyup', '#iptNombreCliente', function() {
-        // Asegúrate de que la variable table_credito_vigente esté correctamente inicializada
+        // Asegúrate de que la variable table_credito_vigenteVenta esté correctamente inicializada
         // y sea accesible en este scope.
-        if (table_credito_vigente) {
+        if (table_credito_vigenteVenta) {
             const index = $(this).data('index');
             const valor = this.value;
-            table_credito_vigente.column(index).search(valor).draw();
+            table_credito_vigenteVenta.column(index).search(valor).draw();
         }
     });
 
@@ -412,14 +417,14 @@ $(document).ready(function() {
 
      $(document).on('click', '#btnBuscarFinalizado', function() {
      let tipo_estado = $("#selEstadoClienteFinalizado").val();
-      let tieneFechas = selectedRange.length === 2;
+      let tieneFechas = selectedRangeVenta.length === 2;
 
       let fechaInicio = null;
       let fechaFin = null;
 
       if (tieneFechas) {
-        fechaInicio = formatDate(selectedRange[0]);
-        fechaFin = formatDate(selectedRange[1]);
+        fechaInicio = formatDate(selectedRangeVenta[0]);
+        fechaFin = formatDate(selectedRangeVenta[1]);
       }
 
       if (tipo_estado || tieneFechas) {
@@ -488,7 +493,7 @@ $(document).on('click', '.btnVerHistorialAbonos', function(e) {
     // Evita el comportamiento por defecto del enlace si es un <a>
     e.preventDefault(); 
 
-    let data = table_credito_finalizado.row($(this).parents('tr')).data();
+    let data = table_credito_finalizadoVenta.row($(this).parents('tr')).data();
     
     var idCredito = data.id_venta_credito; // Asumiendo que 'IdCompraCreditos' es el nombre de la propiedad en tu objeto de datos
     var proveedorNombre = data[3]; // Asumiendo que el nombre del proveedor es la columna de índice 4
@@ -509,7 +514,7 @@ $(document).on('click', '.btnAbono', function(e) {
     tipoAbono=1;
       $("#modalAbonoCredito").modal('show');
       accion = 2;
-      let data = table_credito_vigente.row($(this).parents('tr')).data();
+      let data = table_credito_vigenteVenta.row($(this).parents('tr')).data();
       // Declarar fuera del if
       let diasVencido = 0;
       let fechaVencimientoStr = data[9];
@@ -573,78 +578,85 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
       });
 });
 
-   $(document).on('click', '#btn_procesar_abono', function() {
 
-    $("#btn_procesar_abono").prop('disabled', true);
-      let montoAbono = parseFloat($("#montoAbono").val());
-      let nuevoSaldo = parseFloat($("#nuevoSaldo").val());
-      let saldoRestante = parseFloat($("#saldoRestante").val());
-      let observacion = $("#observacion").val().trim();
+  $(document).on('click', '#btn_procesar_abono', function () {
+  const btn = $(this);
+  if (btn.prop('disabled')) return; // Evita múltiples clics
+  btn.prop('disabled', true);       // 🔒 Desactiva el botón inmediatamente
 
-      // Validación: abono mayor que cero
-      if (isNaN(montoAbono) || montoAbono <= 0) {
+  let montoAbono = parseFloat($("#montoAbono").val());
+  let nuevoSaldo = parseFloat($("#nuevoSaldo").val());
+  let saldoRestante = parseFloat($("#saldoRestante").val());
+  let observacion = $("#observacion").val().trim();
 
-        $("#btn_procesar_abono").prop('disabled', false);
-        return Swal.fire({
-          icon: 'warning',
-          title: 'Monto inválido',
-          text: 'El monto del abono debe ser mayor que cero.',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-
-      // Validación: observación no vacía
-      if (observacion === "") {
-        $("#btn_procesar_abono").prop('disabled', false);
-        return Swal.fire({
-          icon: 'warning',
-          title: 'Observación requerida',
-          text: 'Por favor, ingresa una observación.',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-
-      // Si el nuevo saldo es 0, usamos el saldo restante como abono
-      if (nuevoSaldo === 0) {
-        montoAbono = saldoRestante;
-      }
-
-      let datos = new FormData();
-      datos.append('accion', accion);
-      datos.append('id_caja', $("#txtId_caja").val());
-      datos.append('IdCliente', $("#txtIdCliente").val());
-      datos.append('id_venta_credito', $("#txtIdCredito").val());
-      datos.append('abono', montoAbono.toFixed(2));
-      datos.append('observacion', observacion);
-      datos.append('metodo_pago', 1);
-      datos.append('tipoAbono',tipoAbono);
-      $.ajax({
-        url: "ajax/administrar_creditos.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        success: function(respuesta) {
-          mostrarAlertaRespuesta(respuesta, function() {
-            table_credito_vigente.ajax.reload();
-            Limpiar();
-            $("#modalAbonoCredito").modal('hide');
-          }, {
-            mensajeExito: "éxito",
-            mensajeAdvertencia: "Warning",
-            mensajeError: "Excepción"
-          });
-        },
-        error: manejarErrorAjax
-      }).always(function() {
-        $("#btn_procesar_abono").prop('disabled', false);
-      });
+  // Validación: abono mayor que cero
+  if (isNaN(montoAbono) || montoAbono <= 0) {
+    btn.prop('disabled', false); // 🔓 Rehabilita si hay error
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Monto inválido',
+      text: 'El monto del abono debe ser mayor que cero.',
+      confirmButtonText: 'Aceptar'
     });
+  }
+
+  // Validación: observación no vacía
+  if (observacion === "") {
+    btn.prop('disabled', false); // 🔓 Rehabilita si hay error
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Observación requerida',
+      text: 'Por favor, ingresa una observación.',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  // Si el nuevo saldo es 0, usamos el saldo restante como abono
+  if (nuevoSaldo === 0) {
+    montoAbono = saldoRestante;
+  }
+
+  let datos = new FormData();
+  datos.append('accion', accion);
+  datos.append('id_caja', $("#txtId_caja").val());
+  datos.append('IdCliente', $("#txtIdCliente").val());
+  datos.append('id_venta_credito', $("#txtIdCredito").val());
+  datos.append('abono', montoAbono.toFixed(2));
+  datos.append('observacion', observacion);
+  datos.append('metodo_pago', 1);
+  datos.append('tipoAbono', tipoAbono);
+
+  $.ajax({
+    url: "ajax/administrar_creditos.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function (respuesta) {
+      mostrarAlertaRespuesta(respuesta, function () {
+        table_credito_vigenteVenta.ajax.reload();
+        Limpiar();
+        $("#modalAbonoCredito").modal('hide');
+      }, {
+        mensajeExito: "éxito",
+        mensajeAdvertencia: "Warning",
+        mensajeError: "Excepción"
+      });
+    },
+    error: function () {
+      manejarErrorAjax();
+    },
+    complete: function () {
+      btn.prop('disabled', false); // 🔓 Siempre se vuelve a habilitar
+    }
+  });
+});
+
 
   function cargarCreditoVentaVigente(tipo_estado, fechaDesde, fechaHasta) {
-    table_credito_vigente = $("#tbl_credito_vigente").DataTable({
+    table_credito_vigenteVenta = $("#tbl_credito_vigenteVenta").DataTable({
       destroy: true, // importante para recargar correctamente
       ajax: {
         url: "ajax/administrar_creditos.ajax.php",
@@ -721,7 +733,7 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
   }
 
   function cargarCreditoVentaFinalizado(tipo_estado, fechaDesde, fechaHasta) {
-      table_credito_finalizado = $("#tbl_credito_finalizado").DataTable({
+      table_credito_finalizadoVenta = $("#tbl_credito_finalizadoVentas").DataTable({
       destroy: true,
 
       ajax: {
@@ -855,5 +867,49 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
     });
 
   }
+
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
+
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                // $("#btnRegistrarProveedor").prop('disabled', true);
+                // $("#btnAgregarProducto").prop('disabled', true);
+                // $("#btnIniciarComprasContado").prop('disabled', true);
+                // $("#btnIniciarComprasCredit").prop('disabled', true);
+                $(".btnAbono").prop("disabled", true);
+                  $(".btnAbonoMultiple").prop("disabled", true);
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
+            }
+        }
+    });
+}
 
 </script>

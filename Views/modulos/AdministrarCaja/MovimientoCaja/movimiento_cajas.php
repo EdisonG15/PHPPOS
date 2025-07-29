@@ -493,20 +493,16 @@ session_start();
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="modal fade" id="mdlGestionarMovimientoCaja" tabindex="-1" aria-labelledby="mdlGestionarMovimientoCajaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
-            
-            <!-- Cabecera del modal -->
             <div class="modal-header bg-primary text-white py-3">
                 <h5 class="modal-title fw-bold">
                     <i class="fas fa-cash-register"></i> Gestión de Movimiento de Caja
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="btnCerrarModal"></button>
             </div>
-
-            <!-- Cuerpo del modal -->
             <div class="modal-body p-4">
                 <form class="needs-validation" novalidate>
                     <input type="hidden" id="id_ingresos" value="">
@@ -522,14 +518,6 @@ session_start();
                         </select>
                         <div class="invalid-feedback">Por favor seleccione el tipo de movimiento.</div>
                     </div>
-
-                    <!-- <div class="mb-4">
-                        <label for="txt_Monto" class="form-label fw-semibold">
-                            <i class="fas fa-money-bill-alt"></i> Monto <span class="text-danger">*</span>
-                        </label>
-                        <input type="number" class="form-control rounded-3 py-2 px-3" id="txt_Monto" name="txt_Monto" required maxlength="9" min="1" placeholder="Ingrese el monto" />
-                        <div class="invalid-feedback">Debe ingresar un monto válido.</div>
-                    </div> -->
 <div class="mb-4">
   <label for="txt_Monto" class="form-label fw-semibold">
     <i class="fas fa-money-bill-alt"></i> Monto <span class="text-danger">*</span>
@@ -555,8 +543,6 @@ session_start();
                         <input type="text" class="form-control rounded-3 py-2 px-3" id="txt_Comentario" name="txt_Comentario" required minlength="5" maxlength="50" placeholder="Ingrese un comentario" />
                         <div class="invalid-feedback">Debe ingresar un comentario válido.</div>
                     </div>
-
-                    <!-- Botones -->
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-outline-danger w-50 py-2 fw-semibold" data-bs-dismiss="modal" id="btnCancelarRegistro">
                             <i class="fas fa-times"></i> Cancelar
@@ -569,7 +555,7 @@ session_start();
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <script>
 var table_ingresos = null; // Inicializar con null
 var table_gastos = null;   // Inicializar con null
@@ -1262,6 +1248,8 @@ function cargarTables() {
 };
 
 document.getElementById("btnRealizarArqueo").addEventListener("click", function() {
+    const btn = this;
+    btn.disabled = true; // Desactiva el botón al hacer clic
     const forms = document.getElementsByClassName('needs-validation');
     Swal.fire({
         title: '¿Está seguro de realizar el arqueo?',
@@ -1272,7 +1260,10 @@ document.getElementById("btnRealizarArqueo").addEventListener("click", function(
         confirmButtonText: 'Sí, deseo registrarla',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
-        if (!result.isConfirmed) return;
+         if (!result.isConfirmed) {
+            btn.disabled = false; // Reactiva si cancela
+            return;
+        }
 
         const datos = new FormData();
         datos.append("accion", 8);
@@ -1327,8 +1318,14 @@ document.getElementById("btnRealizarArqueo").addEventListener("click", function(
                     mensajeAdvertencia: "Warning",
                     mensajeError: "Excepción"
                 });
+                   btn.disabled = false; 
             },
-            error: manejarErrorAjax
+            
+            error: function (xhr, status, error) {
+                manejarErrorAjax(xhr, status, error);
+                btn.disabled = false; // Reactiva en caso de error
+            }
+            // error: manejarErrorAjax
         });
     });
 });
@@ -1526,55 +1523,55 @@ function cargarTablesSummaryOnly() {
     return `${year}-${month}-${day}`;
   }
 
-document.getElementById("btnGuardar_movimiento").addEventListener("click", function() {
-    let forms = document.getElementsByClassName('needs-validation');
-    Array.prototype.forEach.call(forms, function(form) {
-        if (form.checkValidity() === true) {
-            fecha = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-            Swal.fire({
-                title: 'Está seguro de registrar Movimientos Cajas?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, deseo registrarlo!',
-                cancelButtonText: 'Cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let datos = new FormData();
-                    datos.append("accion", 6);
-                    datos.append("opcion", opcion_movimiento);
-                    datos.append("id", $("#id_ingresos").val());
-                    datos.append("tipo_movimientos", $("#ddlTipo_Movimiento").val());
-                    datos.append("tipo_movimiento", 1);
-                    datos.append("monto", $("#txt_Monto").val());
-                    datos.append("concepto", $("#txt_Comentario").val());
+// document.getElementById("btnGuardar_movimiento").addEventListener("click", function() {
+//     let forms = document.getElementsByClassName('needs-validation');
+//     Array.prototype.forEach.call(forms, function(form) {
+//         if (form.checkValidity() === true) {
+//             fecha = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+//             Swal.fire({
+//                 title: 'Está seguro de registrar Movimientos Cajas?',
+//                 icon: 'warning',
+//                 showCancelButton: true,
+//                 confirmButtonColor: '#3085d6',
+//                 cancelButtonColor: '#d33',
+//                 confirmButtonText: 'Si, deseo registrarlo!',
+//                 cancelButtonText: 'Cancelar',
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     let datos = new FormData();
+//                     datos.append("accion", 6);
+//                     datos.append("opcion", opcion_movimiento);
+//                     datos.append("id", $("#id_ingresos").val());
+//                     datos.append("tipo_movimientos", $("#ddlTipo_Movimiento").val());
+//                     datos.append("tipo_movimiento", 1);
+//                     datos.append("monto", $("#txt_Monto").val());
+//                     datos.append("concepto", $("#txt_Comentario").val());
 
-                    $.ajax({
-                        url: "ajax/movimiento_cajas.ajax.php",
-                        method: "POST",
-                        data: datos,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        dataType: 'json',
-                        success: function(respuesta) {
-                            mostrarAlertaRespuesta(respuesta, function() {
-                                $("#mdlGestionarMovimientoCaja").modal('hide'); // Asegúrate que es este ID
-                                cargarTables(); // Llama a la función completa para re-inicializar
-                            }, {
-                                mensajeExito: "éxito",
-                                mensajeAdvertencia: "Warning",
-                                mensajeError: "Excepción"
-                            });
-                        },
-                        error: manejarErrorAjax
-                    });
-                }
-            });
-        }
-        form.classList.add('was-validated');
-    });
-});
+//                     $.ajax({
+//                         url: "ajax/movimiento_cajas.ajax.php",
+//                         method: "POST",
+//                         data: datos,
+//                         cache: false,
+//                         contentType: false,
+//                         processData: false,
+//                         dataType: 'json',
+//                         success: function(respuesta) {
+//                             mostrarAlertaRespuesta(respuesta, function() {
+//                                 $("#mdlGestionarMovimientoCaja").modal('hide'); // Asegúrate que es este ID
+//                                 cargarTables(); // Llama a la función completa para re-inicializar
+//                             }, {
+//                                 mensajeExito: "éxito",
+//                                 mensajeAdvertencia: "Warning",
+//                                 mensajeError: "Excepción"
+//                             });
+//                         },
+//                         error: manejarErrorAjax
+//                     });
+//                 }
+//             });
+//         }
+//         form.classList.add('was-validated');
+//     });
+// });
 
 </script>

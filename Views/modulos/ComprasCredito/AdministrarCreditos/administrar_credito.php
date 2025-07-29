@@ -45,6 +45,8 @@ session_start();
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
           <h5 class="mb-0"><i class="fas fa-list me-2"></i>Listado de Créditos </h5>
         </div>
+        <input id="txtId_usuario" type="hidden" value="<?php echo $_SESSION["usuario"]->id_usuario ?>" />
+           <input id="txtId_caja" type="hidden" value="<?php echo $_SESSION['usuario']->id_caja ?>" />
         <div class="card-body">
           <div class="row mb-4">
             <div class="col-md-3">
@@ -61,18 +63,18 @@ session_start();
 
             </div>
             <div class="col-md-3">
-              <label for="rangoFecha" class="form-label">Fecha:</label>
-              <input type="text" class="form-control" id="rangoFecha" placeholder="Buscar por Fecha " autocomplete="off" />
+              <label for="rangoFechaCreditosCompras" class="form-label">Fecha:</label>
+              <input type="text" class="form-control" id="rangoFechaCreditosCompras" placeholder="Buscar por Fecha " autocomplete="off" />
             </div>
             <div class="col-md-2 d-flex align-items-end">
-              <button class="btn btn-outline-primary w-100" id="btnBuscarFinalizado"><i class="fas fa-search"></i> Buscar</button>
+              <button class="btn btn-outline-primary w-100" id="btnBuscarFinalizadoCompras"><i class="fas fa-search"></i> Buscar</button>
             </div>
 
 
           </div>
 
           <div>
-            <table id="tbl_credito_finalizado" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+            <table id="tbl_credito_finalizadoCompras" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
               <thead class="bg-dark text-left">
                 <th></th>
                 <th>Id Compra</th>
@@ -120,12 +122,12 @@ session_start();
 
             </div>
             <div class="col-md-2 d-flex align-items-end">
-              <button class="btn btn-outline-primary w-100" id="btnBuscarVigente"><i class="fas fa-search"></i> Buscar</button>
+              <button class="btn btn-outline-primary w-100" id="btnBuscarVigenteCompras"><i class="fas fa-search"></i> Buscar</button>
             </div>
           </div>
 
           <div>
-            <table id="tbl_credito_vigente" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+            <table id="tbl_credito_vigenteCompras" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
               <thead class="bg-dark text-left">
                 <th></th>
                 <th>Id Compra</th>
@@ -157,11 +159,11 @@ session_start();
 </div>
 <!-- Modal Abono Crédito Moderno -->
 
-<div class="modal fade" id="modalAbonoCredito" tabindex="-1" aria-labelledby="modalAbonoCreditoLabel" aria-hidden="true">
+<div class="modal fade" id="modalAbonoCreditoCompras" tabindex="-1" aria-labelledby="modalAbonoCreditoComprasLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content rounded-4 shadow-lg border-0 modern-modal-content">
       <div class="modal-header text-white py-4 px-4 rounded-top-4 modern-header-gradient">
-        <h5 class="modal-title d-flex align-items-center gap-3 fw-bold" id="modalAbonoCreditoLabel">
+        <h5 class="modal-title d-flex align-items-center gap-3 fw-bold" id="modalAbonoCreditoComprasLabel">
           <i class="fas fa-hand-holding-usd fa-lg"></i> Registrar Abono de Crédito
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -169,7 +171,7 @@ session_start();
 
       <div class="modal-body px-5 py-5 bg-light-subtle">
         <form id="formAbono">
-           <input id="txtId_caja" type="hidden" value="<?php echo $_SESSION['usuario']->id_caja ?>" />
+          
            <input id="txtIdCompra" type="hidden" value="0" />
            <input id="txtIdCompraCredito" type="hidden" value="0" />
            <input id="id_proveedor" type="hidden" value="0" />
@@ -236,7 +238,7 @@ session_start();
           </div>
 
           <div class="d-flex justify-content-end">
-            <button type="button" id="btn_procesar_abono" class="btn btn-success btn-lg px-5 shadow-sm btn-modern-success">
+            <button type="button" id="btn_procesar_abonoCompras" class="btn btn-success btn-lg px-5 shadow-sm btn-modern-success">
               <i class="fas fa-check-circle me-3"></i>Confirmar Abono
             </button>
           </div>
@@ -255,7 +257,7 @@ session_start();
       </div>
       <div class="modal-body">
         <p class="mb-3">Mostrando los abonos para el crédito del proveedor: <strong id="spanProveedorModal"></strong></p>
-        <table id="tblHistorialAbonos" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+        <table id="tblHistorialAbonosCompras" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
           <thead class="bg-dark text-left text-white"> <tr>
               <th>ID Abono</th>
               <th>Fecha Abono</th>
@@ -297,9 +299,9 @@ session_start();
   </style>
 <script>
 // Variables globales
-var table_credito_vigente = null; // Inicializar como null para verificar si ya se instanció
-var table_credito_finalizado = null;
-var selectedRange = [];
+var table_credito_vigenteCompras = null; // Inicializar como null para verificar si ya se instanció
+var table_credito_finalizadoCompras = null;
+var selectedRangeAdminitrarCompras = [];
 
 // Función para formatear fechas (asegúrate de que exista y funcione como esperas)
 function formatDate(date) {
@@ -318,10 +320,10 @@ function formatDate(date) {
 
 
 $(document).ready(function() {
-
+verificarSiExisteCajaAbierta();
     // 1. INICIALIZACIÓN DE COMPONENTES
     // ===================================
-    flatpickr("#rangoFecha", {
+    flatpickr("#rangoFechaCreditosCompras", {
         mode: "range",
         dateFormat: "d/m/Y",
         showMonths: 2,
@@ -356,7 +358,7 @@ $(document).ready(function() {
             }
         },
         onChange: function(selectedDates) {
-            selectedRange = selectedDates;
+            selectedRangeAdminitrarCompras = selectedDates;
         }
     });
 
@@ -372,7 +374,7 @@ $(document).ready(function() {
         const endDate = new Date(today);
         endDate.setDate(today.getDate() + 15);
 
-        cargarCreditoCompraFinalizado("Finalizado", formatDate(startDate), formatDate(endDate));
+        cargarCreditoCompraFinalizadoCompras("Finalizado", formatDate(startDate), formatDate(endDate));
     }
 
 
@@ -385,15 +387,15 @@ $(document).ready(function() {
 
         if (targetTabId === '#content-vigentes') {
             // Solo carga si la tabla no ha sido inicializada
-            if (!$.fn.DataTable.isDataTable('#table_credito_vigente')) {
+            if (!$.fn.DataTable.isDataTable('#tbl_credito_vigenteCompras')) {
                  cargarCreditoCompraVigente('Cobrables', "", "");
             }
         } else if (targetTabId === '#content-finalizados') {
              // Carga siempre que se cambia a esta pestaña o solo si no ha sido inicializada
-            let tieneFechas = selectedRange.length === 2;
-            let fechaInicio = tieneFechas ? formatDate(selectedRange[0]) : '';
-            let fechaFin = tieneFechas ? formatDate(selectedRange[1]) : '';
-            cargarCreditoCompraFinalizado('Finalizado', fechaInicio, fechaFin);
+            let tieneFechas = selectedRangeAdminitrarCompras.length === 2;
+            let fechaInicio = tieneFechas ? formatDate(selectedRangeAdminitrarCompras[0]) : '';
+            let fechaFin = tieneFechas ? formatDate(selectedRangeAdminitrarCompras[1]) : '';
+            cargarCreditoCompraFinalizadoCompras('Finalizado', fechaInicio, fechaFin);
         }
 
         // Ajusta las columnas de las tablas DataTables al cambiar de pestaña
@@ -408,12 +410,12 @@ $(document).ready(function() {
 
     // Filtro para nombre de proveedor
     $(document).on('keyup', '#iptNombreProveedor', function() {
-        // Asegúrate de que la variable table_credito_vigente esté correctamente inicializada
+        // Asegúrate de que la variable table_credito_vigenteCompras esté correctamente inicializada
         // y sea accesible en este scope.
-        if (table_credito_vigente) {
+        if (table_credito_vigenteCompras) {
             const index = $(this).data('index');
             const valor = this.value;
-            table_credito_vigente.column(index).search(valor).draw();
+            table_credito_vigenteCompras.column(index).search(valor).draw();
         }
     });
 
@@ -467,7 +469,7 @@ $(document).ready(function() {
 }); // fin ready
 
   function cargarCreditoCompraVigente(tipo_estado, fechaDesde, fechaHasta) {
-    table_credito_vigente = $("#tbl_credito_vigente").DataTable({
+    table_credito_vigenteCompras = $("#tbl_credito_vigenteCompras").DataTable({
       destroy: true, // importante para recargar correctamente
       ajax: {
         url: "ajax/administrar_creditos_compra.ajax.php",
@@ -539,8 +541,8 @@ $(document).ready(function() {
     });
   }
 
-  function cargarCreditoCompraFinalizado(tipo_estado, fechaDesde, fechaHasta) {
-      table_credito_finalizado = $("#tbl_credito_finalizado").DataTable({
+  function cargarCreditoCompraFinalizadoCompras(tipo_estado, fechaDesde, fechaHasta) {
+      table_credito_finalizadoCompras = $("#tbl_credito_finalizadoCompras").DataTable({
       destroy: true,
 
       ajax: {
@@ -625,11 +627,11 @@ $(document).ready(function() {
 
   function cargarHistorialAbonos(idCredito) {
      // Destruye la instancia existente de DataTable si ya está inicializada
-      if ($.fn.DataTable.isDataTable('#tblHistorialAbonos')) {
-        $('#tblHistorialAbonos').DataTable().destroy();
+      if ($.fn.DataTable.isDataTable('#tblHistorialAbonosCompras')) {
+        $('#tblHistorialAbonosCompras').DataTable().destroy();
       }
 
-     table_historial_abonos = $("#tblHistorialAbonos").DataTable({
+     table_historial_abonos = $("#tblHistorialAbonosCompras").DataTable({
         "ajax": {
             "url": "ajax/administrar_creditos_compra.ajax.php", // Tu archivo AJAX
             "type": "POST",
@@ -660,114 +662,45 @@ $(document).ready(function() {
         "drawCallback": function() {
             // Ajustar columnas después de que el modal se muestre y la tabla se dibuje
             // Esto es crucial para la responsividad dentro de un modal
-            if ($.fn.DataTable.isDataTable('#tblHistorialAbonos')) {
-                $('#tblHistorialAbonos').DataTable().columns.adjust().responsive.recalc();
+            if ($.fn.DataTable.isDataTable('#tblHistorialAbonosCompras')) {
+                $('#tblHistorialAbonosCompras').DataTable().columns.adjust().responsive.recalc();
             }
         }
     });
 
   }
 
-  $(document).on('click', '#btnBuscarVigente', function() {
+  $(document).on('click', '#btnBuscarVigenteCompras', function() {
         let tipo_estado = $("#selEstadoProveedorVigente").val();
         cargarCreditoCompraVigente(tipo_estado, "", "");
  });
 
- $(document).on('click', '#btnBuscarFinalizado', function() {
+ $(document).on('click', '#btnBuscarFinalizadoCompras', function() {
      let tipo_estado = $("#selEstadoProveedorFinalizado").val();
-      let tieneFechas = selectedRange.length === 2;
+      let tieneFechas = selectedRangeAdminitrarCompras.length === 2;
 
       let fechaInicio = null;
       let fechaFin = null;
 
       if (tieneFechas) {
-        fechaInicio = formatDate(selectedRange[0]);
-        fechaFin = formatDate(selectedRange[1]);
+        fechaInicio = formatDate(selectedRangeAdminitrarCompras[0]);
+        fechaFin = formatDate(selectedRangeAdminitrarCompras[1]);
       }
 
       if (tipo_estado || tieneFechas) {
-        cargarCreditoCompraFinalizado(tipo_estado, fechaInicio, fechaFin);
+        cargarCreditoCompraFinalizadoCompras(tipo_estado, fechaInicio, fechaFin);
       } else {
         alert("Por favor selecciona al menos un filtro (estado o rango de fechas).");
       }
 
  });
 
-   $(document).on('click', '#btn_procesar_abono', function() {
-
-    $("#btn_procesar_abono").prop('disabled', true);
-      let montoAbono = parseFloat($("#montoAbono").val());
-      let nuevoSaldo = parseFloat($("#nuevoSaldo").val());
-      let saldoRestante = parseFloat($("#saldoRestante").val());
-      let observacion = $("#observacion").val().trim();
-
-      // Validación: abono mayor que cero
-      if (isNaN(montoAbono) || montoAbono <= 0) {
-
-        $("#btn_procesar_abono").prop('disabled', false);
-        return Swal.fire({
-          icon: 'warning',
-          title: 'Monto inválido',
-          text: 'El monto del abono debe ser mayor que cero.',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-
-      // Validación: observación no vacía
-      if (observacion === "") {
-        $("#btn_procesar_abono").prop('disabled', false);
-        return Swal.fire({
-          icon: 'warning',
-          title: 'Observación requerida',
-          text: 'Por favor, ingresa una observación.',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-
-      // Si el nuevo saldo es 0, usamos el saldo restante como abono
-      if (nuevoSaldo === 0) {
-        montoAbono = saldoRestante;
-      }
-
-      let datos = new FormData();
-      datos.append('accion', accion);
-      datos.append('id_caja', $("#txtId_caja").val());
-      datos.append('id_Compra', $("#txtIdCompra").val());
-      datos.append('id_compra_credito', $("#txtIdCompraCredito").val());
-      datos.append('abonado', montoAbono.toFixed(2));
-      datos.append('observacion', observacion);
-      datos.append('metodo_pago', 1);
-      $.ajax({
-       url: "ajax/administrar_creditos_compra.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        success: function(respuesta) {
-          mostrarAlertaRespuesta(respuesta, function() {
-             $("#modalAbonoCredito").modal('hide');
-            table_credito_vigente.ajax.reload();
-          fun_limpiar() 
-           
-           
-          }, {
-            mensajeExito: "éxito",
-            mensajeAdvertencia: "Warning",
-            mensajeError: "Excepción"
-          });
-        },
-        error: manejarErrorAjax
-      }).always(function() {
-        $("#btn_procesar_abono").prop('disabled', false);
-      });
-  });
+ 
   $(document).on('click', '.btnVerHistorialAbonos', function(e) {
     // Evita el comportamiento por defecto del enlace si es un <a>
     e.preventDefault(); 
 
-    let data = table_credito_finalizado.row($(this).parents('tr')).data();
+    let data = table_credito_finalizadoCompras.row($(this).parents('tr')).data();
     
     var idCredito = data.IdCompraCreditos; // Asumiendo que 'IdCompraCreditos' es el nombre de la propiedad en tu objeto de datos
     var proveedorNombre = data[4]; // Asumiendo que el nombre del proveedor es la columna de índice 4
@@ -785,12 +718,12 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.btnAbono', function(e) {
-  fun_limpiar() 
-      $("#btn_procesar_abono").prop('disabled', false);
+            fun_limpiar() 
+      $("#btn_procesar_abonoCompras").prop('disabled', false);
       tipoAbono=1;
-      $("#modalAbonoCredito").modal('show');
+      $("#modalAbonoCreditoCompras").modal('show');
       accion = 2;
-      let data = table_credito_vigente.row($(this).parents('tr')).data();
+      let data = table_credito_vigenteCompras.row($(this).parents('tr')).data();
       // Declarar fuera del if
       let diasVencido = 0;
       let fechaVencimientoStr = data[11];
@@ -832,4 +765,118 @@ $(document).on('click', '.btnAbono', function(e) {
            $("#observacion").val("");
 
   }
+
+  // Asegúrate que solo se registre UNA VEZ
+$(document).off('click', '#btn_procesar_abonoCompras').on('click', '#btn_procesar_abonoCompras', function () {
+
+  $("#btn_procesar_abonoCompras").prop('disabled', true);
+
+  let montoAbono = parseFloat($("#montoAbono").val());
+  let nuevoSaldo = parseFloat($("#nuevoSaldo").val());
+  let saldoRestante = parseFloat($("#saldoRestante").val());
+  let observacion = $("#observacion").val().trim();
+
+  if (isNaN(montoAbono) || montoAbono <= 0) {
+    $("#btn_procesar_abonoCompras").prop('disabled', false);
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Monto inválido',
+      text: 'El monto del abono debe ser mayor que cero.',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  if (observacion === "") {
+    $("#btn_procesar_abonoCompras").prop('disabled', false);
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Observación requerida',
+      text: 'Por favor, ingresa una observación.',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  if (nuevoSaldo === 0) {
+    montoAbono = saldoRestante;
+  }
+
+  let datos = new FormData();
+  datos.append('accion', accion);
+  datos.append('id_caja', $("#txtId_caja").val());
+  datos.append('id_Compra', $("#txtIdCompra").val());
+  datos.append('id_compra_credito', $("#txtIdCompraCredito").val());
+  datos.append('abonado', montoAbono.toFixed(2));
+  datos.append('observacion', observacion);
+  datos.append('metodo_pago', 1);
+
+  $.ajax({
+    url: "ajax/administrar_creditos_compra.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function(respuesta) {
+      console.log("Abono procesado:", respuesta); // ayuda a depurar
+      mostrarAlertaRespuesta(respuesta, function() {
+        $("#modalAbonoCreditoCompras").modal('hide');
+        table_credito_vigenteCompras.ajax.reload();
+        fun_limpiar();
+      }, {
+        mensajeExito: "éxito",
+        mensajeAdvertencia: "Warning",
+        mensajeError: "Excepción"
+      });
+    },
+    error: manejarErrorAjax
+  }).always(function() {
+    $("#btn_procesar_abonoCompras").prop('disabled', false);
+  });
+});
+
+
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
+
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                // $("#btnRegistrarProveedor").prop('disabled', true);
+                // $("#btnAgregarProducto").prop('disabled', true);
+                // $("#btnIniciarComprasContado").prop('disabled', true);
+                // $("#btnIniciarComprasCredit").prop('disabled', true);
+                $(".btnAbono").prop("disabled", true);
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
+            }
+        }
+    });
+}
+
 </script>

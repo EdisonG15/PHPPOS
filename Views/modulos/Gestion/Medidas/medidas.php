@@ -62,6 +62,14 @@
             <form class="needs-validation" novalidate>
               <input type="hidden" id="idMedidas" name="medidas" value="0">
 
+                 <div class="form-floating mb-4">
+                <input type="text" class="form-control form-control-modern" id="txtNombreCorto"
+                       name="txtNombreCorto" maxlength="20" minlength="1" placeholder="Ej. Und"
+                       required autocomplete="off">
+                <label for="txtNombreCorto">Codigo <span class="text-danger"></span></label>
+                <div class="invalid-feedback">Debe ingresar el Codigo.</div>
+              </div>
+
               <div class="form-floating mb-4">
                 <input type="text" class="form-control form-control-modern" id="txtMedidas"
                        name="txtMedidas" maxlength="50" minlength="2" placeholder="Ej. Unidad"
@@ -70,13 +78,7 @@
                 <div class="invalid-feedback">Debe ingresar el nombre de la Medida.</div>
               </div>
 
-              <div class="form-floating mb-4">
-                <input type="text" class="form-control form-control-modern" id="txtNombreCorto"
-                       name="txtNombreCorto" maxlength="20" minlength="2" placeholder="Ej. Und"
-                       required autocomplete="off">
-                <label for="txtNombreCorto">Nombre Corto <span class="text-danger"></span></label>
-                <div class="invalid-feedback">Debe ingresar el Nombre Corto.</div>
-              </div>
+           
 
               <div class="form-floating mb-5">
                 <select name="estado" id="ddlEstado" class="form-select form-control-modern">

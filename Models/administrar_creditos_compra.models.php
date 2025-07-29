@@ -1,11 +1,8 @@
 <?php
-
 require_once "conexion.php";
-
 session_start();
 class Models
 {
-
 
     static public function mdlMostrarCredito($filtro, $filtro_estado, $fecha_inicio, $fecha_fin)
     {
@@ -64,29 +61,13 @@ class Models
 
     static public function mdlHistorialAbonoCredito($id_credito)
 {
-    // Verifica el valor recibido (puedes usar echo o var_dump)
-    // echo "ID recibido: " . $id_credito . "<br>";
-    // o para más detalle:
-   
-    // Conexión y ejecución del procedimiento
+
     $stmt = Conexion::conectar()->prepare('CALL ups_ListarHistorialAbonoCreditoCompras(:p_id_credito)');
-    $stmt->bindParam(':p_id_credito', $id_credito, PDO::PARAM_INT);
-    
+    $stmt->bindParam(':p_id_credito', $id_credito, PDO::PARAM_INT);    
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
     $stmt = null; // liberar memoria
     return $resultado;
 }
 
-        // static public function mdlHistorialAbonoCredito($id_credito)
-    // {
-
-    //     $stmt = Conexion::conectar()->prepare('call ups_ListarHistorialAbonoCredito(:p_id_credito
-    //                                                                             )');
-    //     $stmt->bindParam(":p_id_credito", $id_credito, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll();
-    //     $stmt = null;
-    // }
 }

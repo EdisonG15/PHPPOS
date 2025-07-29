@@ -25,8 +25,8 @@
     border-color: transparent !important;
 }
 
-/* Si usas Bootstrap 5, la clase puede ser diferente, como .tooltip-inner */
-/* Ajusta si ves que los estilos no se aplican, inspecciona el elemento en el navegador */
+    /* Si usas Bootstrap 5, la clase puede ser diferente, como .tooltip-inner */
+    /* Ajusta si ves que los estilos no se aplican, inspecciona el elemento en el navegador */
 
     /********************************************************************************************************* */
     /* Stepper Styles */
@@ -593,20 +593,23 @@
                     <div class="card-body px-4 py-4">
                         <form class="needs-validation" novalidate>
                             <input type="hidden" id="idMedidas" name="medidas" value="0">
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control form-control-modern" id="txtMedidas"
-                                    name="txtMedidas" maxlength="50" minlength="2" placeholder="Ej. Unidad"
-                                    autocomplete="off">
-                                <label for="txtMedidas">Medidas <span class="text-danger"></span></label>
-                                <div class="invalid-feedback">Debe ingresar el nombre de la Medida.</div>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control form-control-modern" id="txtNombreCorto"
-                                    name="txtNombreCorto" maxlength="20" minlength="2" placeholder="Ej. Und"
-                                    autocomplete="off">
-                                <label for="txtNombreCorto">Nombre Corto <span class="text-danger"></span></label>
-                                <div class="invalid-feedback">Debe ingresar el Nombre Corto.</div>
-                            </div>
+                            
+                 <div class="form-floating mb-4">
+                <input type="text" class="form-control form-control-modern" id="txtNombreCorto"
+                       name="txtNombreCorto" maxlength="20" minlength="1" placeholder="Ej. Und"
+                       required autocomplete="off">
+                <label for="txtNombreCorto">Codigo <span class="text-danger"></span></label>
+                <div class="invalid-feedback">Debe ingresar el Codigo.</div>
+              </div>
+
+              <div class="form-floating mb-4">
+                <input type="text" class="form-control form-control-modern" id="txtMedidas"
+                       name="txtMedidas" maxlength="50" minlength="2" placeholder="Ej. Unidad"
+                       required autocomplete="off">
+                <label for="txtMedidas">Medidas <span class="text-danger"></span></label>
+                <div class="invalid-feedback">Debe ingresar el nombre de la Medida.</div>
+              </div>
+
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-danger btn-lg me-3" data-bs-dismiss="modal" id="btnCancelarRegistroUnidadMedida">
                                     <i class="fas fa-times me-2"></i>Cancelar
@@ -632,6 +635,8 @@
             </div>
             <div class="modal-body p-4">
                 <input type="hidden" id="idProducto_stock" name="producto" value="0">
+                 <input type="hidden" id="iptPrecioCosto" name="iptPrecioCosto" value="0">
+                
                 <input type="hidden" id="percedero" name="percedero" value="0">
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -693,6 +698,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="mdlGestionarProducto" role="dialog" tabindex="-1" aria-labelledby="mdlGestionarProductoLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-ancho-personalizad">
         <div class="modal-content rounded-4 shadow-lg border-0">
@@ -749,7 +755,7 @@
                                         <div class="row g-3">
                                             <div class="col-md-6">
                                                 <label for="iptCodigoReg" class="form-label small">Código</label>
-                                                <input type="text" class="form-control form-control-sm" id="iptCodigoReg" name="iptCodigoReg" maxlength="13" minlength="3" required onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" autocomplete="off">
+                                                <input type="text" class="form-control form-control-sm" id="iptCodigoReg" name="iptCodigoReg" maxlength="13" minlength="3" required  autocomplete="off">
                                                 <div class="invalid-feedback">Debe ingresar el código de barras (mín. 3, máx. 13 dígitos).</div>
                                             </div>
                                             <div class="col-md-6">
@@ -772,7 +778,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="iptDescripcionReg" class="form-label small">Descripción</label>
-                                                <textarea class="form-control form-control-sm" id="iptDescripcionReg" name="iptDescripcionReg" rows="2" maxlength="35" required></textarea>
+                                                <textarea class="form-control form-control-sm" id="iptDescripcionReg" name="iptDescripcionReg" rows="2" maxlength="30" required></textarea>
                                                 <div class="invalid-feedback">Debe ingresar la Descripción del producto (máximo 100 caracteres).</div>
                                             </div>
                                         </div>
@@ -853,7 +859,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-outline-secondary prev-step"><i class="fas fa-arrow-left me-2"></i> Anterior</button>
-                                    <button type="submit" class="btn btn-success">Guardar Datos <i class="fas fa-save ms-2"></i></button>
+                                    <button type="submit" class="btn btn-success"  >Guardar Datos <i class="fas fa-save ms-2"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -878,7 +884,32 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalNuevaFechaVencimiento" tabindex="-1" role="dialog" aria-labelledby="modalNuevaFechaVencimientoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNuevaFechaVencimientoLabel">Ingresar Nueva Fecha de Vencimiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="iptNuevaFechaVencimiento">Fecha de Vencimiento:</label>
+                    <input type="date" class="form-control" id="iptNuevaFechaVencimiento">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarNuevaFecha">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    var idProductoGlobal;
+    var BanderaPerecederoGlobal; // Renombrada para mayor claridad
     var accion;
     var table_producto;
     var operacion_stock = 0;
@@ -1000,8 +1031,14 @@
         productForm.addEventListener('submit', async function(event) { // Añadimos 'async' aquí
             event.preventDefault();
             event.stopPropagation();
-
+             const submitButton = this.querySelector('button[type="submit"]'); // Obtén tu botón de envío
+               
             if (validateCurrentStep()) {
+                  // Deshabilita el botón de envío inmediatamente
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...'; // Opcional: Cambiar texto
+        }
                 console.log('Formulario enviado (simulación)!');
                 const datos = new FormData();
                 // Obtén el ID del producto del campo oculto
@@ -1056,6 +1093,12 @@
                 });
 
                 if (!confirmacion.isConfirmed) {
+                      // Vuelve a habilitar el botón si el usuario cancela
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Registrar Producto'; // Restablece el texto
+            }
+            
                     return; // Si el usuario cancela, no hacemos la llamada AJAX
                 }
 
@@ -1105,7 +1148,14 @@
                             console.error("Error en la solicitud AJAX:", textStatus, errorThrown, jqXHR);
                             Swal.fire("Error", "Ocurrió un error al procesar la solicitud. Por favor, intente de nuevo.", "error");
                         }
-                    }
+                    },
+            complete: function() {
+                // Siempre vuelve a habilitar el botón después de que la solicitud AJAX se complete (éxito o error)
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Registrar Producto'; // Restablece el texto
+                }
+                 }
                 });
             }
         });
@@ -1378,6 +1428,7 @@
             // $("#iptMinimoStockReg").prop('disabled', true);
             $("#iptPrecioCompraReg").prop('disabled', true);
             $('#iptFechaVencimiento').prop('disabled', true);
+            $('#iptCodigoReg').prop('disabled', true);
 
             const logoPreview = document.getElementById('logo-preview');
             const logoPlaceholderText = document.getElementById('logo-placeholder-text');
@@ -1501,173 +1552,248 @@
             $("#iptFechaVencimientoAun").parent().removeClass("d-none");
             $("#contenedorLotes").addClass("d-none");
         });
-
         $('#tbl_productos tbody').on('click', '.btnDisminuirStock', function() {
-            funcion_limpiar_stock();
-            operacion_stock = 2; // restar stock
-            accion = 3;
-            cargarOpcionesTipoOperacion(operacion_stock); // solo PERDIDA, DEVOLUCION, CAMBIO
-            $("#mdlGestionarStock").modal('show');
-            $("#titulo_che").html('Costo Cero');
-            $("#titulo_modal_stock").html('Disminuir Stock');
-            $("#titulo_modal_label").html('Disminuir al Stock');
-            $("#iptCantidad").attr("placeholder", "Ingrese cantidad a disminuir al Stock");
-            let datos = table_producto.row($(this).parents('tr')).data();
-            let perecedero = datos[15];
-            BaderaPerceddero = perecedero;
-            if (perecedero == 1) {
+    funcion_limpiar_stock();
+    operacion_stock = 2; // restar stock
+    accion = 3;
+    cargarOpcionesTipoOperacion(operacion_stock); // solo PERDIDA, DEVOLUCION, CAMBIO
+    $("#mdlGestionarStock").modal('show');
+
+    // Recuperar los datos del producto usando 'datos'
+    let datos = table_producto.row($(this).parents('tr')).data();
+
+    // Almacenar datos en variables globales
+    idProductoGlobal = datos[1]; // Asumiendo que datos[1] es el ID del producto
+    BanderaPerecederoGlobal = datos[15]; // Asumiendo que datos[15] es el indicador de perecedero
+
+    $("#iptPrecioCosto").val(datos[10]);
+    $("#titulo_che").html('Costo Cero');
+    $("#titulo_modal_stock").html('Disminuir Stock');
+    $("#titulo_modal_label").html('Disminuir al Stock');
+    $("#iptCantidad").attr("placeholder", "Ingrese cantidad a disminuir al Stock");
+
+    if (BanderaPerecederoGlobal == 1) { // Producto perecedero
+        $("#iptPrecioCompra").parent().removeClass("d-none");
+        $("#iptFechaVencimientoAun").prop("disabled", false);
+        $("#iptPrecioCompra").prop("disabled", true);
+        $("#contenedorLotes").addClass("d-none");
+    } else { // Producto no perecedero
+        $("#iptPrecioCompra").parent().addClass("d-none");
+        $("#contenedorLotes").removeClass("d-none");
+        $("#iptFechaVencimientoAun").prop("disabled", true).val("");
+    }
+
+    $("#idProducto_stock").val(idProductoGlobal); // Actualizar input oculto
+    $("#stock_codigoProducto").html(datos[2]);
+    $("#nombre_producto").html(datos[7]);
+    $("#stock_Stock").html(datos[16]);
+    $("#percedero").val(BanderaPerecederoGlobal);
+    $("#stock_NuevoStock").html(parseFloat($("#stock_Stock").html()));
+});
+
+
+// Cambiar comportamiento según tipo de acción
+$('#selTipoOperacion').on('change', function() {
+    let tipo = $(this).val();
+    if (operacion_stock === 2) { // solo si se está disminuyendo
+        if (tipo === "PERDIDA") {
+            $("#iptPrecioCompra").parent().addClass("d-none");
+            $("#iptFechaVencimientoAun").prop("disabled", true);
+            $("#contenedorLotes").removeClass("d-none");
+            // Llamar con el idProducto global
+            cargarLotesProducto(idProductoGlobal);
+        } else if (tipo === "DEVOLUCION") {
+            if (BanderaPerecederoGlobal === '1') { // Producto perecedero
                 $("#iptPrecioCompra").parent().removeClass("d-none");
                 $("#iptFechaVencimientoAun").prop("disabled", false);
                 $("#iptPrecioCompra").prop("disabled", true);
                 $("#contenedorLotes").addClass("d-none");
-            } else {
-                // $("#iptPrecioCompra").prop("disabled", false);
+            } else if (BanderaPerecederoGlobal === '0') { // Producto no perecedero
+                // Llamar con el idProducto global cuando no es perecedero
+                cargarLotesProducto(idProductoGlobal);
+                $("#iptFechaVencimientoAun").prop("disabled", true);
                 $("#iptPrecioCompra").parent().addClass("d-none");
                 $("#contenedorLotes").removeClass("d-none");
-                $("#iptFechaVencimientoAun").prop("disabled", true).val("");
-
             }
+        } else {
+            // Comportamiento por defecto para otros tipos de disminución (ej. CAMBIO si se habilita de nuevo)
+            $("#iptPrecioCompra").parent().removeClass("d-none");
+            $("#iptFechaVencimientoAun").parent().removeClass("d-none");
+            $("#contenedorLotes").addClass("d-none");
+        }
+    } else if (operacion_stock === 1) { // Aumentando stock
+        if (tipo === "COMPRA") {
+            $("#iptPrecioCompra").prop("disabled", false);
+        } else if (tipo === "PROMOCION") {
+            $("#iptPrecioCompra").prop("disabled", true);
+        }
+    }
+});
 
-            $("#idProducto_stock").val(datos[1]);
-            $("#stock_codigoProducto").html(datos[2]);
-            $("#nombre_producto").html(datos[7]);
-            $("#stock_Stock").html(datos[16]);
-            
-            $("#percedero").val(datos[15]);
-            $("#stock_NuevoStock").html(parseFloat($("#stock_Stock").html()));
+
+$("#btnGuardarNuevorStock").on('click', function() {
+    // 1. Obtención de valores iniciales
+    $("#btnGuardarNuevorStock").prop('disabled', true); // Deshabilita el botón
+    const cantidad = parseFloat($("#iptCantidad").val());
+    const comentario = $("#iptComentario").val().trim();
+    const percedero = $("#percedero").val(); // Asegúrate de que este valor sea "1" o "0" (string)
+    const tipoOperacion = $("#selTipoOperacion").val();
+    const nuevoStock = parseFloat($("#stock_NuevoStock").html());
+    const idProducto = $("#idProducto_stock").val();
+    const codigoProducto = $("#stock_codigoProducto").html();
+    const precioCosto =$("#iptPrecioCosto").val();
+    let fechaVencimiento = ""; 
+    let precioCompra = 0; // Se inicializa para ser asignado más adelante
+    let nuevafechaVencimiento="";
+    // Función auxiliar para obtener el precio de compra del combo
+    function obtenerPrecioDesdeCombo() {
+        const combo = document.getElementById('selectLote');
+        // Asegúrate de que el combo y su selección existan para evitar errores
+        if (combo && combo.selectedIndex !== -1) {
+            const texto = combo.options[combo.selectedIndex].text;
+            const match = texto.split('$')[1]; // Intenta obtener el valor después del '$'
+            return parseFloat(match) || 0; // Convierte a float, si no es válido, retorna 0
+        }
+        return 0; // Retorna 0 si el combo no está disponible o no hay selección
+    }
+
+    // 2. Validaciones iniciales
+    if (!cantidad || cantidad <= 0) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Cantidad inválida',
+        text: 'La cantidad debe ser mayor a cero.',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#3085d6'
+    });
+    $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+    return;
+}
+
+if (comentario === "") {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Comentario requerido',
+        text: 'Por favor, escriba un comentario antes de continuar.',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#3085d6'
+    });
+    $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+    return;
+}
+if (tipoOperacion === "") {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Tipo de operación requerido',
+        text: 'Por favor, seleccione un tipo de operación antes de continuar.',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#3085d6'
+    });
+    $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+    return;
+}
+    // 3. Función para enviar los datos por AJAX (centralizada)
+    // Se define aquí para poder llamarla después de obtener la fecha del modal
+    function enviarDatosStock() {
+        const datos = new FormData();
+        datos.append('accion', accion); // 'accion' debe estar definida en tu scope global o superior
+        datos.append('id_producto', idProducto);
+        datos.append('codigo_producto', codigoProducto);
+        datos.append('tipo_movimiento', operacion_stock); // 'operacion_stock' debe estar definida
+        datos.append('comentario', comentario);
+        datos.append('nuevo_stock', nuevoStock);
+        datos.append('cantidad', cantidad);
+        datos.append('precio_compra', precioCompra); // El precio de compra final
+        datos.append('tipo_operacion', tipoOperacion);
+        datos.append('fechaVencimientoAun', fechaVencimiento); // La fecha de vencimiento final
+        datos.append('nuevaFechaVencimientoAun', nuevafechaVencimiento); // La fecha de vencimiento final
+        datos.append('precioCosto',precioCosto);
+        $.ajax({
+            url: "ajax/productos.ajax.php",
+            method: "POST",
+            data: datos,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(respuesta) {
+                // Asume que 'mostrarAlertaRespuesta', 'table_producto' y 'funcion_limpiar_stock' están definidas
+                mostrarAlertaRespuesta(respuesta, function() {
+                    table_producto.ajax.reload();
+                    funcion_limpiar_stock();
+                    $("#mdlGestionarStock").modal('hide'); // Cierra el modal principal de gestión de stock
+               $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+                }, {
+                    mensajeExito: "éxito",
+                    mensajeAdvertencia: "Warning",
+                    mensajeError: "Excepción"
+                });
+                $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+            },
+           
+             error: function () {
+        manejarErrorAjax();
+         $("#btnGuardarNuevorStock").prop('disabled', false); // ✅ Volver a habilitar
+      }
         });
+    }
 
-        // Cambiar comportamiento según tipo de acción
-        $('#selTipoOperacion').on('change', function() {
-            let tipo = $(this).val();
-            if (operacion_stock === 2) { // solo si se está disminuyendo
-                if (tipo === "PERDIDA") {
-                    $("#iptPrecioCompra").parent().addClass("d-none");
-                    $("#iptFechaVencimientoAun").prop("disabled", true);
-                    //   $("#iptFechaVencimientoAun").parent().addClass("d-none");
-                    $("#contenedorLotes").removeClass("d-none");
-                    let idProducto = $("#idProducto_stock").val();
-                    cargarLotesProducto(idProducto);
-                } else if (tipo === "DEVOLUCION") {
-                    if (BaderaPerceddero === '1') {
-                        // Mostrar el campo de precio
-                        $("#iptPrecioCompra").parent().removeClass("d-none");
-                        $("#iptFechaVencimientoAun").prop("disabled", false);
-                        //   $("#iptPrecioCompra").parent().addClass("d-none");
-                        $("#iptPrecioCompra").prop("disabled", true);
-                        $("#contenedorLotes").addClass("d-none");
-                        //   $("#iptFechaVencimientoAun").parent().removeClass("d-none");
-                    } else if (BaderaPerceddero === '0') {
-                        $("#iptFechaVencimientoAun").prop("disabled", true);
-                        $("#iptPrecioCompra").parent().addClass("d-none");
-                        // $("#iptPrecioCompra").parent().removeClass("d-none");
-                        $("#contenedorLotes").removeClass("d-none");
+    // 4. Lógica de negocio según el tipo de operación
+    if (operacion_stock === 1) { // Ejemplo: "Entrada" o "Adición"
+        precioCompra = parseFloat($("#iptPrecioCompra").val());
+        fechaVencimiento = $("#iptFechaVencimientoAun").val();
+        enviarDatosStock(); // Envía los datos directamente
+    } else if (operacion_stock === 2) { // Ejemplo: "Salida" o "Ajuste"
+        if (tipoOperacion === "PERDIDA") {
+            precioCompra = obtenerPrecioDesdeCombo();
+            fechaVencimiento = ""; // No aplica fecha de vencimiento para pérdida
+            console.log('PERDIDA:', {
+                precioCompra,
+                fechaVencimiento
+            });
+            enviarDatosStock(); // Envía los datos directamente
+        } else if (tipoOperacion === "DEVOLUCION") {
+            if (percedero === "1") { // Si es perecedero, pedimos nueva fecha
+                // Muestra el modal para ingresar la nueva fecha de vencimiento
+                $("#modalNuevaFechaVencimiento").modal('show');
+
+                // Maneja el clic del botón "Guardar" dentro del modal de nueva fecha
+                // Usamos .off().on() para evitar que el evento se adjunte múltiples veces
+                $("#btnConfirmarNuevaFecha").off('click').on('click', function() {
+                    nuevafechaVencimiento = $("#iptNuevaFechaVencimiento").val();
+                    if (!nuevafechaVencimiento) {
+                        Toast.fire({
+                            icon: 'warning',
+                            title: 'Debe ingresar una nueva fecha de vencimiento.'
+                        });
+                        return; // No cierra el modal y pide la fecha
                     }
-                } else {
-                    // Por defecto, mostrar precio y fecha, ocultar combo
-                    $("#iptPrecioCompra").parent().removeClass("d-none");
-                    $("#iptFechaVencimientoAun").parent().removeClass("d-none");
-                    $("#contenedorLotes").addClass("d-none");
-                }
-            } else if (operacion_stock === 1) { 
-                      if (tipo === "COMPRA") {
-$("#iptPrecioCompra").prop("disabled", false);
-                       } else if  (tipo === "PROMOCION") {
-$("#iptPrecioCompra").prop("disabled", true);
-                                 }
 
-                 }
-        });
+                    fechaVencimiento = $("#iptFechaVencimientoAun").val();
+                    precioCompra = ""; // Si el proveedor te cambia el producto, el precio de compra del "nuevo" registro no viene del lote anterior. Considera tu lógica de negocio aquí. Podrías añadir un input en el modal si el precio de compra también cambia.
 
-        $("#btnGuardarNuevorStock").on('click', function() {
-            const cantidad = parseFloat($("#iptCantidad").val());
-            const comentario = $("#iptComentario").val().trim();
-            const percedero = $("#percedero").val();
-            const tipoOperacion = $("#selTipoOperacion").val();
-            const nuevoStock = parseFloat($("#stock_NuevoStock").html());
-            const idProducto = $("#idProducto_stock").val();
-            const codigoProducto = $("#stock_codigoProducto").html();
-            let fechaVencimiento = "";
-            let precioCompra = 0;
-            function obtenerPrecioDesdeCombo() {
-                const combo = document.getElementById('selectLote');
-                const texto = combo.options[combo.selectedIndex].text;
-                const precioTexto = texto.split('$')[1]; // "12.50"
-                return parseFloat(precioTexto);
-            }
-
-            // === Lógica de negocio según operación ===
-            if (operacion_stock === 1) {
-                precioCompra = parseFloat($("#iptPrecioCompra").val());
-                fechaVencimiento = $("#iptFechaVencimientoAun").val();
-            } else if (operacion_stock === 2) {
-                if (tipoOperacion === "PERDIDA") {
-                    precioCompra = obtenerPrecioDesdeCombo();
-                    fechaVencimiento = "";
-                    console.log('PERDIDA:', {
-                        precioCompra,
-                        fechaVencimiento
-                    });
-
-                } else if (tipoOperacion === "DEVOLUCION") {
-                    if (percedero === "1") {
-                        precioCompra = "";
-                        fechaVencimiento = $("#iptFechaVencimientoAun").val();
-                    } else {
-                        precioCompra = obtenerPrecioDesdeCombo();
-                        fechaVencimiento = "";
-                    }
-                    console.log('DEVOLUCION:', {
+                    $("#modalNuevaFechaVencimiento").modal('hide'); // Cierra el modal de nueva fecha
+                    console.log('DEVOLUCION - PERECEDERO (NUEVA FECHA):', {
                         percedero,
                         precioCompra,
                         fechaVencimiento
                     });
-                }
-            }
-
-            // === Validaciones ===
-            if (!cantidad || cantidad <= 0 || comentario === "") {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'Debe ingresar una cantidad válida y un comentario'
+                    enviarDatosStock(); // Ahora sí, envía los datos con la nueva fecha
                 });
-                return;
-            }
-            // === Preparar datos para enviar ===
-            const datos = new FormData();
-            datos.append('accion', accion);
-            datos.append('id_producto', idProducto);
-            datos.append('codigo_producto', codigoProducto);
-            datos.append('tipo_movimiento', operacion_stock);
-            datos.append('comentario', comentario);
-            datos.append('nuevo_stock', nuevoStock);
-            datos.append('cantidad', cantidad);
-            datos.append('precio_compra', precioCompra);
-            datos.append('tipo_operacion', tipoOperacion);
-            datos.append('fechaVencimientoAun', fechaVencimiento);
-            // === Enviar por AJAX ===
-            $.ajax({
-                url: "ajax/productos.ajax.php",
-                method: "POST",
-                data: datos,
-                processData: false,
-                contentType: false,
-                dataType: 'json',
-                success: function(respuesta) {
-                    mostrarAlertaRespuesta(respuesta, function() {
-                        table_producto.ajax.reload();
-                        funcion_limpiar_stock();
-                        $("#mdlGestionarStock").modal('hide');
-                    }, {
-                        mensajeExito: "éxito",
-                        mensajeAdvertencia: "Warning",
-                        mensajeError: "Excepción"
-                    });
-                },
-                error: manejarErrorAjax
-            });
-        });
 
+            } else { // Si no es perecedero, no necesitamos nueva fecha
+                precioCompra = obtenerPrecioDesdeCombo();
+                fechaVencimiento = "";
+                console.log('DEVOLUCION - NO PERECEDERO:', {
+                    percedero,
+                    precioCompra,
+                    fechaVencimiento
+                });
+                enviarDatosStock(); // Envía los datos directamente
+            }
+        }
+    }
+    // Si hay otras condiciones para 'operacion_stock', puedes añadirlas aquí
+});
         $("#btnLimpiarBusqueda").on('click', function() {
             $("#iptCodigoBarras_cades").val('')
             $("#iptCategoria").val('')
@@ -1679,7 +1805,18 @@ $("#iptPrecioCompra").prop("disabled", true);
     });
 
     document.getElementById("btnGuardarCategorias").addEventListener("click", function() {
-        const forms = document.getElementsByClassName('needs-validation');
+         txtCategoria.value = txtCategoria.value.trim(); // limpiar y poner en mayúscula
+
+      // Validar campo obligatorio
+      if (txtCategoria.value === "") {
+        Swal.fire({
+            title: 'Campo obligatorio',
+            text: 'Debe ingresar una categoría antes de registrar.',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+        return; // detener ejecución
+        }
         // Confirmación con SweetAlert
         Swal.fire({
             title: '¿Está seguro de registrar la Categoría?',
@@ -1722,6 +1859,18 @@ $("#iptPrecioCompra").prop("disabled", true);
 
     document.getElementById("btnGuardarMarca").addEventListener("click", function() {
         const idMarca = $("#idMarca").val() || "0";
+          txtMarca.value = txtMarca.value.trim(); // limpiar y poner en mayúscula
+
+      // Validar campo obligatorio
+      if (txtMarca.value === "") {
+        Swal.fire({
+            title: 'Campo obligatorio',
+            text: 'Debe ingresar una Marca antes de registrar.',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+        return; // detener ejecución
+        }
         Swal.fire({
             title: 'Está seguro de registrar el Marca?',
             icon: 'warning',
@@ -1760,49 +1909,67 @@ $("#iptPrecioCompra").prop("disabled", true);
         });
     });
 
-    document.getElementById("btnGuardarUnidaMedida").addEventListener("click", function() {
-        txtMedidas.value = txtMedidas.value.trim().toUpperCase();
-        txtNombreCorto.value = txtNombreCorto.value.trim().toUpperCase();
-        // Confirmación con SweetAlert
-        Swal.fire({
-            title: '¿Está seguro de registrar la Medida?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, deseo registrarla',
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (!result.isConfirmed) return;
+document.getElementById("btnGuardarUnidaMedida").addEventListener("click", function () {
+    
+    const txtMedidas = document.getElementById("txtMedidas");
+    const txtNombreCorto = document.getElementById("txtNombreCorto");
 
-            const datos = new FormData();
-            datos.append("accion", accion); // asegúrate de que `accion` esté definido en el contexto
-            datos.append("idMedidas", $("#idMedidas").val());
-            datos.append("nombre", $("#txtMedidas").val());
-            datos.append("nombrecorto", $("#txtNombreCorto").val());
-            $.ajax({
-                url: "ajax/medidas.ajax.php",
-                method: "POST",
-                data: datos,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: function(respuesta) {
-                    mostrarAlertaRespuesta(respuesta, function() {
-                        cargarCamboMedidas();
-                        LimpiarMedidas();
-                        $("#mdlGestionarMedidas").modal('hide');
-                    }, {
-                        mensajeExito: "éxito",
-                        mensajeAdvertencia: "Warning",
-                        mensajeError: "Excepción"
-                    });
-                },
-                error: manejarErrorAjax
-            });
+    // Limpiar y convertir a mayúsculas
+    txtMedidas.value = txtMedidas.value.trim().toUpperCase();
+    txtNombreCorto.value = txtNombreCorto.value.trim().toUpperCase();
+
+    // Validar campos obligatorios
+    if (txtMedidas.value === "" || txtNombreCorto.value === "") {
+        Swal.fire({
+            title: 'Campos obligatorios',
+            text: 'Debe completar todos los campos para registrar la medida.',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+        return; // detener ejecución
+    }
+
+    // Confirmación con SweetAlert
+    Swal.fire({
+        title: '¿Está seguro de registrar la Medida?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deseo registrarla',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (!result.isConfirmed) return;
+
+        const datos = new FormData();
+        datos.append("accion", accion); // asegúrate de que 'accion' esté definida
+        datos.append("idMedidas", $("#idMedidas").val());
+        datos.append("nombre", txtMedidas.value);
+        datos.append("nombrecorto", txtNombreCorto.value);
+
+        $.ajax({
+            url: "ajax/medidas.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (respuesta) {
+                mostrarAlertaRespuesta(respuesta, function () {
+                    cargarCamboMedidas();
+                    LimpiarMedidas();
+                    $("#mdlGestionarMedidas").modal('hide');
+                }, {
+                    mensajeExito: "éxito",
+                    mensajeAdvertencia: "Warning",
+                    mensajeError: "Excepción"
+                });
+            },
+            error: manejarErrorAjax
         });
     });
+});
 
     function cargarProducto() {
         table_producto = $("#tbl_productos").DataTable({
@@ -1857,12 +2024,12 @@ $("#iptPrecioCompra").prop("disabled", true);
                  {  targets: 4, visible: false}, {  targets: 5,  visible: false},{  targets: 6,  visible: false}, 
                 
                   {
-    targets: 7,
-    orderable: false,
-    render: function(data, type, row) {
-        var imgPath = row.img_producto || 'https://via.placeholder.com/40'; // Miniatura pequeña
-        var largeImgPath = row.img_producto || 'https://via.placeholder.com/600'; // Imagen más grande para el modal
-        var productName = row.descripcion_producto || 'Producto';
+       targets: 7,
+       orderable: false,
+       render: function(data, type, row) {
+         var imgPath = row.img_producto || 'https://via.placeholder.com/40'; // Miniatura pequeña
+         var largeImgPath = row.img_producto || 'https://via.placeholder.com/600'; // Imagen más grande para el modal
+         var productName = row.descripcion_producto || 'Producto';
 
         return `
             <div class="d-flex align-items-center product-image-wrapper"
@@ -1877,14 +2044,14 @@ $("#iptPrecioCompra").prop("disabled", true);
                     <small class="text-muted">${row.descripcion_producto}</small>
                 </div>
             </div>
-        `;
-    }
-},
+           `;
+        }
+       },
 
                 {  targets: 8,  visible: false}, 
-{
-    targets: 14, // Columna IVA
-    render: function(data, type, row) {
+     {
+      targets: 14, // Columna IVA
+      render: function(data, type, row) {
         let statusClass = '';
         let statusText = '';
         if (data == 1) {
@@ -1899,11 +2066,11 @@ $("#iptPrecioCompra").prop("disabled", true);
         return `<span class="badge ${statusClass} fs-6">${statusText}</span>`; 
         // O si quieres que sea aún más pequeño, prueba con 'small':
         // return `<span class="badge ${statusClass} small">${statusText}</span>`;
-    }
-},
-{
-    targets: 15, // Columna Perecedero
-    render: function(data, type, row) {
+       }
+      },
+      {
+      targets: 15, // Columna Perecedero
+      render: function(data, type, row) {
         let statusClass = '';
         let statusText = '';
         if (data == 1) {
@@ -1917,8 +2084,8 @@ $("#iptPrecioCompra").prop("disabled", true);
         // Añade la misma clase de tamaño de fuente de Bootstrap
         return `<span class="badge ${statusClass} fs-6">${statusText}</span>`;
         // return `<span class="badge ${statusClass} small">${statusText}</span>`;
-    }
-},
+        }
+         },
 
                 {
                     targets: 17,
@@ -1980,10 +2147,10 @@ $("#iptPrecioCompra").prop("disabled", true);
                                 <i class="bi bi-trash-fill me-2 text-danger"></i> Eliminar
                             </a>
                         </li>
-        </ul>
-      </div>
+              </ul>
+             </div>
             
-        `;
+                `;
                     }
                 }
 
@@ -2000,10 +2167,13 @@ $("#iptPrecioCompra").prop("disabled", true);
         select.empty(); // Limpia todas las opciones
         if (operacion === 1) {
             // Aumentar stock
+            select.append('<option value="">Seleccione una acción</option>');
             select.append('<option value="COMPRA">COMPRA</option>');
             select.append('<option value="PROMOCION">PROMOCION</option>');
         } else if (operacion === 2) {
             // Disminuir stock
+                
+            select.append('<option value="">Seleccione una acción</option>');
             select.append('<option value="DEVOLUCION">DEVOLUCION</option>');
             select.append('<option value="PERDIDA">PERDIDA</option>');
             // select.append('<option value="CAMBIO">CAMBIO</option>');
@@ -2050,34 +2220,38 @@ $("#iptPrecioCompra").prop("disabled", true);
 
     }
 
-
     function cargarLotesProducto(idProducto) {
-        let datos = new FormData();
-        datos.append("accion", 9);
-        datos.append("id_producto", idProducto);
+     let datos = new FormData();
+     datos.append("accion", 9);
+     datos.append("id_producto", idProducto);
 
-        $.ajax({
-            url: "ajax/productos.ajax.php",
-            method: "POST",
-            data: datos,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function(data) {
-
-                let $select = $("#selectLote");
-                $select.empty().append('<option value="">Seleccione un lote</option>');
+     $.ajax({
+        url: "ajax/productos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(data) {
+            let $select = $("#selectLote");
+            $select.empty().append('<option value="">Seleccione un lote</option>');
+            if (data.length > 0) {
                 data.forEach(function(lote) {
+                    // Muestra la fecha de vencimiento solo si existe
                     $select.append(`<option value="${lote.id}">
-          ${lote.fechaVencimiento} - $${lote.precioCompra}
-        </option>`);
+                        ${lote.fechaVencimiento ? lote.fechaVencimiento + ' - ' : ''}$${lote.precioCompra}
+                    </option>`);
                 });
-            },
-            error: function() {
-                alert('Error al cargar los lotes');
+            } else {
+                // Opción para indicar que no hay lotes disponibles si la lista está vacía
+                $select.append('<option value="">No hay lotes disponibles</option>');
             }
-        });
+        },
+        error: function() {
+            alert('Error al cargar los lotes');
+        }
+     });
     }
 
     function LimpiarCategoria() {

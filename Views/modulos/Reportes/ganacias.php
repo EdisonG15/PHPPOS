@@ -7,8 +7,8 @@
                     <div class="card-header">                
                         <h3 class="card-title"><i class="fas fa-list"></i> Historial Producto </h3>
                         <div class="card-tools">                           
-                        </div> <!-- ./ end card-tools -->
-                    </div> <!-- ./ end card-header -->
+                        </div> 
+                    </div> 
                      <div class="card-body">
                                    <div class="row mb-4">       
             <div class="col-md-3">
@@ -115,7 +115,6 @@ flatpickr("#rangoFechaGanacias", {
 });
 
 $(document).ready(function() {
-    // Función de ayuda para formatear la fecha como YYYY-MM-DD
     function formatDate(date) {
         if (!date) return null;
         const d = new Date(date);
@@ -124,8 +123,6 @@ $(document).ready(function() {
         const day = String(d.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
-
-    // Carga inicial al cargar la página (rango de fechas de hoy)
     const fechaInicioHoy = new Date();
     const fechaFinHoy = new Date();
     cargarTableGanacias(formatDate(fechaInicioHoy), formatDate(fechaFinHoy));
@@ -164,7 +161,9 @@ function cargarTableGanacias(fechaDesde, fechaHasta) {
         dom: 'Bfrtip',
         buttons: [{
             extend: 'pdfHtml5',
-            text: 'Exportar PDF',
+         
+              text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn btn-danger',
             title: 'Reporte de Ganancias',
             orientation: 'landscape', // vertical portrait
             pageSize: 'A4',
@@ -186,7 +185,7 @@ function cargarTableGanacias(fechaDesde, fechaHasta) {
                     totalComprasExport += parseFloat(data.total_compras || 0);
                     totalGananciaExport += parseFloat(data.total_ganancia || 0);
                 });
-
+                
                 // Determinar el número de columnas que se están exportando al PDF
                 // Esto es crucial para que los anchos y el cuerpo de la tabla de resumen coincidan
                 const numExportedColumns = doc.content[1].table.body[0].length;
@@ -249,7 +248,16 @@ function cargarTableGanacias(fechaDesde, fechaHasta) {
                     layout: 'noBorders' // Sin bordes para la tabla de resumen
                 });
             }
-        }, 'excel', 'print', 'pageLength'],
+        } ,{
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success',
+                     title: 'Reporte de Ganancias',
+                      exportOptions: {
+                    // ¡AQUÍ ESTÁ EL CAMBIO! Define las mismas columnas que para PDF.
+                   columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                }
+                },  'pageLength'],
         ajax: {
             url: "ajax/reporte.ajax.php",
             type: "POST",

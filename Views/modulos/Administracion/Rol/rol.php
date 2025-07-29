@@ -1,243 +1,206 @@
-
-<!-- <?php 
-session_start()         
-           ?> -->
-<style>
-body, html {
-  height: 100%;
-  background-color: #f7f8fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar {
-  background: #ffffff;
-  border-right: 1px solid #e0e6ed;
-  height: 100%;
-  padding: 2rem 1.5rem;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-
-.sidebar .list-group-item {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.sidebar .list-group-item:hover {
-  background-color: #e7f1ff;
-  color: #0056b3;
-}
-
-.sidebar .list-group-item.active {
-  background-color: #e7f1ff;
-  color: #0056b3;
-  border-color: #0056b3;
-}
-
-.content {
-  position: relative;
-  padding: 2rem 3rem 5rem; /* Bottom space for fixed summary */
-  overflow-y: auto;
-  height: 100%;
-}
-
-.card {
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  background-color: #fff;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-}
-
-.card-header {
-  font-size: 1.25rem;
-  font-weight: bold;
-  border-bottom: 1px solid #e0e6ed;
-  padding-bottom: 1rem;
-}
-
-.card-body {
-  padding: 1rem 0;
-}
-
-.form-floating input, .form-floating select {
-  font-size: 1rem;
-  padding: 0.75rem;
-  border-radius: 0.375rem;
-}
-
-.table-scroll {
-  max-height: 300px;
-  overflow-y: auto;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-top: 1.5rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th, table td {
-  padding: 0.75rem;
-  text-align: left;
-  font-size: 0.9rem;
-}
-
-table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-}
-
-table td {
-  background-color: #fff;
-}
-
-.summary-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border-top: 1px solid #e0e6ed;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-}
-
-.summary-bar small {
-  font-size: 0.875rem;
-  color: #6c757d;
-}
-
-.summary-bar .btn-action {
-  min-width: 120px;
-  border-radius: 0.375rem;
-  padding: 0.5rem 1.5rem;
-}
-
-.summary-bar .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.summary-bar .btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-.summary-bar .btn-outline-primary {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.summary-bar .btn-outline-primary:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.summary-bar .text-danger {
-  font-weight: 600;
-}
-
-.summary-bar .text-success {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.table-hover tbody tr:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-</style>
-
-<div class="row g-0 h-100">
- 
-
-    <!-- CONTENT -->
-    <section class="col-12 col-md-8 content">
-        <input id="txtIdCliente" type="hidden" value="1" />
-        <input id="txtId_usuario" type="hidden" value="<?php echo $_SESSION["usuario"]->id_usuario ?>" />
-        <input id="txtId_caja" type="hidden" value="<?php echo $_SESSION["usuario"]->id_caja ?>" />
-        <input id="txtNumeroDocumento" type="hidden" value="0" />
-
-        <div class="card mb-4">
-            <div class="card-header">Información del Cliente y Documento</div>
-            <div class="row g-3">
-                <div class="col-4 form-floating">
-                    <select class="form-select" id="selDocumentoVenta">
-                        <option value="1" selected>Ticket</option>
-                        <option value="2">Factura</option>
-                    </select>
-                    <label for="selDocumentoVenta">Documento</label>
+  <div class="content">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0 text-dark">
+                        <i class="fas fa-chart-pie mr-2"></i> Tablero de Reportes
+                    </h1>
                 </div>
-                <div class="col-4 form-floating">
-                    <input type="text" class="form-control" id="clienteName" placeholder="Cliente">
-                    <label for="clienteName">Cliente</label>
-                </div>
-                <div class="col-4 form-floating">
-                    <input type="date" class="form-control" id="purchaseDate" value="2025-04-24">
-                    <label for="purchaseDate">Fecha de Compra</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-5">
-            <div class="table-scroll">
-                <table id="lstProductosVenta" class="table table-hover table-sm mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Id Producto</th>
-                            <th>Código</th>
-                            <th>Categoría</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Datos dinámicos -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="summary-bar">
-            <div>
-                <small>Items:</small> <strong id="itemProducto">0</strong>
-                &nbsp;&nbsp;
-                <small>SubTotal:</small> <strong id="boleta_subtotal" class="text-danger">00,000</strong>
-                &nbsp;&nbsp;
-                <small>Efectivo:</small>
-                <input type="number" id="iptEfectivoRecibido" class="form-control form-control-sm" placeholder="0">
-            </div>
-            <div>
-                <small>Total:</small>
-                <strong class="text-success" id="totalVenta">00,000</strong>
-                &nbsp;&nbsp;
-                <button class="btn btn-primary btn-action" id="btnIniciarVentaContado"><i class="bi bi-cash-stack"></i> Contado</button>
-                <button class="btn btn-outline-primary btn-action" id="btnVentaCredit"><i class="bi bi-credit-card-2-front"></i> Crédito</button>
-                <button class="btn btn-outline-secondary btn-action"><i class="bi bi-x-circle"></i> Cancelar</button>
             </div>
         </div>
     </section>
 
-       <!-- SIDEBAR -->
-    <div class="col-12 col-md-4 sidebar">
-        <div class="mb-4">
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="searchInputCodigo" placeholder="Buscar..." autocomplete="off">
-                <label for="searchInputCodigo"><i class="bi bi-search me-1"></i>Artículo / Código</label>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-outline card-success"> <div class="card-header border-0">
+                    <h3 class="card-title text-bold">
+                        Generar un nuevo Reporte
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form id="reportGeneratorForm">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label for="reportTypeSelect" class="form-label text-muted">1. Selecciona el tipo de reporte:</label>
+                                <select class="form-control form-control-lg" id="reportTypeSelect" name="reportType" required>
+                                    <option value="">-- Elige un reporte aquí --</option>
+                                    <option value="historialVentas">Historial de Ventas</option>
+                                    <option value="ganancias">Reporte de Ganancias</option>
+                                    <option value="movimientoDiario">Movimiento Diario</option>
+                                    <option value="movimientoMes">Movimiento Mensual por Año</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="dynamicReportInputs" class="mt-4 p-3 bg-light rounded-lg border">
+                            <p class="text-center text-muted m-0">
+                                <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
+                            </p>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-info btn-lg px-5 shadow-sm">
+                                    <i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="list-group" id="productList">
-            <!-- Items dinámicos aquí -->
-        </div>
-    </div>
+    </section>
 </div>
+<script>
+$(document).ready(function() {
+    const $reportTypeSelect = $('#reportTypeSelect');
+    const $dynamicInputsContainer = $('#dynamicReportInputs');
+    const $reportGeneratorForm = $('#reportGeneratorForm');
+    const $submitButton = $reportGeneratorForm.find('button[type="submit"]');
+    const phpScriptUrl = 'endpoint/generate_report.php'; // Your PHP script URL
+
+    // Function to update dynamic input fields based on selected report type
+    function updateReportInputs() {
+        const selectedReportType = $reportTypeSelect.val();
+        let htmlInputs = '';
+
+        if (selectedReportType === 'historialVentas' || selectedReportType === 'ganancias' || selectedReportType === 'movimientoDiario') {
+            htmlInputs = `
+                <label class="form-label text-muted mb-3">2. Ingresa el rango de fechas:</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha Inicio:</label>
+                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha Fin:</label>
+                            <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (selectedReportType === 'movimientoMes') {
+            htmlInputs = `
+                <label class="form-label text-muted mb-3">2. Ingresa el año:</label>
+                <div class="form-group">
+                    <label for="anio">Año:</label>
+                    <input type="number" class="form-control" id="anio" name="anio" placeholder="Ej: 2023" min="1900" max="2100" required>
+                </div>
+            `;
+        } else {
+            // Default message when no report is selected
+            htmlInputs = `
+                <p class="text-center text-muted m-0">
+                    <i class="fas fa-info-circle mr-1"></i> Selecciona un reporte arriba para ver las opciones.
+                </p>
+            `;
+        }
+
+        $dynamicInputsContainer.html(htmlInputs);
+
+        // Enable/disable submit button based on selection
+        if (selectedReportType) {
+            $submitButton.prop('disabled', false);
+        } else {
+            $submitButton.prop('disabled', true);
+        }
+    }
+
+    // Event listener for report type selection change
+    $reportTypeSelect.on('change', updateReportInputs);
+
+    // Initial call to set inputs and disable button
+    updateReportInputs();
+
+    // Handle form submission
+    $reportGeneratorForm.submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const selectedReportType = $reportTypeSelect.val();
+        if (!selectedReportType) {
+            toastr.warning('Por favor, selecciona un tipo de reporte antes de continuar.');
+            return;
+        }
+
+        const formData = new FormData(this);
+
+        // Show loading indicator and disable button
+        const card = $(this).closest('.card');
+        card.append('<div class="overlay dark"><i class="fas fa-2x fa-sync-alt fa-spin text-white"></i></div>'); // Added 'dark' class for overlay
+        $submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Generando...');
+
+        $.ajax({
+            url: phpScriptUrl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhrFields: {
+                responseType: 'blob' // Important: Expect a binary blob response
+            },
+            success: function(response, status, xhr) {
+                const contentType = xhr.getResponseHeader('Content-Type');
+                if (contentType && contentType.indexOf('application/pdf') !== -1) {
+                    const blob = new Blob([response], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+
+                    const contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                    let filename = 'reporte.pdf';
+                    if (contentDisposition) {
+                        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                        if (filenameMatch && filenameMatch.length > 1) {
+                            filename = filenameMatch[1];
+                        }
+                    }
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    toastr.success('¡Reporte generado y descargado exitosamente!');
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        try {
+                            const errorJson = JSON.parse(reader.result);
+                            toastr.error(errorJson.message || 'Ocurrió un error desconocido al generar el reporte.');
+                        } catch (e) {
+                            toastr.error('Respuesta inesperada del servidor o formato no válido.');
+                        }
+                    };
+                    reader.readAsText(response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                let errorMessage = 'Error de conexión con el servidor. Intenta de nuevo.';
+                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                    errorMessage = jqXHR.responseJSON.message;
+                } else if (jqXHR.responseText) {
+                    try {
+                        const errorJson = JSON.parse(jqXHR.responseText);
+                        errorMessage = errorJson.message || errorMessage;
+                    } catch (e) {
+                        // Not JSON, use generic error
+                    }
+                }
+                toastr.error(errorMessage);
+            },
+            complete: function() {
+                card.find('.overlay').remove();
+                $submitButton.prop('disabled', false).html('<i class="fas fa-file-download mr-2"></i> Generar y Descargar Reporte');
+            }
+        });
+    });
+});   
+</script>

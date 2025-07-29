@@ -74,11 +74,13 @@ class ProductosControlador
 
           $iptStockReg=  0;
           $iptPrecioCompraReg=   0;
+          $iptCodigoReg=0;
 
         }else{
 
             $iptStockReg=  $data["iptStockReg"];
           $iptPrecioCompraReg=   $data["iptPrecioCompraReg"];
+          $iptCodigoReg=$data["iptCodigoReg"];
         }
         // Prepara los datos para el modelo, incluyendo la ruta del logo
         // Asegúrate de que las claves aquí coincidan con tus columnas de base de datos y parámetros del SP
@@ -86,7 +88,7 @@ class ProductosControlador
         // 2. Preparar los datos para el modelo, incluyendo el ID de empresa y la ruta final del logo
         $producto_data = [
             "id_producto"         => empty($data["idProducto"]) ? null : (int)$data["idProducto"], // Importante: null para INSERT, int para UPDATE
-            "iptCodigoReg"       => $data["iptCodigoReg"],
+            "iptCodigoReg"       =>  $iptCodigoReg,
             "selMedidasReg"           => (int)$data["selMedidasReg"],
             "selMarcaReg"           => (int)$data["selMarcaReg"],
             "selCategoriaReg"           => (int)$data["selCategoriaReg"],
@@ -151,7 +153,9 @@ class ProductosControlador
         $cantidad,
         $precio_compra,
         $tipo_operacion,
-        $fechaVencimientoAun
+        $fechaVencimientoAun,
+        $nuevaFechaVencimientoAun,
+        $precioCosto
     ) {
 
         $respuesta = ProductosModelo::mdlDisminuirStock(
@@ -162,7 +166,9 @@ class ProductosControlador
             $cantidad,
             $precio_compra,
             $tipo_operacion,
-            $fechaVencimientoAun
+            $fechaVencimientoAun,
+            $nuevaFechaVencimientoAun,
+            $precioCosto
         );
 
         return $respuesta;

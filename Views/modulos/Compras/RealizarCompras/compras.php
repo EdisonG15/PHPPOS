@@ -497,7 +497,6 @@ session_start();
 
     
 </style>
-
    <script src="/WebPuntoVenta2025/Views/util/js/validarDocumento.js"></script>
        <script src="/WebPuntoVenta2025/Views/util/js/respuesta.js"></script>
 <div class="container-fluid">
@@ -509,9 +508,6 @@ session_start();
     <div class="row">
         <div class="col-md-9">
             <div class="section-card">
-                <!-- <div class="card-header-custom">
-                    <i class="fas fa-file-invoice-dollar"></i> Datos Generales de la Compra
-                </div> -->
                     <div class="card-header-custom d-flex justify-content-between align-items-center">
         <span><i class="fas fa-file-invoice-dollar"></i> Datos Generales de la Compra</span>
         <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDatosVenta" aria-expanded="false" aria-controls="collapseDatosVenta">
@@ -524,10 +520,10 @@ session_start();
                         <div class="col-md-6">
                                <input id="txtIdProveedor" type="hidden" value="0" />
                             <input id="iptruc" type="hidden" value="0" />
-                            <label for="proveedorSearch" class="form-label">Proveedor</label>
+                            <label for="proveedorSearchF" class="form-label">Proveedor</label>
                           
                             <div class="input-group">
-                                <input type="text" class="form-control" id="proveedorSearch" placeholder="Buscar o seleccionar proveedor..." list="proveedoresList" autocomplete="off">
+                                <input type="text" class="form-control" id="proveedorSearchF" placeholder="Buscar o seleccionar proveedor..." list="proveedoresList" autocomplete="off">
                                 <datalist id="proveedoresList">
 
                                 </datalist>
@@ -561,8 +557,8 @@ session_start();
                         <input type="hidden" id="txtCodigoProducto" name="Codigo" value="">
                         <input type="hidden" id="txtNombreProducto" name="Nombre" value="">
                         <div class="col-md-5" style="position: relative;">
-    <label for="productoSearch" class="form-label">Buscar Producto</label>
-    <input type="text" class="form-control" id="productoSearch" placeholder="Buscar o seleccionar producto..." autocomplete="off">
+    <label for="productoSearchC" class="form-label">Buscar Producto</label>
+    <input type="text" class="form-control" id="productoSearchC" placeholder="Buscar o seleccionar producto..." autocomplete="off">
     <div id="productosSugerencias" class="sugerencias-container"></div>
      </div>
                         
@@ -586,7 +582,7 @@ session_start();
                     </div>
 
                     <div class="card p-3 table-responsive">
-                        <table class="table table-hover align-middle" id="tb_Compra" style="width:100%">
+                        <table class="table table-hover align-middle" id="tb_CompraC" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -777,12 +773,12 @@ session_start();
 
 <script>
     var accion;
-    var table_compras;
+    var table_comprasC;
     $(document).ready(function() {
         cargarTableProducto();
         CargarNroBoleta();
         verificarSiExisteCajaAbierta();
-         $('#proveedorSearch').on('keyup', function() {
+         $('#proveedorSearchF').on('keyup', function() {
               let query = $(this).val().trim();
             if (query.length < 2) {
                 $('#proveedoresList').empty(); // limpiar si hay poco texto
@@ -811,7 +807,7 @@ session_start();
                     }
 
                     // Manejar evento cuando se selecciona un producto
-                    $("#proveedorSearch").on('change', function() {
+                    $("#proveedorSearchF").on('change', function() {
                         let valor = $(this).val();
                         if (valor !== '') {
                             CargarProveedor(valor);
@@ -826,65 +822,67 @@ session_start();
           $("#modalCredito").modal('show');
 
            });
-        $('#btnGuardarCredito').on('click', function () {
-     
-            $("#btnGuardarCredito").prop('disabled', true);
-                 let efectivoRecibido = parseFloat($("#montoAbonado").val()) || 0;
-                let totalCompras = parseFloat($("#total_compras").html());
-                let fechaVencimiento = $("#fechaVencimiento").val();
-                  if (fechaVencimiento  === "" ) {
-            Swal.fire({
-               icon: 'warning',
-               title: 'Ingrese la fecha Vencimiento'
-            });
-             $("#btnGuardarCredito").prop('disabled', false);
-            return;
-        }
 
+     $(document).off('click', '#btnIniciarComprasContado').on('click', '#btnIniciarComprasContado', function () {
+    const $btn = $("#btnIniciarComprasContado");
+    $btn.prop('disabled', true); // Evita múltiples clics rápidos
 
-      if (efectivoRecibido >= totalCompras) {
-           Swal.fire({
-               icon: 'warning',
-               title: 'No se puede aplicar crédito, ya que no hay saldo'
-            });
-             $("#btnGuardarCredito").prop('disabled', false);
-            return;
-        }
+    if (!validarCamposCompra()) {
+        $btn.prop('disabled', false);
+        return;
+    }
 
-           let formData = recolectarDatosCompra(2, efectivoRecibido);
-          confirmarYEnviarCompra(formData);
+    const formData = recolectarDatosCompra(1);
+    confirmarYEnviarCompra(formData);
 });
-     
-        $('#btnIniciarComprasContado').on('click', function () {
-         
-                 $("#btnIniciarComprasContado").prop('disabled', true);
-      if (!validarCamposCompra()) {
-    $("#btnIniciarComprasContado").prop('disabled', false);
-    return;
-  }
-               let formData = recolectarDatosCompra(1);
-                confirmarYEnviarCompra(formData);
-        });
-     
 
-       $('#tb_Compra tbody').on('click', '.btnEliminarproducto', function() {
-            table_compras.row($(this).parents('tr')).remove().draw();
+$(document).off('click', '#btnGuardarCredito').on('click', '#btnGuardarCredito', function () {
+    const $btn = $("#btnGuardarCredito");
+    $btn.prop('disabled', true); // prevenir clics múltiples
+
+    let efectivoRecibido = parseFloat($("#montoAbonado").val()) || 0;
+    let totalCompras = parseFloat($("#total_compras").html());
+    let fechaVencimiento = $("#fechaVencimiento").val();
+
+    if (fechaVencimiento === "") {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Ingrese la fecha Vencimiento'
+        });
+        $btn.prop('disabled', false); // reactivar si hay error
+        return;
+    }
+
+    if (efectivoRecibido >= totalCompras) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No se puede aplicar crédito, ya que no hay saldo'
+        });
+        $btn.prop('disabled', false); // reactivar si hay error
+        return;
+    }
+
+    const formData = recolectarDatosCompra(2, efectivoRecibido);
+    confirmarYEnviarCompra(formData);
+});
+
+       $('#tb_CompraC tbody').on('click', '.btnEliminarproducto', function() {
+            table_comprasC.row($(this).parents('tr')).remove().draw();
             recalcularTotales();
 
       });
 
-        $("#productoSearch").change(function() { //change cuando dectente un movimiento
-            CargarProductos();
+        $("#productoSearchC").change(function() { //change cuando dectente un movimiento
+            CargarProductosC();
         });
 
          // --- LÓGICA PARA BUSCAR PRODUCTO ---
-    $('#productoSearch').on('keyup', function() {
+    $('#productoSearchC').on('keyup', function() {
         let query = $(this).val().trim();
         if (query.length < 2) {
             $('#productosSugerencias').empty().hide(); // Oculta y limpia si la búsqueda es muy corta
             return;
         }
-
         $.ajax({
             url: "ajax/productos.ajax.php", // Tu endpoint sigue siendo el mismo
             method: "POST",
@@ -938,93 +936,170 @@ session_start();
         const codigoSeleccionado = $(this).data('codigo');
 
         // Cargar los datos del producto en el formulario
-        CargarProductos(codigoSeleccionado);
+        CargarProductosC(codigoSeleccionado);
 
         // Ocultar la caja de sugerencias
         $('#productosSugerencias').empty().hide();
 
         // Opcional: Limpiar el campo de búsqueda para la siguiente búsqueda
-        $('#productoSearch').val('').focus();
+        $('#productoSearchC').val('').focus();
     });
     
     // Ocultar sugerencias si el usuario hace clic fuera
     $(document).on('click', function(e) {
-        if (!$(e.target).closest('#productoSearch, #productosSugerencias').length) {
+        if (!$(e.target).closest('#productoSearchC, #productosSugerencias').length) {
             $('#productosSugerencias').hide();
         }
     })
+const redondear = (valor) => parseFloat(valor.toFixed(2));
+$('#btnAgregarProducto').on('click', function() {
+    const $codigoProducto = $('#txtCodigoProducto');
+    const $nombreProducto = $('#txtNombreProducto');
+    const $idProducto = $('#txtIdProducto');
+    const $cantidadProducto = $('#txtCantidadProducto');
+    const $precioCompraProducto = $('#txtPrecioCompraProducto');
+    const $llevaIva = $('#txtllevaIva');
+    const $fechaVencimiento = $('#txtFechaVencimiento');
+    const $perecedero_producto = $('#perecedero_producto');
+    
+    const codigo = $codigoProducto.val();
+    const nombre = $nombreProducto.val();
 
-    $('#btnAgregarProducto').on('click', function() {
-            const $codigoProducto = $('#txtCodigoProducto');
-            const $nombreProducto = $('#txtNombreProducto');
-            const $idProducto = $('#txtIdProducto');
-            const $cantidadProducto = $('#txtCantidadProducto');
-            const $precioCompraProducto = $('#txtPrecioCompraProducto');
-            const $llevaIva = $('#txtllevaIva');
-            const $fechaVencimiento = $('#txtFechaVencimiento');
-            const $perecedero_producto = $('#perecedero_producto');
-            const codigo = $codigoProducto.val();
-            const nombre = $nombreProducto.val();
+    // Validaciones iniciales
+    if (!codigo || !nombre) {
+        Toast.fire({ icon: 'warning', title: 'No hay producto para agregar' });
+        return;
+    }
+    
+    let existeCodigo = table_comprasC.rows().data().toArray().some(row => row['codigo_producto'] === codigo);
+    if (existeCodigo) {
+        Toast.fire({ icon: 'warning', title: 'El producto ya existe en la compra' });
+        return;
+    }
 
-            if (!codigo || !nombre) {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'No Hay Producto para Agregar'
-                });
-                return;
-            }
-
-            let existeCodigo = table_compras.rows().data().toArray().some(row => row['codigo_producto'] === codigo);
-
-            if (existeCodigo) {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'El producto ya existe en la compra'
-                });
-                return;
-            }
-
-            const cantidad = parseFloat($cantidadProducto.val()) || 0;
-            const precioCompra = parseFloat($precioCompraProducto.val()) || 0;
-            const llevaIva = parseFloat($llevaIva.val()) || 0;
-            const total = cantidad * precioCompra;
-            const iva = llevaIva > 0 ? total * ivaP : 0;
-            const subtotal = total - iva;
-
-            const perecedero = parseInt($perecedero_producto.val()) || 0;
-            const fechaVencimiento = $fechaVencimiento.val();
-
-            // Validar que si el producto es perecedero, tenga fecha de vencimiento
-            if (perecedero === 1 && (!fechaVencimiento || fechaVencimiento.trim() === '')) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'El producto perecedero requiere una fecha de vencimiento'
-                });
-                return;
-            }
-
-            table_compras.row.add({
-                'id_producto': $idProducto.val(),
-                'codigo_producto': codigo,
-                'descripcion_producto': nombre,
-                'cantidad': cantidad,
-                'precio_compra_producto': precioCompra.toFixed(2),
-                'iva': iva.toFixed(2),
-                'sub_total': subtotal.toFixed(2),
-                'total': total.toFixed(2),
-                'vence': $fechaVencimiento.val()
-            }).draw();
-
-            recalcularTotales();
-            limpiartxtProducto();
+    const cantidad = parseFloat($cantidadProducto.val()) || 0;
+    const precioCompraConIva = parseFloat($precioCompraProducto.val()) || 0;
+    const llevaIva = parseInt($llevaIva.val()) || 0;
+    const perecedero = parseInt($perecedero_producto.val()) || 0;
+    const fechaVencimiento = $fechaVencimiento.val();
+    
+    if (perecedero === 1 && (!fechaVencimiento || fechaVencimiento.trim() === '')) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'El producto perecedero requiere una fecha de vencimiento'
         });
+        return;
+    }
+
+    // --- Lógica de cálculo mejorada para decimales ---
+    let iva = 0;
+    let subtotal = 0;
+    const total = redondear(cantidad * precioCompraConIva); // El total se calcula primero y se redondea
+
+    if (llevaIva === 1) {
+        // Se calcula el subtotal (valor sin IVA)
+        const precioUnitarioSinIva = precioCompraConIva / (1 + ivaP);
+        subtotal = redondear(precioUnitarioSinIva * cantidad);
+
+        // El IVA se calcula por diferencia para que cuadre exactamente
+        iva = redondear(total - subtotal);
+    } else {
+        subtotal = total;
+        iva = 0;
+    }
+
+    // Se agrega la fila a la tabla con los valores ya redondeados
+    table_comprasC.row.add({
+        'id_producto': $idProducto.val(),
+        'codigo_producto': codigo,
+        'descripcion_producto': nombre,
+        'cantidad': cantidad,
+        'precio_compra_producto': redondear(precioCompraConIva),
+        'iva': iva,
+        'sub_total': subtotal,
+        'total': total,
+        'vence': fechaVencimiento
+    }).draw();
+
+    recalcularTotales();
+    limpiartxtProducto();
+});
+    // $('#btnAgregarProducto').on('click', function() {
+    //         const $codigoProducto = $('#txtCodigoProducto');
+    //         const $nombreProducto = $('#txtNombreProducto');
+    //         const $idProducto = $('#txtIdProducto');
+    //         const $cantidadProducto = $('#txtCantidadProducto');
+    //         const $precioCompraProducto = $('#txtPrecioCompraProducto');
+    //         const $llevaIva = $('#txtllevaIva');
+    //         const $fechaVencimiento = $('#txtFechaVencimiento');
+    //         const $perecedero_producto = $('#perecedero_producto');
+    //         const codigo = $codigoProducto.val();
+    //         const nombre = $nombreProducto.val();
+
+    //         if (!codigo || !nombre) {
+    //             Toast.fire({
+    //                 icon: 'warning',
+    //                 title: 'No Hay Producto para Agregar'
+    //             });
+    //             return;
+    //         }
+
+    //         let existeCodigo = table_comprasC.rows().data().toArray().some(row => row['codigo_producto'] === codigo);
+
+    //         if (existeCodigo) {
+    //             Toast.fire({
+    //                 icon: 'warning',
+    //                 title: 'El producto ya existe en la compra'
+    //             });
+    //             return;
+    //         }
+
+    //         const cantidad = parseFloat($cantidadProducto.val()) || 0;
+    //         const precioCompra = parseFloat($precioCompraProducto.val()) || 0;
+    //         const llevaIva = parseFloat($llevaIva.val()) || 0;
+    //         const total = cantidad * precioCompra;
+    //         const iva = llevaIva > 0 ? total * ivaP : 0;
+    //         const subtotal = total - iva;
+
+    //         const perecedero = parseInt($perecedero_producto.val()) || 0;
+    //         const fechaVencimiento = $fechaVencimiento.val();
+
+    //         // Validar que si el producto es perecedero, tenga fecha de vencimiento
+    //         if (perecedero === 1 && (!fechaVencimiento || fechaVencimiento.trim() === '')) {
+    //             Swal.fire({
+    //                 icon: 'warning',
+    //                 title: 'El producto perecedero requiere una fecha de vencimiento'
+    //             });
+    //             return;
+    //         }
+
+    //         table_comprasC.row.add({
+    //             'id_producto': $idProducto.val(),
+    //             'codigo_producto': codigo,
+    //             'descripcion_producto': nombre,
+    //             'cantidad': cantidad,
+    //             'precio_compra_producto': precioCompra.toFixed(2),
+    //             'iva': iva.toFixed(2),
+    //             'sub_total': subtotal.toFixed(2),
+    //             'total': total.toFixed(2),
+    //             'vence': $fechaVencimiento.val()
+    //         }).draw();
+
+    //         recalcularTotales();
+    //         limpiartxtProducto();
+    //     });
+
         $('#btnRegistrarProveedor').on('click',function() {
             $("#modalRegistrarProveedor").modal('show');
         });
 
     });
 
-   document.getElementById("btnGuardarProveedor").addEventListener("click", function () {
+
+$(document).off('click', '#btnGuardarProveedor').on('click', '#btnGuardarProveedor', function () {
+    const $btn = $("#btnGuardarProveedor");
+    $btn.prop('disabled', true); // 🔒 Evitar múltiples clics
+
     const tipoIdentificacion = "04";
     const numeroDocumento = $("#iptRuc").val().trim();
     const saltarValidacion = document.getElementById("chkValidar").checked;
@@ -1054,6 +1129,7 @@ session_start();
             text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
             confirmButtonText: 'Aceptar'
         });
+        $btn.prop('disabled', false); // 🔓 Reactivar si error
         return;
     }
 
@@ -1071,6 +1147,7 @@ session_start();
             icon: 'info',
             title: 'Por favor complete todos los campos obligatorios'
         });
+        $btn.prop('disabled', false); // 🔓 Reactivar si error
         return;
     }
 
@@ -1083,10 +1160,14 @@ session_start();
         confirmButtonText: 'Sí, deseo registrarlo',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
-        if (!result.isConfirmed) return;
+        if (!result.isConfirmed) {
+            $btn.prop('disabled', false); // 🔓 Reactivar si cancelado
+            return;
+        }
+
         const datos = new FormData();
-        datos.append("accion", accion); // asegúrate de que esté definido en el scope
-        datos.append("IdProveedor", $("#id").val());
+        datos.append("accion", 2);
+        datos.append("IdProveedor", 0);
         datos.append("Ruc", $("#iptRuc").val());
         datos.append("Nombre", $("#iptNombre").val());
         datos.append("RazonSocial", $("#iptRazonSocial").val());
@@ -1103,22 +1184,22 @@ session_start();
             processData: false,
             dataType: 'json',
             success: function (respuesta) {
-                 mostrarAlertaRespuesta(respuesta, function () {
+                mostrarAlertaRespuesta(respuesta, function () {
                     CargarProveedor(numeroDocumento);
-                      fun_limpiar_proveedor();
-                      $("#modalRegistrarProveedor").modal('hide');
-                  }, {
-                   mensajeExito: "éxito",
-                   mensajeAdvertencia: "Warning",
-                   mensajeError: "Excepción"
-                   });
-                },
-                error: manejarErrorAjax
-    
+                    fun_limpiar_proveedor();
+                    $("#modalRegistrarProveedor").modal('hide');
+                }, {
+                    mensajeExito: "éxito",
+                    mensajeAdvertencia: "Warning",
+                    mensajeError: "Excepción"
+                });
+            },
+            error: manejarErrorAjax
+        }).always(function () {
+            $btn.prop('disabled', false); // 🔓 Reactivar siempre al terminar AJAX
         });
     });
-  });
-
+});
 
    function recolectarDatosCompra(tipoPago, efectivoRecibido = 0) {
     let totalSubtotalCompras = parseFloat($("#subTotal").html());
@@ -1132,8 +1213,8 @@ session_start();
             }
     let formData = new FormData();
     
-    table_compras.rows().eq(0).each(function(index) {
-        let row = table_compras.row(index);
+    table_comprasC.rows().eq(0).each(function(index) {
+        let row = table_comprasC.row(index);
         let data = row.data();
         formData.append('arr[]', JSON.stringify({
             id_producto: data['id_producto'],
@@ -1166,8 +1247,7 @@ session_start();
     return formData;
  };
 
-  function confirmarYEnviarCompra(formData) {
-      // Mostrar contenido del FormData en consola
+function confirmarYEnviarCompra(formData) {
     for (let pair of formData.entries()) {
         console.log(pair[0] + ':', pair[1]);
     }
@@ -1189,29 +1269,34 @@ session_start();
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function(respuesta) {
-
-                     mostrarAlertaRespuesta(respuesta, function () {
-                      table_compras.clear().draw();
-                      LimpiarInputs();
-                      CargarNroBoleta();
-                      $("#modalCredito").modal('hide');
-                  }, {
-                   mensajeExito: "éxito",
-                   mensajeAdvertencia: "Warning",
-                   mensajeError: "Excepción"
-                   });
+                success: function (respuesta) {
+                    mostrarAlertaRespuesta(respuesta, function () {
+                        table_comprasC.clear().draw();
+                        LimpiarInputs();
+                        CargarNroBoleta();
+                        $("#modalCredito").modal('hide');
+                    }, {
+                        mensajeExito: "éxito",
+                        mensajeAdvertencia: "Warning",
+                        mensajeError: "Excepción"
+                    });
                 },
                 error: manejarErrorAjax
-                   
+            }).always(function () {
+                // Reactivar botones después del AJAX
+                $("#btnIniciarComprasCredit").prop('disabled', false);
+                $("#btnIniciarComprasContado").prop('disabled', false);
+                $("#btnGuardarCredito").prop('disabled', false);
             });
+        } else {
+            // Reactivar botones si se cancela
+            $("#btnIniciarComprasCredit").prop('disabled', false);
+            $("#btnIniciarComprasContado").prop('disabled', false);
+            $("#btnGuardarCredito").prop('disabled', false);
         }
-        $("#btnIniciarComprasCredit").prop('disabled', false);
-        $("#btnIniciarComprasContado").prop('disabled', false);
-        $("#btnGuardarCredito").prop('disabled', false);
-      
     });
- };
+}
+
 
 function CargarProveedor(proveedor ="") {
      let ruc =0;
@@ -1237,7 +1322,7 @@ function CargarProveedor(proveedor ="") {
              success: function(respuesta) {
                  $("#txtIdProveedor").val(respuesta['id_proveedor']);
                  $("#iptruc").val(ruc);
-                  $("#proveedorSearch").val(respuesta['nombre']);
+                  $("#proveedorSearchF").val(respuesta['nombre']);
                 
              }
       });
@@ -1245,7 +1330,7 @@ function CargarProveedor(proveedor ="") {
 
 
     function cargarTableProducto() {
-        table_compras = $('#tb_Compra').DataTable({
+        table_comprasC = $('#tb_CompraC').DataTable({
             //  scrollY: "300px",          // Altura máxima
             scrollCollapse: true, // Colapsa si hay pocos datos
             paging: true, // Muestra paginación si hay muchos productos
@@ -1288,13 +1373,12 @@ function CargarProveedor(proveedor ="") {
         });
     };
 
-
-    function CargarProductos(producto = " ") {
+    function CargarProductosC(producto = " ") {
 
         if (producto != "") {
             codigo_producto = producto;
         } else {
-            codigo_producto = $("#productoSearch").val();
+            codigo_producto = $("#productoSearchC").val();
         }
         codigo_producto = $.trim(codigo_producto.split('/')[0]);
         $.ajax({
@@ -1309,7 +1393,7 @@ function CargarProveedor(proveedor ="") {
 
                 $("#txtIdProducto").val(respuesta['id_producto']);
                 $("#txtCodigoProducto").val(codigo_producto);
-                $("#productoSearch").val(respuesta['descripcion_producto']);
+                $("#productoSearchC").val(respuesta['descripcion_producto']);
                 $("#txtNombreProducto").val(respuesta['descripcion_producto']);
                 $("#txtPrecioCompraProducto").val(respuesta['precio_compra_producto']);
                 $("#txtllevaIva").val(respuesta['lleva_iva_producto']);
@@ -1326,7 +1410,7 @@ function CargarProveedor(proveedor ="") {
         let totalIvaCompras = 0;
         let itemCount = 0;
 
-        table_compras.rows().every(function() { // More robust iteration
+        table_comprasC.rows().every(function() { // More robust iteration
             let data = this.data();
             if (data) { // Ensure data exists for the row
                 totalCompras += parseFloat(data['total']) || 0;
@@ -1350,7 +1434,7 @@ function CargarProveedor(proveedor ="") {
         $("#txtPrecioCompraProducto").val("0");
         $("#txtllevaIva").val("0");
         $("#txtFechaVencimiento").val("");
-         $("#productoSearch").val("");
+         $("#productoSearchC").val("");
 
     };
 
@@ -1367,8 +1451,10 @@ function CargarProveedor(proveedor ="") {
         $("#total_compras").html("0");
         $("#montoAbonado").val("0");
         $("#fechaVencimiento").val("");
-        $("#proveedorSearch").val("");
-        table_compras.clear().draw();
+        $("#proveedorSearchF").val("");
+          $("#fechaCompra").val("");
+     
+        table_comprasC.clear().draw();
     };
 
     function CargarNroBoleta() {
@@ -1389,41 +1475,48 @@ function CargarProveedor(proveedor ="") {
             }
         });
     };
+function verificarSiExisteCajaAbierta() {
+    let datos = new FormData();
+    datos.append("opcion", 1);
+    datos.append("txt_id_caja", $("#txtId_caja").val());
+    datos.append("txt_id_usuario", $("#txtId_usuario").val());
 
-    function verificarSiExisteCajaAbierta() {
+    $.ajax({
+        url: "ajax/validar.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            if (parseInt(respuesta['existe']) == 0) {
+                $("#btnRegistrarProveedor").prop('disabled', true);
+                $("#btnAgregarProducto").prop('disabled', true);
+                $("#btnIniciarComprasContado").prop('disabled', true);
+                $("#btnIniciarComprasCredit").prop('disabled', true);
 
-        let datos = new FormData();
-        datos.append("opcion", 1);
-        datos.append("txt_id_caja", $("#txtId_caja").val());
-        datos.append("txt_id_usuario", $("#txtId_usuario").val());
-        $.ajax({
-            url: "ajax/validar.ajax.php",
-            method: "POST",
-            data: datos,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function(respuesta) {
-                if (parseInt(respuesta['existe']) == 0) { // si esiste pero no hasy stock
-
-                    $("#btnBuscarProveedor").prop('disabled', true);
-                    $("#btnBuscarProducto").prop('disabled', true);
-                    $("#btnAgregarCompra").prop('disabled', true);
-                    $("#btnIniciarCompras").prop('disabled', true);
-
-                    Swal.fire({
-                        title: 'LA CAJA SE ENCUENTRA CERRADA, TODAS LAS OPCIONES SE ENCUENTRA DESHABILITADA, POR FAVOR ABRA LA CAJA PRIMERO PARA HABILITAR LAS OPCIONES.',
-                        width: 600,
-                        icon: 'warning',
-                        padding: '3em',
-                        color: '#716add',
-                    })
-                }
+                Swal.fire({
+                    title: 'La caja se encuentra cerrada',
+                    text: 'Todas las opciones están deshabilitadas. Por favor, abra la caja primero para habilitar las opciones.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Abrir Caja',
+                    cancelButtonText: 'Cerrar',
+                    reverseButtons: true,
+                    width: 600,
+                    padding: '3em',
+                    color: '#716add',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Carga la vista usando tu función interna
+                        CargarContenido('Views/modulos/AdministrarCaja/MovimientoCaja/movimiento_cajas.php', 'content-wrapper');
+                    }
+                });
             }
-        });
-    };
-
+        }
+    });
+}
       function fun_limpiar_proveedor(){
         $('needs-validation').removeClass('was-validated');
         $("#id").val("0");
@@ -1435,12 +1528,8 @@ function CargarProveedor(proveedor ="") {
         $("#iptDireccion").val("");
   };
 
-      /*   procesos de comprar */
-
-
-
  function validarCamposCompra() {
-   const count = table_compras.rows().count();
+   const count = table_comprasC.rows().count();
    if (count === 0) {
     Swal.fire({
       icon: 'warning',

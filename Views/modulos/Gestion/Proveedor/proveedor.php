@@ -214,7 +214,104 @@
 
  }); /**  fin document ready */
 
-  document.getElementById("btnGuardar").addEventListener("click", function () {
+//   document.getElementById("btnGuardar").addEventListener("click", function () {
+//     const tipoIdentificacion = "04";
+//     const numeroDocumento = $("#iptRuc").val().trim();
+//     const saltarValidacion = document.getElementById("chkValidar").checked;
+
+//     const tipoIdentificacionTexto = {
+//         "05": "Cédula",
+//         "04": "RUC",
+//         "06": "Pasaporte"
+//     };
+
+//     const validarDocumento = () => {
+//         if (saltarValidacion) return true;
+
+//         switch (tipoIdentificacion) {
+//             case "05": return validarCedula(numeroDocumento);
+//             case "04": return validarRUC(numeroDocumento);
+//             case "06": return validarPasaporte(numeroDocumento);
+//             default: return false;
+//         }
+//     };
+
+//     if (!validarDocumento()) {
+//         const tipoTexto = tipoIdentificacionTexto[tipoIdentificacion] || "documento";
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Documento inválido',
+//             text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
+//             confirmButtonText: 'Aceptar'
+//         });
+//         return;
+//     }
+
+//     const forms = document.getElementsByClassName('needs-validation');
+//     const formularioValido = Array.from(forms).every(form => {
+//         if (!form.checkValidity()) {
+//             form.classList.add('was-validated');
+//             return false;
+//         }
+//         return true;
+//     });
+
+//     if (!formularioValido) {
+//         Swal.fire({
+//             icon: 'info',
+//             title: 'Por favor complete todos los campos obligatorios'
+//         });
+//         return;
+//     }
+
+//     Swal.fire({
+//         title: '¿Está seguro de registrar el Proveedor?',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Sí, deseo registrarlo',
+//         cancelButtonText: 'Cancelar',
+//     }).then((result) => {
+//         if (!result.isConfirmed) return;
+//         const datos = new FormData();
+//         datos.append("accion", accion); // asegúrate de que esté definido en el scope
+//         datos.append("IdProveedor", $("#id").val());
+//         datos.append("Ruc", $("#iptRuc").val());
+//         datos.append("Nombre", $("#iptNombre").val());
+//         datos.append("RazonSocial", $("#iptRazonSocial").val());
+//         datos.append("Telefono", $("#iptTelefono").val());
+//         datos.append("Correo", $("#iptCorreo").val());
+//         datos.append("Direccion", $("#iptDireccion").val());
+
+//         $.ajax({
+//             url: "ajax/proveedor.ajax.php",
+//             method: "POST",
+//             data: datos,
+//             cache: false,
+//             contentType: false,
+//             processData: false,
+//             dataType: 'json',
+//             success: function (respuesta) {
+//                  mostrarAlertaRespuesta(respuesta, function () {
+//                       table_proveedor.ajax.reload();
+//                       fun_limpiar();
+//                       $("#mdlGestionarProveedor").modal('hide');
+//                   }, {
+//                    mensajeExito: "éxito",
+//                    mensajeAdvertencia: "Warning",
+//                    mensajeError: "Excepción"
+//                    });
+//                 },
+//                 error: manejarErrorAjax
+    
+//         });
+//     });
+//   });
+document.getElementById("btnGuardar").addEventListener("click", function () {
+    const btnGuardar = this;
+    btnGuardar.disabled = true; // 🔒 Desactivar el botón
+
     const tipoIdentificacion = "04";
     const numeroDocumento = $("#iptRuc").val().trim();
     const saltarValidacion = document.getElementById("chkValidar").checked;
@@ -243,6 +340,8 @@
             title: 'Documento inválido',
             text: `El número de ${tipoTexto.toLowerCase()} ingresado no es válido. Por favor, verifica el valor.`,
             confirmButtonText: 'Aceptar'
+        }).then(() => {
+            btnGuardar.disabled = false; // 🔓 Reactivar si hay error de validación
         });
         return;
     }
@@ -260,6 +359,8 @@
         Swal.fire({
             icon: 'info',
             title: 'Por favor complete todos los campos obligatorios'
+        }).then(() => {
+            btnGuardar.disabled = false; // 🔓 Reactivar si hay error de validación
         });
         return;
     }
@@ -273,9 +374,13 @@
         confirmButtonText: 'Sí, deseo registrarlo',
         cancelButtonText: 'Cancelar',
     }).then((result) => {
-        if (!result.isConfirmed) return;
+        if (!result.isConfirmed) {
+            btnGuardar.disabled = false; // 🔓 Reactivar si cancela el modal
+            return;
+        }
+
         const datos = new FormData();
-        datos.append("accion", accion); // asegúrate de que esté definido en el scope
+        datos.append("accion", accion); // asegúrate de que esté definido
         datos.append("IdProveedor", $("#id").val());
         datos.append("Ruc", $("#iptRuc").val());
         datos.append("Nombre", $("#iptNombre").val());
@@ -293,21 +398,25 @@
             processData: false,
             dataType: 'json',
             success: function (respuesta) {
-                 mostrarAlertaRespuesta(respuesta, function () {
-                      table_proveedor.ajax.reload();
-                      fun_limpiar();
-                      $("#mdlGestionarProveedor").modal('hide');
-                  }, {
-                   mensajeExito: "éxito",
-                   mensajeAdvertencia: "Warning",
-                   mensajeError: "Excepción"
-                   });
-                },
-                error: manejarErrorAjax
-    
+                mostrarAlertaRespuesta(respuesta, function () {
+                    table_proveedor.ajax.reload();
+                    fun_limpiar();
+                    $("#mdlGestionarProveedor").modal('hide');
+                    btnGuardar.disabled = false; // 🔓 Reactivar después del éxito
+                }, {
+                    mensajeExito: "éxito",
+                    mensajeAdvertencia: "Warning",
+                    mensajeError: "Excepción"
+                });
+                  btnGuardar.disabled = false;
+            },
+            error: function () {
+                manejarErrorAjax();
+                btnGuardar.disabled = false; // 🔓 Reactivar si hubo error de red
+            }
         });
     });
-  });
+});
 
 
   document.getElementById("btnCancelarRegistro").addEventListener("click", function() {

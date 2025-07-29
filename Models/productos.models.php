@@ -197,13 +197,18 @@ class ProductosModelo
 
         $stmt = null; //para que no quede abierta ninguna conexion
     }
-    static public function mdlDisminuirStock($id_producto, $codigo_producto, $comentario, $nuevo_stock, $cantidad, $precio_compra, $tipo_operacion, $fechaVencimientoAun)
+    static public function mdlDisminuirStock($id_producto, $codigo_producto, $comentario, $nuevo_stock, $cantidad, $precio_compra, $tipo_operacion, $fechaVencimientoAun,$nuevaFechaVencimientoAun,$precioCosto)
     {
         $fechaVencimientoAun = trim($fechaVencimientoAun);
+         $nuevaFechaVencimientoAun = trim($nuevaFechaVencimientoAun);
         $fechaVencimientoAun = ($fechaVencimientoAun === "") ? null : $fechaVencimientoAun;
 
-        $precio_compra = (trim($precio_compra) === "") ? null : $precio_compra;
+         $nuevaFechaVencimientoAun = ($nuevaFechaVencimientoAun === "") ? null : $nuevaFechaVencimientoAun;
 
+
+        
+        $precio_compra = (trim($precio_compra) === "") ? null : $precio_compra;
+   $precioCosto= (trim($precioCosto) === "") ? null : $precioCosto;
         $id_usuario = $_SESSION["usuario"]->id_usuario;
 
         try {
@@ -216,6 +221,8 @@ class ProductosModelo
             :p_precio_compra,
             :p_tipo_ajuste,
             :p_fecha_vencimiento,
+            :p_Nuevafecha_vencimiento,
+            :p_precioCosto,
             :p_id_usuario
         );");
 
@@ -235,6 +242,14 @@ class ProductosModelo
             $stmt->bindParam(":p_tipo_ajuste", $tipo_operacion, PDO::PARAM_STR);
 
             $stmt->bindValue(":p_fecha_vencimiento", $fechaVencimientoAun, is_null($fechaVencimientoAun) ? PDO::PARAM_NULL : PDO::PARAM_STR);
+            $stmt->bindValue(":p_Nuevafecha_vencimiento", $nuevaFechaVencimientoAun, is_null($nuevaFechaVencimientoAun) ? PDO::PARAM_NULL : PDO::PARAM_STR);
+           
+            
+              if (is_null($precioCosto)) {
+                $stmt->bindValue(":p_precioCosto", null, PDO::PARAM_NULL);
+            } else {
+                $stmt->bindParam(":p_precioCosto", $precioCosto, PDO::PARAM_STR);
+            }
             $stmt->bindParam(":p_id_usuario", $id_usuario, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
