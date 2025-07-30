@@ -775,16 +775,102 @@
      });
 
          // --- Manejador de cambio de cantidad (`.iptCantidad`) ---
+// $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
+//     let $inputw = $(this);
+//     let row = producto_ventas.row($inputw.closest('tr'));
+//     let data = row.data(); // Obtiene los datos actuales de la fila
+
+//     if (data.id_producto == '') {
+//         return;
+//     }
+//     let cantidad_actual = parseFloat($(this).val()); // Obtiene la nueva cantidad del input
+//     let cod_producto_actual = $(this).attr('codigo_barra');
+
+//     console.log("este es el codigo barra:",cod_producto_actual);
+//     // Validación: Si la cantidad no es numérica o es menor/igual a cero.
+//     if (isNaN(cantidad_actual) || cantidad_actual <= 0) {
+//         Toast.fire({
+//             icon: 'error',
+//             title: 'INGRESE UN VALOR NUMERICO Y MAYOR A 0'
+//         });
+//         $(this).val("1"); // Restablece la cantidad a 1 en el input
+//         cantidad_actual = 1; // Actualiza la variable para el cálculo
+//         $("#searchInputCodigo").val("").focus();
+//     }
+
+//     // Llama a AJAX para validar el stock (tu lógica existente).
+//     $.ajax({
+//         async: false, // Considera hacer esto asíncrono (true) para una mejor UX
+//         url: "ajax/productos.ajax.php",
+//         method: "POST",
+//         data: {
+//             'accion': 8, // Validar stock del producto
+//             'codigo_producto': cod_producto_actual,
+//             'cantidad': cantidad_actual
+//         },
+//         dataType: 'json',
+//         success: function(respuesta) {
+//             // Si no hay stock suficiente, restablece la cantidad a 1.
+//             if (parseInt(respuesta['existe']) == 0) {
+//                 Toast.fire({
+//                     icon: 'error',
+//                     title: 'El producto ' + data['descripcion_producto'] + ' ya no tiene stock'
+//                 });
+//                 // Restablece el input de cantidad en la tabla a 1.
+//                 producto_ventas.cell(row.index(), 8).data('<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + cod_producto_actual + '" class="form-control form-control-sm text-center iptCantidad m-0 p-0" value="1">').draw();
+//                 cantidad_actual = 1; // Asegura que la variable de cantidad sea 1 para los cálculos siguientes.
+
+//                 $("#searchInputCodigo").val("");
+//                 $("#searchInputCodigo").focus();
+//             }
+
+//             // Recalcula los valores de la fila con la cantidad (validada/actualizada).
+//             let precioUnitarioBruto = parseFloat(data['precio_venta'].replace("$./ ", ""));
+//             let totalBrutoProducto = (cantidad_actual * precioUnitarioBruto);
+
+//             let nuevoiva = 0;
+//             let nuevosubtotal = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
+
+//             if (data['lleva_iva_producto'] == 1) {
+//                 nuevosubtotal = totalBrutoProducto / (1 + iva);
+//                 nuevoiva = totalBrutoProducto - nuevosubtotal;
+//             }
+
+//             // Actualiza las celdas de la tabla.
+//             producto_ventas.cell(row.index(), 10).data(nuevoiva.toFixed(2)).draw();
+//             producto_ventas.cell(row.index(), 11).data(nuevosubtotal.toFixed(2)).draw();
+//             producto_ventas.cell(row.index(), 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
+
+//             // Recalcula los totales generales.
+//             recalcularTotales();
+//         }
+//     });
+// });
+// --- Manejador de cambio de cantidad (`.iptCantidad`) ---
+// Este evento se dispara cuando cambias manualmente la cantidad en el input.
 $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
     let $inputw = $(this);
     let row = producto_ventas.row($inputw.closest('tr'));
-    let data = row.data(); // Obtiene los datos actuales de la fila
+    // **SIEMPRE OBTÉN LOS DATOS DE LA FILA DE DATATABLES.**
+    // Estos datos ('data') son la fuente más fiable para 'id_producto', 'codigo_barra', etc.
+    let data = row.data(); 
 
     if (data.id_producto == '') {
         return;
     }
-    let cantidad_actual = parseFloat($(this).val()); // Obtiene la nueva cantidad del input
-    let cod_producto_actual = $(this).attr('codigo_barra');
+
+    let cantidad_actual = parseFloat($(this).val());
+
+    // =========================================================================
+    // ✨ EL CAMBIO CRÍTICO:
+    // Obtén el codigo_barra directamente de los datos de la fila de DataTables ('data').
+    // Esto evita cualquier problema con atributos 'undefined' en el elemento HTML
+    // que se haya recreado debido a las actualizaciones de DataTables.
+    // =========================================================================
+    let cod_producto_actual = data['codigo_barra'];
+    // =========================================================================
+
+    console.log("codigo_barra para AJAX:", cod_producto_actual); // Verifica que aquí siempre sea el código correcto
 
     // Validación: Si la cantidad no es numérica o es menor/igual a cero.
     if (isNaN(cantidad_actual) || cantidad_actual <= 0) {
@@ -797,14 +883,14 @@ $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
         $("#searchInputCodigo").val("").focus();
     }
 
-    // Llama a AJAX para validar el stock (tu lógica existente).
+    // Llama a AJAX para validar el stock.
     $.ajax({
-        async: false, // Considera hacer esto asíncrono (true) para una mejor UX
+        async: false, // ¡Recuerda, esto bloquea la UI! Considera cambiar a 'true' y refactorizar.
         url: "ajax/productos.ajax.php",
         method: "POST",
         data: {
             'accion': 8, // Validar stock del producto
-            'codigo_producto': cod_producto_actual,
+            'codigo_producto': cod_producto_actual, // Usa el 'cod_producto_actual' que obtuvimos de 'data'
             'cantidad': cantidad_actual
         },
         dataType: 'json',
@@ -815,7 +901,8 @@ $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
                     icon: 'error',
                     title: 'El producto ' + data['descripcion_producto'] + ' ya no tiene stock'
                 });
-                // Restablece el input de cantidad en la tabla a 1.
+                // Al recrear el input aquí, asegúrate de mantener el 'codigo_barra'
+                // aunque ya no lo uses para obtener el valor en el manejador.
                 producto_ventas.cell(row.index(), 8).data('<input type="text" style="width: 60px; padding: 1px; margin: 1 auto; box-sizing: border-box;" codigo_barra = "' + cod_producto_actual + '" class="form-control form-control-sm text-center iptCantidad m-0 p-0" value="1">').draw();
                 cantidad_actual = 1; // Asegura que la variable de cantidad sea 1 para los cálculos siguientes.
 
@@ -828,7 +915,7 @@ $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
             let totalBrutoProducto = (cantidad_actual * precioUnitarioBruto);
 
             let nuevoiva = 0;
-            let nuevosubtotal = totalBrutoProducto; // Inicialmente, subtotal es el total bruto
+            let nuevosubtotal = totalBrutoProducto;
 
             if (data['lleva_iva_producto'] == 1) {
                 nuevosubtotal = totalBrutoProducto / (1 + iva);
@@ -838,7 +925,7 @@ $('#lstProductosVenta tbody').on('change', '.iptCantidad', function() {
             // Actualiza las celdas de la tabla.
             producto_ventas.cell(row.index(), 10).data(nuevoiva.toFixed(2)).draw();
             producto_ventas.cell(row.index(), 11).data(nuevosubtotal.toFixed(2)).draw();
-            producto_ventas.cell(row.index(), 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw(); // El total es el total bruto
+            producto_ventas.cell(row.index(), 12).data("$./ " + totalBrutoProducto.toFixed(2)).draw();
 
             // Recalcula los totales generales.
             recalcularTotales();
@@ -1157,7 +1244,13 @@ function CargarNroBoleta() {
     // --- Otras funciones (sin cambios en la lógica de IVA) ---
 function CargarProductos(producto = "") {
     let codigo_producto = producto || $("#productoSearch").val();
-    codigo_producto = $.trim(codigo_producto.split('/')[0]);
+     console.log("codigo:",codigo_producto);
+    // codigo_producto = $.trim(codigo_producto.split('/')[0]);
+    // console.log("codigo:",codigo_producto);
+       // Conversión segura a string y luego split
+    codigo_producto = $.trim(String(codigo_producto).split('/')[0]);
+    console.log("codigo procesado:", codigo_producto);
+
     let producto_repetido = false;
     console.log("producto_repetido pase por repetir1", producto_repetido);
     producto_ventas.rows().eq(0).each(function(index) {
@@ -1183,7 +1276,7 @@ function CargarProductos(producto = "") {
       // Actualiza la cantidad del producto ya existente en la tabla
     function actualizarCantidadProducto(index, data, codigo_producto) {
            let cantidad = parseFloat($.parseHTML(data['cantidad'])[0]['value']) + 1;
-          console.log("producto;",codigo_producto);
+          console.log("producto actuali;",codigo_producto);
            $.ajax({
                async: false,
                url: "ajax/productos.ajax.php",
@@ -1232,6 +1325,8 @@ function actualizarFilaProducto(index, data, cantidad, respuesta) {
         'class="form-control form-control-sm text-center iptCantidad p-0 m-0" ' +
         'value="' + cantidad + '">'
     ).draw();
+
+    
     // Actualiza las celdas de IVA, subtotal y total en la tabla con los nuevos valores.
     producto_ventas.cell(index, 10).data(ivaProductoActual.toFixed(2)).draw();
     producto_ventas.cell(index, 11).data(subtotalProductoActual.toFixed(2)).draw();
@@ -1399,7 +1494,7 @@ function recalcularTotales() {
         TotalIva = parseFloat(TotalIva) + parseFloat(data['iva']); // IVA por línea
         TotalSubtotal = parseFloat(TotalSubtotal) + parseFloat(data['subtotal']); // Subtotal neto por línea
     });
-
+    
     $("#totalVenta").html(TotalVenta.toFixed(2)); 
     // Ahora el subtotal ya no se calcula restando del total, sino sumando los subtotales de cada línea
     $("#boleta_subtotal").html(parseFloat(TotalSubtotal).toFixed(2)); 

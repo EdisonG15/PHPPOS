@@ -1375,12 +1375,17 @@ function CargarProveedor(proveedor ="") {
 
     function CargarProductosC(producto = " ") {
 
+console.log("lo de prodcuto:",producto);
         if (producto != "") {
-            codigo_producto = producto;
+            // codigo_producto = producto;
+              codigo_producto = String(producto);
         } else {
             codigo_producto = $("#productoSearchC").val();
         }
-        codigo_producto = $.trim(codigo_producto.split('/')[0]);
+        // codigo_producto = $.trim(codigo_producto.split('/')[0]);
+        codigo_producto = $.trim(String(codigo_producto).split('/')[0]);
+console.log("codifo:codigo_producto",codigo_producto);
+
         $.ajax({
             url: "ajax/realizar_compras.ajax.php",
             type: "POST",

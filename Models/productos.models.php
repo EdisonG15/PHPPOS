@@ -368,7 +368,7 @@ LIMIT 5  ");
         ' => ',
         descripcion_producto,
         ' | Precio: $/.', -- Moneda de Ecuador es USD $, ajusta si es necesario
-        p.precio_venta_producto,
+        p.precio_compra_producto,
         ' | Stock: ',
         p.stock_producto
     ) AS descripcion_completa,
