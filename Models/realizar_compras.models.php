@@ -99,32 +99,6 @@ class RealizarComprasModelo{
     }
 
 
-    // static public function mdlEliminarCompras($idEliminar){
-    //     $id_usuario = $_SESSION["usuario"]->id_usuario;
-    //     try{ //try can
-            
-    //         $stmt = Conexion::conectar()->prepare("CALL usp_EliminarCompra( :p_IdCompra,
-    //                                                         :p_id_usuario
-    //                                                         )");      
-                                                        
-    //         $stmt -> bindParam(":p_IdCompra",$idEliminar, PDO::PARAM_STR);
-    //         $stmt -> bindParam(":p_id_usuario", $id_usuario , PDO::PARAM_STR);
-
-    //         if ($stmt->execute()) {
-    //             $respuesta = $stmt->fetch(PDO::FETCH_ASSOC); // Obtener el mensaje desde el SELECT
-    //             $resultado = $respuesta['resultado']; // "Categoría registrada con éxito", etc.
-    //         } else {
-    //             $resultado = "Error al ejecutar la accion.";
-    //         }
-    
-    //     } catch (Exception $e) {
-    //         $resultado = 'Excepción: ' . $e->getMessage();
-    //     }
-	//       return $resultado;
-
-	//        $stmt = null; //para que no quede abierta ninguna conexion
-
-	// }
 
 static public function mdlEliminarCompras($idEliminar){
        $id_usuario = $_SESSION["usuario"]->id_usuario;

@@ -1,0 +1,502 @@
+ .sugerencias-container {
+     display: none;
+     /* Oculto por defecto */
+     position: absolute;
+     top: 100%;
+     /* Posicionado justo debajo del campo de búsqueda */
+     left: 0;
+     right: 0;
+     background-color: #fff;
+     border: 1px solid #ced4da;
+     border-radius: 0 0 0.25rem 0.25rem;
+     z-index: 1000;
+     max-height: 300px;
+     overflow-y: auto;
+ }
+
+ .sugerencia-item {
+     display: flex;
+     align-items: center;
+     padding: 0.5rem;
+     cursor: pointer;
+     border-bottom: 1px solid #eee;
+ }
+
+ .sugerencia-item:hover {
+     background-color: #f0f0f0;
+ }
+
+ .sugerencia-item:last-child {
+     border-bottom: none;
+ }
+
+ .sugerencia-img {
+     width: 50px;
+     height: 50px;
+     margin-right: 10px;
+     object-fit: cover;
+ }
+
+ .sugerencia-descripcion {
+     font-size: 0.9rem;
+     color: #333;
+ }
+
+ :root {
+     --primary-color: #5A67D8;
+     /* Azul violeta principal */
+     --primary-light: #7F8AEF;
+     --primary-dark: #434DA1;
+     --secondary-color: #6B7280;
+     /* Gris oscuro para texto secundario */
+     --background-light: #F0F4F8;
+     /* Fondo muy claro */
+     --card-background: #FFFFFF;
+     /* Fondo de tarjetas blanco puro */
+     --border-color: #E2E8F0;
+     /* Borde sutil */
+     --success-color: #4CAF50;
+     --warning-color: #FFC107;
+     --danger-color: #F44336;
+     --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.06);
+     --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+     --info-color: #17a2b8;
+ }
+
+ .container-fluid {
+     padding-top: 1rem;
+     padding-left: 1rem;
+     padding-right: 1rem;
+ }
+
+ .container {
+     /* Custom container class from your CSS */
+     max-width: 1200px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .section-card {
+     background-color: var(--card-background);
+     border-radius: 12px;
+     box-shadow: var(--shadow-light);
+     margin-bottom: 1.5rem;
+     border: 1px solid var(--border-color);
+ }
+
+ .card-header-custom {
+     background-color: var(--card-background);
+     color: var(--primary-color);
+     padding: 1.25rem 1.5rem;
+     border-bottom: 1px solid var(--border-color);
+     font-size: 1.35rem;
+     font-weight: 700;
+     /* Más audaz */
+     border-top-left-radius: 12px;
+     border-top-right-radius: 12px;
+     display: flex;
+     align-items: center;
+ }
+
+ .card-header-custom i {
+     margin-right: 10px;
+     color: var(--primary-light);
+ }
+
+ .form-label {
+     font-weight: 600;
+     color: var(--secondary-color);
+     margin-bottom: 0.5rem;
+     display: block;
+ }
+
+ .form-control,
+ .form-select {
+     border: 1px solid var(--border-color);
+     border-radius: 8px;
+     padding: 0.75rem 1rem;
+     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+     transition: all 0.2s ease-in-out;
+     width: 100%;
+     box-sizing: border-box;
+ }
+
+ .form-control:focus,
+ .form-select:focus {
+     border-color: var(--primary-light);
+     box-shadow: 0 0 0 0.2rem rgba(90, 103, 216, 0.2);
+     background-color: #FBFDFF;
+ }
+
+ .input-group {
+     /* For combining input and button */
+     display: flex;
+     width: 100%;
+ }
+
+ .input-group .form-control {
+     flex-grow: 1;
+     border-top-right-radius: 0;
+     border-bottom-right-radius: 0;
+ }
+
+ .input-group .btn {
+     /* Ensure button in input group has correct rounding */
+     border-top-left-radius: 0;
+     border-bottom-left-radius: 0;
+     border-radius: 8px;
+     /* Overrides individual if it's the only element or for overall consistency */
+     white-space: nowrap;
+ }
+
+ /* Ensure specific button styles are applied correctly */
+ .input-group .btn-outline-secondary-custom {
+     border-top-left-radius: 0;
+     border-bottom-left-radius: 0;
+ }
+
+
+ .btn-primary-custom {
+     background-color: var(--primary-color);
+     border-color: var(--primary-color);
+     color: white;
+     font-weight: 600;
+     padding: 0.75rem 1.25rem;
+     border-radius: 8px;
+     transition: background-color 0.3s ease, transform 0.1s ease;
+     cursor: pointer;
+ }
+
+ .btn-primary-custom:hover {
+     background-color: var(--primary-dark);
+     border-color: var(--primary-dark);
+     transform: translateY(-1px);
+ }
+
+ .btn-outline-secondary-custom {
+     border: 1px solid var(--border-color);
+     color: var(--secondary-color);
+     background-color: var(--card-background);
+     font-weight: 500;
+     padding: 0.75rem 1.25rem;
+     border-radius: 8px;
+     transition: all 0.2s ease;
+     cursor: pointer;
+ }
+
+ .btn-outline-secondary-custom:hover {
+     background-color: var(--background-light);
+     color: var(--primary-color);
+     border-color: var(--primary-color);
+ }
+
+ .form-check-inline {
+     margin-right: 1.5rem;
+ }
+
+ .form-check-input:checked {
+     background-color: var(--primary-color);
+     border-color: var(--primary-color);
+ }
+
+ /* Estilo de la tabla */
+ .table-responsive {
+     /* Using Bootstrap's default responsive class if available, or your custom styles */
+     overflow-x: auto;
+     width: 100%;
+ }
+
+ .table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 1rem;
+     /* border-radius: 8px; /* Applied to wrapper if overflow is hidden */
+     /* overflow: hidden; /* Can clip DataTables elements, manage with wrapper or remove if using DataTables responsive */
+ }
+
+ .table thead th {
+     background-color: var(--background-light);
+     color: var(--secondary-color);
+     font-weight: 600;
+     border-bottom: 2px solid var(--border-color);
+     padding: 1rem 1.25rem;
+     text-align: left;
+ }
+
+ .table tbody tr {
+     transition: background-color 0.2s ease;
+     border-bottom: 1px solid var(--border-color);
+ }
+
+ .table tbody tr:last-child {
+     border-bottom: none;
+ }
+
+ .table tbody tr:hover {
+     background-color: #F8F9FA;
+ }
+
+ .table td {
+     padding: 1rem 1.25rem;
+     vertical-align: middle;
+ }
+
+ .icon-btn {
+     background: none;
+     border: none;
+     color: var(--danger-color);
+     font-size: 1.1rem;
+     cursor: pointer;
+     padding: 0.5rem;
+     border-radius: 50%;
+     transition: background-color 0.2s ease, color 0.2s ease;
+ }
+
+ .icon-btn:hover {
+     background-color: rgba(244, 67, 54, 0.1);
+     color: var(--danger-color);
+ }
+
+ /* Box de Totales */
+ .divider-custom {
+     border-top: 1px dashed var(--border-color);
+     /* Subtle dashed line */
+ }
+
+ .summary-label-custom {
+     color: #666;
+     font-weight: 500;
+     font-size: 1rem;
+ }
+
+ .summary-value-custom {
+     font-size: 1.3rem;
+     font-weight: 700;
+ }
+
+ .total-box-custom {
+     background-color: var(--primary-color);
+     /* Solid primary color */
+     color: white;
+     border-radius: 12px;
+     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+     /* Stronger shadow for emphasis */
+     transition: all 0.2s ease-in-out;
+ }
+
+ .total-box-custom:hover {
+     box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+     transform: translateY(-2px);
+ }
+
+ .total-label-custom {
+     color: rgba(255, 255, 255, 0.8);
+     /* Slightly subdued white */
+     font-weight: 500;
+     letter-spacing: 0.05em;
+     font-size: 0.95rem;
+ }
+
+ .total-amount-custom {
+     color: #ffffff;
+     /* Pure white for the total amount */
+     font-size: 3.2rem;
+     letter-spacing: -0.05em;
+     /* Tighter letter spacing for numbers */
+ }
+
+ /* Botones de acción finales */
+ .action-buttons-group {
+     /* Container for final action buttons */
+     margin-top: 1.5rem;
+     /* Spacing from the totals box */
+ }
+
+ .action-buttons-group .btn {
+     padding: 0.9rem 2rem;
+     font-size: 1.1rem;
+     font-weight: 600;
+     border-radius: 10px;
+     transition: all 0.2s ease-in-out;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+     margin-bottom: 0.5rem;
+     /* Space between buttons if they wrap */
+ }
+
+ .btn-success-custom {
+     background-color: var(--success-color);
+     border-color: var(--success-color);
+     color: white;
+ }
+
+ .btn-success-custom:hover {
+     background-color: #388E3C;
+     border-color: #388E3C;
+     transform: translateY(-2px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .btn-outline-info-custom {
+     /* background-color: transparent; */
+     background-color: transparent;
+     color: var(--info-color, #17a2b8);
+     border: 2px solid var(--info-color, #17a2b8);
+     transition: all 0.3s ease;
+ }
+
+ .btn-outline-info-custom:hover {
+     background-color: var(--info-color, #17a2b8);
+     color: white;
+     transform: translateY(-2px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .btn-warning-custom {
+     background-color: var(--warning-color);
+     border-color: var(--warning-color);
+     color: #495057;
+ }
+
+ .btn-warning-custom:hover {
+     background-color: #FFD233;
+     border-color: #FFD233;
+     transform: translateY(-2px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .btn-danger-custom {
+     background-color: var(--danger-color);
+     border-color: var(--danger-color);
+     color: white;
+ }
+
+ .btn-danger-custom:hover {
+     background-color: #D32F2F;
+     border-color: #D32F2F;
+     transform: translateY(-2px);
+     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ /* Utility classes (if not using a framework like Bootstrap that provides them) */
+ .mt-3 {
+     margin-top: 1rem;
+ }
+
+ .mt-5 {
+     margin-top: 3rem;
+ }
+
+ .mb-4 {
+     margin-bottom: 1.5rem;
+ }
+
+ .p-3 {
+     padding: 1rem;
+ }
+
+ .p-4 {
+     padding: 1.5rem;
+ }
+
+ .me-1 {
+     margin-right: 0.25rem;
+ }
+
+ .me-2 {
+     margin-right: 0.5rem;
+ }
+
+ .text-center {
+     text-align: center;
+ }
+
+ .align-items-end {
+     align-items: flex-end;
+ }
+
+ .justify-content-between {
+     justify-content: space-between;
+ }
+
+ .align-items-center {
+     align-items: center;
+ }
+
+ .d-flex {
+     display: flex;
+ }
+
+ .d-grid {
+     display: grid;
+ }
+
+ .gap-3 {
+     gap: 1rem;
+ }
+
+
+ /* Basic responsive grid (similar to Bootstrap's concept) */
+ .row {
+     display: flex;
+     flex-wrap: wrap;
+     margin-left: -0.75rem;
+     /* Corresponds to col padding */
+     margin-right: -0.75rem;
+     /* Corresponds to col padding */
+ }
+
+ .col-md-1,
+ .col-md-2,
+ .col-md-3,
+ .col-md-5,
+ .col-md-6,
+ .col-md-9 {
+     padding-left: 0.75rem;
+     padding-right: 0.75rem;
+     box-sizing: border-box;
+     width: 100%;
+     /* Default for smaller screens */
+ }
+
+ @media (min-width: 768px) {
+
+     /* md breakpoint */
+     .col-md-1 {
+         width: calc(100% / 12 * 1);
+     }
+
+     .col-md-2 {
+         width: calc(100% / 12 * 2);
+     }
+
+     .col-md-3 {
+         width: calc(100% / 12 * 3);
+     }
+
+     .col-md-5 {
+         width: calc(100% / 12 * 5);
+     }
+
+     .col-md-6 {
+         width: calc(100% / 12 * 6);
+     }
+
+     .col-md-9 {
+         width: calc(100% / 12 * 9);
+     }
+
+     .d-md-flex {
+         display: flex !important;
+     }
+
+     /* For button group layout on md+ */
+     .justify-content-md-end {
+         justify-content: flex-end !important;
+     }
+
+     /* For button group layout on md+ */
+ }
+
+ input[type="hidden"] {
+     display: none;
+ }

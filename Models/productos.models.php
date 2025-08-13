@@ -46,7 +46,7 @@ class ProductosModelo
                      SELECT MIN(id_lote) AS id_lote_unico
                         FROM lote_producto
                          WHERE id_producto = :p_id_producto
-                         AND estado = 1
+                         AND estado = 1 and  cantidad_bonificada=0
                          GROUP BY costo_unitario
                     ) AS unicos ON lp.id_lote = unicos.id_lote_unico  ');
         $stmt->bindParam(":p_id_producto", $id_producto, PDO::PARAM_STR);

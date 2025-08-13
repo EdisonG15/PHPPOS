@@ -655,9 +655,9 @@
                 <form id="stockForm">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="selTipoOperacion" class="form-label">Tipo de Acción:</label>
+                            <label for="selTipoOperacion" class="form-label">Tipo de operación:</label>
                             <select class="form-select form-select-lg shadow-sm" id="selTipoOperacion" required>
-                                <option value="">Seleccione una acción</option>
+                                <option value="">Seleccione Tipo de operación</option>
                                 <option value="COMPRA">COMPRA</option>
                                 <option value="PROMOCION">PROMOCION</option>
                             </select>
@@ -883,15 +883,14 @@
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="modal fade" id="modalNuevaFechaVencimiento" tabindex="-1" role="dialog" aria-labelledby="modalNuevaFechaVencimientoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNuevaFechaVencimientoLabel">Ingresar Nueva Fecha de Vencimiento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+               
+                  <button type="button" class="btn-close btn-close-white" id="btnCerrarModal" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -900,11 +899,39 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-danger btn-lg me-3" data-bs-dismiss="modal" id="btnCancelarRegistroMarca">
+                                    <i class="fas fa-times me-2">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="btnConfirmarNuevaFecha">Guardar</button>
             </div>
         </div>
     </div>
+</div>
+ -->
+<div class="modal fade" id="modalNuevaFechaVencimiento" tabindex="-1" role="dialog" aria-labelledby="modalNuevaFechaVencimientoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalNuevaFechaVencimientoLabel">Ingresar Nueva Fecha de Vencimiento</h5>
+        <button type="button" class="btn-close btn-close-white" id="btnCerrarModal" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="iptNuevaFechaVencimiento">Fecha de Vencimiento:</label>
+          <input type="date" class="form-control" id="iptNuevaFechaVencimiento">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger btn-lg me-3" data-bs-dismiss="modal" id="btnCancelarRegistroMarca">
+          <i class="fas fa-times me-2"></i>Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" id="btnConfirmarNuevaFecha">Guardar</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <script>
@@ -914,6 +941,15 @@
     var table_producto;
     var operacion_stock = 0;
     var BaderaPerceddero = 0;
+    var Toast = Swal.mixin({
+  toast: true,
+//   position: 'top-end',
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+});
+
     // Wrap the entire script in an IIFE to create a new scope
     (function() {
         // Declaración de variables del formulario y stepper
@@ -1182,7 +1218,7 @@
 
         // --- MANEJO DEL ESTADO DEL MODAL ---
         const gestionarProductoModal = document.getElementById('mdlGestionarProducto');
-        gestionarProductoModal.addEventListener('show.bs.modal', function() {
+          gestionarProductoModal.addEventListener('show.bs.modal', function() {
             productForm.reset();
             currentStep = 1;
             updateFormSteps();
@@ -1203,7 +1239,11 @@
 
     $(document).ready(function() {
 
-        $('#tbl_productos').on('click', '.product-image-wrapper', function() {
+        $('#modalNuevaFechaVencimiento').on('hidden.bs.modal', function () {
+    $("#btnGuardarNuevorStock").prop('disabled', false);
+});
+
+    $('#tbl_productos').on('click', '.product-image-wrapper', function() {
         const largeImg = $(this).data('large-img');
         const productName = $(this).data('product-name');
         $('#modalImage').attr('src', largeImg);
@@ -1387,7 +1427,7 @@
             }
         });
      
-       $('#tbl_productos tbody').on('click', '.btnEditarProducto', function() {
+         $('#tbl_productos tbody').on('click', '.btnEditarProducto', function() {
             accion = 2; //seteamos la accion para editar 
             $("#mdlGestionarProducto").modal('show');
             $(".needs-validation").removeClass("was-validated");
@@ -1552,7 +1592,7 @@
             $("#iptFechaVencimientoAun").parent().removeClass("d-none");
             $("#contenedorLotes").addClass("d-none");
         });
-        $('#tbl_productos tbody').on('click', '.btnDisminuirStock', function() {
+ $('#tbl_productos tbody').on('click', '.btnDisminuirStock', function() {
     funcion_limpiar_stock();
     operacion_stock = 2; // restar stock
     accion = 3;
@@ -1739,11 +1779,20 @@ if (tipoOperacion === "") {
 
     // 4. Lógica de negocio según el tipo de operación
     if (operacion_stock === 1) { // Ejemplo: "Entrada" o "Adición"
+        if (!validarCampoObligatorio('#iptPrecioCompra', 'Precio de Compra') ||
+        !validarCampoObligatorio('#iptFechaVencimientoAun', 'Fecha de Vencimiento')) {
+        $("#btnGuardarNuevorStock").prop('disabled', false);
+        return; // Detener ejecución
+    }
         precioCompra = parseFloat($("#iptPrecioCompra").val());
         fechaVencimiento = $("#iptFechaVencimientoAun").val();
         enviarDatosStock(); // Envía los datos directamente
     } else if (operacion_stock === 2) { // Ejemplo: "Salida" o "Ajuste"
         if (tipoOperacion === "PERDIDA") {
+            if (!validarCampoObligatorio('#selectLote', 'Lote')) {
+            $("#btnGuardarNuevorStock").prop('disabled', false);
+            return;
+        }
             precioCompra = obtenerPrecioDesdeCombo();
             fechaVencimiento = ""; // No aplica fecha de vencimiento para pérdida
             console.log('PERDIDA:', {
@@ -1753,6 +1802,10 @@ if (tipoOperacion === "") {
             enviarDatosStock(); // Envía los datos directamente
         } else if (tipoOperacion === "DEVOLUCION") {
             if (percedero === "1") { // Si es perecedero, pedimos nueva fecha
+                if (!validarCampoObligatorio('#iptFechaVencimientoAun', 'Fecha de Vencimiento Actual')) {
+                $("#btnGuardarNuevorStock").prop('disabled', false);
+                return;
+            }
                 // Muestra el modal para ingresar la nueva fecha de vencimiento
                 $("#modalNuevaFechaVencimiento").modal('show');
 
@@ -1781,6 +1834,10 @@ if (tipoOperacion === "") {
                 });
 
             } else { // Si no es perecedero, no necesitamos nueva fecha
+                 if (!validarCampoObligatorio('#selectLote', 'Lote')) {
+                $("#btnGuardarNuevorStock").prop('disabled', false);
+                return;
+            }
                 precioCompra = obtenerPrecioDesdeCombo();
                 fechaVencimiento = "";
                 console.log('DEVOLUCION - NO PERECEDERO:', {
@@ -1794,6 +1851,9 @@ if (tipoOperacion === "") {
     }
     // Si hay otras condiciones para 'operacion_stock', puedes añadirlas aquí
 });
+
+
+
         $("#btnLimpiarBusqueda").on('click', function() {
             $("#iptCodigoBarras_cades").val('')
             $("#iptCategoria").val('')
@@ -2191,6 +2251,8 @@ document.getElementById("btnGuardarUnidaMedida").addEventListener("click", funct
         $("#iptCantidad").val("");
         $("#iptComentario").val("");
         $("#iptFechaVencimientoAun").val("");
+        $("#iptNuevaFechaVencimiento").val("");
+        
 
     }
 
@@ -2371,4 +2433,19 @@ document.getElementById("btnGuardarUnidaMedida").addEventListener("click", funct
             }
         });
     }
+
+    function validarCampoObligatorio(selector, nombreCampo) {
+    const $campo = $(selector);
+    if (!$campo.prop('disabled') && !$campo.val()) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campo requerido',
+            text: `Debe completar el campo: ${nombreCampo}`,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#3085d6'
+        });
+        return false; // ❌ No pasa la validación
+    }
+    return true; // ✅ Pasa la validación
+}
 </script>

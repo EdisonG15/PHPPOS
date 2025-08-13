@@ -1,7 +1,4 @@
 <?php
-//  include "Models/usuario.modelo.php";
-//  include "Views/plantilla.php";
-
  
 require_once "Controllers/plantilla.controller.php";
 
