@@ -1051,8 +1051,28 @@
                     }
                 },
 
-
-                'excel', 'pdf', 'print', 'pageLength'
+   {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]  // ✅ solo estas columnas en horizontal
+    }
+  },
+  {
+    extend: 'pdfHtml5',
+    orientation: 'landscape', // 👉 horizontal
+    pageSize: 'A4',
+    exportOptions: {
+      columns: [2,3,4,5,7,8,9]
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,3,4,5,7,8,9]
+    }
+  },
+  'pageLength'
+   
             ],
             //   pageLength: [5, 10, 15, 30, 50, 100],
             //   pageLength: 5,
@@ -1150,7 +1170,7 @@
                 // {  targets: 20,   visible: false },
                 // {  targets: 20,   visible: false },
                 {
-                    targets: 13,
+                    targets: 24,
                     sortable: false,
                     className: "text-center",
                     render: function(data) {

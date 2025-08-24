@@ -53,13 +53,13 @@
                                     <th></th>
                                     <th>Codigo Barra</th>
                                     <th>Descripcion</th>
-                                    <th>Cantidad Vendida</th>
-                                    <th>Precio Venta Prom</th>
-                                    <th>Costo Unitario Prom</th>
-                                    <th>Ganancia Unitaria Prom</th>
-                                    <th>Total Ventas</th>
-                                    <th>Total Compras</th>
-                                    <th>Total Ganancia</th>                                 
+                                    <th class="text-center">Cantidad Vendida</th>
+                                    <th class="text-center">Precio Venta Prom</th>
+                                    <th class="text-center">Costo Unitario Prom</th>
+                                    <th class="text-center">Ganancia Unitaria Prom</th>
+                                    <th class="text-center">Total Ventas</th>
+                                    <th class="text-center">Total Compras</th>
+                                    <th class="text-center">Total Ganancia</th>                                 
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -286,53 +286,61 @@ function cargarTableGanacias(fechaDesde, fechaHasta) {
                 return respuesta;
             }
         },
-        columns: [{
-                data: 'vacio'
-            }, // Columna vacía para responsive (índice 0)
-            {
-                data: 'codigo_barra'
-            }, // índice 1
-            {
-                data: 'descripcion_producto'
-            }, // índice 2
-            {
-                data: 'total_cantidad_vendida'
-            }, // índice 3
-            {
-                data: 'precio_venta'
-            }, // índice 4
-            {
-                data: 'costo_unitario'
-            }, // índice 5
-            {
-                data: 'ganancia_unitaria'
-            }, // índice 6
-            {
-                data: 'total_ventas'
-            }, // índice 7
-            {
-                data: 'total_compras'
-            }, // índice 8
-            {
-                data: 'total_ganancia'
-            } // índice 9
-        ],
-        responsive: {
-            details: {
-                type: 'column'
-            }
-        },
-        columnDefs: [{
-                targets: 0,
-                orderable: false,
-                className: 'control'
-            },
-          
-            {
-                targets: 3,
-                className: "text-center"
-            }
-        ],
+       columns: [
+    { data: 'vacio' },
+    { data: 'codigo_barra', className: "text-center" },
+    { data: 'descripcion_producto', className: "text-center" },
+    { 
+        data: 'total_cantidad_vendida', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">' + data + '</div>';
+        }
+    },
+    { 
+        data: 'precio_venta', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">' + data + '</div>';
+        }
+    },
+    { 
+        data: 'costo_unitario', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">' + data + '</div>';
+        }
+    },
+    { 
+        data: 'ganancia_unitaria', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">' + data + '</div>';
+        }
+    },
+    { 
+        data: 'total_ventas', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">$ ' + parseFloat(data).toFixed(2) + '</div>';
+        }
+    },
+    { 
+        data: 'total_compras', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">$ ' + parseFloat(data).toFixed(2) + '</div>';
+        }
+    },
+    { 
+        data: 'total_ganancia', 
+        className: "text-center",
+        render: function(data, type, row) {
+            return '<div class="text-center">$ ' + parseFloat(data).toFixed(2) + '</div>';
+        }
+    }
+],
+
         order: [
             [1, 'desc']
         ], // ordena por código de barra

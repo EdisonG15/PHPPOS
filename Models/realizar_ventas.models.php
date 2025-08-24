@@ -125,10 +125,10 @@ class VentasModelo
             $stmt = Conexion::conectar()->prepare("
               select
 	                     concat('B001-', v.nro_boleta) as nro_boleta,
-	                     concat(u.nombre_usuario, '', u.apellido_usuario)as nombre_cajero,
+	                     concat(u.nombre_usuario, ' ', u.apellido_usuario)as nombre_cajero,
 	                     v.Id_caja,
 	                    ca.numero_caja,
-	                    c.nombre as nombre_cliente,
+	                   concat( c.nombre, ' ', c.apellido) as nombre_cliente,
 	                    c.numeroDocumento as documento_cliente,
 	                    c.telefono as telefono_cliente,
 	                    c.direccion as direccion_cliente,
@@ -136,6 +136,9 @@ class VentasModelo
 	                    p.descripcion_producto,
 	                    dv.cantidad,
 	                    dv.PrecioUnidad,
+                        ROUND(dv.Sub_total / dv.cantidad, 6) as precio_sin_iva,
+                         dv.iva ,
+	                    dv.Sub_total ,
 	                    dv.total_venta as total_ventas_producto,
 	                    v.iva as iva_Cab,
 	                    v.subtotal as subtotal_Cab,
@@ -177,7 +180,7 @@ class VentasModelo
 
         try {
 
-            $stmt = Conexion::conectar()->prepare("SELECT  id_Empresa, razon_social,  concat('RUC: ',ruc) as 
+            $stmt = Conexion::conectar()->prepare("SELECT  id_Empresa, razon_social, 
             ruc , mensaje,
             concat('Direccion: ',direccion_sucursal) as direccion , marca, serie_boleta,  concat('IVA(',pi2.porcentaje,'%)') as  iva,
              nro_correlativo_ventas, nro_credito_ventas, 

@@ -271,7 +271,27 @@ function cargarTableCompras(fechaDesde, fechaHasta) {
                     // onclick="CargarContenido('Views/modulos/Compras/RealizarCompras/compras.php','content-wrapper')" 
                 }
             },
-            'excel', 'pdf', 'print', 'pageLength'
+                 {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,4,5,8,9,10,11,13]  // ✅ solo estas columnas en horizontal
+    }
+  },
+  {
+    extend: 'pdfHtml5',
+    orientation: 'landscape', // 👉 horizontal
+    pageSize: 'A4',
+    exportOptions: {
+      columns: [2,4,5,8,9,10,11,13]
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,4,5,8,9,10,11,13]
+    }
+  },
+  'pageLength'
         ],
         pageLength: 5,
         ajax: {

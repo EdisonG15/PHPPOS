@@ -114,4 +114,29 @@ static public function mdlHistorialAbonoCredito($id_credito)
     $stmt = null; // liberar memoria
     return $resultado;
 }
+
+static public function mdlEliminarAbono($id_idAbono
+          ) {
+        $id_usuario = $_SESSION["usuario"]->id_usuario;
+        try {
+
+            $stmt = Conexion::conectar()->prepare("CALL ups_EliminarAbonoCreditoVenta(:p_idUsuario, 
+                                                                         :p_idAbono)");
+            $stmt->bindParam(":p_idUsuario", $id_usuario, PDO::PARAM_INT);
+            $stmt->bindParam(":p_idAbono", $id_idAbono, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $respuesta = $stmt->fetch(PDO::FETCH_ASSOC); // Obtener el mensaje desde el SELECT
+                $resultado = $respuesta['resultado']; // "Categoría registrada con éxito", etc.
+            } else {
+                $resultado = "Error al ejecutar la accion.";
+            }
+        } catch (Exception $e) {
+            $resultado = 'Excepción: ' . $e->getMessage();
+        }
+
+        $stmt = null; // cerrar conexión
+        return $resultado;
+    }
+
+
 }

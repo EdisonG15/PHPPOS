@@ -16,7 +16,7 @@
                                      <br>
                 <div class="row mt-3">
                     <div class="col-sm-12">
-                        <table id="tb_reporte_ganacias" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+                        <table id="tb_reporte_poco_stock" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
                             <thead class="bg-dark ">
                                 <tr>
                                     <th></th>
@@ -39,10 +39,10 @@
 
 <script>
     var accion;
-    var table_ganacia;
+    var table_poco_stock;
     $(document).ready(function() {
 
-        table_ganacia = $("#tb_reporte_ganacias").DataTable({
+        table_poco_stock = $("#tb_reporte_poco_stock").DataTable({
             dom: 'Bfrtip', // botoneras en la parte superior
             buttons: [
                 {
@@ -50,7 +50,7 @@
                     extend: 'pdfHtml5',
                      text: '<i class="fas fa-file-pdf"></i> PDF',
                     className: 'btn btn-danger', // Texto que se mostrará en el botón
-                    title: 'Reporte de Ganancias', // Título para el documento PDF
+                    title: 'Reporte de Producto Poco Stock', // Título para el documento PDF
                     orientation: 'portrait', // Orientación del PDF (portrait o landscape)
                     pageSize: 'A4', // Tamaño de la página (A4, Letter, etc.)
                     exportOptions: {

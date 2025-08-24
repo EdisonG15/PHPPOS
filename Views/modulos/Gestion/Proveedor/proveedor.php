@@ -2,6 +2,26 @@
     <script src="/WebPuntoVenta2025/Views/util/js/respuesta.js"></script>
      <script src="/WebPuntoVenta2025/Views/util/js/validarDocumento.js"></script>
 <br>
+<style>
+  .bg-gradient-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Un azul más vibrante que el primary por defecto */
+  }
+  /* Si tus botones "Acciones" tienen un estilo específico que desees replicar */
+  .btn-acciones {
+      background-color: #f8f9fa; /* o el color de fondo de tu elección */
+      border: 1px solid #ced4da;
+      color: #343a40;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: all 0.2s ease-in-out;
+  }
+  .btn-acciones:hover {
+      background-color: #e2e6ea;
+      border-color: #dae0e5;
+  }
+  </style>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -441,7 +461,29 @@ document.getElementById("btnGuardar").addEventListener("click", function () {
 
                   }
               },
-              'excel', 'print', 'pageLength'
+            
+        {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,3,4,5,6,7,8,10]  // ✅ solo estas columnas en horizontal
+    }
+  },
+  {
+    extend: 'pdfHtml5',
+    orientation: 'landscape', // 👉 horizontal
+    pageSize: 'A4',
+    exportOptions: {
+      columns: [2,3,4,5,6,7,8,10]
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,3,4,5,6,7,8,10]
+    }
+  },
+  'pageLength'
+     
           ],
         //   pageLength: [5, 10, 15, 30, 50, 100],
         //   pageLength: 10,

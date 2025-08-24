@@ -10,12 +10,9 @@ class Controllers{
 
 	static public function ctrRegistrarAbono( $id_caja,$id_Compra,$id_compra_credito,$abonado,$observacion, 
 	                                          $metodo_pago){
-		
 		$respuesta = Models::mdlRegistrarAbono( $id_caja,$id_Compra,$id_compra_credito,$abonado,$observacion, 
 	                                          $metodo_pago);
-
 		return $respuesta;
-	
 	}
 
 	static public function ctrHistorialAbonoCredito( $id_credito){
@@ -23,7 +20,12 @@ class Controllers{
 		$respuesta = Models::mdlHistorialAbonoCredito( $id_credito);
 
 		return $respuesta;
+	}
+
 	
+	static public function ctrEliminarAbono($id_idAbono){
+		$respuesta = Models::mdlEliminarAbono($id_idAbono);
+		return $respuesta;
 	}
 
 	

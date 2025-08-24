@@ -42,6 +42,12 @@ class Ajax {
         );
         echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
     }
+
+    public function EliminarAbono(){
+
+    $respuesta = Controllers::ctrEliminarAbono($_POST['id_abono'] );
+        echo json_encode($respuesta,JSON_UNESCAPED_UNICODE);
+    }
 }
 
 // Verificación principal
@@ -61,6 +67,9 @@ if (isset($_POST['accion'])) {
             break;
         case 4:
             $ajax->HistorialAbonoCredito();
+            break;
+        case 5:
+            $ajax->EliminarAbono();
             break;
 
         default:

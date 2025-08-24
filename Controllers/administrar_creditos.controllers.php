@@ -48,4 +48,9 @@ class Controllers{
 		return $respuesta;
 	}
 
+		static public function ctrEliminarAbono($id_idAbono){
+		$respuesta = Models::mdlEliminarAbono($id_idAbono);
+		return $respuesta;
+	}
+
 }

@@ -290,7 +290,27 @@ $('#tb_ventaAdministrar tbody').on('click', '.btnImprimir', function () {
                 className: 'addNewRecord',
                 action: function(e, dt, node, config) {}
             },
-            'excel', 'pdf', 'print', 'pageLength'
+                         {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,3,5,6,7,8,9,10]  // ✅ solo estas columnas en horizontal
+    }
+  },
+  {
+    extend: 'pdfHtml5',
+    orientation: 'landscape', // 👉 horizontal
+    pageSize: 'A4',
+    exportOptions: {
+      columns: [2,3,5,6,7,8,9,10]
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,3,5,6,7,8,9,10]
+    }
+  },
+  'pageLength'
         ],
         pageLength: 5,
         ajax: {

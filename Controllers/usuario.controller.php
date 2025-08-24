@@ -49,7 +49,7 @@ class UsuarioControlador{
         } else {
             echo '
             <script>
-                fncSweetAlert("error","Licencia No Activada en esta Maquina; comuniquese con su Proveedor","http://localhost/WebPuntoVenta");
+         fncSweetAlert("error","Usuario y/o password inválido","http://localhost/WebPuntoVenta2025");
             </script>
         
         ';

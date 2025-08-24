@@ -240,22 +240,23 @@ session_start();
 </div>
 
 
-<div class="modal fade" id="modalHistorialAbonos" tabindex="-1" aria-labelledby="modalHistorialAbonosLabel" aria-hidden="true">
+<div class="modal fade" id="modalHistorialVentasAbonos" tabindex="-1" aria-labelledby="modalHistorialVentasAbonosLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg"> <div class="modal-content">
-      <div class="modal-header bg-primary text-white"> <h5 class="modal-title" id="modalHistorialAbonosLabel">
+      <div class="modal-header bg-primary text-white"> <h5 class="modal-title" id="modalHistorialVentasAbonosLabel">
           <i class="fas fa-history me-2"></i>Historial de Abonos - Crédito N°: <span id="spanNumeroCredito"></span>
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p class="mb-3">Mostrando los abonos para el crédito del proveedor: <strong id="spanProveedorModal"></strong></p>
-        <table id="tblHistorialAbonos" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
+        <table id="tblHistorialVentasAbonos" class="uk-table uk-table-hover uk-table-striped display" style="width:100%">
           <thead class="bg-dark text-left text-white"> <tr>
               <th>ID Abono</th>
               <th>Fecha Abono</th>
               <th>Monto Abono</th>
               <th>Forma de Pago</th>
               <th>Comentario/Ref.</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -390,13 +391,6 @@ $(document).ready(function() {
         }).columns.adjust().responsive.recalc();
     });
 
-
-    //   $("#iptNombreCliente").keyup(function() {
-    //   const index = $(this).data('index'); // obtiene el índice desde el atributo
-    //   const valor = this.value; // obtiene el valor del input
-    //   table_credito_vigenteVenta.column(index).search(valor).draw(); // aplica el filtro
-    // });
-
     // Filtro para nombre de proveedor
     $(document).on('keyup', '#iptNombreCliente', function() {
         // Asegúrate de que la variable table_credito_vigenteVenta esté correctamente inicializada
@@ -408,15 +402,12 @@ $(document).ready(function() {
         }
     });
 
-
-
       $(document).on('click', '#btnBuscarVigente', function() {
         let tipo_estado = $("#selEstadoClienteVigente").val();
         cargarCreditoVentaVigente(tipo_estado, "", "");
      });
-
-     $(document).on('click', '#btnBuscarFinalizado', function() {
-     let tipo_estado = $("#selEstadoClienteFinalizado").val();
+   $(document).on('click', '#btnBuscarFinalizado', function() {
+      let tipo_estado = $("#selEstadoClienteFinalizado").val();
       let tieneFechas = selectedRangeVenta.length === 2;
 
       let fechaInicio = null;
@@ -433,11 +424,10 @@ $(document).ready(function() {
         alert("Por favor selecciona al menos un filtro (estado o rango de fechas).");
       }
 
- });
+   });
 
-
-   // Cálculo de abono y vuelto
-    $(document).on('keyup', '#montoAbono', function() {
+       // Cálculo de abono y vuelto
+  $(document).on('keyup', '#montoAbono', function() {
               let inputVal = $(this).val().replace(/,/g, ''); // elimina comas
 
       // Validación: solo permite números válidos sin ceros innecesarios al inicio
@@ -484,7 +474,7 @@ $(document).ready(function() {
 
       $("#nuevoSaldo").val(nuevoSaldoCalculado.toFixed(2));
 
-    });
+  });
 
 
 }); //fin  ready
@@ -504,11 +494,33 @@ $(document).on('click', '.btnVerHistorialAbonos', function(e) {
     $('#spanProveedorModal').text(proveedorNombre);
 
     // Muestra el modal
-    $('#modalHistorialAbonos').modal('show');
+    $('#modalHistorialVentasAbonos').modal('show');
 
     // Llama a la función para cargar la tabla de historial de abonos dentro del modal
-    cargarHistorialAbonos(idCredito);
+    cargarHistorialAbonos(idCredito,false);
 });
+
+$(document).on('click', '.btnVerHistorialAbonosVigente', function(e) {
+    
+    e.preventDefault(); 
+
+    let data = table_credito_vigenteVenta.row($(this).parents('tr')).data();
+    
+    var idCredito = data.id_venta_credito; // Asumiendo que 'IdCompraCreditos' es el nombre de la propiedad en tu objeto de datos
+    var proveedorNombre = data[3]; // Asumiendo que el nombre del proveedor es la columna de índice 4
+    var numeroCredito = data[4]; // Asumiendo que el número de crédito es la columna de índice 6
+
+    // Actualiza los títulos del modal
+    $('#spanNumeroCredito').text(numeroCredito);
+    $('#spanProveedorModal').text(proveedorNombre);
+
+    // Muestra el modal
+    $('#modalHistorialVentasAbonos').modal('show');
+
+    // Llama a la función para cargar la tabla de historial de abonos dentro del modal
+    cargarHistorialAbonos(idCredito,true);
+});
+
 
 $(document).on('click', '.btnAbono', function(e) {
     tipoAbono=1;
@@ -579,7 +591,50 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
 });
 
 
-  $(document).on('click', '#btn_procesar_abono', function () {
+$(document).on('click', '.btnEliminarAbono', function() {
+    // Obtiene la fila y los datos del abono
+    let data = table_historial_abonos.row($(this).parents('tr')).data();
+    let idAbono = data.id_abono;
+    // Aquí puedes mostrar un cuadro de diálogo de confirmación (SweetAlert es una buena opción)
+    Swal.fire({
+        title: '¿Está seguro de eliminar este abono?',
+        text: "¡Esta acción no se puede revertir!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Realiza la llamada AJAX para eliminar el abono
+            $.ajax({
+                url: 'ajax/administrar_creditos.ajax.php',
+                method: 'POST',
+                data: {
+                    'accion': 5, // Define una nueva acción para eliminar
+                    'id_abono': idAbono
+                },
+             
+              success: function(respuesta) {
+              mostrarAlertaRespuesta(respuesta, () => {
+               
+                table_historial_abonos.ajax.reload();
+                table_credito_vigenteVenta.ajax.reload();
+              
+              }, {
+                mensajeExito: 'eliminó con éxito',
+                mensajeAdvertencia: 'Warning',
+                mensajeError: 'error'
+              });
+            },
+            error: manejarErrorAjax
+            });
+        }
+    });
+});
+
+$(document).on('click', '#btn_procesar_abono', function () {
   const btn = $(this);
   if (btn.prop('disabled')) return; // Evita múltiples clics
   btn.prop('disabled', true);       // 🔒 Desactiva el botón inmediatamente
@@ -713,6 +768,11 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
           <a class="dropdown-item btnAbonoMultiple" href="#" data-id="${full.id_cliente}" title="Realizar abono a todos los créditos del cliente" style="cursor:pointer;">
             <i class="fas fa-layer-group"></i> Abono múltiple
           </a>
+              <a class="dropdown-item btnVerHistorialAbonosVigente" href="#" 
+                           data-idcredito="${full.IdCompraCreditos}"  
+                           title="Ver historial de abonos" style="cursor:pointer;">
+                            <i class="fas fa-history"></i> Historial de Abonos
+                        </a>
         </li>
       </ul>
     </div>
@@ -807,8 +867,6 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
     });
   }
 
-
-
     function Limpiar() {
     $("#txtIdCredito").val("");
     $("#clienteNombre").val("");
@@ -823,48 +881,60 @@ $(document).on('click', '.btnAbonoMultiple', function(e) {
 
   }
 
-    function cargarHistorialAbonos(idCredito) {
+    function cargarHistorialAbonos(idCredito,esVigente) {
      // Destruye la instancia existente de DataTable si ya está inicializada
-      if ($.fn.DataTable.isDataTable('#tblHistorialAbonos')) {
-        $('#tblHistorialAbonos').DataTable().destroy();
+      if ($.fn.DataTable.isDataTable('#tblHistorialVentasAbonos')) {
+        $('#tblHistorialVentasAbonos').DataTable().destroy();
       }
-
-     table_historial_abonos = $("#tblHistorialAbonos").DataTable({
-        "ajax": {
-            "url": "ajax/administrar_creditos.ajax.php", // Tu archivo AJAX
-            "type": "POST",
-            "data": {
-                'accion': 4, // Una nueva acción para obtener el historial de abonos
-                'id_credito': idCredito
-            },
-            "dataSrc": "" // Los datos deben venir directamente como un array de objetos
+          // Definición de columnas
+    let columns = [
+        { "data": "id_abono", "visible": false },
+        { "data": "fecha_abono" },
+        { "data": "monto_abono" },
+        { 
+            "data": "forma_pago",
+            "render": function (data) {
+                switch (data) {
+                    case "1": return "Efectivo";
+                    case "2": return "Transferencia";
+                    case "3": return "Cheque";
+                    default: return "Otro";
+                }
+            }
         },
-        "columns": [
-            { "data": "id_abono" }, // Asegúrate de que los nombres de las propiedades coincidan con tu JSON de respuesta
-            { "data": "fecha_abono" },
-            { "data": "monto_abono" },
-            { "data": "forma_pago" },
-            { "data": "comentario_referencia" }
-        ],
-        "responsive": true, // Activa la responsividad para la tabla dentro del modal
-        "deferRender": true, // Optimización para tablas grandes
-        "retrieve": true, // Permite que DataTable retorne la instancia existente si ya está creada
-        "paging": true, // Paginación
-        "lengthChange": false, // No permitir cambiar la cantidad de entradas por página
-        "searching": false, // No mostrar el campo de búsqueda en este modal
-        "ordering": false, // No permitir ordenar las columnas en este modal (o ajusta según necesidad)
-        "info": false, // No mostrar "Showing X to Y of Z entries"
+        { "data": "comentario_referencia" },
+        {
+            "data": null,
+            "defaultContent": '<div class="btn-group"><button class="btn btn-danger btn-sm btnEliminarAbono"><i class="fa fa-trash"></i></button></div>',
+            "orderable": false,
+            "visible": esVigente // Solo visible si es vigente
+        }
+    ];
+
+    // Inicializamos DataTable
+    table_historial_abonos = $("#tblHistorialVentasAbonos").DataTable({
+        "ajax": {
+            "url": "ajax/administrar_creditos.ajax.php",
+            "type": "POST",
+            "data": { 'accion': 4, 'id_credito': idCredito },
+            "dataSrc": ""
+        },
+        "columns": columns,
+        "responsive": true,
+        "deferRender": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "drawCallback": function() {
-            // Ajustar columnas después de que el modal se muestre y la tabla se dibuje
-            // Esto es crucial para la responsividad dentro de un modal
-            if ($.fn.DataTable.isDataTable('#tblHistorialAbonos')) {
-                $('#tblHistorialAbonos').DataTable().columns.adjust().responsive.recalc();
-            }
+            $('#tblHistorialVentasAbonos').DataTable().columns.adjust().responsive.recalc();
         }
     });
+
 
   }
 
@@ -911,5 +981,8 @@ function verificarSiExisteCajaAbierta() {
         }
     });
 }
+
+
+
 
 </script>

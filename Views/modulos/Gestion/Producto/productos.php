@@ -2056,7 +2056,27 @@ document.getElementById("btnGuardarUnidaMedida").addEventListener("click", funct
 
                     }
                 },
-                'excel', 'print', 'pdf', 'pageLength'
+              {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,6,7,8,10,11,12,13,14,15,16]  // ✅ solo estas columnas en horizontal
+    }
+  },
+  {
+    extend: 'pdfHtml5',
+    orientation: 'landscape', // 👉 horizontal
+    pageSize: 'A4',
+    exportOptions: {
+      columns: [2,6,7,10,11,12,13,14,15,16]
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,6,7,10,11,12,13,14,15,16]
+    }
+  },
+  'pageLength'
             ],
             pageLength: [5, 10, 15, 30, 50, 100],
             pageLength: 10,

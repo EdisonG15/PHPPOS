@@ -22,8 +22,12 @@ class ajax{
     $registroAbono = Controllers::ctrHistorialAbonoCredito($_POST['id_credito'] );
         echo json_encode($registroAbono,JSON_UNESCAPED_UNICODE);
     }
-   
-    
+    public function EliminarAbono(){
+
+    $registroAbono = Controllers::ctrEliminarAbono($_POST['id_abono'] );
+        echo json_encode($registroAbono,JSON_UNESCAPED_UNICODE);
+    }
+  
 }
 
 // Verificación principal
@@ -40,6 +44,9 @@ if (isset($_POST['accion'])) {
             break;
            case 3:
             $ajax->HistorialAbonoCredito();
+            break;
+            case 4:
+            $ajax->EliminarAbono();
             break;
         default:
             echo json_encode(["error" => "Acción no válida"]);

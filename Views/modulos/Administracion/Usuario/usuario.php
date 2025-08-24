@@ -1165,7 +1165,19 @@ console.log("---------------------------------------");
                      clearForm();
                   }
               },
-              'excel', 'print', 'pageLength'
+          {
+    extend: 'excel',
+    exportOptions: {
+      columns: [2,3,4,5,9,10,11] // aquí defines las columnas que sí exportarás
+    }
+  },
+  {
+    extend: 'print',
+    exportOptions: {
+      columns: [2,3,4,5,9,10,11] // lo mismo para imprimir
+    }
+  },
+  'pageLength'
           ],
         ajax: {
              url: "ajax/usuario.ajax.php",

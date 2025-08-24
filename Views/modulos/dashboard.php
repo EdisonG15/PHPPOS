@@ -77,8 +77,16 @@
                      <div class="icon">
                          <i class="ion ion-ios-cart"></i>
                      </div>
+ <a style="cursor:pointer;" 
+   onclick="document.getElementById('moduloFrame').src='Views/modulos/Ventas/RealizarVentas/realizar_ventas.php'" 
+   class="small-box-footer">
+   Más Info <i class="fas fa-arrow-circle-right"></i>
+</a>
+
+<!-- 
                      <a style="cursor:pointer;" onclick="CargarContenido('Views/modulos/Ventas/RealizarVentas/realizar_ventas.php','content-wrapper')" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
-                 </div>
+                  -->
+                    </div>
              </div>
 
              <!-- TARJETA TOTAL GANANCIAS -->
